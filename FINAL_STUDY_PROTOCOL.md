@@ -18,6 +18,36 @@ one new file, `src/canonical_transforms.py` (the frozen
 encoding/payload-splitting transforms, Sec 5.6). `README.md` remains
 unsynced (still describes the pre-Round-4 state) -- flagged in Sec 13.
 
+**Round 6 repository simplification (explicit, per user request)**:
+`audits/` (both the 10-condition structural audit and the
+real-tokenizer boundary audit scripts, plus `audits/imported/`'s 3
+migrated provenance files), `config/` (`OUTPUT_SCHEMA.md`), and
+`legacy_reference/` (2 reference-only source docs) were **deleted from
+this repository**. This is a deliberate simplification, not a
+retraction of the work those directories held -- Sec 9 (output schema),
+Sec 11 (audit scope, now historical), and Sec 13 record what those
+scripts verified and when, as the surviving written record. The
+10-condition structural audit script, `audits/imported/`'s 3 provenance
+files, and `legacy_reference/`'s 2 docs remain deleted, recoverable from
+this repo's pre-Round-6 git history or (for the 2 legacy docs and 3
+provenance files) from `~/new_experiment` if ever needed again.
+
+**Round 7 correction (explicit, per user request)**: on reflection,
+`audits/audit_real_tokenizer_boundary.py` (only) is **restored and kept
+permanently** -- it is needed to actually run the real-tokenizer
+boundary check on the cluster (Sec 9's `t_generation_boundary`/
+`t_final_user_end`), which this repo has no other way to do. It was used
+locally in Round 7 (HF-hub-hosted Qwen2.5-7B-Instruct only, via its
+`THESIS_FINAL_TOKENIZER_PATH_QWEN` override) and passed all 10
+conditions cleanly (`TOKEN_AUDIT_PASS`); Meta-Llama-3.1-8B-Instruct and
+gemma-2-9b-it could not be checked locally (gated HF repos, no token on
+this machine) and remain unverified pending a run on the cluster against
+the script's default frozen local paths
+(`MODEL_TOKENIZER_SOURCES`/`defence_metrics_reference.py`'s
+`MODEL_PATHS`). The repo now keeps `data/`, `templates/`, `src/`,
+`slurm/`, `audits/audit_real_tokenizer_boundary.py` only, plus this
+protocol, `README.md`, and `MIGRATION_MANIFEST.json` at top level.
+
 Scope freeze (explicit, per this round's instruction): the final study
 answers exactly RQ1 and RQ2 (Sec 1) and nothing else. No further
 expansion of research questions, models, data, or conditions is in
@@ -69,10 +99,41 @@ round.
   future code may consult regarding `test_ids` membership.
 
 Source files (migrated Round 2, byte-identical, re-verified this round --
-see Sec 12): `data/source/sampled_prompts.json`, `data/splits/splits.json`.
+see Sec 12): `data/source/sampled_prompts.json` (provenance record only,
+Sec 2's Language note below), `data/splits/splits.json`. The file any
+driver actually reads for instruction text is
+`data/source/sampled_prompts_en_only.json` (derived this round, see
+below).
 
 No new split is created. No re-shuffling. `direction_ids` retains its 2
 known duplicate-text groups (4 ids) verbatim -- never deduplicated away.
+
+**Language (frozen, confirmed this round; data file split this round)**:
+this study is English-only. As of this round, the study reads
+instructions from **`data/source/sampled_prompts_en_only.json`** --
+a derived file containing only `{id, category, instruction_en}` per
+item, with no `instructions` field at all. It was derived losslessly
+from `sampled_prompts.json` (0 mismatches on a full 572-item
+`id`/`category`/`instruction_en` re-check;
+`data/manifests/english_only_derivation_round7.json` records the
+derivation and both files' SHA-256). The original
+`data/source/sampled_prompts.json` (which still carries the full
+9-language `instructions` dict -- `en`, `zh`, `de`, `ko`, `ar`, `th`,
+`yo`, `sw`, `am` -- an unremoved artifact of the source multilingual
+pool, Sec 12) is **unmodified and retained** solely as the byte-identical
+Round 2 migration-provenance record (its hash still matches
+`MIGRATION_MANIFEST.json`); it is not the file any driver should read
+going forward. **No code in this repository reads the `instructions`
+field, and none is authorized to.** `id`s and `instruction_en` values
+are identical across both files, so `splits.json`,
+`test_ids_protected_manifest.json`, and
+`split_integrity_check_round2.json` (all computed from `instruction_en`/
+its hash, never from `instructions`) remain valid unchanged against
+either file. Any future driver (rendering, activation extraction,
+generation) must read `sampled_prompts_en_only.json`; reading any
+language key from `sampled_prompts.json`'s `instructions` field is out
+of scope for this study and would need a new protocol round to
+authorize.
 
 ## 3. Models (frozen, exactly 3)
 
@@ -529,11 +590,9 @@ itself (Sec 5.2), so the model-added priming boilerplate after
 `final_user` is no longer negligible the way it was when `final_user`
 was always a bare `{instruction}`. `templates/final_10_condition_v1.json`'s
 top-level `token_positions` field declares these same two names as
-metadata; the CPU audit (Sec 11) checks the two agree.
-**`config/OUTPUT_SCHEMA.md` still names the old, superseded `t_inst`/
-`t_post` pair as of the end of this round** -- out of this round's
-scope (Sec 0), to be synced in a future round; this protocol section,
-not that file, is authoritative in the meantime.
+metadata. `config/OUTPUT_SCHEMA.md` (which used to mirror this section
+in human-readable form) was deleted in Round 6's repository
+simplification -- this protocol section is now the sole copy.
 
 ### 9.1 Direction-activation record (one per `(model, condition, instruction_id, layer)`, `direction_ids` only)
 
@@ -603,6 +662,8 @@ itself be a bug to fix, not a value to pick between).
 
 ## 10. Files this round
 
+*(Historical record of Round 4. **`audits/audit_final_10_condition_dry_run.py` and `config/OUTPUT_SCHEMA.md` were deleted in Round 6's repository simplification** and no longer exist in this repo -- see the Round 6 note near the top of this document. This list is kept as an accurate record of what Round 4 did, not a statement of current repo contents.)*
+
 - `FINAL_STUDY_PROTOCOL.md` (this file, revised)
 - `templates/final_10_condition_v1.json` (revised: `assistant_acknowledgement`
   unified byte-identical across all 10 conditions; all 10 conditions'
@@ -631,9 +692,20 @@ itself be a bug to fix, not a value to pick between).
 **Not modified this round**: `README.md` (still describes the
 pre-Round-4 state; flagged in Sec 13).
 
-## 11. CPU-only audit scope (this round)
+## 11. CPU-only audit scope
 
-`audits/audit_final_10_condition_dry_run.py` checks, against
+*(The structural 10-condition audit below documents what
+`audits/audit_final_10_condition_dry_run.py` checked and confirmed as of
+Round 4/5 -- a written record that these checks were performed and
+passed. That script was deleted from this repository in Round 6's
+simplification and is no longer runnable here; it remains recoverable
+from this repo's pre-Round-6 git history, or can be re-created from this
+section's description if needed. `audits/audit_real_tokenizer_boundary.py`
+-- described separately below -- is NOT deleted; it was restored and
+kept permanently in Round 7 and is the one runnable audit script in
+this repository.)*
+
+`audits/audit_final_10_condition_dry_run.py` checked, against
 `templates/final_10_condition_v1.json`: condition count is exactly 10;
 group distribution is exactly CO=3/MG=3/Context=3/neutral=1; every
 condition's implied message structure is `user`/`assistant`/`user`;
@@ -679,6 +751,44 @@ audit never emits, and no file in this repository ever sets,
 `READY_FOR_PILOT` -- that remains a distinct, later, human-only
 decision (Sec 5.5, Sec 13).
 
+### 11.1 Real-tokenizer boundary audit (`audits/audit_real_tokenizer_boundary.py`, kept permanently)
+
+Loads each model's real tokenizer only (`AutoTokenizer.from_pretrained`,
+never `AutoModel*` -- no model weights, no GPU). Defaults to the frozen
+cluster paths matching `src/defence_metrics_reference.py`'s
+`MODEL_PATHS`; overridable per-model via
+`THESIS_FINAL_TOKENIZER_PATH_{QWEN,LLAMA,GEMMA}` for local
+smoke-testing. For each of the 10 conditions, calls the official
+`apply_chat_template(..., add_generation_prompt=True)` and locates
+`t_generation_boundary` (`len(full_prompt_ids) - 1`) and
+`t_final_user_end` (an exact, uniqueness-checked substring search of the
+rendered final-user content, cross-verified against a fast-tokenizer
+offset mapping, with a re-tokenization consistency check and a
+special-token guard -- never a "N tokens from the end" heuristic). Any
+missing condition, render failure, non-unique/unlocatable position,
+re-tokenization mismatch, or special-token collision -> `TOKEN_AUDIT_FAIL`
++ `pilot_forbidden: true` for that model; a tokenizer that fails to load
+at all fails that whole model, not just one condition. Records, per
+condition: total token count, delta vs. `neutral`, both position indices
+and token ids, whether they coincide, transform provenance (for the 2
+transform-using conditions), template content hash, and (per model)
+tokenizer class, `name_or_path`, `transformers` version, and a version
+proxy (local tokenizer_config.json hash, or the resolved HF revision).
+No length equalization -- attack conditions are never padded/trimmed to
+match `neutral`.
+
+**Results as of Round 7** (run locally, HF-hub-hosted tokenizers via the
+env-var override, not the frozen cluster paths):
+Qwen2.5-7B-Instruct -- `TOKEN_AUDIT_PASS`, `pilot_forbidden: false`, all
+10/10 conditions passed, no truncation, no ambiguity, positions never
+coincided. Meta-Llama-3.1-8B-Instruct and gemma-2-9b-it --
+`TOKENIZER_LOAD_FAILED` (401, gated HF repos, no token on this machine)
+-- **unverified**, not a script defect. Overall (this machine):
+`TOKEN_AUDIT_FAIL`, `pilot_forbidden: true`. **Running this same script
+on the cluster (default paths, no overrides needed) to get a real
+Llama/Gemma result is the next concrete step before any
+`READY_FOR_PILOT` decision.**
+
 ## 12. Compute estimate (planning only, not authorized to run)
 
 **Experiment 1** (`direction_ids`, 300, 8 single-turn conditions, 3
@@ -710,10 +820,9 @@ and `OUTPUT_SCHEMA.md` synced Sec 10; transforms frozen Sec 5.6). Item 4
 (keyword-heuristic limitation) and item 5 (pilot-vs-review ordering)
 remain open, renumbered below. Remaining and new open items:
 
-1. **`README.md` is not synced** to the Round 4 revision -- still
-   describes the pre-Round-4 (Round 3) state. Low-risk (it is a summary
-   pointer, not authoritative), but should be updated in a future round
-   before this repository is shared or handed off.
+1. ~~`README.md` is not synced to the Round 4 revision~~ -- **resolved
+   in Round 5** (synced to Round 4 state) and **re-synced in Round 6**
+   to reflect the `audits/`/`config/`/`legacy_reference/` deletion.
 2. The forbidden-semantic-keyword check in the CPU audit (Sec 11) is an
    explicitly documented heuristic (a fixed keyword list), not a
    semantic guarantee -- the human review already performed this round
@@ -742,3 +851,12 @@ remain open, renumbered below. Remaining and new open items:
    become answerable once Sec 6.1's pairwise-cosine and partition-
    ranking analysis actually runs, which requires activations that this
    round does not produce.
+6. **(Round 6/7)** The structural 10-condition CPU audit (Sec 11) no
+   longer exists as a runnable script in this repo -- if it's needed
+   again (e.g. to re-verify `READY_FOR_TOKEN_AUDIT` after any future
+   template edit), it must be recovered from this repo's pre-Round-6 git
+   history or re-implemented from Sec 11's written description; this
+   does not happen automatically. The real-tokenizer boundary audit
+   (`audits/audit_real_tokenizer_boundary.py`, Sec 11.1) IS still
+   present and runnable -- it just hasn't been run on the cluster yet,
+   which is the actual next step, not a recovery task.

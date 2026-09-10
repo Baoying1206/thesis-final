@@ -46,23 +46,47 @@ setup framing and the 6 CO/MG conditions' canonical mechanism text
 unchanged from the source templates. The frozen render-time transforms
 for `mg_encoding_obfuscation` (UTF-8 + standard Base64) and
 `mg_payload_splitting` (deterministic normalized-text midpoint split)
-live in `src/canonical_transforms.py`. The CPU-only structural audit
-(`audits/audit_final_10_condition_dry_run.py`) reports
-`READY_FOR_TOKEN_AUDIT` -- deliberately NOT `READY_FOR_PILOT`, which
-remains a separate, later, human-only decision pending a real-tokenizer
-boundary audit (`audits/audit_real_tokenizer_boundary.py`, Round 5) and
-the pilot itself (`FINAL_STUDY_PROTOCOL.md` Sec 5.5). See
-`FINAL_STUDY_PROTOCOL.md` Sec 13 for remaining open items. Nothing under
-`output/` exists yet.
+live in `src/canonical_transforms.py`. The study is **English-only** --
+instructions are read from `data/source/sampled_prompts_en_only.json`
+(`id`/`category`/`instruction_en` only, derived losslessly this round).
+`data/source/sampled_prompts.json` still carries the full 9-language
+`instructions` field inherited from the source pool; it is kept
+unmodified purely as the byte-identical migration-provenance record and
+no code here reads it (`FINAL_STUDY_PROTOCOL.md` Sec 2). `READY_FOR_PILOT`
+remains a separate, later, human-only decision
+pending a real-tokenizer boundary check on the cluster and the pilot
+itself (`FINAL_STUDY_PROTOCOL.md` Sec 5.5). See `FINAL_STUDY_PROTOCOL.md`
+Sec 13 for remaining open items.
+
+**Round 6**: the repo was simplified to just `data/`, `templates/`,
+`src/`, `slurm/` plus this file, `FINAL_STUDY_PROTOCOL.md`, and
+`MIGRATION_MANIFEST.json` -- the CPU-only structural and real-tokenizer
+audit scripts (`audits/`), `config/OUTPUT_SCHEMA.md`, and the 2
+reference-only source docs (`legacy_reference/`) were deleted. What they
+verified is preserved in writing in `FINAL_STUDY_PROTOCOL.md` Sec 9/11;
+the structural audit script remains recoverable from this repo's git
+history if needed again.
+
+**Round 7**: `audits/audit_real_tokenizer_boundary.py` was restored and
+is kept permanently -- it's needed to actually run the real-tokenizer
+boundary check (`FINAL_STUDY_PROTOCOL.md` Sec 11.1). Locally it has only
+been validated against Qwen2.5-7B-Instruct (via HF Hub, `TOKEN_AUDIT_PASS`,
+10/10 conditions); Llama-3.1-8B-Instruct and gemma-2-9b-it are gated on
+HF and untested here -- **running this script on the cluster is the
+next concrete step**.
 
 ## Relationship to `~/new_experiment`
 
 Every file under `data/source/`, `data/splits/`, `templates/imported/`,
-`audits/imported/`, `legacy_reference/docs/`, and 4 files under `src/`
-was **copied byte-identical** from that repo (verified source-vs-
-destination SHA-256 for every one -- see `MIGRATION_MANIFEST.json`).
-`~/new_experiment` itself was never modified, moved, or deleted -- this
-is a copy, not a move. Everything else (the 12-item code-reuse audit in
-`FINAL_STUDY_PROTOCOL.md` Sec 9) is either flagged `REWRITE` (deferred to
-a future round, not copied) or already copied as noted above -- no
-scientific results, generations, judgements, or tensors were migrated.
+and 4 files under `src/` was **copied byte-identical** from that repo
+(verified source-vs-destination SHA-256 for every one -- see
+`MIGRATION_MANIFEST.json`). `~/new_experiment` itself was never
+modified, moved, or deleted -- this is a copy, not a move. Everything
+else (the 12-item code-reuse audit in `FINAL_STUDY_PROTOCOL.md` Sec 9)
+is either flagged `REWRITE` (deferred to a future round, not copied) or
+already copied as noted above -- no scientific results, generations,
+judgements, or tensors were migrated. (`MIGRATION_MANIFEST.json` also
+records 3 provenance files and 2 reference docs migrated to
+`audits/imported/`/`legacy_reference/` at the time -- those destination
+paths no longer exist after Round 6's simplification, see
+`FINAL_STUDY_PROTOCOL.md`'s Round 6 note.)

@@ -1,0 +1,19 @@
+{
+  "result_status": "ENGLISH_ONLY_DERIVATION_RECORD",
+  "note": "data/source/sampled_prompts.json (the byte-identical Round 2 migration copy, MIGRATION_MANIFEST.json) carries a per-item 'instructions' dict with 9 languages (en/zh/de/ko/ar/th/yo/sw/am), an unremoved artifact of the source multilingual pool. This study is English-only (FINAL_STUDY_PROTOCOL.md Sec 2) and never reads that field. This round creates an English-only derived file rather than editing the migrated original in place, so the original's documented byte-identity to ~/new_experiment (MIGRATION_MANIFEST.json) is never broken.",
+  "source_file": "data/source/sampled_prompts.json",
+  "source_file_sha256": "07167488ef38eecefef61250b0f6e99e5ff92fe725860dbec5abcbccd4e92aef",
+  "source_file_unchanged": true,
+  "derived_file": "data/source/sampled_prompts_en_only.json",
+  "derived_file_sha256": "a4831f9fc48220ad7caf698ad5296d54dcea1def8b8b5a9b843bdcab2bf03697",
+  "derivation_method": "for each item, keep only {id, category, instruction_en}; drop the 'instructions' field entirely. No other transformation.",
+  "source_item_count": 572,
+  "derived_item_count": 572,
+  "counts_match": true,
+  "id_category_instruction_en_1to1_mismatches": 0,
+  "derived_file_contains_no_instructions_field": true,
+  "downstream_impact": "None on existing integrity checks: data/manifests/split_integrity_check_round2.json and data/manifests/test_ids_protected_manifest.json were both computed from instruction_en / normalized_text_hash(instruction_en) only, never from the 'instructions' dict -- their recorded counts and hashes remain valid and unchanged.",
+  "protocol_status": "FINAL_STUDY_PROTOCOL.md Sec 2 updated this round to name sampled_prompts_en_only.json as the file the study actually reads; sampled_prompts.json is retained, unmodified, as the migration-provenance record only.",
+  "test_data_content_read": false,
+  "checked_at": "2026-09-10"
+}

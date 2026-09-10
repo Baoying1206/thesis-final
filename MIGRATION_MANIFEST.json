@@ -59,7 +59,8 @@
       "destination_sha256": "a58dfc6384371cc41fb9c72db15e8ac620a905dbd1121bc5873edf67e20ffc5e",
       "byte_identical": true,
       "role": "audit",
-      "status": "IMPORTED_FROZEN_INPUT"
+      "status": "IMPORTED_FROZEN_INPUT",
+      "destination_deleted_round6": true
     },
     {
       "source_path": "new_experiment/output/audits/context/context_multiturn_token_length_audit_v2.json",
@@ -69,7 +70,8 @@
       "destination_sha256": "082cc8827c2119dd61071a7165d5061f85795cfb5aa7133c251bc82e43a8c069",
       "byte_identical": true,
       "role": "audit",
-      "status": "IMPORTED_FROZEN_INPUT"
+      "status": "IMPORTED_FROZEN_INPUT",
+      "destination_deleted_round6": true
     },
     {
       "source_path": "new_experiment/output/audits/context/context_multiturn_pilot_readiness_attestation.json",
@@ -79,7 +81,8 @@
       "destination_sha256": "c82f08d33a98206f313447b16c2d02235500c1eab75155c1bb9140d3fe29be74",
       "byte_identical": true,
       "role": "audit",
-      "status": "IMPORTED_FROZEN_INPUT"
+      "status": "IMPORTED_FROZEN_INPUT",
+      "destination_deleted_round6": true
     },
     {
       "source_path": "new_experiment/EXPERIMENT_CONTEXT_MULTITURN_BEHAVIOR_PROTOCOL.md",
@@ -89,7 +92,8 @@
       "destination_sha256": "cb7ea79c4fc8708e9a6ec30c7809f1dd6c4e4bea5b0ec7c30f90b9ff610ad340",
       "byte_identical": true,
       "role": "protocol_reference",
-      "status": "REFERENCE_ONLY"
+      "status": "REFERENCE_ONLY",
+      "destination_deleted_round6": true
     },
     {
       "source_path": "new_experiment/EXPERIMENT_REDUCTION_PLAN.md",
@@ -99,7 +103,8 @@
       "destination_sha256": "2872486df89cbeb9c711fd1c343fcbb6cd5a6a313d149126a8026800a489063b",
       "byte_identical": true,
       "role": "protocol_reference",
-      "status": "REFERENCE_ONLY"
+      "status": "REFERENCE_ONLY",
+      "destination_deleted_round6": true
     },
     {
       "source_path": "new_experiment/scripts/utils/axis_manifest.py",
@@ -145,5 +150,17 @@
       "status": "IMPORTED_FROZEN_INPUT",
       "reuse_audit_note": "Only stdlib imports (hashlib/json/os/subprocess). Provides sha256_hex/sha256_of_file/git_commit_hash/load_jsonl/append_jsonl/judge_cache_key -- pure, portable. CAVEAT (not silently resolved, flagged transparently): this file ALSO contains MODEL_PATHS, a hardcoded dict of absolute cluster paths to the 3 models' weight directories (e.g. /home/h24/baga0553/models/Qwen2.5-7B-Instruct). These are ENVIRONMENT (shared cluster model-storage) paths, not old-EXPERIMENT-specific output paths -- the round's own rule permits depending on 'thesis_final和模型环境' (thesis_final code plus the model environment), so this was judged in-scope for a whole-file copy rather than REWRITE, but this judgment call is reported for confirmation, not assumed uncontroversial. Also contains PROTOCOL_VERSION/PRIMARY_CONDITIONS/EXCLUDED_CONDITIONS constants specific to the OLD repo's defence/intervention experiment (Experiment 3) -- irrelevant to this study's scope (defence/intervention is explicitly out of scope here) and should be trimmed in a future cleanup round, not used from this file."
     }
-  ]
+  ],
+  "round6_note": {
+    "event": "repository_simplification",
+    "date": "2026-09-10",
+    "description": "audits/ (2 CPU audit scripts + audits/imported/, 3 files below), config/ (OUTPUT_SCHEMA.md), and legacy_reference/ (docs/, 2 files below) were deleted from thesis_final per explicit user request to simplify the repo to data/templates/src/slurm only. This did not touch ~/new_experiment (the migration source) in any way. The 5 entries below whose destination_path started with audits/imported/ or legacy_reference/docs/ now point at files that no longer exist in this repository -- their byte_identical:true verification remains an accurate historical record of the Round 2 migration, not a claim that the destination file currently exists. Recoverable from this repo git history (pre-Round-6 commits) or by re-copying from ~/new_experiment if needed again.",
+    "affected_entry_destination_paths": [
+      "thesis_final/audits/imported/context_multiturn_templates_human_review_checklist_v3.json",
+      "thesis_final/audits/imported/context_multiturn_token_length_audit_v2.json",
+      "thesis_final/audits/imported/context_multiturn_pilot_readiness_attestation.json",
+      "thesis_final/legacy_reference/docs/EXPERIMENT_CONTEXT_MULTITURN_BEHAVIOR_PROTOCOL.md",
+      "thesis_final/legacy_reference/docs/EXPERIMENT_REDUCTION_PLAN.md"
+    ]
+  }
 }
