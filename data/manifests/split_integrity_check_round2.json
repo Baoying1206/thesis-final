@@ -1,0 +1,27 @@
+{
+  "result_status": "ROUND2_SPLIT_INTEGRITY_CHECK_NON_RESULT",
+  "note": "ID-level and pre-existing-hash-level checks only. No split was created or modified -- direction_ids/validation_ids/test_ids are read verbatim from the imported splits.json. No test instruction text was read, printed, or displayed.",
+  "sampled_prompts_total": 572,
+  "sampled_prompts_unique_ids": 572,
+  "direction_ids_count": 300,
+  "validation_ids_count": 72,
+  "test_ids_count": 200,
+  "union_size": 572,
+  "union_equals_572": true,
+  "pairwise_overlaps": {
+    "direction_validation": 0,
+    "direction_test": 0,
+    "validation_test": 0
+  },
+  "all_split_ids_map_to_pool": true,
+  "direction_ids_unique_normalized_texts": 298,
+  "direction_ids_duplicate_text_groups": 2,
+  "direction_ids_in_duplicate_groups": 4,
+  "direction_duplicate_groups_preserved_from_legacy_split": true,
+  "validation_ids_unique_normalized_texts": 72,
+  "validation_ids_all_unique_confirmed": true,
+  "test_ids_unique_normalized_text_hash_count": 197,
+  "test_data_content_read": false,
+  "test_data_content_read_note": "Only test_ids (identifiers) and PRE-EXISTING normalized_text_hash values (one-way, non-reversible) were accessed to compute the count above -- no test instruction string was loaded into a printable/displayable form, matching the distinction the round explicitly required between technically loading JSON vs. scientifically reading test content.",
+  "checked_at": "2026-09-10"
+}

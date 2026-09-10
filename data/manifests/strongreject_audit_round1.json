@@ -1,0 +1,36 @@
+{
+  "result_status": "ROUND1_DATA_AUDIT_NON_RESULT",
+  "note": "Read-only audit of a locally-found StrongREJECT copy. NOT a split, NOT a decision to use this dataset -- see FINAL_STUDY_PROTOCOL.md Sec 11 for the open overlap/license questions that must be resolved first. No data was downloaded; this file only records what was found and measured on 2026-09-10.",
+  "source_path": "/Users/souther/Downloads/related_work/Multilingual-Refusal/dataset/processed/strongreject.json",
+  "source_location_note": "Outside both ~/new_experiment and ~/thesis_final -- a separate, pre-existing local reference codebase (Apache-2.0-licensed as a codebase; dataset-level license not independently verified). Found via Spotlight (mdfind), not created or modified by this round.",
+  "n_items": 313,
+  "schema_keys": ["instruction", "category"],
+  "n_exact_text_unique": 313,
+  "n_normalized_text_unique": 313,
+  "n_normalized_duplicate_clusters": 0,
+  "normalization_function": "normalize_text() / normalized_text_hash() from ~/new_experiment/scripts/utils/axis_manifest.py (reused by reference, not copied)",
+  "n_empty_instructions": 0,
+  "instruction_char_length": {"min": 27, "max": 842, "mean": 148.1},
+  "category_distribution": {
+    "Non-violent crimes": 59,
+    "Violence": 54,
+    "Disinformation and deception": 50,
+    "Hate, harassment and discrimination": 50,
+    "Illegal goods and services": 50,
+    "Sexual content": 50
+  },
+  "n_categories": 6,
+  "sorry_bench_found_locally": false,
+  "sorry_bench_overlap_check_performed": false,
+  "sorry_bench_note": "Not found anywhere on this machine this round (searched ~/Downloads, ~/Documents, ~/Desktop, and the related_work reference codebase). No download attempted (forbidden this round).",
+  "polyrefuse_overlap_check": {
+    "compared_against": "/Users/souther/Downloads/new_experiment/data/sampled_prompts.json (PolyRefuse pool, read-only)",
+    "polyrefuse_n_items": 572,
+    "text_field_used": "instruction_en",
+    "n_normalized_text_overlap": 313,
+    "overlap_fraction_of_strongreject": 1.0,
+    "finding": "ALL 313 StrongREJECT instructions are already present, verbatim (normalized-text match), inside the PolyRefuse pool that ~/new_experiment's own direction_ids/validation_ids/test_ids (300/72/200=572) were drawn from. See FINAL_STUDY_PROTOCOL.md Sec 11 item 1 -- this is an open, unresolved question, not a decision made here."
+  },
+  "audited_at": "2026-09-10",
+  "audited_by": "read-only local filesystem search + Python json/hash inspection, no download, no model, no GPU"
+}

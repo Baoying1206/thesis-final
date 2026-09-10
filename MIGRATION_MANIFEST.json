@@ -1,0 +1,149 @@
+{
+  "old_repository_path": "/Users/souther/Downloads/new_experiment",
+  "old_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+  "old_repository_note": "old_repository_commit is the last COMMITTED state; the working tree at migration time also had 3 modified + 3 untracked files from a still-open, unrelated round in that repo (multi-turn driver serialization-gate fix). Every file migrated below was read from the actual on-disk working-tree content at migration time and hashed at that moment -- if a migrated file happened to be one of the modified ones, its hash reflects the working tree, not strictly the commit; none of the files below were among those 6 modified/untracked paths, so in practice every hash below equals what commit f3c9c9d9b0768360a1083161d0a4181f30b84b10 itself contains.",
+  "new_repository_path": "/Users/souther/Downloads/thesis_final",
+  "migration_time": "2026-09-10",
+  "copied_file_count": 13,
+  "rejected_file_count": 0,
+  "test_data_content_read": false,
+  "model_outputs_copied": false,
+  "tensors_copied": false,
+  "note": "This is a COPY, not a move -- ~/new_experiment is untouched (verified: same HEAD, same working-tree diff, before and after this migration). No scientific results, generations, judgements, or tensors were migrated -- only frozen inputs (data/splits/templates), human-review/audit provenance for the multi-turn templates, two directly-relevant protocol documents (reference only, never authoritative for this study), and 4 self-contained, torch-free utility source files.",
+  "entries": [
+    {
+      "source_path": "new_experiment/data/sampled_prompts.json",
+      "destination_path": "thesis_final/data/source/sampled_prompts.json",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "07167488ef38eecefef61250b0f6e99e5ff92fe725860dbec5abcbccd4e92aef",
+      "destination_sha256": "07167488ef38eecefef61250b0f6e99e5ff92fe725860dbec5abcbccd4e92aef",
+      "byte_identical": true,
+      "role": "data",
+      "status": "IMPORTED_FROZEN_INPUT"
+    },
+    {
+      "source_path": "new_experiment/data/splits.json",
+      "destination_path": "thesis_final/data/splits/splits.json",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "529ae240ac61521ebdf7c061a2af95562a9e01585e3836a238d8a98c1f267d7a",
+      "destination_sha256": "529ae240ac61521ebdf7c061a2af95562a9e01585e3836a238d8a98c1f267d7a",
+      "byte_identical": true,
+      "role": "split",
+      "status": "IMPORTED_FROZEN_INPUT"
+    },
+    {
+      "source_path": "new_experiment/templates/templates_en.json",
+      "destination_path": "thesis_final/templates/imported/templates_wei_canonical.json",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "07bc0eecbf6f74bd7256abe48661dd06d14769a68bb6a86a335996eb0d439ced",
+      "destination_sha256": "07bc0eecbf6f74bd7256abe48661dd06d14769a68bb6a86a335996eb0d439ced",
+      "byte_identical": true,
+      "role": "template",
+      "status": "IMPORTED_FROZEN_INPUT"
+    },
+    {
+      "source_path": "new_experiment/templates/templates_context_multiturn_v2.json",
+      "destination_path": "thesis_final/templates/imported/templates_context_multiturn_v2.json",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "2fc7b7ed900838243cfeed15b2d44b81f1e0d480b2da22a804a08e6e1298a8d6",
+      "destination_sha256": "2fc7b7ed900838243cfeed15b2d44b81f1e0d480b2da22a804a08e6e1298a8d6",
+      "byte_identical": true,
+      "role": "template",
+      "status": "IMPORTED_FROZEN_INPUT"
+    },
+    {
+      "source_path": "new_experiment/output/audits/context/context_multiturn_templates_human_review_checklist_v3.json",
+      "destination_path": "thesis_final/audits/imported/context_multiturn_templates_human_review_checklist_v3.json",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "a58dfc6384371cc41fb9c72db15e8ac620a905dbd1121bc5873edf67e20ffc5e",
+      "destination_sha256": "a58dfc6384371cc41fb9c72db15e8ac620a905dbd1121bc5873edf67e20ffc5e",
+      "byte_identical": true,
+      "role": "audit",
+      "status": "IMPORTED_FROZEN_INPUT"
+    },
+    {
+      "source_path": "new_experiment/output/audits/context/context_multiturn_token_length_audit_v2.json",
+      "destination_path": "thesis_final/audits/imported/context_multiturn_token_length_audit_v2.json",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "082cc8827c2119dd61071a7165d5061f85795cfb5aa7133c251bc82e43a8c069",
+      "destination_sha256": "082cc8827c2119dd61071a7165d5061f85795cfb5aa7133c251bc82e43a8c069",
+      "byte_identical": true,
+      "role": "audit",
+      "status": "IMPORTED_FROZEN_INPUT"
+    },
+    {
+      "source_path": "new_experiment/output/audits/context/context_multiturn_pilot_readiness_attestation.json",
+      "destination_path": "thesis_final/audits/imported/context_multiturn_pilot_readiness_attestation.json",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "c82f08d33a98206f313447b16c2d02235500c1eab75155c1bb9140d3fe29be74",
+      "destination_sha256": "c82f08d33a98206f313447b16c2d02235500c1eab75155c1bb9140d3fe29be74",
+      "byte_identical": true,
+      "role": "audit",
+      "status": "IMPORTED_FROZEN_INPUT"
+    },
+    {
+      "source_path": "new_experiment/EXPERIMENT_CONTEXT_MULTITURN_BEHAVIOR_PROTOCOL.md",
+      "destination_path": "thesis_final/legacy_reference/docs/EXPERIMENT_CONTEXT_MULTITURN_BEHAVIOR_PROTOCOL.md",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10 (working tree, this specific file had an uncommitted local edit in the old repo at migration time -- see old_repository_note)",
+      "source_sha256": "cb7ea79c4fc8708e9a6ec30c7809f1dd6c4e4bea5b0ec7c30f90b9ff610ad340",
+      "destination_sha256": "cb7ea79c4fc8708e9a6ec30c7809f1dd6c4e4bea5b0ec7c30f90b9ff610ad340",
+      "byte_identical": true,
+      "role": "protocol_reference",
+      "status": "REFERENCE_ONLY"
+    },
+    {
+      "source_path": "new_experiment/EXPERIMENT_REDUCTION_PLAN.md",
+      "destination_path": "thesis_final/legacy_reference/docs/EXPERIMENT_REDUCTION_PLAN.md",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "2872486df89cbeb9c711fd1c343fcbb6cd5a6a313d149126a8026800a489063b",
+      "destination_sha256": "2872486df89cbeb9c711fd1c343fcbb6cd5a6a313d149126a8026800a489063b",
+      "byte_identical": true,
+      "role": "protocol_reference",
+      "status": "REFERENCE_ONLY"
+    },
+    {
+      "source_path": "new_experiment/scripts/utils/axis_manifest.py",
+      "destination_path": "thesis_final/src/axis_manifest.py",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "2ff87a5f75157f64023626d5d006d3f10668527060c07a206ad57939544294b0",
+      "destination_sha256": "2ff87a5f75157f64023626d5d006d3f10668527060c07a206ad57939544294b0",
+      "byte_identical": true,
+      "role": "utility",
+      "status": "IMPORTED_FROZEN_INPUT",
+      "reuse_audit_note": "Pure Python/JSON, stdlib-only imports (hashlib/json/os/re), no torch, no hardcoded old-repo paths. Copied whole-file, unmodified. Provides normalize_text()/normalized_text_hash(), used this round for the StrongREJECT/PolyRefuse overlap audit and this round's split-integrity checks."
+    },
+    {
+      "source_path": "new_experiment/scripts/utils/token_positions.py",
+      "destination_path": "thesis_final/src/token_positions.py",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "50cca2f223a14e57c0c88e4427b98f7762a6752d86e1349ff4fd150afc207156",
+      "destination_sha256": "50cca2f223a14e57c0c88e4427b98f7762a6752d86e1349ff4fd150afc207156",
+      "byte_identical": true,
+      "role": "utility",
+      "status": "IMPORTED_FROZEN_INPUT",
+      "reuse_audit_note": "Only stdlib imports (dataclasses/typing) at module level -- no torch/pipeline coupling. Functions take a tokenizer object as a parameter rather than importing/loading one. Copied whole-file, unmodified. NOT yet exercised against a real tokenizer in this repo -- do that before relying on it."
+    },
+    {
+      "source_path": "new_experiment/scripts/_taxonomy_v2_loader.py",
+      "destination_path": "thesis_final/src/taxonomy_v2_loader.py",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "83d0f3cd564c9c32c4b3e73dfdaede2f4838e7b5a35f24e0b12bbbb4442a8987",
+      "destination_sha256": "83d0f3cd564c9c32c4b3e73dfdaede2f4838e7b5a35f24e0b12bbbb4442a8987",
+      "byte_identical": true,
+      "role": "utility",
+      "status": "IMPORTED_FROZEN_INPUT",
+      "reuse_audit_note": "Only stdlib imports (json/os). Self-validating loader for the wei_canonical_v2 taxonomy (asserts CO/MG partition, 6 mechanisms, internal consistency) -- exactly matches this study's Sec 5 CO/MG mapping. CAVEAT, not fixed this round (content must stay byte-identical to the source): its DEFAULT_TEMPLATES_PATH is a RELATIVE path (os.path.join(SCRIPT_DIR, '..', 'templates', 'templates_en.json')) that assumes the old repo's directory layout (scripts/../templates/templates_en.json) and the OLD filename -- in this repo the template now lives at thesis_final/templates/imported/templates_wei_canonical.json, a different relative location AND filename. This function will need an explicit `path=` argument (or a follow-up edit, in a future round) to work correctly here; not modified this round per the 'do not edit copied files' rule."
+    },
+    {
+      "source_path": "new_experiment/scripts/_defence_metrics.py",
+      "destination_path": "thesis_final/src/defence_metrics_reference.py",
+      "source_repository_commit": "f3c9c9d9b0768360a1083161d0a4181f30b84b10",
+      "source_sha256": "0a239bd8c6c54d36f30d6dc2193ba2ba36d3066839cbff0c390b5deed3bf5b3c",
+      "destination_sha256": "0a239bd8c6c54d36f30d6dc2193ba2ba36d3066839cbff0c390b5deed3bf5b3c",
+      "byte_identical": true,
+      "role": "utility",
+      "status": "IMPORTED_FROZEN_INPUT",
+      "reuse_audit_note": "Only stdlib imports (hashlib/json/os/subprocess). Provides sha256_hex/sha256_of_file/git_commit_hash/load_jsonl/append_jsonl/judge_cache_key -- pure, portable. CAVEAT (not silently resolved, flagged transparently): this file ALSO contains MODEL_PATHS, a hardcoded dict of absolute cluster paths to the 3 models' weight directories (e.g. /home/h24/baga0553/models/Qwen2.5-7B-Instruct). These are ENVIRONMENT (shared cluster model-storage) paths, not old-EXPERIMENT-specific output paths -- the round's own rule permits depending on 'thesis_final和模型环境' (thesis_final code plus the model environment), so this was judged in-scope for a whole-file copy rather than REWRITE, but this judgment call is reported for confirmation, not assumed uncontroversial. Also contains PROTOCOL_VERSION/PRIMARY_CONDITIONS/EXCLUDED_CONDITIONS constants specific to the OLD repo's defence/intervention experiment (Experiment 3) -- irrelevant to this study's scope (defence/intervention is explicitly out of scope here) and should be trimmed in a future cleanup round, not used from this file."
+    }
+  ]
+}
