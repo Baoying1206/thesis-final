@@ -1,0 +1,76 @@
+Start: Fri Sep 11 18:39:09 CEST 2026
+Loading model: /home/h24/baga0553/models/Llama-3.1-8B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:07<00:22,  7.62s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:16<00:16,  8.38s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:25<00:08,  8.65s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:27<00:00,  6.06s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:27<00:00,  6.90s/it]
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:567: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:572: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+  generated 8/300
+  generated 16/300
+  generated 24/300
+  generated 32/300
+  generated 40/300
+  generated 48/300
+  generated 56/300
+  generated 64/300
+  generated 72/300
+  generated 80/300
+  generated 88/300
+  generated 96/300
+  generated 104/300
+  generated 112/300
+  generated 120/300
+  generated 128/300
+  generated 136/300
+  generated 144/300
+  generated 152/300
+  generated 160/300
+  generated 168/300
+  generated 176/300
+  generated 184/300
+  generated 192/300
+  generated 200/300
+  generated 208/300
+  generated 216/300
+  generated 224/300
+  generated 232/300
+  generated 240/300
+  generated 248/300
+  generated 256/300
+  generated 264/300
+  generated 272/300
+  generated 280/300
+  generated 288/300
+  generated 296/300
+  generated 300/300
+Loading WildGuard...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:18<00:18, 18.18s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:26<00:00, 12.21s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:26<00:00, 13.11s/it]
+  judged 16/300
+  judged 32/300
+  judged 48/300
+  judged 64/300
+  judged 80/300
+  judged 96/300
+  judged 112/300
+  judged 128/300
+  judged 144/300
+  judged 160/300
+  judged 176/300
+  judged 192/300
+  judged 208/300
+  judged 224/300
+  judged 240/300
+  judged 256/300
+  judged 272/300
+  judged 288/300
+  judged 300/300
+{
+  "result_status": "PILOT_NON_RESULT",
+  "pilot": true,
+  "n_generation_records": 300,
+  "n_judge_records": 300,
+  "generation_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/pilot_output/pilot_generation_records.jsonl",
+  "judge_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/pilot_output/pilot_judge_records.jsonl",
+  "note": "PILOT_NON_RESULT -- mechanical sanity check only. Never use these numbers to select, revise, or tune any condition's template wording (Sec 5.5)."
+}
+Done: Fri Sep 11 18:43:57 CEST 2026

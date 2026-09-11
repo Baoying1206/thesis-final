@@ -1,0 +1,1340 @@
+{
+  "result_status": "EXPERIMENT2_REPRESENTATION_ANALYSIS",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "primary_layer": 16,
+  "CO": [
+    "co_prefix_injection",
+    "co_refusal_suppression",
+    "co_persona_roleplay"
+  ],
+  "MG": [
+    "mg_encoding_obfuscation",
+    "mg_payload_splitting",
+    "mg_distractors_negated"
+  ],
+  "Context": [
+    "context_persona",
+    "context_authority",
+    "context_fictional"
+  ],
+  "primary_position": "t_generation_boundary",
+  "sensitivity_position": "t_final_user_end",
+  "by_position": {
+    "t_generation_boundary": {
+      "n_instructions": 300,
+      "n_instruction_clusters": 298,
+      "cosine_matrix": {
+        "co_prefix_injection": {
+          "co_prefix_injection": 1.0,
+          "co_refusal_suppression": 0.64111328125,
+          "co_persona_roleplay": 0.36572265625,
+          "mg_encoding_obfuscation": 0.495361328125,
+          "mg_payload_splitting": 0.5537109375,
+          "mg_distractors_negated": 0.39208984375,
+          "context_persona": 0.3212890625,
+          "context_authority": -0.08990478515625,
+          "context_fictional": 0.01514434814453125
+        },
+        "co_refusal_suppression": {
+          "co_prefix_injection": 0.64111328125,
+          "co_refusal_suppression": 0.99951171875,
+          "co_persona_roleplay": 0.6103515625,
+          "mg_encoding_obfuscation": 0.37353515625,
+          "mg_payload_splitting": 0.43798828125,
+          "mg_distractors_negated": 0.267822265625,
+          "context_persona": 0.223388671875,
+          "context_authority": -0.07049560546875,
+          "context_fictional": -0.049407958984375
+        },
+        "co_persona_roleplay": {
+          "co_prefix_injection": 0.36572265625,
+          "co_refusal_suppression": 0.6103515625,
+          "co_persona_roleplay": 1.0009765625,
+          "mg_encoding_obfuscation": 0.1712646484375,
+          "mg_payload_splitting": 0.173095703125,
+          "mg_distractors_negated": 0.1492919921875,
+          "context_persona": 0.1297607421875,
+          "context_authority": -0.1435546875,
+          "context_fictional": -0.2020263671875
+        },
+        "mg_encoding_obfuscation": {
+          "co_prefix_injection": 0.495361328125,
+          "co_refusal_suppression": 0.37353515625,
+          "co_persona_roleplay": 0.1712646484375,
+          "mg_encoding_obfuscation": 0.99951171875,
+          "mg_payload_splitting": 0.79638671875,
+          "mg_distractors_negated": 0.429443359375,
+          "context_persona": 0.27685546875,
+          "context_authority": -0.108642578125,
+          "context_fictional": 0.114501953125
+        },
+        "mg_payload_splitting": {
+          "co_prefix_injection": 0.5537109375,
+          "co_refusal_suppression": 0.43798828125,
+          "co_persona_roleplay": 0.173095703125,
+          "mg_encoding_obfuscation": 0.79638671875,
+          "mg_payload_splitting": 1.0,
+          "mg_distractors_negated": 0.482177734375,
+          "context_persona": 0.28857421875,
+          "context_authority": -0.1148681640625,
+          "context_fictional": 0.1124267578125
+        },
+        "mg_distractors_negated": {
+          "co_prefix_injection": 0.39208984375,
+          "co_refusal_suppression": 0.267822265625,
+          "co_persona_roleplay": 0.1492919921875,
+          "mg_encoding_obfuscation": 0.429443359375,
+          "mg_payload_splitting": 0.482177734375,
+          "mg_distractors_negated": 0.99951171875,
+          "context_persona": 0.26611328125,
+          "context_authority": 0.1329345703125,
+          "context_fictional": 0.31982421875
+        },
+        "context_persona": {
+          "co_prefix_injection": 0.3212890625,
+          "co_refusal_suppression": 0.223388671875,
+          "co_persona_roleplay": 0.1297607421875,
+          "mg_encoding_obfuscation": 0.27685546875,
+          "mg_payload_splitting": 0.28857421875,
+          "mg_distractors_negated": 0.26611328125,
+          "context_persona": 1.0,
+          "context_authority": 0.1654052734375,
+          "context_fictional": 0.2423095703125
+        },
+        "context_authority": {
+          "co_prefix_injection": -0.08990478515625,
+          "co_refusal_suppression": -0.07049560546875,
+          "co_persona_roleplay": -0.1435546875,
+          "mg_encoding_obfuscation": -0.108642578125,
+          "mg_payload_splitting": -0.1148681640625,
+          "mg_distractors_negated": 0.1329345703125,
+          "context_persona": 0.1654052734375,
+          "context_authority": 1.0,
+          "context_fictional": 0.4541015625
+        },
+        "context_fictional": {
+          "co_prefix_injection": 0.01514434814453125,
+          "co_refusal_suppression": -0.049407958984375,
+          "co_persona_roleplay": -0.2020263671875,
+          "mg_encoding_obfuscation": 0.114501953125,
+          "mg_payload_splitting": 0.1124267578125,
+          "mg_distractors_negated": 0.31982421875,
+          "context_persona": 0.2423095703125,
+          "context_authority": 0.4541015625,
+          "context_fictional": 1.0009765625
+        }
+      },
+      "cosine_result": {
+        "S_CO": 0.5390625,
+        "S_MG": 0.5693359375,
+        "S_Context": 0.2872721354166667,
+        "S_between_all": 0.16429901123046875,
+        "T_partition": 0.30092451307508683,
+        "S_Context_vs_CO": 0.014910380045572916,
+        "S_Context_vs_MG": 0.14307996961805555,
+        "S_CO_vs_MG": 0.3349066840277778
+      },
+      "n_partitions": 280,
+      "canonical_partition_rank": 1,
+      "mean_norms": {
+        "co_prefix_injection": {
+          "mean_norm": 29.21875,
+          "std_norm": 3.22265625,
+          "min_norm": 20.296875,
+          "max_norm": 37.34375
+        },
+        "co_refusal_suppression": {
+          "mean_norm": 24.515625,
+          "std_norm": 3.375,
+          "min_norm": 13.4609375,
+          "max_norm": 32.5
+        },
+        "co_persona_roleplay": {
+          "mean_norm": 16.234375,
+          "std_norm": 2.099609375,
+          "min_norm": 10.9765625,
+          "max_norm": 22.03125
+        },
+        "mg_encoding_obfuscation": {
+          "mean_norm": 42.34375,
+          "std_norm": 3.009765625,
+          "min_norm": 33.84375,
+          "max_norm": 52.5
+        },
+        "mg_payload_splitting": {
+          "mean_norm": 38.5,
+          "std_norm": 3.173828125,
+          "min_norm": 30.1875,
+          "max_norm": 47.125
+        },
+        "mg_distractors_negated": {
+          "mean_norm": 34.0,
+          "std_norm": 4.5625,
+          "min_norm": 20.875,
+          "max_norm": 46.03125
+        },
+        "context_persona": {
+          "mean_norm": 18.546875,
+          "std_norm": 2.962890625,
+          "min_norm": 9.71875,
+          "max_norm": 26.234375
+        },
+        "context_authority": {
+          "mean_norm": 8.9609375,
+          "std_norm": 0.85009765625,
+          "min_norm": 6.46484375,
+          "max_norm": 12.375
+        },
+        "context_fictional": {
+          "mean_norm": 11.2890625,
+          "std_norm": 2.326171875,
+          "min_norm": 6.796875,
+          "max_norm": 19.96875
+        }
+      },
+      "reliability": {
+        "co_prefix_injection": {
+          "split_half_cosine_mean": 0.997916042804718,
+          "split_half_cosine_median": 0.998046875,
+          "split_half_cosine_ci95": [
+            0.99609375,
+            0.9990234375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "co_refusal_suppression": {
+          "split_half_cosine_mean": 0.9976142644882202,
+          "split_half_cosine_median": 0.998046875,
+          "split_half_cosine_ci95": [
+            0.995349109172821,
+            0.9990234375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "co_persona_roleplay": {
+          "split_half_cosine_mean": 0.9961435794830322,
+          "split_half_cosine_median": 0.99609375,
+          "split_half_cosine_ci95": [
+            0.992907702922821,
+            0.99755859375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "mg_encoding_obfuscation": {
+          "split_half_cosine_mean": 0.9977314472198486,
+          "split_half_cosine_median": 0.99755859375,
+          "split_half_cosine_ci95": [
+            0.99560546875,
+            0.9990234375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "mg_payload_splitting": {
+          "split_half_cosine_mean": 0.9974531531333923,
+          "split_half_cosine_median": 0.998046875,
+          "split_half_cosine_ci95": [
+            0.99462890625,
+            0.999279797077179
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "mg_distractors_negated": {
+          "split_half_cosine_mean": 0.9972206950187683,
+          "split_half_cosine_median": 0.99755859375,
+          "split_half_cosine_ci95": [
+            0.99462890625,
+            0.99853515625
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "context_persona": {
+          "split_half_cosine_mean": 0.9969072341918945,
+          "split_half_cosine_median": 0.9970703125,
+          "split_half_cosine_ci95": [
+            0.99462890625,
+            0.99853515625
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "context_authority": {
+          "split_half_cosine_mean": 0.9960097670555115,
+          "split_half_cosine_median": 0.99609375,
+          "split_half_cosine_ci95": [
+            0.99365234375,
+            0.99755859375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "context_fictional": {
+          "split_half_cosine_mean": 0.9940254092216492,
+          "split_half_cosine_median": 0.99462890625,
+          "split_half_cosine_ci95": [
+            0.9892578125,
+            0.99658203125
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        }
+      },
+      "context_leave_one_out": {
+        "context_persona": {
+          "remaining_pair": [
+            "context_authority",
+            "context_fictional"
+          ],
+          "pair_internal_cosine": 0.4541015625,
+          "pair_centroid_vs_CO": -0.10162353515625,
+          "pair_centroid_vs_MG": 0.10235595703125
+        },
+        "context_authority": {
+          "remaining_pair": [
+            "context_persona",
+            "context_fictional"
+          ],
+          "pair_internal_cosine": 0.2423095703125,
+          "pair_centroid_vs_CO": 0.204833984375,
+          "pair_centroid_vs_MG": 0.349853515625
+        },
+        "context_fictional": {
+          "remaining_pair": [
+            "context_persona",
+            "context_authority"
+          ],
+          "pair_internal_cosine": 0.1654052734375,
+          "pair_centroid_vs_CO": 0.2034912109375,
+          "pair_centroid_vs_MG": 0.259765625
+        }
+      },
+      "minimum_evidence": {
+        "criterion_1_all_context_reliable": {
+          "per_condition": {
+            "context_persona": true,
+            "context_authority": true,
+            "context_fictional": true
+          },
+          "met": true,
+          "proxy": "split_half_cosine_ci95 lower bound > 0"
+        },
+        "criterion_2_context_internal_gt_between": {
+          "S_Context": 0.2872721354166667,
+          "S_Context_vs_CO": 0.014910380045572916,
+          "S_Context_vs_MG": 0.14307996961805555,
+          "met": true
+        },
+        "criterion_3_leave_one_out_stable": {
+          "per_holdout": {
+            "context_persona": {
+              "remaining_pair": [
+                "context_authority",
+                "context_fictional"
+              ],
+              "pair_internal_cosine": 0.4541015625,
+              "pair_centroid_vs_CO": -0.10162353515625,
+              "pair_centroid_vs_MG": 0.10235595703125
+            },
+            "context_authority": {
+              "remaining_pair": [
+                "context_persona",
+                "context_fictional"
+              ],
+              "pair_internal_cosine": 0.2423095703125,
+              "pair_centroid_vs_CO": 0.204833984375,
+              "pair_centroid_vs_MG": 0.349853515625
+            },
+            "context_fictional": {
+              "remaining_pair": [
+                "context_persona",
+                "context_authority"
+              ],
+              "pair_internal_cosine": 0.1654052734375,
+              "pair_centroid_vs_CO": 0.2034912109375,
+              "pair_centroid_vs_MG": 0.259765625
+            }
+          },
+          "met": false
+        },
+        "criterion_4_partition_best_rank": {
+          "canonical_partition_rank": 1,
+          "met": true
+        },
+        "criterion_5_replication_2_of_3_models": "NOT evaluated by this script -- read all 3 models' output files together to assess this criterion.",
+        "all_4_single_model_criteria_met": false
+      },
+      "bootstrap": {
+        "S_CO": {
+          "mean": 0.5390300750732422,
+          "median": 0.5391438603401184,
+          "ci95": [
+            0.530029296875,
+            0.5475260615348816
+          ]
+        },
+        "S_MG": {
+          "mean": 0.5698195099830627,
+          "median": 0.5697428584098816,
+          "ci95": [
+            0.556884765625,
+            0.5821126103401184
+          ]
+        },
+        "S_Context": {
+          "mean": 0.2873263359069824,
+          "median": 0.2872314453125,
+          "ci95": [
+            0.27713826298713684,
+            0.297811895608902
+          ]
+        },
+        "S_between": {
+          "mean": 0.16455385088920593,
+          "median": 0.16450020670890808,
+          "ci95": [
+            0.1549011468887329,
+            0.17394909262657166
+          ]
+        },
+        "T": {
+          "mean": 0.30083808302879333,
+          "median": 0.30078861117362976,
+          "ci95": [
+            0.2963210642337799,
+            0.30564525723457336
+          ]
+        },
+        "P_canonical_rank_1": 1.0,
+        "n_bootstrap": 2000,
+        "seed": 20260828
+      },
+      "layerwise_sweep_point_estimate_only": [
+        {
+          "layer": 0,
+          "S_CO": NaN,
+          "S_MG": NaN,
+          "S_Context": NaN,
+          "S_between": NaN,
+          "T": NaN,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 1,
+          "S_CO": 0.60693359375,
+          "S_MG": 0.2346623738606771,
+          "S_Context": 0.19608561197916666,
+          "S_between": 0.12048622413917824,
+          "T": 0.225407635724103,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 2,
+          "S_CO": 0.6652018229166666,
+          "S_MG": 0.1707763671875,
+          "S_Context": 0.2894694010416667,
+          "S_between": 0.1307883792453342,
+          "T": 0.2443608178032769,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 3,
+          "S_CO": 0.6414388020833334,
+          "S_MG": 0.26204681396484375,
+          "S_Context": 0.3086751302083333,
+          "S_between": 0.14631624575014468,
+          "T": 0.25773733633535884,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 4,
+          "S_CO": 0.6534830729166666,
+          "S_MG": 0.3496500651041667,
+          "S_Context": 0.416748046875,
+          "S_between": 0.12261691799870243,
+          "T": 0.35067681029990866,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 5,
+          "S_CO": 0.592041015625,
+          "S_MG": 0.4069010416666667,
+          "S_Context": 0.3433837890625,
+          "S_between": 0.12144145259150751,
+          "T": 0.32600049619321475,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 6,
+          "S_CO": 0.70751953125,
+          "S_MG": 0.467529296875,
+          "S_Context": 0.4759114583333333,
+          "S_between": 0.10948873449254919,
+          "T": 0.44083136099356185,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 7,
+          "S_CO": 0.71875,
+          "S_MG": 0.4336751302083333,
+          "S_Context": 0.509765625,
+          "S_between": 0.14207698680736403,
+          "T": 0.4119865982620804,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 8,
+          "S_CO": 0.74072265625,
+          "S_MG": 0.4678548177083333,
+          "S_Context": 0.4867350260416667,
+          "S_between": 0.14021759342264245,
+          "T": 0.4248865732440242,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 9,
+          "S_CO": 0.7239583333333334,
+          "S_MG": 0.4628092447916667,
+          "S_Context": 0.4744466145833333,
+          "S_between": 0.19325277540418836,
+          "T": 0.36048528883192266,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 10,
+          "S_CO": 0.5523274739583334,
+          "S_MG": 0.5098470052083334,
+          "S_Context": 0.403564453125,
+          "S_between": 0.1308919765331127,
+          "T": 0.3576876675641095,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 11,
+          "S_CO": 0.5494791666666666,
+          "S_MG": 0.5127766927083334,
+          "S_Context": 0.4070638020833333,
+          "S_between": 0.13786033347800924,
+          "T": 0.35191288700810186,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 12,
+          "S_CO": 0.5616861979166666,
+          "S_MG": 0.4947102864583333,
+          "S_Context": 0.3807779947916667,
+          "S_between": 0.1862756234628183,
+          "T": 0.292782536259404,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 13,
+          "S_CO": 0.5472005208333334,
+          "S_MG": 0.483154296875,
+          "S_Context": 0.4154459635416667,
+          "S_between": 0.194520667747215,
+          "T": 0.28741292600278506,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 14,
+          "S_CO": 0.5995279947916666,
+          "S_MG": 0.527099609375,
+          "S_Context": 0.2559814453125,
+          "S_between": 0.16335607458043983,
+          "T": 0.29751360857928233,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 15,
+          "S_CO": 0.5641276041666666,
+          "S_MG": 0.5271809895833334,
+          "S_Context": 0.2716064453125,
+          "S_between": 0.15459880122432001,
+          "T": 0.2997062117965133,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 16,
+          "S_CO": 0.5390625,
+          "S_MG": 0.5693359375,
+          "S_Context": 0.2872721354166667,
+          "S_between": 0.16429901123046875,
+          "T": 0.30092451307508683,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 17,
+          "S_CO": 0.48876953125,
+          "S_MG": 0.5596516927083334,
+          "S_Context": 0.3025309244791667,
+          "S_between": 0.1278754340277778,
+          "T": 0.32244194878472227,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 18,
+          "S_CO": 0.4458414713541667,
+          "S_MG": 0.5887044270833334,
+          "S_Context": 0.3302001953125,
+          "S_between": 0.12270927429199219,
+          "T": 0.3322060902913411,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 19,
+          "S_CO": 0.4609375,
+          "S_MG": 0.6673177083333334,
+          "S_Context": 0.2862141927083333,
+          "S_between": 0.1332962601273148,
+          "T": 0.33819354021990744,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 20,
+          "S_CO": 0.4122721354166667,
+          "S_MG": 0.671875,
+          "S_Context": 0.23624674479166666,
+          "S_between": 0.1734969527633102,
+          "T": 0.26663434063946767,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 21,
+          "S_CO": 0.374267578125,
+          "S_MG": 0.67822265625,
+          "S_Context": 0.2132568359375,
+          "S_between": 0.14603621871383102,
+          "T": 0.27587947139033564,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 22,
+          "S_CO": 0.3459879557291667,
+          "S_MG": 0.6634114583333334,
+          "S_Context": 0.2095947265625,
+          "S_between": 0.1775139702690972,
+          "T": 0.2288174099392361,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 23,
+          "S_CO": 0.3173828125,
+          "S_MG": 0.6689453125,
+          "S_Context": 0.18900553385416666,
+          "S_between": 0.18078048140914352,
+          "T": 0.21099740487557875,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 24,
+          "S_CO": 0.3084716796875,
+          "S_MG": 0.666015625,
+          "S_Context": 0.18229166666666666,
+          "S_between": 0.1594895256890191,
+          "T": 0.22610346476236978,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 25,
+          "S_CO": 0.3110758463541667,
+          "S_MG": 0.6546223958333334,
+          "S_Context": 0.18326822916666666,
+          "S_between": 0.1642173484519676,
+          "T": 0.21877147533275468,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 26,
+          "S_CO": 0.3284912109375,
+          "S_MG": 0.66796875,
+          "S_Context": 0.1783447265625,
+          "S_between": 0.1819717972366898,
+          "T": 0.2096297652633102,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 27,
+          "S_CO": 0.3274332682291667,
+          "S_MG": 0.6573893229166666,
+          "S_Context": 0.21065266927083334,
+          "S_between": 0.1987412064163773,
+          "T": 0.19975054705584486,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 28,
+          "S_CO": 0.2920328776041667,
+          "S_MG": 0.5745442708333334,
+          "S_Context": 0.12721761067708334,
+          "S_between": 0.10541435524269387,
+          "T": 0.22585056446216722,
+          "canonical_partition_rank": 1
+        }
+      ],
+      "layerwise_sweep_skipped": false
+    },
+    "t_final_user_end": {
+      "n_instructions": 300,
+      "n_instruction_clusters": 298,
+      "cosine_matrix": {
+        "co_prefix_injection": {
+          "co_prefix_injection": 1.0,
+          "co_refusal_suppression": 0.7314453125,
+          "co_persona_roleplay": 0.63330078125,
+          "mg_encoding_obfuscation": 0.14794921875,
+          "mg_payload_splitting": 0.09539794921875,
+          "mg_distractors_negated": -0.0289459228515625,
+          "context_persona": -0.010589599609375,
+          "context_authority": 0.09014892578125,
+          "context_fictional": 0.05438232421875
+        },
+        "co_refusal_suppression": {
+          "co_prefix_injection": 0.7314453125,
+          "co_refusal_suppression": 0.99951171875,
+          "co_persona_roleplay": 0.78173828125,
+          "mg_encoding_obfuscation": 0.2252197265625,
+          "mg_payload_splitting": 0.134765625,
+          "mg_distractors_negated": 0.09417724609375,
+          "context_persona": 0.061553955078125,
+          "context_authority": 0.0374755859375,
+          "context_fictional": 0.0158233642578125
+        },
+        "co_persona_roleplay": {
+          "co_prefix_injection": 0.63330078125,
+          "co_refusal_suppression": 0.78173828125,
+          "co_persona_roleplay": 0.99951171875,
+          "mg_encoding_obfuscation": 0.12646484375,
+          "mg_payload_splitting": 0.060394287109375,
+          "mg_distractors_negated": 0.0290985107421875,
+          "context_persona": 0.08282470703125,
+          "context_authority": 0.017578125,
+          "context_fictional": 0.0616455078125
+        },
+        "mg_encoding_obfuscation": {
+          "co_prefix_injection": 0.14794921875,
+          "co_refusal_suppression": 0.2252197265625,
+          "co_persona_roleplay": 0.12646484375,
+          "mg_encoding_obfuscation": 0.99951171875,
+          "mg_payload_splitting": 0.287353515625,
+          "mg_distractors_negated": 0.306396484375,
+          "context_persona": 0.08892822265625,
+          "context_authority": -0.0169525146484375,
+          "context_fictional": 0.08514404296875
+        },
+        "mg_payload_splitting": {
+          "co_prefix_injection": 0.09539794921875,
+          "co_refusal_suppression": 0.134765625,
+          "co_persona_roleplay": 0.060394287109375,
+          "mg_encoding_obfuscation": 0.287353515625,
+          "mg_payload_splitting": 1.0,
+          "mg_distractors_negated": 0.446533203125,
+          "context_persona": 0.07733154296875,
+          "context_authority": 0.029052734375,
+          "context_fictional": -0.004375457763671875
+        },
+        "mg_distractors_negated": {
+          "co_prefix_injection": -0.0289459228515625,
+          "co_refusal_suppression": 0.09417724609375,
+          "co_persona_roleplay": 0.0290985107421875,
+          "mg_encoding_obfuscation": 0.306396484375,
+          "mg_payload_splitting": 0.446533203125,
+          "mg_distractors_negated": 1.0,
+          "context_persona": 0.1552734375,
+          "context_authority": 0.02490234375,
+          "context_fictional": 0.042694091796875
+        },
+        "context_persona": {
+          "co_prefix_injection": -0.010589599609375,
+          "co_refusal_suppression": 0.061553955078125,
+          "co_persona_roleplay": 0.08282470703125,
+          "mg_encoding_obfuscation": 0.08892822265625,
+          "mg_payload_splitting": 0.07733154296875,
+          "mg_distractors_negated": 0.1552734375,
+          "context_persona": 1.0009765625,
+          "context_authority": 0.2919921875,
+          "context_fictional": 0.323486328125
+        },
+        "context_authority": {
+          "co_prefix_injection": 0.09014892578125,
+          "co_refusal_suppression": 0.0374755859375,
+          "co_persona_roleplay": 0.017578125,
+          "mg_encoding_obfuscation": -0.0169525146484375,
+          "mg_payload_splitting": 0.029052734375,
+          "mg_distractors_negated": 0.02490234375,
+          "context_persona": 0.2919921875,
+          "context_authority": 1.0,
+          "context_fictional": 0.1298828125
+        },
+        "context_fictional": {
+          "co_prefix_injection": 0.05438232421875,
+          "co_refusal_suppression": 0.0158233642578125,
+          "co_persona_roleplay": 0.0616455078125,
+          "mg_encoding_obfuscation": 0.08514404296875,
+          "mg_payload_splitting": -0.004375457763671875,
+          "mg_distractors_negated": 0.042694091796875,
+          "context_persona": 0.323486328125,
+          "context_authority": 0.1298828125,
+          "context_fictional": 1.0009765625
+        }
+      },
+      "cosine_result": {
+        "S_CO": 0.7154947916666666,
+        "S_MG": 0.3467610677083333,
+        "S_Context": 0.24845377604166666,
+        "S_between_all": 0.06582825272171584,
+        "T_partition": 0.37107495908383975,
+        "S_Context_vs_CO": 0.045649210611979164,
+        "S_Context_vs_MG": 0.05355538262261285,
+        "S_CO_vs_MG": 0.09828016493055555
+      },
+      "n_partitions": 280,
+      "canonical_partition_rank": 1,
+      "mean_norms": {
+        "co_prefix_injection": {
+          "mean_norm": 11.921875,
+          "std_norm": 5.73046875,
+          "min_norm": 3.689453125,
+          "max_norm": 31.84375
+        },
+        "co_refusal_suppression": {
+          "mean_norm": 13.84375,
+          "std_norm": 5.78515625,
+          "min_norm": 4.9765625,
+          "max_norm": 37.125
+        },
+        "co_persona_roleplay": {
+          "mean_norm": 11.6328125,
+          "std_norm": 4.7109375,
+          "min_norm": 4.20703125,
+          "max_norm": 27.015625
+        },
+        "mg_encoding_obfuscation": {
+          "mean_norm": 86.5,
+          "std_norm": 5.8359375,
+          "min_norm": 74.5625,
+          "max_norm": 101.125
+        },
+        "mg_payload_splitting": {
+          "mean_norm": 69.4375,
+          "std_norm": 11.3046875,
+          "min_norm": 47.34375,
+          "max_norm": 93.625
+        },
+        "mg_distractors_negated": {
+          "mean_norm": 76.4375,
+          "std_norm": 8.984375,
+          "min_norm": 59.25,
+          "max_norm": 98.125
+        },
+        "context_persona": {
+          "mean_norm": 9.015625,
+          "std_norm": 2.787109375,
+          "min_norm": 3.7578125,
+          "max_norm": 20.546875
+        },
+        "context_authority": {
+          "mean_norm": 5.60546875,
+          "std_norm": 1.5302734375,
+          "min_norm": 2.447265625,
+          "max_norm": 10.96875
+        },
+        "context_fictional": {
+          "mean_norm": 10.109375,
+          "std_norm": 3.900390625,
+          "min_norm": 3.3515625,
+          "max_norm": 27.21875
+        }
+      },
+      "reliability": {
+        "co_prefix_injection": {
+          "split_half_cosine_mean": 0.9740742444992065,
+          "split_half_cosine_median": 0.97509765625,
+          "split_half_cosine_ci95": [
+            0.9638671875,
+            0.980236828327179
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "co_refusal_suppression": {
+          "split_half_cosine_mean": 0.974856436252594,
+          "split_half_cosine_median": 0.9755859375,
+          "split_half_cosine_ci95": [
+            0.9658203125,
+            0.98046875
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "co_persona_roleplay": {
+          "split_half_cosine_mean": 0.9797617197036743,
+          "split_half_cosine_median": 0.98095703125,
+          "split_half_cosine_ci95": [
+            0.9716796875,
+            0.984375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "mg_encoding_obfuscation": {
+          "split_half_cosine_mean": 0.9914599657058716,
+          "split_half_cosine_median": 0.9921875,
+          "split_half_cosine_ci95": [
+            0.9843505620956421,
+            0.99462890625
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "mg_payload_splitting": {
+          "split_half_cosine_mean": 0.992483377456665,
+          "split_half_cosine_median": 0.9931640625,
+          "split_half_cosine_ci95": [
+            0.98779296875,
+            0.99462890625
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "mg_distractors_negated": {
+          "split_half_cosine_mean": 0.9941845536231995,
+          "split_half_cosine_median": 0.99462890625,
+          "split_half_cosine_ci95": [
+            0.990234375,
+            0.99609375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "context_persona": {
+          "split_half_cosine_mean": 0.9785370826721191,
+          "split_half_cosine_median": 0.97900390625,
+          "split_half_cosine_ci95": [
+            0.971423327922821,
+            0.982421875
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "context_authority": {
+          "split_half_cosine_mean": 0.9821923971176147,
+          "split_half_cosine_median": 0.98291015625,
+          "split_half_cosine_ci95": [
+            0.976794421672821,
+            0.9853515625
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "context_fictional": {
+          "split_half_cosine_mean": 0.9706474542617798,
+          "split_half_cosine_median": 0.97119140625,
+          "split_half_cosine_ci95": [
+            0.95947265625,
+            0.9775390625
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        }
+      },
+      "context_leave_one_out": {
+        "context_persona": {
+          "remaining_pair": [
+            "context_authority",
+            "context_fictional"
+          ],
+          "pair_internal_cosine": 0.1298828125,
+          "pair_centroid_vs_CO": 0.06475830078125,
+          "pair_centroid_vs_MG": 0.05389404296875
+        },
+        "context_authority": {
+          "remaining_pair": [
+            "context_persona",
+            "context_fictional"
+          ],
+          "pair_internal_cosine": 0.323486328125,
+          "pair_centroid_vs_CO": 0.060546875,
+          "pair_centroid_vs_MG": 0.1241455078125
+        },
+        "context_fictional": {
+          "remaining_pair": [
+            "context_persona",
+            "context_authority"
+          ],
+          "pair_internal_cosine": 0.2919921875,
+          "pair_centroid_vs_CO": 0.06353759765625,
+          "pair_centroid_vs_MG": 0.1142578125
+        }
+      },
+      "minimum_evidence": {
+        "criterion_1_all_context_reliable": {
+          "per_condition": {
+            "context_persona": true,
+            "context_authority": true,
+            "context_fictional": true
+          },
+          "met": true,
+          "proxy": "split_half_cosine_ci95 lower bound > 0"
+        },
+        "criterion_2_context_internal_gt_between": {
+          "S_Context": 0.24845377604166666,
+          "S_Context_vs_CO": 0.045649210611979164,
+          "S_Context_vs_MG": 0.05355538262261285,
+          "met": true
+        },
+        "criterion_3_leave_one_out_stable": {
+          "per_holdout": {
+            "context_persona": {
+              "remaining_pair": [
+                "context_authority",
+                "context_fictional"
+              ],
+              "pair_internal_cosine": 0.1298828125,
+              "pair_centroid_vs_CO": 0.06475830078125,
+              "pair_centroid_vs_MG": 0.05389404296875
+            },
+            "context_authority": {
+              "remaining_pair": [
+                "context_persona",
+                "context_fictional"
+              ],
+              "pair_internal_cosine": 0.323486328125,
+              "pair_centroid_vs_CO": 0.060546875,
+              "pair_centroid_vs_MG": 0.1241455078125
+            },
+            "context_fictional": {
+              "remaining_pair": [
+                "context_persona",
+                "context_authority"
+              ],
+              "pair_internal_cosine": 0.2919921875,
+              "pair_centroid_vs_CO": 0.06353759765625,
+              "pair_centroid_vs_MG": 0.1142578125
+            }
+          },
+          "met": true
+        },
+        "criterion_4_partition_best_rank": {
+          "canonical_partition_rank": 1,
+          "met": true
+        },
+        "criterion_5_replication_2_of_3_models": "NOT evaluated by this script -- read all 3 models' output files together to assess this criterion.",
+        "all_4_single_model_criteria_met": true
+      },
+      "bootstrap": {
+        "S_CO": {
+          "mean": 0.7154510021209717,
+          "median": 0.7154948115348816,
+          "ci95": [
+            0.70751953125,
+            0.7233073115348816
+          ]
+        },
+        "S_MG": {
+          "mean": 0.34851208329200745,
+          "median": 0.3485514223575592,
+          "ci95": [
+            0.33512166142463684,
+            0.36181843280792236
+          ]
+        },
+        "S_Context": {
+          "mean": 0.2482108622789383,
+          "median": 0.2481689453125,
+          "ci95": [
+            0.2367350310087204,
+            0.2600509524345398
+          ]
+        },
+        "S_between": {
+          "mean": 0.06638313084840775,
+          "median": 0.06640635430812836,
+          "ci95": [
+            0.05963778868317604,
+            0.07311197370290756
+          ]
+        },
+        "T": {
+          "mean": 0.37100815773010254,
+          "median": 0.37092363834381104,
+          "ci95": [
+            0.36281150579452515,
+            0.3792168200016022
+          ]
+        },
+        "P_canonical_rank_1": 1.0,
+        "n_bootstrap": 2000,
+        "seed": 20260828
+      },
+      "layerwise_sweep_point_estimate_only": [
+        {
+          "layer": 0,
+          "S_CO": NaN,
+          "S_MG": 0.15592447916666666,
+          "S_Context": NaN,
+          "S_between": NaN,
+          "T": NaN,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 1,
+          "S_CO": 0.5528157552083334,
+          "S_MG": 0.3933512369791667,
+          "S_Context": 0.19441731770833334,
+          "S_between": 0.05400410404911748,
+          "T": 0.32619066591616025,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 2,
+          "S_CO": 0.7366536458333334,
+          "S_MG": 0.2918345133463542,
+          "S_Context": 0.2582600911458333,
+          "S_between": 0.005190036914966725,
+          "T": 0.4237260465268735,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 3,
+          "S_CO": 0.70947265625,
+          "S_MG": 0.2926228841145833,
+          "S_Context": 0.307373046875,
+          "S_between": 0.04130769658971716,
+          "T": 0.39518183249014394,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 4,
+          "S_CO": 0.6964518229166666,
+          "S_MG": 0.24711100260416666,
+          "S_Context": 0.3504231770833333,
+          "S_between": 0.04072387130172164,
+          "T": 0.3906047962330005,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 5,
+          "S_CO": 0.7522786458333334,
+          "S_MG": 0.173431396484375,
+          "S_Context": 0.2766520182291667,
+          "S_between": 0.05152935451931423,
+          "T": 0.34925799899631077,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 6,
+          "S_CO": 0.7286783854166666,
+          "S_MG": 0.17985026041666666,
+          "S_Context": 0.4069010416666667,
+          "S_between": 0.04461044735378689,
+          "T": 0.3938661151462131,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 7,
+          "S_CO": 0.7737630208333334,
+          "S_MG": 0.23708089192708334,
+          "S_Context": 0.420166015625,
+          "S_between": 0.06426380298755788,
+          "T": 0.41273950647424773,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 8,
+          "S_CO": 0.7888997395833334,
+          "S_MG": 0.2752278645833333,
+          "S_Context": 0.4170735677083333,
+          "S_between": 0.07112693786621094,
+          "T": 0.4226067860921224,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 9,
+          "S_CO": 0.79931640625,
+          "S_MG": 0.32666015625,
+          "S_Context": 0.461669921875,
+          "S_between": 0.17558910228587962,
+          "T": 0.353626392505787,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 10,
+          "S_CO": 0.7718098958333334,
+          "S_MG": 0.2710367838541667,
+          "S_Context": 0.375732421875,
+          "S_between": 0.1091167308666088,
+          "T": 0.36374296965422453,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 11,
+          "S_CO": 0.7210286458333334,
+          "S_MG": 0.24141438802083334,
+          "S_Context": 0.317138671875,
+          "S_between": 0.09758730287905093,
+          "T": 0.32893993236400465,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 12,
+          "S_CO": 0.7410481770833334,
+          "S_MG": 0.2950032552083333,
+          "S_Context": 0.3083089192708333,
+          "S_between": 0.12640324345341436,
+          "T": 0.32171687373408564,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 13,
+          "S_CO": 0.7320963541666666,
+          "S_MG": 0.3409830729166667,
+          "S_Context": 0.24009195963541666,
+          "S_between": 0.09602730362503616,
+          "T": 0.34169649194788054,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 14,
+          "S_CO": 0.7203776041666666,
+          "S_MG": 0.3377278645833333,
+          "S_Context": 0.21331787109375,
+          "S_between": 0.08744246871383103,
+          "T": 0.33636531123408564,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 15,
+          "S_CO": 0.7073567708333334,
+          "S_MG": 0.29443359375,
+          "S_Context": 0.23301188151041666,
+          "S_between": 0.05336980466489439,
+          "T": 0.35823094403302236,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 16,
+          "S_CO": 0.7154947916666666,
+          "S_MG": 0.3467610677083333,
+          "S_Context": 0.24845377604166666,
+          "S_between": 0.06582825272171584,
+          "T": 0.37107495908383975,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 17,
+          "S_CO": 0.7135416666666666,
+          "S_MG": 0.359130859375,
+          "S_Context": 0.2754313151041667,
+          "S_between": 0.04975502579300492,
+          "T": 0.3996129212556062,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 18,
+          "S_CO": 0.6778971354166666,
+          "S_MG": 0.4013671875,
+          "S_Context": 0.302978515625,
+          "S_between": 0.057544849537037035,
+          "T": 0.4032027633101851,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 19,
+          "S_CO": 0.6497395833333334,
+          "S_MG": 0.4510904947916667,
+          "S_Context": 0.4243977864583333,
+          "S_between": 0.14003358063874422,
+          "T": 0.3683757075557002,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 20,
+          "S_CO": 0.6097005208333334,
+          "S_MG": 0.4144694010416667,
+          "S_Context": 0.36474609375,
+          "S_between": 0.13007806848596645,
+          "T": 0.3328939367223669,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 21,
+          "S_CO": 0.5784505208333334,
+          "S_MG": 0.3531494140625,
+          "S_Context": 0.3866373697916667,
+          "S_between": 0.11611345079210068,
+          "T": 0.32329898410373265,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 22,
+          "S_CO": 0.5974934895833334,
+          "S_MG": 0.2895100911458333,
+          "S_Context": 0.3909505208333333,
+          "S_between": 0.1170455084906684,
+          "T": 0.3089391920301649,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 23,
+          "S_CO": 0.5401204427083334,
+          "S_MG": 0.24723307291666666,
+          "S_Context": 0.3799641927083333,
+          "S_between": 0.09260234126338251,
+          "T": 0.2965035615143952,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 24,
+          "S_CO": 0.5188802083333334,
+          "S_MG": 0.22957356770833334,
+          "S_Context": 0.339111328125,
+          "S_between": 0.09306388431125218,
+          "T": 0.2694578170776367,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 25,
+          "S_CO": 0.4881998697916667,
+          "S_MG": 0.21372477213541666,
+          "S_Context": 0.34765625,
+          "S_between": 0.07850138346354167,
+          "T": 0.27135891384548616,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 26,
+          "S_CO": 0.4642740885416667,
+          "S_MG": 0.20001220703125,
+          "S_Context": 0.3660481770833333,
+          "S_between": 0.08549556025752314,
+          "T": 0.25794926396122686,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 27,
+          "S_CO": 0.4315592447916667,
+          "S_MG": 0.21319580078125,
+          "S_Context": 0.3673502604166667,
+          "S_between": 0.08328303584346065,
+          "T": 0.2540853994864005,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 28,
+          "S_CO": 0.4844563802083333,
+          "S_MG": 0.4193115234375,
+          "S_Context": 0.3391927083333333,
+          "S_between": 0.08525349475719311,
+          "T": 0.3290667092358624,
+          "canonical_partition_rank": 1
+        }
+      ],
+      "layerwise_sweep_skipped": false
+    }
+  }
+}
