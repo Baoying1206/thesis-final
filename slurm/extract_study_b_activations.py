@@ -295,11 +295,25 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
     commit = git_commit_hash(REPO_ROOT)
     os.makedirs(output_dir, exist_ok=True)
     manifest_path = os.path.join(output_dir, f"{model_alias}_{manifest_ids_key_label}_study_b_manifest.jsonl")
+    responses_path = os.path.join(output_dir, f"{model_alias}_{manifest_ids_key_label}_study_b_responses.jsonl")
     activations_by_condition = {condition_name(f, form): {} for f in FAMILIES for form in ALL_FORMS}
     judge_input_rows = []  # only ever populated for validation_ids or pilot
     n_ok, n_fail = 0, 0
 
     manifest_f = open(manifest_path, "w", encoding="utf-8")
+    responses_f = open(responses_path, "w", encoding="utf-8")
+
+    def write_response(row, stage):
+        """Diagnostic log only (not consumed by analyze_study_b.py) --
+        real generated response text for every stage, so a future
+        empty-response/garbled-output bug (the Gemma-2 precedent from
+        Experiment 2) can be caught by inspection without re-running
+        generation."""
+        responses_f.write(json.dumps({
+            "instruction_id": row["instruction_id"], "condition": row["condition"],
+            "stage": stage, "response": row.get("stage_response"),
+            "response_len_chars": len(row["stage_response"]) if row.get("stage_response") else 0,
+        }, ensure_ascii=False) + "\n")
 
     def write_record(row, stage, t_gen, tok_id, seq_len, result_status, failure_reason=None):
         nonlocal n_ok, n_fail
@@ -339,6 +353,7 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
         print(f"  generating real responses for {len(single_pass_ok_rows)} S/C rows (batched)", file=sys.stderr)
         run_generation_wave(model, tokenizer, eos_ids, single_pass_ok_rows, batch_size)
         for row in single_pass_ok_rows:
+            write_response(row, "single")
             judge_input_rows.append({
                 "generation_key": sha256_hex(f"{model_alias}|{row['condition']}|{row['instruction_id']}|single"),
                 "messages": row["messages"] + [{"role": "assistant", "content": row["stage_response"]}],
@@ -366,6 +381,7 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
             print(f"  stage {stage_idx}: generating real responses ({len(trajectory_rows)} rows)", file=sys.stderr)
             run_generation_wave(model, tokenizer, eos_ids, trajectory_rows, batch_size)
             for row in trajectory_rows:
+                write_response(row, stage_idx)
                 row["messages"].append({"role": "assistant", "content": row["stage_response"]})
                 if stage_idx == 4 and (ids_key == "validation_ids" or force_full_generation):
                     judge_input_rows.append({
@@ -376,6 +392,7 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
                     })
 
     manifest_f.close()
+    responses_f.close()
 
     for name, per_instruction in activations_by_condition.items():
         activation_path = os.path.join(output_dir, f"{model_alias}_{manifest_ids_key_label}_{name}_activations.pt")
@@ -403,7 +420,7 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
         "result_status": ("STUDY_B_PILOT_DONE" if is_pilot else "STUDY_B_EXTRACTION_DONE"),
         "model_alias": model_alias, "ids_key": ids_key, "pilot": is_pilot,
         "n_instructions": len(instructions), "n_ok": n_ok, "n_fail": n_fail,
-        "manifest_path": manifest_path, "judge_path": judge_path, "output_dir": output_dir,
+        "manifest_path": manifest_path, "responses_path": responses_path, "judge_path": judge_path, "output_dir": output_dir,
     }, indent=2, ensure_ascii=False))
 
 
