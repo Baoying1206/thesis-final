@@ -114,6 +114,11 @@ def fig2_cosine_heatmap(data, position, out_dir):
         ax.set_yticklabels(short_labels, fontsize=7)
         ax.axhline(2.5, color="black", linewidth=1.2)
         ax.axvline(2.5, color="black", linewidth=1.2)
+        for i in range(len(order)):
+            for j in range(len(order)):
+                value = grid[i, j]
+                text_color = "white" if abs(value) > 0.6 else "black"
+                ax.text(j, i, f"{value:.2f}", ha="center", va="center", fontsize=6.5, color=text_color)
         ax.set_title(MODEL_SHORT[m], fontsize=11)
     fig.colorbar(im, ax=axes, shrink=0.7, label="cosine similarity")
     fig.suptitle(f"Pairwise cosine similarity among calibrated mechanism directions\n(position: {position}; top-left 3x3 block = CO, bottom-right 3x3 block = MG)", y=1.08)
