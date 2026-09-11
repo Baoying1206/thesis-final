@@ -76,7 +76,17 @@ def generate_responses(rows, model_path, batch_size, generation_config):
     tokenizer.padding_side = "left"
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.bfloat16, device_map="auto")
+    # Gemma-2's sliding-window attention under the default "sdpa" backend
+    # mis-handles left-padding in batched generation: confirmed on a real
+    # cluster run that within every batch, only the single row with ZERO
+    # left-padding (the batch's longest prompt) generated real text --
+    # every other row, regardless of how little padding it had, produced
+    # max_new_tokens of pure special-token filler that decoded to "".
+    # "eager" attention is the documented-correct fallback for this.
+    attn_kwargs = {"attn_implementation": "eager"} if "gemma" in model_path.lower() else {}
+    model = AutoModelForCausalLM.from_pretrained(
+        model_path, torch_dtype=torch.bfloat16, device_map="auto", **attn_kwargs,
+    )
     model.eval()
 
     # Real end-of-turn token can differ from tokenizer.eos_token_id (e.g.
