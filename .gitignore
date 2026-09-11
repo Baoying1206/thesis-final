@@ -1,2 +1,15 @@
 __pycache__/
 *.pyc
+
+# Raw activation tensors -- never committed (standing project rule, see
+# MIGRATION_MANIFEST.json's forbidden-to-copy list and
+# FINAL_STUDY_PROTOCOL.md's data-handling discipline). A single
+# condition's 300-instruction .pt file is already ~125MB; 8 conditions x
+# 3 models would be several GB, well past what a git repo should hold
+# and past GitHub's 100MB single-file push limit for several of these.
+# Manifests (.jsonl) and analysis output (.json) are NOT excluded --
+# those ARE the results and should be committed.
+*.pt
+*.pth
+*.bin
+*.safetensors
