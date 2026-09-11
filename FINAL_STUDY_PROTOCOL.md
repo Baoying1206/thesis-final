@@ -215,8 +215,15 @@ no `srun --partition=gpu`) and silently succeeded there too (torch/
 transformers fall back to CPU without erroring) -- a real, now-documented
 risk: this pipeline does not fail loudly if GPU allocation is missing,
 so always confirm `nvidia-smi` shows the GPU before trusting a timing- or
-memory-sensitive run. **Still not run: the full 300 x 8 extraction for
-any model** -- only 8-row smoke tests so far.
+memory-sensitive run.
+
+**Round 13: first full-scale real extraction complete
+(Qwen2.5-7B-Instruct, 2026-09-11)** -- the full 300 x 8 = 2,400 forward
+passes, on `slurm-node-gpu-01`, `2400/2400 ok, 0 fail`. All 8
+`Qwen2.5-7B-Instruct_<condition>_activations.pt` files now hold 300 real
+instructions each. **This is the first real (non-synthetic,
+non-`--limit`) activation data this study has produced.** Llama-3.1-8B-
+Instruct and gemma-2-9b-it's full extractions have not run yet.
 
 ### 4.3 Analysis
 
