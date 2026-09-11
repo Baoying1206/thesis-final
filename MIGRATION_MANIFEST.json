@@ -19,7 +19,8 @@
       "destination_sha256": "07167488ef38eecefef61250b0f6e99e5ff92fe725860dbec5abcbccd4e92aef",
       "byte_identical": true,
       "role": "data",
-      "status": "IMPORTED_FROZEN_INPUT"
+      "status": "IMPORTED_FROZEN_INPUT",
+      "destination_deleted_round10": true
     },
     {
       "source_path": "new_experiment/data/splits.json",
@@ -162,5 +163,11 @@
       "thesis_final/legacy_reference/docs/EXPERIMENT_CONTEXT_MULTITURN_BEHAVIOR_PROTOCOL.md",
       "thesis_final/legacy_reference/docs/EXPERIMENT_REDUCTION_PLAN.md"
     ]
+  },
+  "round10_note": {
+    "event": "multilingual_source_file_deleted",
+    "date": "2026-09-11",
+    "description": "data/source/sampled_prompts.json (the byte-identical Round 2 migration copy, carrying the full 9-language instructions dict) was deleted per explicit user request -- the study only ever needed data/source/sampled_prompts_en_only.json (the lossless English-only derivation created in Round 7, see data/manifests/english_only_derivation_round7.json). No code ever read sampled_prompts.json directly (verified by repo-wide grep before deletion). The byte_identical:true verification for this entry remains an accurate historical record of the Round 2 migration, not a claim that the destination file currently exists. Recoverable from ~/new_experiment (untouched) or this repo git history if ever needed again.",
+    "affected_entry_destination_path": "thesis_final/data/source/sampled_prompts.json"
   }
 }

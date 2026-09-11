@@ -48,12 +48,13 @@ for `mg_encoding_obfuscation` (UTF-8 + standard Base64) and
 `mg_payload_splitting` (deterministic normalized-text midpoint split)
 live in `src/canonical_transforms.py`. The study is **English-only** --
 instructions are read from `data/source/sampled_prompts_en_only.json`
-(`id`/`category`/`instruction_en` only, derived losslessly this round).
-`data/source/sampled_prompts.json` still carries the full 9-language
-`instructions` field inherited from the source pool; it is kept
-unmodified purely as the byte-identical migration-provenance record and
-no code here reads it (`FINAL_STUDY_PROTOCOL.md` Sec 2). See
-`FINAL_STUDY_PROTOCOL.md` Sec 13 for remaining open items.
+(`id`/`category`/`instruction_en` only, derived losslessly in Round 7).
+The original `data/source/sampled_prompts.json` (which carried the full
+9-language `instructions` field inherited from the source pool, never
+read by any code here) was **deleted in Round 10** -- recoverable from
+`~/new_experiment` or this repo's git history if ever needed again
+(`FINAL_STUDY_PROTOCOL.md` Sec 2). See `FINAL_STUDY_PROTOCOL.md` Sec 13
+for remaining open items.
 
 **Round 6**: the repo was simplified to just `data/`, `templates/`,
 `src/`, `slurm/` plus this file, `FINAL_STUDY_PROTOCOL.md`, and
@@ -75,10 +76,52 @@ Meta-Llama-3.1-8B-Instruct, and gemma-2-9b-it**, 10/10 conditions each
 (`FINAL_STUDY_PROTOCOL.md` Sec 11.1,
 `data/manifests/real_tokenizer_boundary_audit_cluster_round8.json`).
 **`READY_FOR_PILOT` confirmed 2026-09-11** (`FINAL_STUDY_PROTOCOL.md`
-Sec 5.5) -- the first time this status has been set in this repo. **No
-pilot driver script exists yet** -- nothing here loads a model,
-generates, or calls WildGuard; building that driver is the next
-concrete task (`FINAL_STUDY_PROTOCOL.md` Sec 13).
+Sec 5.5) -- the first time this status has been set in this repo.
+
+**Round 9**: `slurm/run_pilot_llama.py` written -- loads
+Meta-Llama-3.1-8B-Instruct + WildGuard via plain `transformers`, renders
+the frozen 30 ids x 10 conditions, generates, judges, writes
+`pilot_generation_records.jsonl`/`pilot_judge_records.jsonl` (every
+record tagged `"pilot": true`/`"result_status": "PILOT_NON_RESULT"`,
+never to be used to tune templates). `--dry-run` (CPU-only, no model)
+validated locally: 300/300 rows render correctly, including the
+Base64/payload-splitting transforms against real pool text.
+
+`slurm/extract_experiment1_activations.py` also written -- Experiment 1
+(RQ1) raw activation extraction, one forward pass per
+`(condition, instruction_id)` (no `.generate()`), both frozen token
+positions read from the same pass, full-layer hidden states saved per
+`(model, condition)`. `--dry-run` validated 2,400/2,400 rows for
+Qwen2.5-7B-Instruct (via HF Hub); Llama/Gemma untested here (gated).
+This script produces raw activation records only -- it does not compute
+`d_m`, calibration, or any Sec 4.3 statistic.
+
+**Round 10**: Experiment 2's two remaining drivers written --
+`slurm/extract_experiment2_activations.py` (representation extraction,
+parameterized `--ids-key direction_ids|validation_ids`; `--dry-run`
+validated 3,000/3,000 and 720/720 rows respectively for
+Qwen2.5-7B-Instruct) and `slurm/run_formal_behavioral.py` (the FORMAL
+behavioral run -- all 3 models, all 72 `validation_ids`, all 10
+conditions, 2,160 generations + 2,160 judgements; `--dry-run` validated
+720/720 rows for all 3 models). Generation/judging code was factored
+out of `run_pilot_llama.py` into `slurm/_behavioral_shared.py` so the
+pilot and the formal run share identical logic and cannot silently
+diverge.
+
+**No GPU path across any of the 4 drivers has been run anywhere yet**
+-- that's the next concrete step, on the cluster
+(`FINAL_STUDY_PROTOCOL.md` Sec 13).
+
+Statistical analysis code also now exists: `src/stats_shared.py`
+(bootstrap, Holm correction, partition enumeration/ranking, split-half
+reliability -- validated against hand-computed examples) and
+`slurm/analyze_experiment1_geometry.py` /
+`slurm/analyze_experiment2_representation.py` /
+`slurm/analyze_experiment2_behavioral.py`, each validated end-to-end
+against fabricated synthetic fixtures only (never real activations or
+real generations -- those don't exist yet). Every driver and every
+analysis script exists in code now; **only the tokenizer audit has
+actually run against real model data.** RQ1/RQ2 cannot be answered yet.
 
 ## Relationship to `~/new_experiment`
 

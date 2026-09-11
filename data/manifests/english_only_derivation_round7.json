@@ -15,5 +15,7 @@
   "downstream_impact": "None on existing integrity checks: data/manifests/split_integrity_check_round2.json and data/manifests/test_ids_protected_manifest.json were both computed from instruction_en / normalized_text_hash(instruction_en) only, never from the 'instructions' dict -- their recorded counts and hashes remain valid and unchanged.",
   "protocol_status": "FINAL_STUDY_PROTOCOL.md Sec 2 updated this round to name sampled_prompts_en_only.json as the file the study actually reads; sampled_prompts.json is retained, unmodified, as the migration-provenance record only.",
   "test_data_content_read": false,
-  "checked_at": "2026-09-10"
+  "checked_at": "2026-09-10",
+  "source_file_deleted_round10": true,
+  "source_file_deleted_round10_note": "sampled_prompts.json was deleted in Round 10 per explicit user request (multilingual data no longer needed). source_file_unchanged:true above remains accurate as of Round 7, when this derivation was made; it does not claim the source file still exists now. Recoverable from ~/new_experiment or git history if needed."
 }
