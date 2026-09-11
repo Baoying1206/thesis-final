@@ -1,10 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=jb-exp1-smoke
-#SBATCH --gres=gpu:1
 #SBATCH --partition=gpu
 #SBATCH --account=slurm-students
-#SBATCH --mem=32G
-#SBATCH --time=00:30:00
 #SBATCH --output=sbatch/logs/exp1_smoketest_%j.out
 
 # One-off sanity check BEFORE the real extract_experiment1_activations.sh
