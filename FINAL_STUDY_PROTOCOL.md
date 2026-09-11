@@ -1099,3 +1099,52 @@ remain open, renumbered below. Remaining and new open items:
     has previously timed out), and the same `MODEL_IDX`
     array-plus-`--export` submission pattern for per-model jobs. None of
     these submission scripts has been submitted yet.
+14. **(Round 14, new)** First real GPU run of Experiment 2's full
+    pipeline (extraction, Sec 6.1 representation analysis, Llama pilot,
+    formal behavioral, Sec 7 analysis), all 3 models. Two real bugs
+    found and fixed in `slurm/_behavioral_shared.py`'s
+    `generate_responses()`, both Gemma-2-specific (Qwen/Llama generation
+    was clean throughout, 0/720 empty responses, 0/720 judge
+    parse-failures for both): (a) `generate()` was never given the real
+    end-of-turn token (`<end_of_turn>`, distinct from
+    `tokenizer.eos_token_id`), so it ran to `max_new_tokens` emitting
+    special-token filler that decoded to `""`; (b) even after fixing (a),
+    within every batch only the row with zero left-padding (the batch's
+    longest prompt) generated real text -- a known Gemma-2
+    sliding-window-attention/left-padding bug under the default `sdpa`
+    backend, fixed by forcing `attn_implementation="eager"` for Gemma.
+    Gemma's formal behavioral run must be redone under the fix before
+    its Sec 7 results can be trusted (its Sec 6.1 geometry results are
+    unaffected -- that path never calls `generate()`).
+    **Explicit, human-authorized, NOT pre-registered deviation**: on the
+    original frozen `templates/final_10_condition_v1.json`, real Sec 7
+    data on Qwen2.5-7B-Instruct and Meta-Llama-3.1-8B-Instruct showed the
+    Context group produced no significant `strict_success` uplift over
+    `neutral` in either model (Delta = +1.4%/+0.5%, Holm p = 0.619/0.826),
+    while raw generation records were confirmed coherent and on-topic --
+    not a data/generation bug (the model visibly engaged with the
+    persona/authority/fictional framing before refusing). The human
+    researcher explicitly chose to revise the 3 Context conditions'
+    `setup_user` wording in response to this null result, producing
+    `templates/final_10_condition_v2.json` (now the loader's
+    `DEFAULT_TEMPLATE_PATH`) with substantially stronger framing --
+    explicit persona commitment, professional/legal authorisation
+    claims, dual-use fictional justification. Scope of the revision is
+    narrow and disclosed: ONLY the 3 Context conditions' `setup_user`
+    changed; CO, MG, `neutral`, the shared `assistant_acknowledgement`,
+    all `final_user` fields (including the two other freeze commitments
+    -- byte-identity with `templates_wei_canonical.json` for CO/MG, and
+    the bare `{instruction}` placeholder for Context/neutral), and the
+    3-turn `message_structure` are untouched from v1.
+    `templates/final_10_condition_v1.json` is retained unmodified as the
+    historical Round-1 record (marked `superseded_note` at its top
+    level). **Any thesis write-up must report v1's Qwen/Llama results as
+    a Round-1/superseded confirmatory pass, and any v2 results as a
+    Round-2 exploratory (not pre-registered) revision -- the two must
+    never be silently merged into one dataset or presented as a single
+    confirmatory test.** All 3 models' Sec 6.1/Sec 7 data must be
+    (re-)collected under v2 for the 3 Context conditions before RQ2's
+    final synthesis; CO/MG/neutral data does not need to be re-collected
+    (v1 and v2 are byte-identical for those 7 conditions) but re-running
+    the full pipeline is simpler than partial-file bookkeeping and was
+    the adopted approach.

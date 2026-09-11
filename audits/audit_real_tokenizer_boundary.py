@@ -295,7 +295,7 @@ def audit():
     return {
         "result_status": "TOKEN_AUDIT_PASS" if all_models_pass else "TOKEN_AUDIT_FAIL",
         "pilot_forbidden": not all_models_pass,
-        "template_path": os.path.join(REPO_ROOT, "templates", "final_10_condition_v1.json"),
+        "template_path": os.path.join(REPO_ROOT, "templates", "final_10_condition_v2.json"),
         "dummy_instruction_used": DUMMY_INSTRUCTION,
         "models": models,
     }

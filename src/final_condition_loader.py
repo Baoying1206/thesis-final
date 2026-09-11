@@ -23,8 +23,13 @@ from canonical_transforms import encode_base64_utf8, split_payload_midpoint
 
 DEFAULT_TEMPLATE_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
-    "..", "templates", "final_10_condition_v1.json",
+    "..", "templates", "final_10_condition_v2.json",
 )
+# v1 (superseded Round 14): Context conditions' setup_user under v1 produced
+# no significant strict_success uplift in real Qwen/Llama data. Kept
+# unmodified at templates/final_10_condition_v1.json as the historical
+# Round-1 record -- see FINAL_STUDY_PROTOCOL.md Sec 13 and v2's top-level
+# "note" field for the full disclosure of this post-hoc deviation.
 
 EXPECTED_CONDITION_COUNT = 10
 EXPECTED_GROUPS = {"CO", "MG", "Context", "neutral"}
