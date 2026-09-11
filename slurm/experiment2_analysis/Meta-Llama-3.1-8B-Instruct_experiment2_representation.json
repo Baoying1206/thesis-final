@@ -31,9 +31,9 @@
           "mg_encoding_obfuscation": 0.1337890625,
           "mg_payload_splitting": 0.2001953125,
           "mg_distractors_negated": 0.3310546875,
-          "context_persona": 0.10919189453125,
-          "context_authority": 0.05279541015625,
-          "context_fictional": -0.0723876953125
+          "context_persona": 0.11236572265625,
+          "context_authority": 0.076416015625,
+          "context_fictional": 0.035888671875
         },
         "co_refusal_suppression": {
           "co_prefix_injection": 0.109619140625,
@@ -42,9 +42,9 @@
           "mg_encoding_obfuscation": 0.497802734375,
           "mg_payload_splitting": 0.52685546875,
           "mg_distractors_negated": 0.321533203125,
-          "context_persona": -0.1402587890625,
-          "context_authority": -0.160400390625,
-          "context_fictional": 0.37353515625
+          "context_persona": 0.05426025390625,
+          "context_authority": 0.041595458984375,
+          "context_fictional": 0.2958984375
         },
         "co_persona_roleplay": {
           "co_prefix_injection": 0.2203369140625,
@@ -53,9 +53,9 @@
           "mg_encoding_obfuscation": 0.09893798828125,
           "mg_payload_splitting": 0.1475830078125,
           "mg_distractors_negated": 0.228759765625,
-          "context_persona": 0.326171875,
-          "context_authority": 0.10400390625,
-          "context_fictional": -0.07220458984375
+          "context_persona": 0.467529296875,
+          "context_authority": 0.339111328125,
+          "context_fictional": 0.03692626953125
         },
         "mg_encoding_obfuscation": {
           "co_prefix_injection": 0.1337890625,
@@ -64,9 +64,9 @@
           "mg_encoding_obfuscation": 1.0009765625,
           "mg_payload_splitting": 0.79638671875,
           "mg_distractors_negated": 0.312255859375,
-          "context_persona": -0.0906982421875,
-          "context_authority": -0.2371826171875,
-          "context_fictional": 0.308837890625
+          "context_persona": -0.00872039794921875,
+          "context_authority": -0.041351318359375,
+          "context_fictional": 0.201904296875
         },
         "mg_payload_splitting": {
           "co_prefix_injection": 0.2001953125,
@@ -75,9 +75,9 @@
           "mg_encoding_obfuscation": 0.79638671875,
           "mg_payload_splitting": 1.0,
           "mg_distractors_negated": 0.4111328125,
-          "context_persona": -0.0833740234375,
-          "context_authority": -0.2117919921875,
-          "context_fictional": 0.30712890625
+          "context_persona": 0.007053375244140625,
+          "context_authority": -0.019012451171875,
+          "context_fictional": 0.2232666015625
         },
         "mg_distractors_negated": {
           "co_prefix_injection": 0.3310546875,
@@ -86,56 +86,56 @@
           "mg_encoding_obfuscation": 0.312255859375,
           "mg_payload_splitting": 0.4111328125,
           "mg_distractors_negated": 1.0009765625,
-          "context_persona": 0.051544189453125,
-          "context_authority": -0.043121337890625,
-          "context_fictional": 0.1424560546875
+          "context_persona": 0.0948486328125,
+          "context_authority": 0.0950927734375,
+          "context_fictional": 0.15380859375
         },
         "context_persona": {
-          "co_prefix_injection": 0.10919189453125,
-          "co_refusal_suppression": -0.1402587890625,
-          "co_persona_roleplay": 0.326171875,
-          "mg_encoding_obfuscation": -0.0906982421875,
-          "mg_payload_splitting": -0.0833740234375,
-          "mg_distractors_negated": 0.051544189453125,
-          "context_persona": 1.0,
-          "context_authority": 0.2237548828125,
-          "context_fictional": -0.10540771484375
+          "co_prefix_injection": 0.11236572265625,
+          "co_refusal_suppression": 0.05426025390625,
+          "co_persona_roleplay": 0.467529296875,
+          "mg_encoding_obfuscation": -0.00872039794921875,
+          "mg_payload_splitting": 0.007053375244140625,
+          "mg_distractors_negated": 0.0948486328125,
+          "context_persona": 0.99951171875,
+          "context_authority": 0.4375,
+          "context_fictional": 0.01776123046875
         },
         "context_authority": {
-          "co_prefix_injection": 0.05279541015625,
-          "co_refusal_suppression": -0.160400390625,
-          "co_persona_roleplay": 0.10400390625,
-          "mg_encoding_obfuscation": -0.2371826171875,
-          "mg_payload_splitting": -0.2117919921875,
-          "mg_distractors_negated": -0.043121337890625,
-          "context_persona": 0.2237548828125,
+          "co_prefix_injection": 0.076416015625,
+          "co_refusal_suppression": 0.041595458984375,
+          "co_persona_roleplay": 0.339111328125,
+          "mg_encoding_obfuscation": -0.041351318359375,
+          "mg_payload_splitting": -0.019012451171875,
+          "mg_distractors_negated": 0.0950927734375,
+          "context_persona": 0.4375,
           "context_authority": 1.0,
-          "context_fictional": -0.0184783935546875
+          "context_fictional": 0.486328125
         },
         "context_fictional": {
-          "co_prefix_injection": -0.0723876953125,
-          "co_refusal_suppression": 0.37353515625,
-          "co_persona_roleplay": -0.07220458984375,
-          "mg_encoding_obfuscation": 0.308837890625,
-          "mg_payload_splitting": 0.30712890625,
-          "mg_distractors_negated": 0.1424560546875,
-          "context_persona": -0.10540771484375,
-          "context_authority": -0.0184783935546875,
-          "context_fictional": 1.0
+          "co_prefix_injection": 0.035888671875,
+          "co_refusal_suppression": 0.2958984375,
+          "co_persona_roleplay": 0.03692626953125,
+          "mg_encoding_obfuscation": 0.201904296875,
+          "mg_payload_splitting": 0.2232666015625,
+          "mg_distractors_negated": 0.15380859375,
+          "context_persona": 0.01776123046875,
+          "context_authority": 0.486328125,
+          "context_fictional": 1.0009765625
         }
       },
       "cosine_result": {
         "S_CO": 0.17435709635416666,
         "S_MG": 0.506591796875,
-        "S_Context": 0.033289591471354164,
-        "S_between_all": 0.11669469762731481,
-        "T_partition": 0.12138479727285877,
-        "S_Context_vs_CO": 0.05782741970486111,
-        "S_Context_vs_MG": 0.015977647569444444,
+        "S_Context": 0.3138631184895833,
+        "S_between_all": 0.17234788117585356,
+        "T_partition": 0.15925612273039644,
+        "S_Context_vs_CO": 0.16222127278645834,
+        "S_Context_vs_MG": 0.07854334513346355,
         "S_CO_vs_MG": 0.2762790256076389
       },
       "n_partitions": 280,
-      "canonical_partition_rank": 26,
+      "canonical_partition_rank": 12,
       "mean_norms": {
         "co_prefix_injection": {
           "mean_norm": 7.56640625,
@@ -174,22 +174,22 @@
           "max_norm": 11.484375
         },
         "context_persona": {
-          "mean_norm": 4.484375,
-          "std_norm": 1.091796875,
-          "min_norm": 2.439453125,
-          "max_norm": 9.4375
+          "mean_norm": 6.19921875,
+          "std_norm": 1.1396484375,
+          "min_norm": 3.85546875,
+          "max_norm": 11.109375
         },
         "context_authority": {
-          "mean_norm": 2.28515625,
-          "std_norm": 0.46875,
-          "min_norm": 1.494140625,
-          "max_norm": 4.23046875
+          "mean_norm": 3.822265625,
+          "std_norm": 0.78466796875,
+          "min_norm": 2.224609375,
+          "max_norm": 9.3203125
         },
         "context_fictional": {
-          "mean_norm": 3.0234375,
-          "std_norm": 1.1064453125,
-          "min_norm": 1.6630859375,
-          "max_norm": 8.1171875
+          "mean_norm": 4.75390625,
+          "std_norm": 1.408203125,
+          "min_norm": 2.78125,
+          "max_norm": 9.6953125
         }
       },
       "reliability": {
@@ -254,31 +254,31 @@
           "seed": 20260828
         },
         "context_persona": {
-          "split_half_cosine_mean": 0.992993175983429,
-          "split_half_cosine_median": 0.99365234375,
+          "split_half_cosine_mean": 0.9945068359375,
+          "split_half_cosine_median": 0.9951171875,
           "split_half_cosine_ci95": [
-            0.986560046672821,
-            0.99560546875
+            0.990234375,
+            0.9970703125
           ],
           "n_reps": 500,
           "seed": 20260828
         },
         "context_authority": {
-          "split_half_cosine_mean": 0.9912666082382202,
-          "split_half_cosine_median": 0.99169921875,
+          "split_half_cosine_mean": 0.9894306659698486,
+          "split_half_cosine_median": 0.990234375,
           "split_half_cosine_ci95": [
-            0.98583984375,
-            0.99462890625
+            0.982421875,
+            0.99365234375
           ],
           "n_reps": 500,
           "seed": 20260828
         },
         "context_fictional": {
-          "split_half_cosine_mean": 0.9835498332977295,
-          "split_half_cosine_median": 0.98486328125,
+          "split_half_cosine_mean": 0.9816884994506836,
+          "split_half_cosine_median": 0.984375,
           "split_half_cosine_ci95": [
-            0.969470202922821,
-            0.990234375
+            0.9574950933456421,
+            0.99072265625
           ],
           "n_reps": 500,
           "seed": 20260828
@@ -290,27 +290,27 @@
             "context_authority",
             "context_fictional"
           ],
-          "pair_internal_cosine": -0.0184783935546875,
-          "pair_centroid_vs_CO": 0.09686279296875,
-          "pair_centroid_vs_MG": 0.08868408203125
+          "pair_internal_cosine": 0.486328125,
+          "pair_centroid_vs_CO": 0.2265625,
+          "pair_centroid_vs_MG": 0.1363525390625
         },
         "context_authority": {
           "remaining_pair": [
             "context_persona",
             "context_fictional"
           ],
-          "pair_internal_cosine": -0.10540771484375,
-          "pair_centroid_vs_CO": 0.1566162109375,
-          "pair_centroid_vs_MG": 0.09185791015625
+          "pair_internal_cosine": 0.01776123046875,
+          "pair_centroid_vs_CO": 0.318359375,
+          "pair_centroid_vs_MG": 0.131103515625
         },
         "context_fictional": {
           "remaining_pair": [
             "context_persona",
             "context_authority"
           ],
-          "pair_internal_cosine": 0.2237548828125,
-          "pair_centroid_vs_CO": 0.05816650390625,
-          "pair_centroid_vs_MG": -0.1448974609375
+          "pair_internal_cosine": 0.4375,
+          "pair_centroid_vs_CO": 0.2626953125,
+          "pair_centroid_vs_MG": 0.01450347900390625
         }
       },
       "minimum_evidence": {
@@ -324,10 +324,10 @@
           "proxy": "split_half_cosine_ci95 lower bound > 0"
         },
         "criterion_2_context_internal_gt_between": {
-          "S_Context": 0.033289591471354164,
-          "S_Context_vs_CO": 0.05782741970486111,
-          "S_Context_vs_MG": 0.015977647569444444,
-          "met": false
+          "S_Context": 0.3138631184895833,
+          "S_Context_vs_CO": 0.16222127278645834,
+          "S_Context_vs_MG": 0.07854334513346355,
+          "met": true
         },
         "criterion_3_leave_one_out_stable": {
           "per_holdout": {
@@ -336,33 +336,33 @@
                 "context_authority",
                 "context_fictional"
               ],
-              "pair_internal_cosine": -0.0184783935546875,
-              "pair_centroid_vs_CO": 0.09686279296875,
-              "pair_centroid_vs_MG": 0.08868408203125
+              "pair_internal_cosine": 0.486328125,
+              "pair_centroid_vs_CO": 0.2265625,
+              "pair_centroid_vs_MG": 0.1363525390625
             },
             "context_authority": {
               "remaining_pair": [
                 "context_persona",
                 "context_fictional"
               ],
-              "pair_internal_cosine": -0.10540771484375,
-              "pair_centroid_vs_CO": 0.1566162109375,
-              "pair_centroid_vs_MG": 0.09185791015625
+              "pair_internal_cosine": 0.01776123046875,
+              "pair_centroid_vs_CO": 0.318359375,
+              "pair_centroid_vs_MG": 0.131103515625
             },
             "context_fictional": {
               "remaining_pair": [
                 "context_persona",
                 "context_authority"
               ],
-              "pair_internal_cosine": 0.2237548828125,
-              "pair_centroid_vs_CO": 0.05816650390625,
-              "pair_centroid_vs_MG": -0.1448974609375
+              "pair_internal_cosine": 0.4375,
+              "pair_centroid_vs_CO": 0.2626953125,
+              "pair_centroid_vs_MG": 0.01450347900390625
             }
           },
           "met": false
         },
         "criterion_4_partition_best_rank": {
-          "canonical_partition_rank": 26,
+          "canonical_partition_rank": 12,
           "met": false
         },
         "criterion_5_replication_2_of_3_models": "NOT evaluated by this script -- read all 3 models' output files together to assess this criterion.",
@@ -386,27 +386,27 @@
           ]
         },
         "S_Context": {
-          "mean": 0.03449639678001404,
-          "median": 0.0346425361931324,
+          "mean": 0.3143184185028076,
+          "median": 0.31414794921875,
           "ci95": [
-            0.019132360816001892,
-            0.049569886177778244
+            0.3014366328716278,
+            0.32794302701950073
           ]
         },
         "S_between": {
-          "mean": 0.11709785461425781,
-          "median": 0.11705921590328217,
+          "mean": 0.17273302376270294,
+          "median": 0.17263567447662354,
           "ci95": [
-            0.10528986901044846,
-            0.1289723664522171
+            0.15815469622612,
+            0.18717573583126068
           ]
         },
         "T": {
-          "mean": 0.12142232060432434,
-          "median": 0.1212649866938591,
+          "mean": 0.15906116366386414,
+          "median": 0.15911473333835602,
           "ci95": [
-            0.11137000471353531,
-            0.1324130743741989
+            0.14536048471927643,
+            0.1734762042760849
           ]
         },
         "P_canonical_rank_1": 0.0,
@@ -427,289 +427,289 @@
           "layer": 1,
           "S_CO": 0.9088541666666666,
           "S_MG": 0.40673828125,
-          "S_Context": 0.3124186197916667,
-          "S_between": 0.2184578224464699,
-          "T": 0.32421253345630785,
+          "S_Context": 0.7296549479166666,
+          "S_between": 0.28202028627748843,
+          "T": 0.3997288456669559,
           "canonical_partition_rank": 1
         },
         {
           "layer": 2,
           "S_CO": 0.8719075520833334,
           "S_MG": 0.4249674479166667,
-          "S_Context": 0.2982991536458333,
-          "S_between": 0.1668150160047743,
-          "T": 0.3649097018771701,
+          "S_Context": 0.8079427083333334,
+          "S_between": 0.21703197337962962,
+          "T": 0.48457392939814814,
           "canonical_partition_rank": 1
         },
         {
           "layer": 3,
           "S_CO": 0.8504231770833334,
           "S_MG": 0.417236328125,
-          "S_Context": 0.3822428385416667,
-          "S_between": 0.16313994372332538,
-          "T": 0.38682750419334133,
+          "S_Context": 0.8562825520833334,
+          "S_between": 0.26164302119502314,
+          "T": 0.4463376645688658,
           "canonical_partition_rank": 1
         },
         {
           "layer": 4,
           "S_CO": 0.810546875,
           "S_MG": 0.5130208333333334,
-          "S_Context": 0.3579915364583333,
-          "S_between": 0.16965512876157407,
-          "T": 0.3908646195023149,
+          "S_Context": 0.8108723958333334,
+          "S_between": 0.23889725296585648,
+          "T": 0.4725827817563658,
           "canonical_partition_rank": 1
         },
         {
           "layer": 5,
           "S_CO": 0.80859375,
           "S_MG": 0.5145670572916666,
-          "S_Context": 0.4881184895833333,
-          "S_between": 0.12751264925356262,
-          "T": 0.47624711637143724,
+          "S_Context": 0.8243815104166666,
+          "S_between": 0.17146202369972507,
+          "T": 0.544385415536386,
           "canonical_partition_rank": 1
         },
         {
           "layer": 6,
           "S_CO": 0.7462565104166666,
           "S_MG": 0.593017578125,
-          "S_Context": 0.3579508463541667,
-          "S_between": 0.14823602747034142,
-          "T": 0.41750561749493637,
+          "S_Context": 0.6904296875,
+          "S_between": 0.20806319625289352,
+          "T": 0.4685047290943287,
           "canonical_partition_rank": 1
         },
         {
           "layer": 7,
           "S_CO": 0.6964518229166666,
           "S_MG": 0.5419921875,
-          "S_Context": 0.2641194661458333,
-          "S_between": 0.16382740162037038,
-          "T": 0.33702709056712954,
+          "S_Context": 0.6640625,
+          "S_between": 0.206833733452691,
+          "T": 0.4273351033528645,
           "canonical_partition_rank": 1
         },
         {
           "layer": 8,
           "S_CO": 0.6393229166666666,
           "S_MG": 0.5257975260416666,
-          "S_Context": 0.2886962890625,
-          "S_between": 0.18755029748987265,
-          "T": 0.2970552797670718,
+          "S_Context": 0.6564127604166666,
+          "S_between": 0.22768543384693285,
+          "T": 0.37949230052806715,
           "canonical_partition_rank": 1
         },
         {
           "layer": 9,
           "S_CO": 0.5916341145833334,
           "S_MG": 0.5572102864583334,
-          "S_Context": 0.2771402994791667,
-          "S_between": 0.17857021755642358,
-          "T": 0.29675801595052087,
+          "S_Context": 0.602294921875,
+          "S_between": 0.2260329635054977,
+          "T": 0.3576801441333912,
           "canonical_partition_rank": 1
         },
         {
           "layer": 10,
           "S_CO": 0.5252278645833334,
           "S_MG": 0.5348307291666666,
-          "S_Context": 0.277099609375,
-          "S_between": 0.1498904758029514,
-          "T": 0.2958289252387153,
+          "S_Context": 0.532958984375,
+          "S_between": 0.20035976833767363,
+          "T": 0.33064609103732634,
           "canonical_partition_rank": 1
         },
         {
           "layer": 11,
           "S_CO": 0.5396321614583334,
           "S_MG": 0.5801595052083334,
-          "S_Context": 0.2709147135416667,
-          "S_between": 0.19243741918493198,
-          "T": 0.27113137421784583,
+          "S_Context": 0.52978515625,
+          "S_between": 0.241891931604456,
+          "T": 0.3079670093677662,
           "canonical_partition_rank": 1
         },
         {
           "layer": 12,
           "S_CO": 0.4961751302083333,
           "S_MG": 0.6256510416666666,
-          "S_Context": 0.256591796875,
-          "S_between": 0.20271612096715855,
-          "T": 0.2567565352828415,
+          "S_Context": 0.5113118489583334,
+          "S_between": 0.25609065868236397,
+          "T": 0.2882886815954138,
           "canonical_partition_rank": 1
         },
         {
           "layer": 13,
           "S_CO": 0.5201822916666666,
           "S_MG": 0.640625,
-          "S_Context": 0.2672932942708333,
-          "S_between": 0.241957841096101,
-          "T": 0.23407568754973226,
+          "S_Context": 0.532470703125,
+          "S_between": 0.3147289134837963,
+          "T": 0.24969708478009256,
           "canonical_partition_rank": 1
         },
         {
           "layer": 14,
           "S_CO": 0.427001953125,
           "S_MG": 0.5546875,
-          "S_Context": 0.211669921875,
-          "S_between": 0.15999776345712166,
-          "T": 0.23778869487621165,
+          "S_Context": 0.4366861979166667,
+          "S_between": 0.22842746310763887,
+          "T": 0.2443644205729167,
           "canonical_partition_rank": 1
         },
         {
           "layer": 15,
           "S_CO": 0.3705240885416667,
           "S_MG": 0.5245768229166666,
-          "S_Context": 0.17368570963541666,
-          "S_between": 0.14506700303819442,
-          "T": 0.21119520399305558,
+          "S_Context": 0.4206136067708333,
+          "S_between": 0.22367350260416666,
+          "T": 0.21489800347222218,
           "canonical_partition_rank": 1
         },
         {
           "layer": 16,
           "S_CO": 0.2693277994791667,
           "S_MG": 0.5057779947916666,
-          "S_Context": 0.0885009765625,
-          "S_between": 0.13268188193992334,
-          "T": 0.15518704167118777,
-          "canonical_partition_rank": 4
+          "S_Context": 0.3462117513020833,
+          "S_between": 0.19433678521050346,
+          "T": 0.1794357299804687,
+          "canonical_partition_rank": 3
         },
         {
           "layer": 17,
           "S_CO": 0.21785481770833334,
           "S_MG": 0.5276692708333334,
-          "S_Context": 0.057657877604166664,
-          "S_between": 0.12816365559895831,
-          "T": 0.1395636664496528,
-          "canonical_partition_rank": 11
+          "S_Context": 0.3142649332682292,
+          "S_between": 0.18015148021556712,
+          "T": 0.17311152705439822,
+          "canonical_partition_rank": 10
         },
         {
           "layer": 18,
           "S_CO": 0.1907958984375,
           "S_MG": 0.50390625,
-          "S_Context": 0.047963460286458336,
-          "S_between": 0.12017878779658564,
-          "T": 0.1273764151114005,
-          "canonical_partition_rank": 18
+          "S_Context": 0.325103759765625,
+          "S_between": 0.18266805013020834,
+          "T": 0.15726725260416666,
+          "canonical_partition_rank": 11
         },
         {
           "layer": 19,
           "S_CO": 0.17435709635416666,
           "S_MG": 0.506591796875,
-          "S_Context": 0.033289591471354164,
-          "S_between": 0.11669469762731481,
-          "T": 0.12138479727285877,
-          "canonical_partition_rank": 26
+          "S_Context": 0.3138631184895833,
+          "S_between": 0.17234788117585356,
+          "T": 0.15925612273039644,
+          "canonical_partition_rank": 12
         },
         {
           "layer": 20,
           "S_CO": 0.1920166015625,
           "S_MG": 0.499267578125,
-          "S_Context": 0.022308349609375,
-          "S_between": 0.13087039523654515,
-          "T": 0.10699378119574651,
-          "canonical_partition_rank": 34
+          "S_Context": 0.3018595377604167,
+          "S_between": 0.18439568413628474,
+          "T": 0.14665222167968753,
+          "canonical_partition_rank": 14
         },
         {
           "layer": 21,
           "S_CO": 0.206298828125,
           "S_MG": 0.491455078125,
-          "S_Context": 0.030965169270833332,
-          "S_between": 0.139479743109809,
-          "T": 0.10342661539713544,
-          "canonical_partition_rank": 35
+          "S_Context": 0.3082173665364583,
+          "S_between": 0.19156576085973667,
+          "T": 0.14375799673574943,
+          "canonical_partition_rank": 13
         },
         {
           "layer": 22,
           "S_CO": 0.2066650390625,
           "S_MG": 0.4984537760416667,
-          "S_Context": 0.051177978515625,
-          "S_between": 0.14001747413917826,
-          "T": 0.11208145706741901,
-          "canonical_partition_rank": 31
+          "S_Context": 0.3201700846354167,
+          "S_between": 0.1873119495533131,
+          "T": 0.15445101702654807,
+          "canonical_partition_rank": 13
         },
         {
           "layer": 23,
           "S_CO": 0.21439615885416666,
           "S_MG": 0.53857421875,
-          "S_Context": 0.03314208984375,
-          "S_between": 0.14673021104600695,
-          "T": 0.11530727810329858,
-          "canonical_partition_rank": 31
+          "S_Context": 0.3185831705729167,
+          "S_between": 0.205230712890625,
+          "T": 0.15195380316840273,
+          "canonical_partition_rank": 13
         },
         {
           "layer": 24,
           "S_CO": 0.23250325520833334,
           "S_MG": 0.5343424479166666,
-          "S_Context": 0.041259765625,
-          "S_between": 0.14929029676649305,
-          "T": 0.12007819281684026,
-          "canonical_partition_rank": 28
+          "S_Context": 0.30743408203125,
+          "S_between": 0.20013936360677084,
+          "T": 0.15795389811197916,
+          "canonical_partition_rank": 11
         },
         {
           "layer": 25,
           "S_CO": 0.24397786458333334,
           "S_MG": 0.5340169270833334,
-          "S_Context": 0.0509033203125,
-          "S_between": 0.16199578179253474,
-          "T": 0.11430358886718753,
-          "canonical_partition_rank": 27
+          "S_Context": 0.3086140950520833,
+          "S_between": 0.20124308268229166,
+          "T": 0.16095987955729166,
+          "canonical_partition_rank": 11
         },
         {
           "layer": 26,
           "S_CO": 0.2578125,
           "S_MG": 0.534423828125,
-          "S_Context": 0.07112630208333333,
-          "S_between": 0.16736574526186343,
-          "T": 0.12042179814091436,
-          "canonical_partition_rank": 25
+          "S_Context": 0.3003946940104167,
+          "S_between": 0.20358756736472802,
+          "T": 0.16062277334707756,
+          "canonical_partition_rank": 8
         },
         {
           "layer": 27,
           "S_CO": 0.2669270833333333,
           "S_MG": 0.5615234375,
-          "S_Context": 0.0577392578125,
-          "S_between": 0.18359459771050346,
-          "T": 0.11180199517144096,
-          "canonical_partition_rank": 25
+          "S_Context": 0.2876078287760417,
+          "S_between": 0.2254459217742637,
+          "T": 0.14657352809552798,
+          "canonical_partition_rank": 12
         },
         {
           "layer": 28,
           "S_CO": 0.24454752604166666,
           "S_MG": 0.552490234375,
-          "S_Context": 0.062383015950520836,
-          "S_between": 0.1917416254679362,
-          "T": 0.09473196665445963,
-          "canonical_partition_rank": 27
+          "S_Context": 0.2866414388020833,
+          "S_between": 0.232778478551794,
+          "T": 0.1284479211877893,
+          "canonical_partition_rank": 16
         },
         {
           "layer": 29,
           "S_CO": 0.24723307291666666,
           "S_MG": 0.5454915364583334,
-          "S_Context": 0.07103602091471355,
-          "S_between": 0.18559293393735532,
-          "T": 0.10232727615921583,
-          "canonical_partition_rank": 25
+          "S_Context": 0.2845967610677083,
+          "S_between": 0.22677329734519672,
+          "T": 0.13233382613570602,
+          "canonical_partition_rank": 16
         },
         {
           "layer": 30,
           "S_CO": 0.2571207682291667,
           "S_MG": 0.5374348958333334,
-          "S_Context": 0.07446670532226562,
-          "S_between": 0.19759142840350116,
-          "T": 0.09208269472475403,
-          "canonical_partition_rank": 26
+          "S_Context": 0.277069091796875,
+          "S_between": 0.22358597649468315,
+          "T": 0.13362227545844185,
+          "canonical_partition_rank": 15
         },
         {
           "layer": 31,
           "S_CO": 0.23795572916666666,
           "S_MG": 0.5338541666666666,
-          "S_Context": 0.068389892578125,
-          "S_between": 0.19977258752893515,
-          "T": 0.08029400860821759,
-          "canonical_partition_rank": 30
+          "S_Context": 0.2870890299479167,
+          "S_between": 0.24359017831307872,
+          "T": 0.10937613028067128,
+          "canonical_partition_rank": 21
         },
         {
           "layer": 32,
           "S_CO": 0.22501627604166666,
           "S_MG": 0.4764811197916667,
-          "S_Context": 0.050638834635416664,
-          "S_between": 0.19276767306857637,
-          "T": 0.05794440375434032,
-          "canonical_partition_rank": 44
+          "S_Context": 0.3052775065104167,
+          "S_between": 0.23326393410011573,
+          "T": 0.10232770001446759,
+          "canonical_partition_rank": 22
         }
       ],
       "layerwise_sweep_skipped": false
@@ -725,9 +725,9 @@
           "mg_encoding_obfuscation": 0.0989990234375,
           "mg_payload_splitting": 0.22314453125,
           "mg_distractors_negated": 0.08642578125,
-          "context_persona": 0.1378173828125,
-          "context_authority": -0.1334228515625,
-          "context_fictional": -0.11871337890625
+          "context_persona": 0.1116943359375,
+          "context_authority": -0.00995635986328125,
+          "context_fictional": 0.07684326171875
         },
         "co_refusal_suppression": {
           "co_prefix_injection": 0.471435546875,
@@ -736,9 +736,9 @@
           "mg_encoding_obfuscation": 0.1429443359375,
           "mg_payload_splitting": 0.1607666015625,
           "mg_distractors_negated": -0.0016937255859375,
-          "context_persona": 0.07427978515625,
-          "context_authority": 0.10150146484375,
-          "context_fictional": 0.06304931640625
+          "context_persona": 0.234375,
+          "context_authority": 0.2275390625,
+          "context_fictional": 0.22900390625
         },
         "co_persona_roleplay": {
           "co_prefix_injection": 0.488037109375,
@@ -747,9 +747,9 @@
           "mg_encoding_obfuscation": 0.0231475830078125,
           "mg_payload_splitting": 0.0645751953125,
           "mg_distractors_negated": -0.0310821533203125,
-          "context_persona": 0.04669189453125,
-          "context_authority": 0.0682373046875,
-          "context_fictional": 0.0146484375
+          "context_persona": 0.2132568359375,
+          "context_authority": 0.1981201171875,
+          "context_fictional": 0.1298828125
         },
         "mg_encoding_obfuscation": {
           "co_prefix_injection": 0.0989990234375,
@@ -758,9 +758,9 @@
           "mg_encoding_obfuscation": 1.0,
           "mg_payload_splitting": 0.222412109375,
           "mg_distractors_negated": 0.27978515625,
-          "context_persona": 0.0196685791015625,
-          "context_authority": -0.0298309326171875,
-          "context_fictional": -0.04302978515625
+          "context_persona": 0.0933837890625,
+          "context_authority": 0.0380859375,
+          "context_fictional": 0.16845703125
         },
         "mg_payload_splitting": {
           "co_prefix_injection": 0.22314453125,
@@ -769,9 +769,9 @@
           "mg_encoding_obfuscation": 0.222412109375,
           "mg_payload_splitting": 1.0009765625,
           "mg_distractors_negated": 0.393310546875,
-          "context_persona": 0.1138916015625,
-          "context_authority": 0.0037250518798828125,
-          "context_fictional": 0.00696563720703125
+          "context_persona": 0.06304931640625,
+          "context_authority": 0.01143646240234375,
+          "context_fictional": 0.126708984375
         },
         "mg_distractors_negated": {
           "co_prefix_injection": 0.08642578125,
@@ -780,52 +780,52 @@
           "mg_encoding_obfuscation": 0.27978515625,
           "mg_payload_splitting": 0.393310546875,
           "mg_distractors_negated": 1.0,
-          "context_persona": 0.0794677734375,
-          "context_authority": -0.032196044921875,
-          "context_fictional": -0.04095458984375
+          "context_persona": 0.101806640625,
+          "context_authority": 0.03240966796875,
+          "context_fictional": 0.1279296875
         },
         "context_persona": {
-          "co_prefix_injection": 0.1378173828125,
-          "co_refusal_suppression": 0.07427978515625,
-          "co_persona_roleplay": 0.04669189453125,
-          "mg_encoding_obfuscation": 0.0196685791015625,
-          "mg_payload_splitting": 0.1138916015625,
-          "mg_distractors_negated": 0.0794677734375,
+          "co_prefix_injection": 0.1116943359375,
+          "co_refusal_suppression": 0.234375,
+          "co_persona_roleplay": 0.2132568359375,
+          "mg_encoding_obfuscation": 0.0933837890625,
+          "mg_payload_splitting": 0.06304931640625,
+          "mg_distractors_negated": 0.101806640625,
           "context_persona": 0.99951171875,
-          "context_authority": 0.33740234375,
-          "context_fictional": 0.2060546875
+          "context_authority": 0.73046875,
+          "context_fictional": 0.66162109375
         },
         "context_authority": {
-          "co_prefix_injection": -0.1334228515625,
-          "co_refusal_suppression": 0.10150146484375,
-          "co_persona_roleplay": 0.0682373046875,
-          "mg_encoding_obfuscation": -0.0298309326171875,
-          "mg_payload_splitting": 0.0037250518798828125,
-          "mg_distractors_negated": -0.032196044921875,
-          "context_persona": 0.33740234375,
-          "context_authority": 0.99951171875,
-          "context_fictional": 0.3271484375
+          "co_prefix_injection": -0.00995635986328125,
+          "co_refusal_suppression": 0.2275390625,
+          "co_persona_roleplay": 0.1981201171875,
+          "mg_encoding_obfuscation": 0.0380859375,
+          "mg_payload_splitting": 0.01143646240234375,
+          "mg_distractors_negated": 0.03240966796875,
+          "context_persona": 0.73046875,
+          "context_authority": 1.0,
+          "context_fictional": 0.69580078125
         },
         "context_fictional": {
-          "co_prefix_injection": -0.11871337890625,
-          "co_refusal_suppression": 0.06304931640625,
-          "co_persona_roleplay": 0.0146484375,
-          "mg_encoding_obfuscation": -0.04302978515625,
-          "mg_payload_splitting": 0.00696563720703125,
-          "mg_distractors_negated": -0.04095458984375,
-          "context_persona": 0.2060546875,
-          "context_authority": 0.3271484375,
-          "context_fictional": 0.99951171875
+          "co_prefix_injection": 0.07684326171875,
+          "co_refusal_suppression": 0.22900390625,
+          "co_persona_roleplay": 0.1298828125,
+          "mg_encoding_obfuscation": 0.16845703125,
+          "mg_payload_splitting": 0.126708984375,
+          "mg_distractors_negated": 0.1279296875,
+          "context_persona": 0.66162109375,
+          "context_authority": 0.69580078125,
+          "context_fictional": 1.0009765625
         }
       },
       "cosine_result": {
         "S_CO": 0.5188802083333334,
         "S_MG": 0.2985026041666667,
-        "S_Context": 0.2902018229166667,
-        "S_between_all": 0.04070458588776765,
-        "T_partition": 0.3284902925844546,
-        "S_Context_vs_CO": 0.028232150607638888,
-        "S_Context_vs_MG": 0.00863414340549045,
+        "S_Context": 0.6959635416666666,
+        "S_between_all": 0.10893532081886574,
+        "T_partition": 0.39551346390335645,
+        "S_Context_vs_CO": 0.1567509969075521,
+        "S_Context_vs_MG": 0.08480750189887153,
         "S_CO_vs_MG": 0.0852474636501736
       },
       "n_partitions": 280,
@@ -868,22 +868,22 @@
           "max_norm": 17.40625
         },
         "context_persona": {
-          "mean_norm": 2.1171875,
-          "std_norm": 1.00390625,
-          "min_norm": 0.822265625,
-          "max_norm": 7.97265625
+          "mean_norm": 3.404296875,
+          "std_norm": 1.1328125,
+          "min_norm": 1.7490234375,
+          "max_norm": 8.0078125
         },
         "context_authority": {
-          "mean_norm": 1.6474609375,
-          "std_norm": 0.5498046875,
-          "min_norm": 0.7822265625,
-          "max_norm": 3.80859375
+          "mean_norm": 3.111328125,
+          "std_norm": 1.142578125,
+          "min_norm": 1.41796875,
+          "max_norm": 8.5
         },
         "context_fictional": {
-          "mean_norm": 2.291015625,
-          "std_norm": 1.4736328125,
-          "min_norm": 0.6826171875,
-          "max_norm": 10.8984375
+          "mean_norm": 4.5625,
+          "std_norm": 1.6884765625,
+          "min_norm": 2.20703125,
+          "max_norm": 11.2890625
         }
       },
       "reliability": {
@@ -948,31 +948,31 @@
           "seed": 20260828
         },
         "context_persona": {
-          "split_half_cosine_mean": 0.953499972820282,
-          "split_half_cosine_median": 0.95556640625,
+          "split_half_cosine_mean": 0.9713769555091858,
+          "split_half_cosine_median": 0.97265625,
           "split_half_cosine_ci95": [
-            0.9303833246231079,
-            0.962890625
+            0.960192859172821,
+            0.9765625
           ],
           "n_reps": 500,
           "seed": 20260828
         },
         "context_authority": {
-          "split_half_cosine_mean": 0.9760273694992065,
-          "split_half_cosine_median": 0.9765625,
+          "split_half_cosine_mean": 0.9708486199378967,
+          "split_half_cosine_median": 0.9716796875,
           "split_half_cosine_ci95": [
-            0.967028796672821,
-            0.98095703125
+            0.96142578125,
+            0.97607421875
           ],
           "n_reps": 500,
           "seed": 20260828
         },
         "context_fictional": {
-          "split_half_cosine_mean": 0.9416953325271606,
-          "split_half_cosine_median": 0.943359375,
+          "split_half_cosine_mean": 0.9721719026565552,
+          "split_half_cosine_median": 0.97265625,
           "split_half_cosine_ci95": [
-            0.918408215045929,
-            0.95556640625
+            0.96044921875,
+            0.978771984577179
           ],
           "n_reps": 500,
           "seed": 20260828
@@ -984,27 +984,27 @@
             "context_authority",
             "context_fictional"
           ],
-          "pair_internal_cosine": 0.3271484375,
-          "pair_centroid_vs_CO": -0.0008835792541503906,
-          "pair_centroid_vs_MG": -0.038330078125
+          "pair_internal_cosine": 0.69580078125,
+          "pair_centroid_vs_CO": 0.1875,
+          "pair_centroid_vs_MG": 0.1417236328125
         },
         "context_authority": {
           "remaining_pair": [
             "context_persona",
             "context_fictional"
           ],
-          "pair_internal_cosine": 0.2060546875,
-          "pair_centroid_vs_CO": 0.055694580078125,
-          "pair_centroid_vs_MG": 0.03814697265625
+          "pair_internal_cosine": 0.66162109375,
+          "pair_centroid_vs_CO": 0.2161865234375,
+          "pair_centroid_vs_MG": 0.1768798828125
         },
         "context_fictional": {
           "remaining_pair": [
             "context_persona",
             "context_authority"
           ],
-          "pair_internal_cosine": 0.33740234375,
-          "pair_centroid_vs_CO": 0.0736083984375,
-          "pair_centroid_vs_MG": 0.04327392578125
+          "pair_internal_cosine": 0.73046875,
+          "pair_centroid_vs_CO": 0.2137451171875,
+          "pair_centroid_vs_MG": 0.0855712890625
         }
       },
       "minimum_evidence": {
@@ -1018,9 +1018,9 @@
           "proxy": "split_half_cosine_ci95 lower bound > 0"
         },
         "criterion_2_context_internal_gt_between": {
-          "S_Context": 0.2902018229166667,
-          "S_Context_vs_CO": 0.028232150607638888,
-          "S_Context_vs_MG": 0.00863414340549045,
+          "S_Context": 0.6959635416666666,
+          "S_Context_vs_CO": 0.1567509969075521,
+          "S_Context_vs_MG": 0.08480750189887153,
           "met": true
         },
         "criterion_3_leave_one_out_stable": {
@@ -1030,27 +1030,27 @@
                 "context_authority",
                 "context_fictional"
               ],
-              "pair_internal_cosine": 0.3271484375,
-              "pair_centroid_vs_CO": -0.0008835792541503906,
-              "pair_centroid_vs_MG": -0.038330078125
+              "pair_internal_cosine": 0.69580078125,
+              "pair_centroid_vs_CO": 0.1875,
+              "pair_centroid_vs_MG": 0.1417236328125
             },
             "context_authority": {
               "remaining_pair": [
                 "context_persona",
                 "context_fictional"
               ],
-              "pair_internal_cosine": 0.2060546875,
-              "pair_centroid_vs_CO": 0.055694580078125,
-              "pair_centroid_vs_MG": 0.03814697265625
+              "pair_internal_cosine": 0.66162109375,
+              "pair_centroid_vs_CO": 0.2161865234375,
+              "pair_centroid_vs_MG": 0.1768798828125
             },
             "context_fictional": {
               "remaining_pair": [
                 "context_persona",
                 "context_authority"
               ],
-              "pair_internal_cosine": 0.33740234375,
-              "pair_centroid_vs_CO": 0.0736083984375,
-              "pair_centroid_vs_MG": 0.04327392578125
+              "pair_internal_cosine": 0.73046875,
+              "pair_centroid_vs_CO": 0.2137451171875,
+              "pair_centroid_vs_MG": 0.0855712890625
             }
           },
           "met": true
@@ -1080,27 +1080,27 @@
           ]
         },
         "S_Context": {
-          "mean": 0.2884311079978943,
-          "median": 0.2888590395450592,
+          "mean": 0.6927723288536072,
+          "median": 0.6931965947151184,
           "ci95": [
-            0.2646474242210388,
-            0.31201374530792236
+            0.6738240718841553,
+            0.7107787728309631
           ]
         },
         "S_between": {
-          "mean": 0.04166233167052269,
-          "median": 0.041584793478250504,
+          "mean": 0.10966098308563232,
+          "median": 0.1096559464931488,
           "ci95": [
-            0.03219517692923546,
-            0.0510791577398777
+            0.09910737723112106,
+            0.1199733316898346
           ]
         },
         "T": {
-          "mean": 0.3284637928009033,
-          "median": 0.32844918966293335,
+          "mean": 0.3952455520629883,
+          "median": 0.39515092968940735,
           "ci95": [
-            0.3075012266635895,
-            0.3501797914505005
+            0.3748916983604431,
+            0.4150862991809845
           ]
         },
         "P_canonical_rank_1": 1.0,
@@ -1121,288 +1121,288 @@
           "layer": 1,
           "S_CO": 0.8009440104166666,
           "S_MG": 0.2846838633219401,
-          "S_Context": 0.2646484375,
-          "S_between": 0.07070371839735243,
-          "T": 0.3793883853488498,
+          "S_Context": 0.6376953125,
+          "S_between": 0.11902872721354167,
+          "T": 0.4554123348659939,
           "canonical_partition_rank": 1
         },
         {
           "layer": 2,
           "S_CO": 0.8505859375,
           "S_MG": 0.14358011881510416,
-          "S_Context": 0.2919108072916667,
-          "S_between": 0.07583074216489438,
-          "T": 0.3528615457040292,
+          "S_Context": 0.7530924479166666,
+          "S_between": 0.07642633385128444,
+          "T": 0.5059931675593059,
           "canonical_partition_rank": 1
         },
         {
           "layer": 3,
           "S_CO": 0.8400065104166666,
           "S_MG": 0.18964131673177084,
-          "S_Context": 0.235107421875,
-          "S_between": 0.08282039783619068,
-          "T": 0.33876468517162184,
+          "S_Context": 0.7698567708333334,
+          "S_between": 0.07228759483054832,
+          "T": 0.5275472711633753,
           "canonical_partition_rank": 1
         },
         {
           "layer": 4,
           "S_CO": 0.8291015625,
           "S_MG": 0.19842529296875,
-          "S_Context": 0.299560546875,
-          "S_between": 0.0978122287326389,
-          "T": 0.3445502387152778,
+          "S_Context": 0.73486328125,
+          "S_between": 0.0998893313937717,
+          "T": 0.4875740475124783,
           "canonical_partition_rank": 1
         },
         {
           "layer": 5,
           "S_CO": 0.77197265625,
           "S_MG": 0.23946126302083334,
-          "S_Context": 0.352294921875,
-          "S_between": 0.1428714328342014,
-          "T": 0.311704847547743,
+          "S_Context": 0.7439778645833334,
+          "S_between": 0.17679850260416666,
+          "T": 0.4083387586805556,
           "canonical_partition_rank": 1
         },
         {
           "layer": 6,
           "S_CO": 0.7180989583333334,
           "S_MG": 0.22049967447916666,
-          "S_Context": 0.3065185546875,
-          "S_between": 0.06765676427770545,
-          "T": 0.34738229822229455,
+          "S_Context": 0.7140299479166666,
+          "S_between": 0.10071365921585647,
+          "T": 0.4501625343605324,
           "canonical_partition_rank": 1
         },
         {
           "layer": 7,
           "S_CO": 0.6806640625,
           "S_MG": 0.2701822916666667,
-          "S_Context": 0.3136393229166667,
-          "S_between": 0.08212297934072989,
-          "T": 0.3393722463537146,
+          "S_Context": 0.712890625,
+          "S_between": 0.11034393310546875,
+          "T": 0.44423505995008683,
           "canonical_partition_rank": 1
         },
         {
           "layer": 8,
           "S_CO": 0.64013671875,
           "S_MG": 0.2843424479166667,
-          "S_Context": 0.2985026041666667,
-          "S_between": 0.06199893244990596,
-          "T": 0.3456616578278719,
+          "S_Context": 0.7218424479166666,
+          "S_between": 0.10438643561469185,
+          "T": 0.44438743591308594,
           "canonical_partition_rank": 1
         },
         {
           "layer": 9,
           "S_CO": 0.6357421875,
           "S_MG": 0.2892659505208333,
-          "S_Context": 0.2779541015625,
-          "S_between": 0.04451179504394531,
-          "T": 0.3564756181504991,
+          "S_Context": 0.7058919270833334,
+          "S_between": 0.1007503933376736,
+          "T": 0.4428829616970486,
           "canonical_partition_rank": 1
         },
         {
           "layer": 10,
           "S_CO": 0.59912109375,
           "S_MG": 0.24198404947916666,
-          "S_Context": 0.2392578125,
-          "S_between": 0.022584279378255207,
-          "T": 0.33753670586480033,
+          "S_Context": 0.6686197916666666,
+          "S_between": 0.07920554832175926,
+          "T": 0.42403609664351855,
           "canonical_partition_rank": 1
         },
         {
           "layer": 11,
           "S_CO": 0.56201171875,
           "S_MG": 0.23685709635416666,
-          "S_Context": 0.29541015625,
-          "S_between": 0.020429399278428823,
-          "T": 0.3443302578396267,
+          "S_Context": 0.6888020833333334,
+          "S_between": 0.08803855048285592,
+          "T": 0.40785174899631077,
           "canonical_partition_rank": 1
         },
         {
           "layer": 12,
           "S_CO": 0.5616048177083334,
           "S_MG": 0.22920735677083334,
-          "S_Context": 0.3127848307291667,
-          "S_between": -0.005639305821171513,
-          "T": 0.37350497422394935,
+          "S_Context": 0.65966796875,
+          "S_between": 0.043110900455051004,
+          "T": 0.4403824806213379,
           "canonical_partition_rank": 1
         },
         {
           "layer": 13,
           "S_CO": 0.55908203125,
           "S_MG": 0.3204752604166667,
-          "S_Context": 0.3336588541666667,
-          "S_between": -0.0020322446469907413,
-          "T": 0.40643762659143523,
+          "S_Context": 0.68212890625,
+          "S_between": 0.05807480988679109,
+          "T": 0.4624872560854311,
           "canonical_partition_rank": 1
         },
         {
           "layer": 14,
           "S_CO": 0.504150390625,
           "S_MG": 0.3395182291666667,
-          "S_Context": 0.3153483072916667,
-          "S_between": 0.01355972996464482,
-          "T": 0.37277924572979965,
+          "S_Context": 0.6748046875,
+          "S_between": 0.07691722446017796,
+          "T": 0.42924054463704425,
           "canonical_partition_rank": 1
         },
         {
           "layer": 15,
           "S_CO": 0.4947102864583333,
           "S_MG": 0.3426106770833333,
-          "S_Context": 0.32763671875,
-          "S_between": 0.04464036447030526,
-          "T": 0.34367886296025024,
+          "S_Context": 0.6951497395833334,
+          "S_between": 0.10726723847565828,
+          "T": 0.4035563292326751,
           "canonical_partition_rank": 1
         },
         {
           "layer": 16,
           "S_CO": 0.487060546875,
           "S_MG": 0.3495279947916667,
-          "S_Context": 0.2880045572916667,
-          "S_between": 0.030169734248408565,
-          "T": 0.3446946320710359,
+          "S_Context": 0.6730143229166666,
+          "S_between": 0.10103720205801503,
+          "T": 0.40216375280309613,
           "canonical_partition_rank": 1
         },
         {
           "layer": 17,
           "S_CO": 0.48779296875,
           "S_MG": 0.3557942708333333,
-          "S_Context": 0.3477783203125,
-          "S_between": 0.050294999723081234,
-          "T": 0.3468268535755299,
+          "S_Context": 0.69287109375,
+          "S_between": 0.12061168087853326,
+          "T": 0.39154109689924455,
           "canonical_partition_rank": 1
         },
         {
           "layer": 18,
           "S_CO": 0.5017903645833334,
           "S_MG": 0.3509928385416667,
-          "S_Context": 0.2972005208333333,
-          "S_between": 0.03501877961335359,
-          "T": 0.3483091283727575,
+          "S_Context": 0.689453125,
+          "S_between": 0.10585327280892266,
+          "T": 0.408225503232744,
           "canonical_partition_rank": 1
         },
         {
           "layer": 19,
           "S_CO": 0.5188802083333334,
           "S_MG": 0.2985026041666667,
-          "S_Context": 0.2902018229166667,
-          "S_between": 0.04070458588776765,
-          "T": 0.3284902925844546,
+          "S_Context": 0.6959635416666666,
+          "S_between": 0.10893532081886574,
+          "T": 0.39551346390335645,
           "canonical_partition_rank": 1
         },
         {
           "layer": 20,
           "S_CO": 0.505126953125,
           "S_MG": 0.3304850260416667,
-          "S_Context": 0.2989095052083333,
-          "S_between": 0.055793161745424626,
-          "T": 0.32238066637957535,
+          "S_Context": 0.7023111979166666,
+          "S_between": 0.13529459635416666,
+          "T": 0.37734646267361116,
           "canonical_partition_rank": 1
         },
         {
           "layer": 21,
           "S_CO": 0.5142415364583334,
           "S_MG": 0.3304036458333333,
-          "S_Context": 0.2861735026041667,
-          "S_between": 0.07246554339373552,
-          "T": 0.30447401823820897,
+          "S_Context": 0.7054036458333334,
+          "S_between": 0.15946395308883102,
+          "T": 0.3572189896195024,
           "canonical_partition_rank": 1
         },
         {
           "layer": 22,
           "S_CO": 0.5109049479166666,
           "S_MG": 0.3252766927083333,
-          "S_Context": 0.258544921875,
-          "S_between": 0.07075528745298032,
-          "T": 0.29415356671368637,
+          "S_Context": 0.7014973958333334,
+          "S_between": 0.1547427707248264,
+          "T": 0.35781690809461814,
           "canonical_partition_rank": 1
         },
         {
           "layer": 23,
           "S_CO": 0.5047200520833334,
           "S_MG": 0.310302734375,
-          "S_Context": 0.2585042317708333,
-          "S_between": 0.05957674097131801,
-          "T": 0.2982655984384043,
+          "S_Context": 0.6943359375,
+          "S_between": 0.13469660723650898,
+          "T": 0.3684229674162688,
           "canonical_partition_rank": 1
         },
         {
           "layer": 24,
           "S_CO": 0.5027669270833334,
           "S_MG": 0.3109537760416667,
-          "S_Context": 0.24845377604166666,
-          "S_between": 0.058680216471354164,
-          "T": 0.2953779432508681,
+          "S_Context": 0.6866861979166666,
+          "S_between": 0.13433272750289352,
+          "T": 0.365802906177662,
           "canonical_partition_rank": 1
         },
         {
           "layer": 25,
           "S_CO": 0.5616861979166666,
           "S_MG": 0.2892659505208333,
-          "S_Context": 0.3033854166666667,
-          "S_between": 0.052893532647026904,
-          "T": 0.3318856557210287,
+          "S_Context": 0.68603515625,
+          "S_between": 0.12264053909866897,
+          "T": 0.38968856246383105,
           "canonical_partition_rank": 1
         },
         {
           "layer": 26,
           "S_CO": 0.5646158854166666,
           "S_MG": 0.2843424479166667,
-          "S_Context": 0.3243815104166667,
-          "S_between": 0.07174241101300276,
-          "T": 0.31937087023699723,
+          "S_Context": 0.6832682291666666,
+          "S_between": 0.14604017469618055,
+          "T": 0.3647020128038194,
           "canonical_partition_rank": 1
         },
         {
           "layer": 27,
           "S_CO": 0.5694986979166666,
           "S_MG": 0.311279296875,
-          "S_Context": 0.3232421875,
-          "S_between": 0.07147753680193866,
-          "T": 0.32986252396195015,
+          "S_Context": 0.6487630208333334,
+          "S_between": 0.14582542136863427,
+          "T": 0.36402158383969907,
           "canonical_partition_rank": 1
         },
         {
           "layer": 28,
           "S_CO": 0.5745442708333334,
           "S_MG": 0.3006591796875,
-          "S_Context": 0.3361002604166667,
-          "S_between": 0.04839452107747397,
-          "T": 0.3553733825683594,
+          "S_Context": 0.6246744791666666,
+          "S_between": 0.12157920554832176,
+          "T": 0.37838010434751157,
           "canonical_partition_rank": 1
         },
         {
           "layer": 29,
           "S_CO": 0.587890625,
           "S_MG": 0.2959391276041667,
-          "S_Context": 0.3810221354166667,
-          "S_between": 0.05984984503851997,
-          "T": 0.3617674509684245,
+          "S_Context": 0.6341145833333334,
+          "S_between": 0.12142040111400461,
+          "T": 0.3845610441984954,
           "canonical_partition_rank": 1
         },
         {
           "layer": 30,
           "S_CO": 0.6209309895833334,
           "S_MG": 0.2939860026041667,
-          "S_Context": 0.3792317708333333,
-          "S_between": 0.06417698330349393,
-          "T": 0.3672059377034505,
+          "S_Context": 0.6134440104166666,
+          "S_between": 0.16980997721354166,
+          "T": 0.3396436903211806,
           "canonical_partition_rank": 1
         },
         {
           "layer": 31,
           "S_CO": 0.6432291666666666,
           "S_MG": 0.24820963541666666,
-          "S_Context": 0.4237467447916667,
-          "S_between": 0.05642859141031901,
-          "T": 0.38196659088134766,
+          "S_Context": 0.5789388020833334,
+          "S_between": 0.14906706633391203,
+          "T": 0.3410588017216435,
           "canonical_partition_rank": 1
         },
         {
           "layer": 32,
           "S_CO": 0.6551106770833334,
           "S_MG": 0.23787434895833334,
-          "S_Context": 0.5061848958333334,
-          "S_between": 0.11483835290979455,
-          "T": 0.35155162104853876,
+          "S_Context": 0.512939453125,
+          "S_between": 0.16475084092881945,
+          "T": 0.30389065212673616,
           "canonical_partition_rank": 1
         }
       ],

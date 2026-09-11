@@ -1,0 +1,32 @@
+Model: Meta-Llama-3.1-8B-Instruct  expected_primary_layer=19  ids_key=validation_ids  Start: Fri 11 Sep 20:23:26 CEST 2026
+[Meta-Llama-3.1-8B-Instruct] loading tokenizer + model: /home/h24/baga0553/models/Llama-3.1-8B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.11s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.13s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.12s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.23it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.08it/s]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+  [Meta-Llama-3.1-8B-Instruct][validation_ids] 100/720 (ok=100 fail=0)
+  [Meta-Llama-3.1-8B-Instruct][validation_ids] 200/720 (ok=200 fail=0)
+  [Meta-Llama-3.1-8B-Instruct][validation_ids] 300/720 (ok=300 fail=0)
+  [Meta-Llama-3.1-8B-Instruct][validation_ids] 400/720 (ok=400 fail=0)
+  [Meta-Llama-3.1-8B-Instruct][validation_ids] 500/720 (ok=500 fail=0)
+  [Meta-Llama-3.1-8B-Instruct][validation_ids] 600/720 (ok=600 fail=0)
+  [Meta-Llama-3.1-8B-Instruct][validation_ids] 700/720 (ok=700 fail=0)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_co_prefix_injection_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_co_refusal_suppression_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_co_persona_roleplay_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_mg_encoding_obfuscation_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_mg_payload_splitting_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_mg_distractors_negated_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_context_persona_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_context_authority_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_context_fictional_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_neutral_activations.pt (72 instructions)
+{
+  "result_status": "EXPERIMENT2_EXTRACTION_DONE",
+  "model_alias": "Meta-Llama-3.1-8B-Instruct",
+  "ids_key": "validation_ids",
+  "n_rows": 720,
+  "n_ok": 720,
+  "n_fail": 0,
+  "manifest_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Meta-Llama-3.1-8B-Instruct_validation_ids_experiment2_manifest.jsonl",
+  "output_dir": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output"
+}
+Done: Fri 11 Sep 20:23:59 CEST 2026

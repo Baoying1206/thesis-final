@@ -31,9 +31,9 @@
           "mg_encoding_obfuscation": 0.424072265625,
           "mg_payload_splitting": 0.409423828125,
           "mg_distractors_negated": 0.461181640625,
-          "context_persona": 0.239990234375,
-          "context_authority": -0.0159912109375,
-          "context_fictional": 0.037689208984375
+          "context_persona": 0.2003173828125,
+          "context_authority": 0.091552734375,
+          "context_fictional": 0.1412353515625
         },
         "co_refusal_suppression": {
           "co_prefix_injection": 0.3896484375,
@@ -42,9 +42,9 @@
           "mg_encoding_obfuscation": 0.38916015625,
           "mg_payload_splitting": 0.34228515625,
           "mg_distractors_negated": 0.362548828125,
-          "context_persona": 0.267822265625,
-          "context_authority": 0.1400146484375,
-          "context_fictional": 0.1536865234375
+          "context_persona": 0.435302734375,
+          "context_authority": 0.353759765625,
+          "context_fictional": 0.34375
         },
         "co_persona_roleplay": {
           "co_prefix_injection": 0.121337890625,
@@ -53,9 +53,9 @@
           "mg_encoding_obfuscation": 0.026123046875,
           "mg_payload_splitting": 0.0570068359375,
           "mg_distractors_negated": -0.0484619140625,
-          "context_persona": 0.251220703125,
-          "context_authority": 0.1710205078125,
-          "context_fictional": 0.058349609375
+          "context_persona": 0.3720703125,
+          "context_authority": 0.402099609375,
+          "context_fictional": 0.182861328125
         },
         "mg_encoding_obfuscation": {
           "co_prefix_injection": 0.424072265625,
@@ -64,9 +64,9 @@
           "mg_encoding_obfuscation": 1.0,
           "mg_payload_splitting": 0.74365234375,
           "mg_distractors_negated": 0.58447265625,
-          "context_persona": 0.13818359375,
-          "context_authority": -0.031005859375,
-          "context_fictional": 0.1019287109375
+          "context_persona": 0.1932373046875,
+          "context_authority": 0.108154296875,
+          "context_fictional": 0.2496337890625
         },
         "mg_payload_splitting": {
           "co_prefix_injection": 0.409423828125,
@@ -75,9 +75,9 @@
           "mg_encoding_obfuscation": 0.74365234375,
           "mg_payload_splitting": 1.0,
           "mg_distractors_negated": 0.552734375,
-          "context_persona": 0.1298828125,
-          "context_authority": 0.004241943359375,
-          "context_fictional": 0.08795166015625
+          "context_persona": 0.173095703125,
+          "context_authority": 0.10284423828125,
+          "context_fictional": 0.22412109375
         },
         "mg_distractors_negated": {
           "co_prefix_injection": 0.461181640625,
@@ -86,52 +86,52 @@
           "mg_encoding_obfuscation": 0.58447265625,
           "mg_payload_splitting": 0.552734375,
           "mg_distractors_negated": 0.99951171875,
-          "context_persona": 0.178955078125,
-          "context_authority": -0.000682830810546875,
-          "context_fictional": 0.1781005859375
+          "context_persona": 0.172119140625,
+          "context_authority": 0.1373291015625,
+          "context_fictional": 0.343017578125
         },
         "context_persona": {
-          "co_prefix_injection": 0.239990234375,
-          "co_refusal_suppression": 0.267822265625,
-          "co_persona_roleplay": 0.251220703125,
-          "mg_encoding_obfuscation": 0.13818359375,
-          "mg_payload_splitting": 0.1298828125,
-          "mg_distractors_negated": 0.178955078125,
-          "context_persona": 1.0009765625,
-          "context_authority": 0.2220458984375,
-          "context_fictional": 0.079833984375
+          "co_prefix_injection": 0.2003173828125,
+          "co_refusal_suppression": 0.435302734375,
+          "co_persona_roleplay": 0.3720703125,
+          "mg_encoding_obfuscation": 0.1932373046875,
+          "mg_payload_splitting": 0.173095703125,
+          "mg_distractors_negated": 0.172119140625,
+          "context_persona": 1.0,
+          "context_authority": 0.57275390625,
+          "context_fictional": 0.3388671875
         },
         "context_authority": {
-          "co_prefix_injection": -0.0159912109375,
-          "co_refusal_suppression": 0.1400146484375,
-          "co_persona_roleplay": 0.1710205078125,
-          "mg_encoding_obfuscation": -0.031005859375,
-          "mg_payload_splitting": 0.004241943359375,
-          "mg_distractors_negated": -0.000682830810546875,
-          "context_persona": 0.2220458984375,
+          "co_prefix_injection": 0.091552734375,
+          "co_refusal_suppression": 0.353759765625,
+          "co_persona_roleplay": 0.402099609375,
+          "mg_encoding_obfuscation": 0.108154296875,
+          "mg_payload_splitting": 0.10284423828125,
+          "mg_distractors_negated": 0.1373291015625,
+          "context_persona": 0.57275390625,
           "context_authority": 1.0,
-          "context_fictional": 0.333740234375
+          "context_fictional": 0.607421875
         },
         "context_fictional": {
-          "co_prefix_injection": 0.037689208984375,
-          "co_refusal_suppression": 0.1536865234375,
-          "co_persona_roleplay": 0.058349609375,
-          "mg_encoding_obfuscation": 0.1019287109375,
-          "mg_payload_splitting": 0.08795166015625,
-          "mg_distractors_negated": 0.1781005859375,
-          "context_persona": 0.079833984375,
-          "context_authority": 0.333740234375,
-          "context_fictional": 1.0
+          "co_prefix_injection": 0.1412353515625,
+          "co_refusal_suppression": 0.34375,
+          "co_persona_roleplay": 0.182861328125,
+          "mg_encoding_obfuscation": 0.2496337890625,
+          "mg_payload_splitting": 0.22412109375,
+          "mg_distractors_negated": 0.343017578125,
+          "context_persona": 0.3388671875,
+          "context_authority": 0.607421875,
+          "context_fictional": 0.99951171875
         }
       },
       "cosine_result": {
         "S_CO": 0.283203125,
         "S_MG": 0.626953125,
-        "S_Context": 0.21187337239583334,
-        "S_between_all": 0.16721103809497975,
-        "T_partition": 0.20679883603696467,
-        "S_Context_vs_CO": 0.144866943359375,
-        "S_Context_vs_MG": 0.08750618828667535,
+        "S_Context": 0.50634765625,
+        "S_between_all": 0.24629041883680558,
+        "T_partition": 0.22587754991319442,
+        "S_Context_vs_CO": 0.2803276909722222,
+        "S_Context_vs_MG": 0.18928358289930555,
         "S_CO_vs_MG": 0.2692599826388889
       },
       "n_partitions": 280,
@@ -174,22 +174,22 @@
           "max_norm": 297.5
         },
         "context_persona": {
-          "mean_norm": 95.375,
-          "std_norm": 19.96875,
-          "min_norm": 44.46875,
-          "max_norm": 152.25
+          "mean_norm": 130.875,
+          "std_norm": 24.28125,
+          "min_norm": 60.875,
+          "max_norm": 206.125
         },
         "context_authority": {
-          "mean_norm": 41.75,
-          "std_norm": 8.84375,
-          "min_norm": 21.453125,
-          "max_norm": 83.125
+          "mean_norm": 91.5625,
+          "std_norm": 20.15625,
+          "min_norm": 42.875,
+          "max_norm": 149.75
         },
         "context_fictional": {
-          "mean_norm": 64.5625,
-          "std_norm": 21.4375,
-          "min_norm": 26.984375,
-          "max_norm": 212.5
+          "mean_norm": 112.5625,
+          "std_norm": 29.15625,
+          "min_norm": 58.5,
+          "max_norm": 223.75
         }
       },
       "reliability": {
@@ -254,7 +254,17 @@
           "seed": 20260828
         },
         "context_persona": {
-          "split_half_cosine_mean": 0.995355486869812,
+          "split_half_cosine_mean": 0.9962851405143738,
+          "split_half_cosine_median": 0.99658203125,
+          "split_half_cosine_ci95": [
+            0.99365234375,
+            0.998046875
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "context_authority": {
+          "split_half_cosine_mean": 0.9953984618186951,
           "split_half_cosine_median": 0.99609375,
           "split_half_cosine_ci95": [
             0.9912109375,
@@ -263,22 +273,12 @@
           "n_reps": 500,
           "seed": 20260828
         },
-        "context_authority": {
-          "split_half_cosine_mean": 0.9945077896118164,
-          "split_half_cosine_median": 0.99462890625,
-          "split_half_cosine_ci95": [
-            0.991442859172821,
-            0.99658203125
-          ],
-          "n_reps": 500,
-          "seed": 20260828
-        },
         "context_fictional": {
-          "split_half_cosine_mean": 0.9882919788360596,
-          "split_half_cosine_median": 0.9892578125,
+          "split_half_cosine_mean": 0.9921425580978394,
+          "split_half_cosine_median": 0.99267578125,
           "split_half_cosine_ci95": [
-            0.97998046875,
-            0.9931640625
+            0.985095202922821,
+            0.99560546875
           ],
           "n_reps": 500,
           "seed": 20260828
@@ -290,27 +290,27 @@
             "context_authority",
             "context_fictional"
           ],
-          "pair_internal_cosine": 0.333740234375,
-          "pair_centroid_vs_CO": 0.1451416015625,
-          "pair_centroid_vs_MG": 0.08868408203125
+          "pair_internal_cosine": 0.607421875,
+          "pair_centroid_vs_CO": 0.369873046875,
+          "pair_centroid_vs_MG": 0.25
         },
         "context_authority": {
           "remaining_pair": [
             "context_persona",
             "context_fictional"
           ],
-          "pair_internal_cosine": 0.079833984375,
-          "pair_centroid_vs_CO": 0.34326171875,
-          "pair_centroid_vs_MG": 0.2076416015625
+          "pair_internal_cosine": 0.3388671875,
+          "pair_centroid_vs_CO": 0.47265625,
+          "pair_centroid_vs_MG": 0.3037109375
         },
         "context_fictional": {
           "remaining_pair": [
             "context_persona",
             "context_authority"
           ],
-          "pair_internal_cosine": 0.2220458984375,
-          "pair_centroid_vs_CO": 0.330810546875,
-          "pair_centroid_vs_MG": 0.140380859375
+          "pair_internal_cosine": 0.57275390625,
+          "pair_centroid_vs_CO": 0.456298828125,
+          "pair_centroid_vs_MG": 0.1982421875
         }
       },
       "minimum_evidence": {
@@ -324,9 +324,9 @@
           "proxy": "split_half_cosine_ci95 lower bound > 0"
         },
         "criterion_2_context_internal_gt_between": {
-          "S_Context": 0.21187337239583334,
-          "S_Context_vs_CO": 0.144866943359375,
-          "S_Context_vs_MG": 0.08750618828667535,
+          "S_Context": 0.50634765625,
+          "S_Context_vs_CO": 0.2803276909722222,
+          "S_Context_vs_MG": 0.18928358289930555,
           "met": true
         },
         "criterion_3_leave_one_out_stable": {
@@ -336,27 +336,27 @@
                 "context_authority",
                 "context_fictional"
               ],
-              "pair_internal_cosine": 0.333740234375,
-              "pair_centroid_vs_CO": 0.1451416015625,
-              "pair_centroid_vs_MG": 0.08868408203125
+              "pair_internal_cosine": 0.607421875,
+              "pair_centroid_vs_CO": 0.369873046875,
+              "pair_centroid_vs_MG": 0.25
             },
             "context_authority": {
               "remaining_pair": [
                 "context_persona",
                 "context_fictional"
               ],
-              "pair_internal_cosine": 0.079833984375,
-              "pair_centroid_vs_CO": 0.34326171875,
-              "pair_centroid_vs_MG": 0.2076416015625
+              "pair_internal_cosine": 0.3388671875,
+              "pair_centroid_vs_CO": 0.47265625,
+              "pair_centroid_vs_MG": 0.3037109375
             },
             "context_fictional": {
               "remaining_pair": [
                 "context_persona",
                 "context_authority"
               ],
-              "pair_internal_cosine": 0.2220458984375,
-              "pair_centroid_vs_CO": 0.330810546875,
-              "pair_centroid_vs_MG": 0.140380859375
+              "pair_internal_cosine": 0.57275390625,
+              "pair_centroid_vs_CO": 0.456298828125,
+              "pair_centroid_vs_MG": 0.1982421875
             }
           },
           "met": false
@@ -386,30 +386,30 @@
           ]
         },
         "S_Context": {
-          "mean": 0.21161790192127228,
-          "median": 0.21148681640625,
+          "mean": 0.5060875415802002,
+          "median": 0.5060221552848816,
           "ci95": [
-            0.2020670622587204,
-            0.22204691171646118
+            0.49145305156707764,
+            0.5204264521598816
           ]
         },
         "S_between": {
-          "mean": 0.16744448244571686,
-          "median": 0.16748294234275818,
+          "mean": 0.24653878808021545,
+          "median": 0.24662385880947113,
           "ci95": [
-            0.15812206268310547,
-            0.1761951446533203
+            0.23575414717197418,
+            0.2564443349838257
           ]
         },
         "T": {
-          "mean": 0.2066812813282013,
-          "median": 0.20667365193367004,
+          "mean": 0.22574353218078613,
+          "median": 0.22569839656352997,
           "ci95": [
-            0.2015390545129776,
-            0.21190804243087769
+            0.22099919617176056,
+            0.23058263957500458
           ]
         },
-        "P_canonical_rank_1": 0.9285,
+        "P_canonical_rank_1": 1.0,
         "n_bootstrap": 2000,
         "seed": 20260828
       },
@@ -427,379 +427,379 @@
           "layer": 1,
           "S_CO": 0.9112955729166666,
           "S_MG": -0.017801920572916668,
-          "S_Context": 0.3134358723958333,
-          "S_between": 0.15441046820746526,
-          "T": 0.24789937337239584,
-          "canonical_partition_rank": 14
+          "S_Context": 0.7957356770833334,
+          "S_between": 0.321197509765625,
+          "T": 0.24187893337673616,
+          "canonical_partition_rank": 4
         },
         {
           "layer": 2,
           "S_CO": 0.6949869791666666,
           "S_MG": 0.09956868489583333,
-          "S_Context": 0.15475972493489584,
-          "S_between": 0.10650072053626732,
-          "T": 0.20993774246286467,
-          "canonical_partition_rank": 2
+          "S_Context": 0.7898763020833334,
+          "S_between": 0.28240401656539355,
+          "T": 0.24573997214988424,
+          "canonical_partition_rank": 1
         },
         {
           "layer": 3,
           "S_CO": 0.6834309895833334,
           "S_MG": 0.16251627604166666,
-          "S_Context": 0.16123453776041666,
-          "S_between": 0.11501792625144676,
-          "T": 0.22070934154369215,
+          "S_Context": 0.8172200520833334,
+          "S_between": 0.25694910685221356,
+          "T": 0.29743999905056423,
           "canonical_partition_rank": 1
         },
         {
           "layer": 4,
           "S_CO": 0.7091471354166666,
           "S_MG": 0.2790374755859375,
-          "S_Context": 0.22037760416666666,
-          "S_between": 0.15109422471788195,
-          "T": 0.25175984700520826,
+          "S_Context": 0.8404947916666666,
+          "S_between": 0.2583464163321036,
+          "T": 0.35121338455765333,
           "canonical_partition_rank": 1
         },
         {
           "layer": 5,
           "S_CO": 0.6798502604166666,
           "S_MG": 0.388916015625,
-          "S_Context": 0.105010986328125,
-          "S_between": 0.14862576237431277,
-          "T": 0.24263332508228438,
+          "S_Context": 0.7371419270833334,
+          "S_between": 0.1539171713369864,
+          "T": 0.4480522297046802,
           "canonical_partition_rank": 1
         },
         {
           "layer": 6,
           "S_CO": 0.7389322916666666,
           "S_MG": 0.5018717447916666,
-          "S_Context": 0.21781412760416666,
-          "S_between": 0.21642529522931134,
-          "T": 0.2697807594581887,
+          "S_Context": 0.7654622395833334,
+          "S_between": 0.1987687570077402,
+          "T": 0.469986668339482,
           "canonical_partition_rank": 1
         },
         {
           "layer": 7,
           "S_CO": 0.7545572916666666,
           "S_MG": 0.50341796875,
-          "S_Context": 0.2660725911458333,
-          "S_between": 0.19015079074435762,
-          "T": 0.31786515977647567,
+          "S_Context": 0.7654622395833334,
+          "S_between": 0.19700322327790434,
+          "T": 0.4774759433887623,
           "canonical_partition_rank": 1
         },
         {
           "layer": 8,
           "S_CO": 0.7578125,
           "S_MG": 0.5540364583333334,
-          "S_Context": 0.3309326171875,
-          "S_between": 0.19167709350585935,
-          "T": 0.35591676500108516,
+          "S_Context": 0.8095703125,
+          "S_between": 0.1793611314561632,
+          "T": 0.5277786254882814,
           "canonical_partition_rank": 1
         },
         {
           "layer": 9,
           "S_CO": 0.6982421875,
           "S_MG": 0.4923502604166667,
-          "S_Context": 0.37109375,
-          "S_between": 0.19738981458875868,
-          "T": 0.3231722513834635,
+          "S_Context": 0.8209635416666666,
+          "S_between": 0.17159454910843464,
+          "T": 0.4989241140860099,
           "canonical_partition_rank": 1
         },
         {
           "layer": 10,
           "S_CO": 0.6002604166666666,
           "S_MG": 0.5337727864583334,
-          "S_Context": 0.2703857421875,
-          "S_between": 0.13939525462962962,
-          "T": 0.32874439380787035,
+          "S_Context": 0.70263671875,
+          "S_between": 0.1721343994140625,
+          "T": 0.44008890787760413,
           "canonical_partition_rank": 1
         },
         {
           "layer": 11,
           "S_CO": 0.6580403645833334,
           "S_MG": 0.5874837239583334,
-          "S_Context": 0.24226888020833334,
-          "S_between": 0.19418730559172456,
-          "T": 0.3017436839916088,
+          "S_Context": 0.7111002604166666,
+          "S_between": 0.23953416612413192,
+          "T": 0.4126739501953126,
           "canonical_partition_rank": 1
         },
         {
           "layer": 12,
           "S_CO": 0.63232421875,
           "S_MG": 0.5384114583333334,
-          "S_Context": 0.18778483072916666,
-          "S_between": 0.1971542923538773,
-          "T": 0.2556858769169561,
+          "S_Context": 0.5843098958333334,
+          "S_between": 0.22624997739438657,
+          "T": 0.35876521357783575,
           "canonical_partition_rank": 1
         },
         {
           "layer": 13,
           "S_CO": 0.6871744791666666,
           "S_MG": 0.5669759114583334,
-          "S_Context": 0.18355305989583334,
-          "S_between": 0.2059860935917607,
-          "T": 0.27324838991518374,
+          "S_Context": 0.6036783854166666,
+          "S_between": 0.22671395760995372,
+          "T": 0.39256230107060175,
           "canonical_partition_rank": 1
         },
         {
           "layer": 14,
           "S_CO": 0.6455078125,
           "S_MG": 0.599365234375,
-          "S_Context": 0.172149658203125,
-          "S_between": 0.2269219292534722,
-          "T": 0.2454189724392361,
+          "S_Context": 0.62890625,
+          "S_between": 0.23468639232494212,
+          "T": 0.3899067066333912,
           "canonical_partition_rank": 1
         },
         {
           "layer": 15,
           "S_CO": 0.6123046875,
           "S_MG": 0.6161295572916666,
-          "S_Context": 0.15858968098958334,
-          "S_between": 0.24498607494212962,
-          "T": 0.21735523365162032,
+          "S_Context": 0.6261393229166666,
+          "S_between": 0.292265150282118,
+          "T": 0.325926038953993,
           "canonical_partition_rank": 1
         },
         {
           "layer": 16,
           "S_CO": 0.6259765625,
           "S_MG": 0.5611979166666666,
-          "S_Context": 0.14095052083333334,
-          "S_between": 0.20397680777090568,
-          "T": 0.23873152556242758,
+          "S_Context": 0.5870768229166666,
+          "S_between": 0.25132836235894096,
+          "T": 0.34008873833550335,
           "canonical_partition_rank": 1
         },
         {
           "layer": 17,
           "S_CO": 0.6201171875,
           "S_MG": 0.5514322916666666,
-          "S_Context": 0.15293375651041666,
-          "S_between": 0.2075193193223741,
-          "T": 0.233975092569987,
+          "S_Context": 0.5601399739583334,
+          "S_between": 0.2578013384783709,
+          "T": 0.3194284792299625,
           "canonical_partition_rank": 1
         },
         {
           "layer": 18,
           "S_CO": 0.5215657552083334,
           "S_MG": 0.58935546875,
-          "S_Context": 0.15561930338541666,
-          "S_between": 0.1995216652199074,
-          "T": 0.22265851056134264,
+          "S_Context": 0.5333658854166666,
+          "S_between": 0.2783836082175926,
+          "T": 0.2697120949074074,
           "canonical_partition_rank": 1
         },
         {
           "layer": 19,
           "S_CO": 0.4161783854166667,
           "S_MG": 0.5755208333333334,
-          "S_Context": 0.13828531901041666,
-          "S_between": 0.1465900562427662,
-          "T": 0.2300714563440394,
+          "S_Context": 0.453125,
+          "S_between": 0.23306048357928244,
+          "T": 0.24854758933738424,
           "canonical_partition_rank": 1
         },
         {
           "layer": 20,
           "S_CO": 0.447021484375,
           "S_MG": 0.60791015625,
-          "S_Context": 0.174072265625,
-          "S_between": 0.17814042833116317,
-          "T": 0.23152754041883683,
+          "S_Context": 0.468994140625,
+          "S_between": 0.27666106047453703,
+          "T": 0.2313141999421296,
           "canonical_partition_rank": 1
         },
         {
           "layer": 21,
           "S_CO": 0.3966471354166667,
           "S_MG": 0.59716796875,
-          "S_Context": 0.1954345703125,
-          "S_between": 0.19040227819372105,
-          "T": 0.20601427996600122,
+          "S_Context": 0.4654134114583333,
+          "S_between": 0.28157778139467593,
+          "T": 0.20483172381365738,
           "canonical_partition_rank": 1
         },
         {
           "layer": 22,
           "S_CO": 0.3550211588541667,
           "S_MG": 0.64599609375,
-          "S_Context": 0.20273844401041666,
-          "S_between": 0.20710090354636865,
-          "T": 0.1941509953251592,
+          "S_Context": 0.458251953125,
+          "S_between": 0.2809431287977431,
+          "T": 0.20547993977864581,
           "canonical_partition_rank": 1
         },
         {
           "layer": 23,
           "S_CO": 0.3604736328125,
           "S_MG": 0.6604817708333334,
-          "S_Context": 0.20011393229166666,
-          "S_between": 0.20924660011574073,
-          "T": 0.197776511863426,
+          "S_Context": 0.50244140625,
+          "S_between": 0.29587328875506363,
+          "T": 0.2119256478768809,
           "canonical_partition_rank": 1
         },
         {
           "layer": 24,
           "S_CO": 0.3409016927083333,
           "S_MG": 0.6222330729166666,
-          "S_Context": 0.22300211588541666,
-          "S_between": 0.20887784604673035,
-          "T": 0.18650111445674192,
+          "S_Context": 0.5367024739583334,
+          "S_between": 0.29768315067997686,
+          "T": 0.20226259584780099,
           "canonical_partition_rank": 1
         },
         {
           "layer": 25,
           "S_CO": 0.283203125,
           "S_MG": 0.626953125,
-          "S_Context": 0.21187337239583334,
-          "S_between": 0.16721103809497975,
-          "T": 0.20679883603696467,
+          "S_Context": 0.50634765625,
+          "S_between": 0.24629041883680558,
+          "T": 0.22587754991319442,
           "canonical_partition_rank": 1
         },
         {
           "layer": 26,
           "S_CO": 0.2574055989583333,
           "S_MG": 0.6280924479166666,
-          "S_Context": 0.22015380859375,
-          "S_between": 0.1618799986662688,
-          "T": 0.20667061982331453,
+          "S_Context": 0.5006510416666666,
+          "S_between": 0.22942521837022567,
+          "T": 0.23262447781032985,
           "canonical_partition_rank": 1
         },
         {
           "layer": 27,
           "S_CO": 0.23319498697916666,
           "S_MG": 0.5537923177083334,
-          "S_Context": 0.21549479166666666,
-          "S_between": 0.15615562156394674,
-          "T": 0.17800507722077552,
+          "S_Context": 0.4868977864583333,
+          "S_between": 0.21836005316840276,
+          "T": 0.20626831054687497,
           "canonical_partition_rank": 1
         },
         {
           "layer": 28,
           "S_CO": 0.2410888671875,
           "S_MG": 0.5701497395833334,
-          "S_Context": 0.21539306640625,
-          "S_between": 0.1633032339590567,
-          "T": 0.1789073237666378,
+          "S_Context": 0.48193359375,
+          "S_between": 0.2206748679832176,
+          "T": 0.21038253219039357,
           "canonical_partition_rank": 1
         },
         {
           "layer": 29,
           "S_CO": 0.22794596354166666,
           "S_MG": 0.5724283854166666,
-          "S_Context": 0.2691650390625,
-          "S_between": 0.15700163664641206,
-          "T": 0.19951149269386567,
+          "S_Context": 0.482666015625,
+          "S_between": 0.211517333984375,
+          "T": 0.21616278754340273,
           "canonical_partition_rank": 1
         },
         {
           "layer": 30,
           "S_CO": 0.213134765625,
           "S_MG": 0.5611979166666666,
-          "S_Context": 0.2574869791666667,
-          "S_between": 0.1422380518030237,
-          "T": 0.20170183534975403,
-          "canonical_partition_rank": 1
+          "S_Context": 0.46630859375,
+          "S_between": 0.19652190031828706,
+          "T": 0.21702519169560178,
+          "canonical_partition_rank": 2
         },
         {
           "layer": 31,
           "S_CO": 0.2149658203125,
           "S_MG": 0.5458170572916666,
-          "S_Context": 0.26611328125,
-          "S_between": 0.13412150630244501,
-          "T": 0.2081772133156105,
-          "canonical_partition_rank": 1
+          "S_Context": 0.4556477864583333,
+          "S_between": 0.1954323097511574,
+          "T": 0.2100445782696759,
+          "canonical_partition_rank": 2
         },
         {
           "layer": 32,
           "S_CO": 0.19063313802083334,
           "S_MG": 0.5096842447916666,
-          "S_Context": 0.2565511067708333,
-          "S_between": 0.12884510887993705,
-          "T": 0.19011105431450737,
-          "canonical_partition_rank": 1
+          "S_Context": 0.4374186197916667,
+          "S_between": 0.18842513472945602,
+          "T": 0.19082019947193288,
+          "canonical_partition_rank": 2
         },
         {
           "layer": 33,
           "S_CO": 0.18308512369791666,
           "S_MG": 0.5032552083333334,
-          "S_Context": 0.24589029947916666,
-          "S_between": 0.12562928376374422,
-          "T": 0.1851142600730613,
-          "canonical_partition_rank": 1
+          "S_Context": 0.4266357421875,
+          "S_between": 0.1934921829788773,
+          "T": 0.17749984176070602,
+          "canonical_partition_rank": 3
         },
         {
           "layer": 34,
           "S_CO": 0.17417399088541666,
           "S_MG": 0.514404296875,
-          "S_Context": 0.23111979166666666,
-          "S_between": 0.13319340458622686,
-          "T": 0.17337262188946756,
-          "canonical_partition_rank": 3
+          "S_Context": 0.4243977864583333,
+          "S_between": 0.19888987364592378,
+          "T": 0.17210215109365953,
+          "canonical_partition_rank": 4
         },
         {
           "layer": 35,
           "S_CO": 0.19134521484375,
           "S_MG": 0.5047200520833334,
-          "S_Context": 0.22623697916666666,
-          "S_between": 0.13583571822554977,
-          "T": 0.17159836380570023,
-          "canonical_partition_rank": 3
+          "S_Context": 0.4136149088541667,
+          "S_between": 0.200264400906033,
+          "T": 0.1696289910210503,
+          "canonical_partition_rank": 6
         },
         {
           "layer": 36,
           "S_CO": 0.19063313802083334,
           "S_MG": 0.5162760416666666,
-          "S_Context": 0.21980794270833334,
-          "S_between": 0.13897662692599827,
-          "T": 0.16992908053927952,
-          "canonical_partition_rank": 3
+          "S_Context": 0.4132486979166667,
+          "S_between": 0.2061131795247396,
+          "T": 0.1672727796766493,
+          "canonical_partition_rank": 6
         },
         {
           "layer": 37,
           "S_CO": 0.18831380208333334,
           "S_MG": 0.505615234375,
-          "S_Context": 0.2171630859375,
-          "S_between": 0.1291277850115741,
-          "T": 0.17456958912037038,
-          "canonical_partition_rank": 3
+          "S_Context": 0.37744140625,
+          "S_between": 0.19685533311631945,
+          "T": 0.1602681477864584,
+          "canonical_partition_rank": 8
         },
         {
           "layer": 38,
           "S_CO": 0.16762288411458334,
           "S_MG": 0.5048014322916666,
-          "S_Context": 0.22037760416666666,
-          "S_between": 0.1293323658130787,
-          "T": 0.16826827437789352,
-          "canonical_partition_rank": 3
+          "S_Context": 0.3836263020833333,
+          "S_between": 0.1988762749565972,
+          "T": 0.1531405978732639,
+          "canonical_partition_rank": 11
         },
         {
           "layer": 39,
           "S_CO": 0.14725748697916666,
           "S_MG": 0.48046875,
-          "S_Context": 0.23628743489583334,
-          "S_between": 0.12040060537832754,
-          "T": 0.16760395191333916,
-          "canonical_partition_rank": 4
+          "S_Context": 0.3940022786458333,
+          "S_between": 0.19090610080295137,
+          "T": 0.14967007107204863,
+          "canonical_partition_rank": 9
         },
         {
           "layer": 40,
           "S_CO": 0.1373291015625,
           "S_MG": 0.4769694010416667,
-          "S_Context": 0.2627360026041667,
-          "S_between": 0.1254340277777778,
-          "T": 0.16691080729166669,
-          "canonical_partition_rank": 3
+          "S_Context": 0.3835042317708333,
+          "S_between": 0.18862123842592593,
+          "T": 0.14397967303240738,
+          "canonical_partition_rank": 9
         },
         {
           "layer": 41,
           "S_CO": 0.16652425130208334,
           "S_MG": 0.5230305989583334,
-          "S_Context": 0.2751057942708333,
-          "S_between": 0.11054498177987555,
-          "T": 0.21100856639720778,
-          "canonical_partition_rank": 2
+          "S_Context": 0.392333984375,
+          "S_between": 0.16612863540649414,
+          "T": 0.19450097613864475,
+          "canonical_partition_rank": 4
         },
         {
           "layer": 42,
           "S_CO": 0.12244669596354167,
           "S_MG": 0.3741861979166667,
-          "S_Context": 0.2720947265625,
-          "S_between": 0.14254732485170718,
-          "T": 0.1136952152958623,
-          "canonical_partition_rank": 6
+          "S_Context": 0.437744140625,
+          "S_between": 0.20111988208912035,
+          "T": 0.11033912941261576,
+          "canonical_partition_rank": 8
         }
       ],
       "layerwise_sweep_skipped": false
@@ -815,9 +815,9 @@
           "mg_encoding_obfuscation": 0.19384765625,
           "mg_payload_splitting": 0.140380859375,
           "mg_distractors_negated": 0.05511474609375,
-          "context_persona": 0.11334228515625,
-          "context_authority": -0.0654296875,
-          "context_fictional": -0.033050537109375
+          "context_persona": 0.0227508544921875,
+          "context_authority": 0.1103515625,
+          "context_fictional": 0.03466796875
         },
         "co_refusal_suppression": {
           "co_prefix_injection": 0.728515625,
@@ -826,9 +826,9 @@
           "mg_encoding_obfuscation": 0.283447265625,
           "mg_payload_splitting": 0.12493896484375,
           "mg_distractors_negated": 0.11328125,
-          "context_persona": 0.259765625,
-          "context_authority": 0.010986328125,
-          "context_fictional": -0.034088134765625
+          "context_persona": 0.2066650390625,
+          "context_authority": 0.2142333984375,
+          "context_fictional": 0.181884765625
         },
         "co_persona_roleplay": {
           "co_prefix_injection": 0.51416015625,
@@ -837,9 +837,9 @@
           "mg_encoding_obfuscation": -0.0758056640625,
           "mg_payload_splitting": -0.06170654296875,
           "mg_distractors_negated": -0.1676025390625,
-          "context_persona": 0.27587890625,
-          "context_authority": 0.2200927734375,
-          "context_fictional": 0.1654052734375
+          "context_persona": 0.289306640625,
+          "context_authority": 0.409423828125,
+          "context_fictional": 0.2413330078125
         },
         "mg_encoding_obfuscation": {
           "co_prefix_injection": 0.19384765625,
@@ -848,9 +848,9 @@
           "mg_encoding_obfuscation": 1.0,
           "mg_payload_splitting": 0.33984375,
           "mg_distractors_negated": 0.5244140625,
-          "context_persona": 0.1072998046875,
-          "context_authority": -0.0394287109375,
-          "context_fictional": -0.015106201171875
+          "context_persona": 0.158203125,
+          "context_authority": 0.00814056396484375,
+          "context_fictional": 0.2386474609375
         },
         "mg_payload_splitting": {
           "co_prefix_injection": 0.140380859375,
@@ -859,9 +859,9 @@
           "mg_encoding_obfuscation": 0.33984375,
           "mg_payload_splitting": 1.0,
           "mg_distractors_negated": 0.39208984375,
-          "context_persona": -0.043609619140625,
-          "context_authority": -0.044097900390625,
-          "context_fictional": -0.045806884765625
+          "context_persona": -0.01210784912109375,
+          "context_authority": -0.10748291015625,
+          "context_fictional": 0.033966064453125
         },
         "mg_distractors_negated": {
           "co_prefix_injection": 0.05511474609375,
@@ -870,52 +870,52 @@
           "mg_encoding_obfuscation": 0.5244140625,
           "mg_payload_splitting": 0.39208984375,
           "mg_distractors_negated": 0.99951171875,
-          "context_persona": 0.1417236328125,
-          "context_authority": -0.0180511474609375,
-          "context_fictional": -0.01044464111328125
+          "context_persona": 0.1876220703125,
+          "context_authority": 0.01081085205078125,
+          "context_fictional": 0.2276611328125
         },
         "context_persona": {
-          "co_prefix_injection": 0.11334228515625,
-          "co_refusal_suppression": 0.259765625,
-          "co_persona_roleplay": 0.27587890625,
-          "mg_encoding_obfuscation": 0.1072998046875,
-          "mg_payload_splitting": -0.043609619140625,
-          "mg_distractors_negated": 0.1417236328125,
-          "context_persona": 0.99951171875,
-          "context_authority": 0.404541015625,
-          "context_fictional": 0.250244140625
+          "co_prefix_injection": 0.0227508544921875,
+          "co_refusal_suppression": 0.2066650390625,
+          "co_persona_roleplay": 0.289306640625,
+          "mg_encoding_obfuscation": 0.158203125,
+          "mg_payload_splitting": -0.01210784912109375,
+          "mg_distractors_negated": 0.1876220703125,
+          "context_persona": 1.0,
+          "context_authority": 0.7587890625,
+          "context_fictional": 0.716796875
         },
         "context_authority": {
-          "co_prefix_injection": -0.0654296875,
-          "co_refusal_suppression": 0.010986328125,
-          "co_persona_roleplay": 0.2200927734375,
-          "mg_encoding_obfuscation": -0.0394287109375,
-          "mg_payload_splitting": -0.044097900390625,
-          "mg_distractors_negated": -0.0180511474609375,
-          "context_persona": 0.404541015625,
+          "co_prefix_injection": 0.1103515625,
+          "co_refusal_suppression": 0.2142333984375,
+          "co_persona_roleplay": 0.409423828125,
+          "mg_encoding_obfuscation": 0.00814056396484375,
+          "mg_payload_splitting": -0.10748291015625,
+          "mg_distractors_negated": 0.01081085205078125,
+          "context_persona": 0.7587890625,
           "context_authority": 1.0,
-          "context_fictional": 0.3525390625
+          "context_fictional": 0.7119140625
         },
         "context_fictional": {
-          "co_prefix_injection": -0.033050537109375,
-          "co_refusal_suppression": -0.034088134765625,
-          "co_persona_roleplay": 0.1654052734375,
-          "mg_encoding_obfuscation": -0.015106201171875,
-          "mg_payload_splitting": -0.045806884765625,
-          "mg_distractors_negated": -0.01044464111328125,
-          "context_persona": 0.250244140625,
-          "context_authority": 0.3525390625,
-          "context_fictional": 1.0009765625
+          "co_prefix_injection": 0.03466796875,
+          "co_refusal_suppression": 0.181884765625,
+          "co_persona_roleplay": 0.2413330078125,
+          "mg_encoding_obfuscation": 0.2386474609375,
+          "mg_payload_splitting": 0.033966064453125,
+          "mg_distractors_negated": 0.2276611328125,
+          "context_persona": 0.716796875,
+          "context_authority": 0.7119140625,
+          "context_fictional": 1.0
         }
       },
       "cosine_result": {
         "S_CO": 0.6189778645833334,
         "S_MG": 0.4187825520833333,
-        "S_Context": 0.3357747395833333,
-        "S_between_all": 0.057454709653501156,
-        "T_partition": 0.4003903424298322,
-        "S_Context_vs_CO": 0.10143364800347222,
-        "S_Context_vs_MG": 0.00360870361328125,
+        "S_Context": 0.7291666666666666,
+        "S_between_all": 0.11340642858434608,
+        "T_partition": 0.47556926586009846,
+        "S_Context_vs_CO": 0.19006856282552084,
+        "S_Context_vs_MG": 0.08282894558376735,
         "S_CO_vs_MG": 0.06732177734375
       },
       "n_partitions": 280,
@@ -958,22 +958,22 @@
           "max_norm": 433.0
         },
         "context_persona": {
-          "mean_norm": 45.0,
-          "std_norm": 15.0,
-          "min_norm": 15.0546875,
-          "max_norm": 88.25
+          "mean_norm": 67.5625,
+          "std_norm": 17.84375,
+          "min_norm": 32.90625,
+          "max_norm": 131.75
         },
         "context_authority": {
-          "mean_norm": 31.125,
-          "std_norm": 11.84375,
-          "min_norm": 12.3671875,
-          "max_norm": 69.0625
+          "mean_norm": 63.5625,
+          "std_norm": 21.515625,
+          "min_norm": 28.875,
+          "max_norm": 146.5
         },
         "context_fictional": {
-          "mean_norm": 54.5625,
-          "std_norm": 28.015625,
-          "min_norm": 14.2421875,
-          "max_norm": 197.5
+          "mean_norm": 102.4375,
+          "std_norm": 35.4375,
+          "min_norm": 46.90625,
+          "max_norm": 230.375
         }
       },
       "reliability": {
@@ -1038,31 +1038,31 @@
           "seed": 20260828
         },
         "context_persona": {
-          "split_half_cosine_mean": 0.981247067451477,
-          "split_half_cosine_median": 0.98193359375,
+          "split_half_cosine_mean": 0.9882881045341492,
+          "split_half_cosine_median": 0.98876953125,
           "split_half_cosine_ci95": [
-            0.97412109375,
-            0.9853515625
+            0.982421875,
+            0.9912109375
           ],
           "n_reps": 500,
           "seed": 20260828
         },
         "context_authority": {
-          "split_half_cosine_mean": 0.982739269733429,
-          "split_half_cosine_median": 0.9833984375,
+          "split_half_cosine_mean": 0.9889463186264038,
+          "split_half_cosine_median": 0.98974609375,
           "split_half_cosine_ci95": [
-            0.9755859375,
-            0.98681640625
+            0.982421875,
+            0.9921875
           ],
           "n_reps": 500,
           "seed": 20260828
         },
         "context_fictional": {
-          "split_half_cosine_mean": 0.971929669380188,
-          "split_half_cosine_median": 0.97265625,
+          "split_half_cosine_mean": 0.9840644598007202,
+          "split_half_cosine_median": 0.98486328125,
           "split_half_cosine_ci95": [
-            0.957751452922821,
-            0.9794921875
+            0.97509765625,
+            0.98876953125
           ],
           "n_reps": 500,
           "seed": 20260828
@@ -1074,27 +1074,27 @@
             "context_authority",
             "context_fictional"
           ],
-          "pair_internal_cosine": 0.3525390625,
-          "pair_centroid_vs_CO": 0.055206298828125,
-          "pair_centroid_vs_MG": -0.040740966796875
+          "pair_internal_cosine": 0.7119140625,
+          "pair_centroid_vs_CO": 0.245849609375,
+          "pair_centroid_vs_MG": 0.12493896484375
         },
         "context_authority": {
           "remaining_pair": [
             "context_persona",
             "context_fictional"
           ],
-          "pair_internal_cosine": 0.250244140625,
-          "pair_centroid_vs_CO": 0.179931640625,
-          "pair_centroid_vs_MG": 0.03875732421875
+          "pair_internal_cosine": 0.716796875,
+          "pair_centroid_vs_CO": 0.2138671875,
+          "pair_centroid_vs_MG": 0.2052001953125
         },
         "context_fictional": {
           "remaining_pair": [
             "context_persona",
             "context_authority"
           ],
-          "pair_internal_cosine": 0.404541015625,
-          "pair_centroid_vs_CO": 0.2132568359375,
-          "pair_centroid_vs_MG": 0.045074462890625
+          "pair_internal_cosine": 0.7587890625,
+          "pair_centroid_vs_CO": 0.26611328125,
+          "pair_centroid_vs_MG": 0.06396484375
         }
       },
       "minimum_evidence": {
@@ -1108,9 +1108,9 @@
           "proxy": "split_half_cosine_ci95 lower bound > 0"
         },
         "criterion_2_context_internal_gt_between": {
-          "S_Context": 0.3357747395833333,
-          "S_Context_vs_CO": 0.10143364800347222,
-          "S_Context_vs_MG": 0.00360870361328125,
+          "S_Context": 0.7291666666666666,
+          "S_Context_vs_CO": 0.19006856282552084,
+          "S_Context_vs_MG": 0.08282894558376735,
           "met": true
         },
         "criterion_3_leave_one_out_stable": {
@@ -1120,27 +1120,27 @@
                 "context_authority",
                 "context_fictional"
               ],
-              "pair_internal_cosine": 0.3525390625,
-              "pair_centroid_vs_CO": 0.055206298828125,
-              "pair_centroid_vs_MG": -0.040740966796875
+              "pair_internal_cosine": 0.7119140625,
+              "pair_centroid_vs_CO": 0.245849609375,
+              "pair_centroid_vs_MG": 0.12493896484375
             },
             "context_authority": {
               "remaining_pair": [
                 "context_persona",
                 "context_fictional"
               ],
-              "pair_internal_cosine": 0.250244140625,
-              "pair_centroid_vs_CO": 0.179931640625,
-              "pair_centroid_vs_MG": 0.03875732421875
+              "pair_internal_cosine": 0.716796875,
+              "pair_centroid_vs_CO": 0.2138671875,
+              "pair_centroid_vs_MG": 0.2052001953125
             },
             "context_fictional": {
               "remaining_pair": [
                 "context_persona",
                 "context_authority"
               ],
-              "pair_internal_cosine": 0.404541015625,
-              "pair_centroid_vs_CO": 0.2132568359375,
-              "pair_centroid_vs_MG": 0.045074462890625
+              "pair_internal_cosine": 0.7587890625,
+              "pair_centroid_vs_CO": 0.26611328125,
+              "pair_centroid_vs_MG": 0.06396484375
             }
           },
           "met": true
@@ -1170,27 +1170,27 @@
           ]
         },
         "S_Context": {
-          "mean": 0.33417946100234985,
-          "median": 0.3341471254825592,
+          "mean": 0.7276592254638672,
+          "median": 0.7277018427848816,
           "ci95": [
-            0.31994324922561646,
-            0.3487955629825592
+            0.7189127802848816,
+            0.7355143427848816
           ]
         },
         "S_between": {
-          "mean": 0.05799495801329613,
-          "median": 0.05776045098900795,
+          "mean": 0.11393703520298004,
+          "median": 0.11366476863622665,
           "ci95": [
-            0.04597581550478935,
-            0.0707065761089325
+            0.09976062923669815,
+            0.12869147956371307
           ]
         },
         "T": {
-          "mean": 0.4001131057739258,
-          "median": 0.3999953866004944,
+          "mean": 0.4753308892250061,
+          "median": 0.4750775098800659,
           "ci95": [
-            0.3857925236225128,
-            0.41498008370399475
+            0.45838481187820435,
+            0.4923328459262848
           ]
         },
         "P_canonical_rank_1": 1.0,
@@ -1211,378 +1211,378 @@
           "layer": 1,
           "S_CO": 0.7713216145833334,
           "S_MG": 0.3934733072916667,
-          "S_Context": 0.3261311848958333,
-          "S_between": 0.03040599822998047,
-          "T": 0.46656937069363064,
+          "S_Context": 0.7765299479166666,
+          "S_between": 0.09368444372106483,
+          "T": 0.5534238462094907,
           "canonical_partition_rank": 1
         },
         {
           "layer": 2,
           "S_CO": 0.5979817708333334,
           "S_MG": 0.3411356608072917,
-          "S_Context": 0.17376708984375,
-          "S_between": 0.043143042811640976,
-          "T": 0.3278184643498173,
+          "S_Context": 0.7345377604166666,
+          "S_between": 0.10024388631184895,
+          "T": 0.45764117770724827,
           "canonical_partition_rank": 1
         },
         {
           "layer": 3,
           "S_CO": 0.7685546875,
           "S_MG": 0.3312479654947917,
-          "S_Context": 0.20937093098958334,
-          "S_between": 0.0568531177662037,
-          "T": 0.3795380768952546,
+          "S_Context": 0.7965494791666666,
+          "S_between": 0.0766143798828125,
+          "T": 0.5555029975043403,
           "canonical_partition_rank": 1
         },
         {
           "layer": 4,
           "S_CO": 0.8299153645833334,
           "S_MG": 0.3196207682291667,
-          "S_Context": 0.2654622395833333,
-          "S_between": 0.07370122273763022,
-          "T": 0.3979649013943142,
+          "S_Context": 0.8439127604166666,
+          "S_between": 0.04774051242404514,
+          "T": 0.6167424519856771,
           "canonical_partition_rank": 1
         },
         {
           "layer": 5,
           "S_CO": 0.8235677083333334,
           "S_MG": 0.318115234375,
-          "S_Context": 0.2288818359375,
-          "S_between": 0.08746104770236546,
-          "T": 0.3693938785129124,
+          "S_Context": 0.83251953125,
+          "S_between": 0.05532511958369502,
+          "T": 0.6027423717357495,
           "canonical_partition_rank": 1
         },
         {
           "layer": 6,
           "S_CO": 0.8790690104166666,
           "S_MG": 0.2764078776041667,
-          "S_Context": 0.3095703125,
-          "S_between": 0.12690678349247686,
-          "T": 0.3614422833478009,
+          "S_Context": 0.8572591145833334,
+          "S_between": 0.07719915884512442,
+          "T": 0.5937128420229311,
           "canonical_partition_rank": 1
         },
         {
           "layer": 7,
           "S_CO": 0.85009765625,
           "S_MG": 0.21437581380208334,
-          "S_Context": 0.23139444986979166,
-          "S_between": 0.11465284559461807,
-          "T": 0.3173031277126736,
+          "S_Context": 0.79345703125,
+          "S_between": 0.09910074869791667,
+          "T": 0.5202094184027778,
           "canonical_partition_rank": 1
         },
         {
           "layer": 8,
           "S_CO": 0.8636067708333334,
           "S_MG": 0.2776692708333333,
-          "S_Context": 0.257965087890625,
-          "S_between": 0.10655608000578703,
-          "T": 0.35985762984664355,
+          "S_Context": 0.8224283854166666,
+          "S_between": 0.0972267433449074,
+          "T": 0.5573413990162037,
           "canonical_partition_rank": 1
         },
         {
           "layer": 9,
           "S_CO": 0.8819986979166666,
           "S_MG": 0.3272298177083333,
-          "S_Context": 0.28037770589192706,
-          "S_between": 0.16963252314814814,
-          "T": 0.32690288402416084,
+          "S_Context": 0.7942708333333334,
+          "S_between": 0.17405644169560186,
+          "T": 0.49377667462384267,
           "canonical_partition_rank": 1
         },
         {
           "layer": 10,
           "S_CO": 0.8787434895833334,
           "S_MG": 0.2906901041666667,
-          "S_Context": 0.25019582112630206,
-          "S_between": 0.12704594930013022,
-          "T": 0.34616385565863717,
+          "S_Context": 0.7664388020833334,
+          "S_between": 0.1214317039207176,
+          "T": 0.5238590946903936,
           "canonical_partition_rank": 1
         },
         {
           "layer": 11,
           "S_CO": 0.8624674479166666,
           "S_MG": 0.3117268880208333,
-          "S_Context": 0.2904256184895833,
-          "S_between": 0.13424710874204282,
-          "T": 0.3539595427336516,
+          "S_Context": 0.7862955729166666,
+          "S_between": 0.13331434461805555,
+          "T": 0.5201822916666666,
           "canonical_partition_rank": 1
         },
         {
           "layer": 12,
           "S_CO": 0.7980143229166666,
           "S_MG": 0.2694498697916667,
-          "S_Context": 0.21368408203125,
-          "S_between": 0.07635921902126737,
-          "T": 0.35069020589192706,
+          "S_Context": 0.6905924479166666,
+          "S_between": 0.08559898093894676,
+          "T": 0.5004198992693866,
           "canonical_partition_rank": 1
         },
         {
           "layer": 13,
           "S_CO": 0.8033854166666666,
           "S_MG": 0.287841796875,
-          "S_Context": 0.22283935546875,
-          "S_between": 0.07761019247549551,
-          "T": 0.36041199719464334,
+          "S_Context": 0.7130533854166666,
+          "S_between": 0.1003090187355324,
+          "T": 0.5011178475839119,
           "canonical_partition_rank": 1
         },
         {
           "layer": 14,
           "S_CO": 0.7877604166666666,
           "S_MG": 0.3248291015625,
-          "S_Context": 0.2088623046875,
-          "S_between": 0.05370302553530093,
-          "T": 0.3867809154369212,
+          "S_Context": 0.7268880208333334,
+          "S_between": 0.07823435465494792,
+          "T": 0.5349248250325521,
           "canonical_partition_rank": 1
         },
         {
           "layer": 15,
           "S_CO": 0.7666015625,
           "S_MG": 0.3631998697916667,
-          "S_Context": 0.22251383463541666,
-          "S_between": 0.048157992186369715,
-          "T": 0.4026137634559914,
+          "S_Context": 0.7439778645833334,
+          "S_between": 0.08932488935965077,
+          "T": 0.5352682095986826,
           "canonical_partition_rank": 1
         },
         {
           "layer": 16,
           "S_CO": 0.7373046875,
           "S_MG": 0.2591959635416667,
-          "S_Context": 0.21645100911458334,
-          "S_between": 0.011842727661132812,
-          "T": 0.3924744923909505,
+          "S_Context": 0.6984049479166666,
+          "S_between": 0.05489928634078414,
+          "T": 0.510069246645327,
           "canonical_partition_rank": 1
         },
         {
           "layer": 17,
           "S_CO": 0.7399088541666666,
           "S_MG": 0.2828369140625,
-          "S_Context": 0.2346776326497396,
-          "S_between": 0.021960011234989873,
-          "T": 0.39718112239131215,
+          "S_Context": 0.677734375,
+          "S_between": 0.07675206219708479,
+          "T": 0.4900746522126374,
           "canonical_partition_rank": 1
         },
         {
           "layer": 18,
           "S_CO": 0.6931966145833334,
           "S_MG": 0.2650146484375,
-          "S_Context": 0.239776611328125,
-          "S_between": 0.004118742766203704,
-          "T": 0.3952105486834491,
+          "S_Context": 0.6669921875,
+          "S_between": 0.06389179936161747,
+          "T": 0.47784268414532705,
           "canonical_partition_rank": 1
         },
         {
           "layer": 19,
           "S_CO": 0.6765950520833334,
           "S_MG": 0.2676188151041667,
-          "S_Context": 0.2274017333984375,
-          "S_between": 0.0013953314887152773,
-          "T": 0.3891432020399305,
+          "S_Context": 0.6429036458333334,
+          "S_between": 0.062340595104076246,
+          "T": 0.4666985759028683,
           "canonical_partition_rank": 1
         },
         {
           "layer": 20,
           "S_CO": 0.6604817708333334,
           "S_MG": 0.3035888671875,
-          "S_Context": 0.2748616536458333,
-          "S_between": 0.003689377396195023,
-          "T": 0.40928805315936057,
+          "S_Context": 0.6533203125,
+          "S_between": 0.06801011827256943,
+          "T": 0.47112019856770837,
           "canonical_partition_rank": 1
         },
         {
           "layer": 21,
           "S_CO": 0.6573893229166666,
           "S_MG": 0.3084309895833333,
-          "S_Context": 0.2843831380208333,
-          "S_between": 0.02749605532045718,
-          "T": 0.38923842818648724,
+          "S_Context": 0.6433919270833334,
+          "S_between": 0.09260756881148725,
+          "T": 0.4437965110496239,
           "canonical_partition_rank": 1
         },
         {
           "layer": 22,
           "S_CO": 0.65625,
           "S_MG": 0.353759765625,
-          "S_Context": 0.2950032552083333,
-          "S_between": 0.031604643221254704,
-          "T": 0.403399697056523,
+          "S_Context": 0.6461588541666666,
+          "S_between": 0.08512737132884839,
+          "T": 0.4669288352683738,
           "canonical_partition_rank": 1
         },
         {
           "layer": 23,
           "S_CO": 0.6432291666666666,
           "S_MG": 0.3668619791666667,
-          "S_Context": 0.32470703125,
-          "S_between": 0.03538082264087818,
-          "T": 0.40955190305356626,
+          "S_Context": 0.67138671875,
+          "S_between": 0.08890208491572626,
+          "T": 0.4715905366120515,
           "canonical_partition_rank": 1
         },
         {
           "layer": 24,
           "S_CO": 0.6344401041666666,
           "S_MG": 0.327392578125,
-          "S_Context": 0.3228352864583333,
-          "S_between": 0.031933819806134266,
-          "T": 0.39628883644386576,
+          "S_Context": 0.6922200520833334,
+          "S_between": 0.07646751403808594,
+          "T": 0.47488339742024743,
           "canonical_partition_rank": 1
         },
         {
           "layer": 25,
           "S_CO": 0.6189778645833334,
           "S_MG": 0.4187825520833333,
-          "S_Context": 0.3357747395833333,
-          "S_between": 0.057454709653501156,
-          "T": 0.4003903424298322,
+          "S_Context": 0.7291666666666666,
+          "S_between": 0.11340642858434608,
+          "T": 0.47556926586009846,
           "canonical_partition_rank": 1
         },
         {
           "layer": 26,
           "S_CO": 0.615234375,
           "S_MG": 0.471435546875,
-          "S_Context": 0.3355712890625,
-          "S_between": 0.08920524738453052,
-          "T": 0.3848751562613028,
+          "S_Context": 0.7462565104166666,
+          "S_between": 0.15370941162109375,
+          "T": 0.4572660658094617,
           "canonical_partition_rank": 1
         },
         {
           "layer": 27,
           "S_CO": 0.6476236979166666,
           "S_MG": 0.3527018229166667,
-          "S_Context": 0.348876953125,
-          "S_between": 0.0572292098292598,
-          "T": 0.39250494815685133,
+          "S_Context": 0.7587890625,
+          "S_between": 0.10534833978723597,
+          "T": 0.48102318799054183,
           "canonical_partition_rank": 1
         },
         {
           "layer": 28,
           "S_CO": 0.6398111979166666,
           "S_MG": 0.4203287760416667,
-          "S_Context": 0.3294270833333333,
-          "S_between": 0.04046023333514178,
-          "T": 0.4227287857620804,
+          "S_Context": 0.7547200520833334,
+          "S_between": 0.09208015159324363,
+          "T": 0.5128731904206452,
           "canonical_partition_rank": 1
         },
         {
           "layer": 29,
           "S_CO": 0.6277669270833334,
           "S_MG": 0.4430338541666667,
-          "S_Context": 0.3350423177083333,
-          "S_between": 0.08068762885199653,
-          "T": 0.3879267374674479,
+          "S_Context": 0.7722981770833334,
+          "S_between": 0.1428807576497396,
+          "T": 0.4714855617947049,
           "canonical_partition_rank": 1
         },
         {
           "layer": 30,
           "S_CO": 0.6170247395833334,
           "S_MG": 0.4325358072916667,
-          "S_Context": 0.3092041015625,
-          "S_between": 0.07162005813033492,
-          "T": 0.38130149134883173,
+          "S_Context": 0.7687174479166666,
+          "S_between": 0.12776558487503617,
+          "T": 0.47832708005551927,
           "canonical_partition_rank": 1
         },
         {
           "layer": 31,
           "S_CO": 0.6272786458333334,
           "S_MG": 0.4144694010416667,
-          "S_Context": 0.302001953125,
-          "S_between": 0.0631726582845052,
-          "T": 0.3847440083821615,
+          "S_Context": 0.7779947916666666,
+          "S_between": 0.11996346932870372,
+          "T": 0.48661747685185175,
           "canonical_partition_rank": 1
         },
         {
           "layer": 32,
           "S_CO": 0.6114908854166666,
           "S_MG": 0.41015625,
-          "S_Context": 0.3163655598958333,
-          "S_between": 0.06197554976851852,
-          "T": 0.38402868200231477,
+          "S_Context": 0.77685546875,
+          "S_between": 0.10803823117856626,
+          "T": 0.4914626368769892,
           "canonical_partition_rank": 1
         },
         {
           "layer": 33,
           "S_CO": 0.6012369791666666,
           "S_MG": 0.4068196614583333,
-          "S_Context": 0.3107503255208333,
-          "S_between": 0.046785707826967594,
-          "T": 0.3928166142216435,
+          "S_Context": 0.7776692708333334,
+          "S_between": 0.09313406767668547,
+          "T": 0.5021079028094257,
           "canonical_partition_rank": 1
         },
         {
           "layer": 34,
           "S_CO": 0.5962727864583334,
           "S_MG": 0.411865234375,
-          "S_Context": 0.3074544270833333,
-          "S_between": 0.05463042082609954,
-          "T": 0.38390039514612273,
+          "S_Context": 0.7760416666666666,
+          "S_between": 0.1030941715946904,
+          "T": 0.4916323909053096,
           "canonical_partition_rank": 1
         },
         {
           "layer": 35,
           "S_CO": 0.5885416666666666,
           "S_MG": 0.38671875,
-          "S_Context": 0.3128255208333333,
-          "S_between": 0.05396850020797165,
-          "T": 0.375393478958695,
+          "S_Context": 0.7828776041666666,
+          "S_between": 0.09342928285951968,
+          "T": 0.49261672408492474,
           "canonical_partition_rank": 1
         },
         {
           "layer": 36,
           "S_CO": 0.5633951822916666,
           "S_MG": 0.392578125,
-          "S_Context": 0.3069254557291667,
-          "S_between": 0.037915547688802086,
-          "T": 0.38305070665147567,
+          "S_Context": 0.7765299479166666,
+          "S_between": 0.07156174271195022,
+          "T": 0.5059393423574942,
           "canonical_partition_rank": 1
         },
         {
           "layer": 37,
           "S_CO": 0.5589192708333334,
           "S_MG": 0.4052734375,
-          "S_Context": 0.33251953125,
-          "S_between": 0.045864529079861105,
-          "T": 0.38637288411458337,
+          "S_Context": 0.7532552083333334,
+          "S_between": 0.07306784170645254,
+          "T": 0.4994147971824364,
           "canonical_partition_rank": 1
         },
         {
           "layer": 38,
           "S_CO": 0.5699869791666666,
           "S_MG": 0.3726399739583333,
-          "S_Context": 0.3186848958333333,
-          "S_between": 0.04530638235586661,
-          "T": 0.3751309006302445,
+          "S_Context": 0.7565104166666666,
+          "S_between": 0.06131405300564236,
+          "T": 0.5050650702582464,
           "canonical_partition_rank": 1
         },
         {
           "layer": 39,
           "S_CO": 0.5703125,
           "S_MG": 0.3943684895833333,
-          "S_Context": 0.3238118489583333,
-          "S_between": 0.053712915491174774,
-          "T": 0.37578469735604736,
+          "S_Context": 0.74951171875,
+          "S_between": 0.07300754829689309,
+          "T": 0.4983900211475513,
           "canonical_partition_rank": 1
         },
         {
           "layer": 40,
           "S_CO": 0.5071614583333334,
           "S_MG": 0.3850911458333333,
-          "S_Context": 0.3416341145833333,
-          "S_between": 0.06581511320891203,
-          "T": 0.34548045970775465,
+          "S_Context": 0.7350260416666666,
+          "S_between": 0.07485255488642939,
+          "T": 0.4675736603913484,
           "canonical_partition_rank": 1
         },
         {
           "layer": 41,
           "S_CO": 0.3961588541666667,
           "S_MG": 0.3192138671875,
-          "S_Context": 0.2986653645833333,
-          "S_between": 0.038118876792766425,
-          "T": 0.29989381851973357,
+          "S_Context": 0.7034505208333334,
+          "S_between": 0.03765869140625,
+          "T": 0.4352823893229167,
           "canonical_partition_rank": 1
         },
         {
           "layer": 42,
           "S_CO": 0.3909505208333333,
           "S_MG": 0.2808837890625,
-          "S_Context": 0.3166097005208333,
-          "S_between": 0.04930312545211227,
-          "T": 0.28017821135344323,
+          "S_Context": 0.697265625,
+          "S_between": 0.03689730608904803,
+          "T": 0.4194693388762297,
           "canonical_partition_rank": 1
         }
       ],

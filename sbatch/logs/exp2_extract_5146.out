@@ -1,0 +1,55 @@
+Model: Qwen2.5-7B-Instruct  expected_primary_layer=16  ids_key=direction_ids  Start: Fri 11 Sep 20:17:03 CEST 2026
+[Qwen2.5-7B-Instruct] loading tokenizer + model: /home/h24/baga0553/models/Qwen2.5-7B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:06<00:19,  6.40s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:13<00:13,  6.61s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:19<00:06,  6.40s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  6.34s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  6.39s/it]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+  [Qwen2.5-7B-Instruct][direction_ids] 100/3000 (ok=100 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 200/3000 (ok=200 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 300/3000 (ok=300 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 400/3000 (ok=400 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 500/3000 (ok=500 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 600/3000 (ok=600 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 700/3000 (ok=700 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 800/3000 (ok=800 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 900/3000 (ok=900 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1000/3000 (ok=1000 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1100/3000 (ok=1100 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1200/3000 (ok=1200 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1300/3000 (ok=1300 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1400/3000 (ok=1400 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1500/3000 (ok=1500 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1600/3000 (ok=1600 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1700/3000 (ok=1700 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1800/3000 (ok=1800 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 1900/3000 (ok=1900 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2000/3000 (ok=2000 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2100/3000 (ok=2100 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2200/3000 (ok=2200 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2300/3000 (ok=2300 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2400/3000 (ok=2400 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2500/3000 (ok=2500 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2600/3000 (ok=2600 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2700/3000 (ok=2700 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2800/3000 (ok=2800 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 2900/3000 (ok=2900 fail=0)
+  [Qwen2.5-7B-Instruct][direction_ids] 3000/3000 (ok=3000 fail=0)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_co_prefix_injection_activations.pt (300 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_co_refusal_suppression_activations.pt (300 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_co_persona_roleplay_activations.pt (300 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_mg_encoding_obfuscation_activations.pt (300 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_mg_payload_splitting_activations.pt (300 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_mg_distractors_negated_activations.pt (300 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_context_persona_activations.pt (300 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_context_authority_activations.pt (300 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_context_fictional_activations.pt (300 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_neutral_activations.pt (300 instructions)
+{
+  "result_status": "EXPERIMENT2_EXTRACTION_DONE",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "ids_key": "direction_ids",
+  "n_rows": 3000,
+  "n_ok": 3000,
+  "n_fail": 0,
+  "manifest_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output/Qwen2.5-7B-Instruct_direction_ids_experiment2_manifest.jsonl",
+  "output_dir": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_output"
+}
+Done: Fri 11 Sep 20:19:26 CEST 2026

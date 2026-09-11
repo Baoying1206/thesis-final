@@ -1,0 +1,118 @@
+Model: gemma-2-9b-it  Start: Fri 11 Sep 19:53:54 CEST 2026
+Loading model: /home/h24/baga0553/models/gemma-2-9b-it
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.32it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.34it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.33it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.46it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.41it/s]
+  generated 8/720
+  generated 16/720
+  generated 24/720
+  generated 32/720
+  generated 40/720
+  generated 48/720
+  generated 56/720
+  generated 64/720
+  generated 72/720
+  generated 80/720
+  generated 88/720
+  generated 96/720
+  generated 104/720
+  generated 112/720
+  generated 120/720
+  generated 128/720
+  generated 136/720
+  generated 144/720
+  generated 152/720
+  generated 160/720
+  generated 168/720
+  generated 176/720
+  generated 184/720
+  generated 192/720
+  generated 200/720
+  generated 208/720
+  generated 216/720
+  generated 224/720
+  generated 232/720
+  generated 240/720
+  generated 248/720
+  generated 256/720
+  generated 264/720
+  generated 272/720
+  generated 280/720
+  generated 288/720
+  generated 296/720
+  generated 304/720
+  generated 312/720
+  generated 320/720
+  generated 328/720
+  generated 336/720
+  generated 344/720
+  generated 352/720
+  generated 360/720
+  generated 368/720
+  generated 376/720
+  generated 384/720
+  generated 392/720
+  generated 400/720
+  generated 408/720
+  generated 416/720
+  generated 424/720
+  generated 432/720
+  generated 440/720
+  generated 448/720
+  generated 456/720
+  generated 464/720
+  generated 472/720
+  generated 480/720
+  generated 488/720
+  generated 496/720
+  generated 504/720
+  generated 512/720
+  generated 520/720
+  generated 528/720
+  generated 536/720
+  generated 544/720
+  generated 552/720
+  generated 560/720
+  generated 568/720
+  generated 576/720
+  generated 584/720
+  generated 592/720
+  generated 600/720
+  generated 608/720
+  generated 616/720
+  generated 624/720
+  generated 632/720
+  generated 640/720
+  generated 648/720
+  generated 656/720
+  generated 664/720
+  generated 672/720
+  generated 680/720
+  generated 688/720
+  generated 696/720
+  generated 704/720
+  generated 712/720
+  generated 720/720
+Loading WildGuard...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.74s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.29s/it]
+  judged 16/720
+  judged 32/720
+  judged 48/720
+  judged 64/720
+  judged 80/720
+  judged 96/720
+  judged 112/720
+  judged 128/720
+  judged 144/720
+  judged 160/720
+  judged 176/720
+  judged 192/720
+  judged 208/720
+  judged 224/720
+  judged 240/720
+  judged 256/720
+  judged 272/720
+  judged 288/720
+  judged 304/720
+  judged 320/720
+  judged 336/720
+  judged 352/720
+[2026-09-11T20:08:23.563] error: *** JOB 5143 ON slurm-node-gpu-01 CANCELLED AT 2026-09-11T20:08:23 DUE to SIGNAL Terminated ***
