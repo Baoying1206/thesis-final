@@ -123,6 +123,13 @@ real generations -- those don't exist yet). Every driver and every
 analysis script exists in code now; **only the tokenizer audit has
 actually run against real model data.** RQ1/RQ2 cannot be answered yet.
 
+**`sbatch/`**: real SLURM submission scripts, one per `slurm/`/`audits/`
+driver, conventions matched to `~/new_experiment/slurm/*.sh`
+(`partition=cpu`/`gpu`, `account=slurm-students`, the project's shared
+venv, `MODEL_IDX`-array submission for per-model jobs). None submitted
+yet -- `exp1_smoketest.sh` (Qwen, 4 rows) is the recommended first real
+GPU run, to validate the extraction code path before the full array.
+
 ## Relationship to `~/new_experiment`
 
 Every file under `data/source/`, `data/splits/`, `templates/imported/`,

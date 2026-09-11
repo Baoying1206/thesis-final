@@ -1062,3 +1062,16 @@ remain open, renumbered below. Remaining and new open items:
     3-8 exist only as code, exercised solely against `--dry-run` paths
     or fabricated test fixtures.** RQ1/RQ2 cannot yet be answered --
     that requires steps 3-7's real GPU output first.
+13. **(Round 11, new)** `sbatch/` added -- 9 real SLURM submission scripts
+    (one per `slurm/`/`audits/` driver, plus a Qwen-only 4-row smoke test
+    for the never-yet-run GPU extraction path), `--partition`/`--account`/
+    venv-activation conventions matched to `~/new_experiment/slurm/*.sh`
+    (read there for conventions, not copied file-for-file): `partition=cpu`
+    for tokenizer-only/analysis jobs, `partition=gpu` for
+    extraction/generation, `account=slurm-students`,
+    `source ~/thesis_experiment/Multilingual-Refusal/venv/bin/activate`,
+    output to `sbatch/logs/<name>_%j.out`, no `--time` limit (matching
+    that repo's own stated convention of leaving it unset unless a job
+    has previously timed out), and the same `MODEL_IDX`
+    array-plus-`--export` submission pattern for per-model jobs. None of
+    these submission scripts has been submitted yet.
