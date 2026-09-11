@@ -399,6 +399,17 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
         torch.save(per_instruction, activation_path)
         print(f"  saved {activation_path} ({len(per_instruction)} instructions)", file=sys.stderr)
 
+    # Free the main model BEFORE loading WildGuard -- a real cluster run
+    # (Qwen validation_ids) showed "Some parameters are on the meta
+    # device because they were offloaded to the cpu" when WildGuard was
+    # loaded while the main model was still resident, because this used
+    # to happen after judge_responses(). Judging still completed that
+    # time, but this is exactly the kind of silent degradation (slow,
+    # or outright OOM on a bigger model) that should be fixed on sight,
+    # not left to fail later on Llama/Gemma.
+    del model
+    torch.cuda.empty_cache()
+
     judge_path = None
     if (ids_key == "validation_ids" or force_full_generation) and judge_input_rows:
         print(f"[{model_alias}] judging {len(judge_input_rows)} final responses with WildGuard", file=sys.stderr)
@@ -412,9 +423,6 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
                 jr["condition"] = src["condition"]
                 jr["instruction_id"] = src["instruction_id"]
                 jf.write(json.dumps(jr, ensure_ascii=False) + "\n")
-
-    del model
-    torch.cuda.empty_cache()
 
     print(json.dumps({
         "result_status": ("STUDY_B_PILOT_DONE" if is_pilot else "STUDY_B_EXTRACTION_DONE"),
