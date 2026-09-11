@@ -425,8 +425,12 @@ computed directly per Sec 6/Sec 7's existing per-condition formulas.
   optimize for jailbreak effectiveness. This rule is an instance of, not
   an exception to, the standing "no tuning by outcome" discipline in
   Sec 5.2.
-- Not run this round -- no GPU, no generation, no judge call has
-  occurred. This subsection specifies the design only.
+- **`READY_FOR_PILOT`: CONFIRMED 2026-09-11**, by the user, following
+  Sec 11.1's all-3-model `TOKEN_AUDIT_PASS` on the cluster (Round 8).
+  This is the first time this status has been set anywhere in this
+  repository -- it authorizes building and running the pilot itself,
+  which had not started as of this confirmation (no driver script
+  exists yet in this repo; see Sec 13).
 
 ### 5.6 Frozen render-time transforms (`mg_encoding_obfuscation`, `mg_payload_splitting`)
 
@@ -777,17 +781,33 @@ proxy (local tokenizer_config.json hash, or the resolved HF revision).
 No length equalization -- attack conditions are never padded/trimmed to
 match `neutral`.
 
-**Results as of Round 7** (run locally, HF-hub-hosted tokenizers via the
-env-var override, not the frozen cluster paths):
-Qwen2.5-7B-Instruct -- `TOKEN_AUDIT_PASS`, `pilot_forbidden: false`, all
-10/10 conditions passed, no truncation, no ambiguity, positions never
-coincided. Meta-Llama-3.1-8B-Instruct and gemma-2-9b-it --
-`TOKENIZER_LOAD_FAILED` (401, gated HF repos, no token on this machine)
--- **unverified**, not a script defect. Overall (this machine):
-`TOKEN_AUDIT_FAIL`, `pilot_forbidden: true`. **Running this same script
-on the cluster (default paths, no overrides needed) to get a real
-Llama/Gemma result is the next concrete step before any
-`READY_FOR_PILOT` decision.**
+**Round 7 (local, HF-hub-hosted Qwen only)**: `TOKEN_AUDIT_PASS`,
+10/10 conditions, no truncation/ambiguity, positions never coincided.
+Meta-Llama-3.1-8B-Instruct and gemma-2-9b-it -- `TOKENIZER_LOAD_FAILED`
+(401, gated HF repos, no token on this machine) -- unverified, not a
+script defect.
+
+**Round 8 (real cluster run, all 3 models -- CONFIRMED,
+`data/manifests/real_tokenizer_boundary_audit_cluster_round8.json`)**:
+run on `slurm-node-cpu-03` (`srun --mem=16G --pty bash`, no GPU needed),
+venv `/home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv`,
+`transformers` 4.44.2, frozen `MODEL_TOKENIZER_SOURCES` local paths (no
+overrides). **All 3 models: `TOKEN_AUDIT_PASS`, `pilot_forbidden: false`,
+10/10 conditions each, positions never coincided, no truncation, no
+ambiguity** -- verified authoritative by re-reading the output file
+directly (`d['result_status']`/`d['pilot_forbidden']`), since the raw
+terminal paste of this run showed a contradictory top-level
+`TOKEN_AUDIT_FAIL` alongside all-PASS per-model results -- a
+terminal/copy-paste display artifact (confirmed not a real script bug
+by inspecting the committed aggregation logic), not a finding about the
+tokenizers themselves. Total token counts per condition, per model
+(`neutral` / `mg_encoding_obfuscation` largest delta / `mg_payload_splitting`):
+Qwen 80 / 155 (+75) / 117 (+37); Llama 86 / 159 (+73) / 123 (+37);
+Gemma 67 / 128 (+61) / 108 (+41) -- all 3 models' deltas are directionally
+consistent (encoding_obfuscation costs the most tokens, matching its
+Base64 expansion; payload_splitting next). **This step (Sec 11.1) is
+now complete for all 3 models -- the next decision is `READY_FOR_PILOT`
+(Sec 5.5, Sec 13).**
 
 ## 12. Compute estimate (planning only, not authorized to run)
 
@@ -830,13 +850,8 @@ remain open, renumbered below. Remaining and new open items:
    safeguard against context semantics leaking into the shared CO/MG/
    neutral setup/ack, or vice versa; the heuristic is a regression
    trip-wire for future edits, not a substitute for review.
-3. Whether the pilot (Sec 5.5) should run now that the audit can reach
-   `READY_FOR_TOKEN_AUDIT`, or should wait for a further explicit
-   `READY_FOR_PILOT` human decision, is still open by design --
-   `READY_FOR_TOKEN_AUDIT` deliberately certifies only structural/
-   transform/ack correctness, not a decision that the template wording
-   itself (in particular the 3 development-stage Context `setup_user`
-   texts, Sec 5.1) is ready to be run against a model.
+3. ~~Whether the pilot should run now or wait for `READY_FOR_PILOT`~~ --
+   **resolved 2026-09-11: `READY_FOR_PILOT` confirmed (Sec 5.5)**.
 4. `mg_encoding_obfuscation`/`mg_payload_splitting`'s frozen transforms
    (Sec 5.6) are this study's own new specification, not a port of the
    single-turn study's `02_build_templated_data.py` (not migrated,
@@ -856,7 +871,21 @@ remain open, renumbered below. Remaining and new open items:
    again (e.g. to re-verify `READY_FOR_TOKEN_AUDIT` after any future
    template edit), it must be recovered from this repo's pre-Round-6 git
    history or re-implemented from Sec 11's written description; this
-   does not happen automatically. The real-tokenizer boundary audit
-   (`audits/audit_real_tokenizer_boundary.py`, Sec 11.1) IS still
-   present and runnable -- it just hasn't been run on the cluster yet,
-   which is the actual next step, not a recovery task.
+   does not happen automatically.
+7. **(Round 8, resolved)** ~~The real-tokenizer boundary audit hasn't
+   been run on the cluster~~ -- run on `slurm-node-cpu-03`, all 3 models
+   `TOKEN_AUDIT_PASS` (Sec 11.1,
+   `data/manifests/real_tokenizer_boundary_audit_cluster_round8.json`).
+8. **(Round 8, new, blocking)** **No pilot driver script exists yet in
+   this repository.** `READY_FOR_PILOT` (Sec 5.5) authorizes building
+   and running the pilot; it does not mean the code to do so already
+   exists. Nothing in this repo loads a model, generates a response, or
+   calls WildGuard -- every round so far has been explicitly scoped to
+   exclude that (`src/final_condition_loader.py` only renders
+   `messages`, `src/canonical_transforms.py` only does text transforms,
+   `audits/audit_real_tokenizer_boundary.py` only loads tokenizers). A
+   new pilot driver (load Llama, render the 10 conditions for the 30
+   fixed `direction_ids` via `final_condition_loader.render_messages()`,
+   generate, call WildGuard, tag every record `"pilot": true` /
+   `"result_status": "PILOT_NON_RESULT"` per Sec 5.5/9.3/9.4) has not
+   been authorized or written in any round to date.

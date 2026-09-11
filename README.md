@@ -52,11 +52,8 @@ instructions are read from `data/source/sampled_prompts_en_only.json`
 `data/source/sampled_prompts.json` still carries the full 9-language
 `instructions` field inherited from the source pool; it is kept
 unmodified purely as the byte-identical migration-provenance record and
-no code here reads it (`FINAL_STUDY_PROTOCOL.md` Sec 2). `READY_FOR_PILOT`
-remains a separate, later, human-only decision
-pending a real-tokenizer boundary check on the cluster and the pilot
-itself (`FINAL_STUDY_PROTOCOL.md` Sec 5.5). See `FINAL_STUDY_PROTOCOL.md`
-Sec 13 for remaining open items.
+no code here reads it (`FINAL_STUDY_PROTOCOL.md` Sec 2). See
+`FINAL_STUDY_PROTOCOL.md` Sec 13 for remaining open items.
 
 **Round 6**: the repo was simplified to just `data/`, `templates/`,
 `src/`, `slurm/` plus this file, `FINAL_STUDY_PROTOCOL.md`, and
@@ -69,11 +66,19 @@ history if needed again.
 
 **Round 7**: `audits/audit_real_tokenizer_boundary.py` was restored and
 is kept permanently -- it's needed to actually run the real-tokenizer
-boundary check (`FINAL_STUDY_PROTOCOL.md` Sec 11.1). Locally it has only
-been validated against Qwen2.5-7B-Instruct (via HF Hub, `TOKEN_AUDIT_PASS`,
-10/10 conditions); Llama-3.1-8B-Instruct and gemma-2-9b-it are gated on
-HF and untested here -- **running this script on the cluster is the
-next concrete step**.
+boundary check (`FINAL_STUDY_PROTOCOL.md` Sec 11.1). Locally it was only
+validated against Qwen2.5-7B-Instruct (via HF Hub).
+
+**Round 8**: run for real on the cluster against all 3 frozen local
+tokenizer paths -- **`TOKEN_AUDIT_PASS` for Qwen2.5-7B-Instruct,
+Meta-Llama-3.1-8B-Instruct, and gemma-2-9b-it**, 10/10 conditions each
+(`FINAL_STUDY_PROTOCOL.md` Sec 11.1,
+`data/manifests/real_tokenizer_boundary_audit_cluster_round8.json`).
+**`READY_FOR_PILOT` confirmed 2026-09-11** (`FINAL_STUDY_PROTOCOL.md`
+Sec 5.5) -- the first time this status has been set in this repo. **No
+pilot driver script exists yet** -- nothing here loads a model,
+generates, or calls WildGuard; building that driver is the next
+concrete task (`FINAL_STUDY_PROTOCOL.md` Sec 13).
 
 ## Relationship to `~/new_experiment`
 

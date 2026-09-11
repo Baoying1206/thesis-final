@@ -1,0 +1,91 @@
+{
+  "result_status": "TOKEN_AUDIT_PASS",
+  "pilot_forbidden": false,
+  "template_path": "/home/h24/baga0553/thesis-final/audits/../templates/final_10_condition_v1.json",
+  "dummy_instruction_used": "AUDIT_PLACEHOLDER_INSTRUCTION_TEXT_NOT_REAL_DATA_ROUND5_TOKEN_BOUNDARY_CHECK",
+  "run_context": "Cluster (slurm-node-cpu-03, srun --mem=16G --pty bash), venv /home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv, transformers 4.44.2, frozen MODEL_TOKENIZER_SOURCES local paths (no env-var overrides). Verified authoritative via a separate `python3 -c \"import json; ...\"` re-read of the output file (result_status/pilot_forbidden confirmed TOKEN_AUDIT_PASS / False), since the raw terminal paste of this run appeared to show a contradictory top-level TOKEN_AUDIT_FAIL alongside all-PASS per-model results -- a terminal/copy-paste display artifact, not a real script inconsistency.",
+  "checked_at": "2026-09-11",
+  "models": {
+    "Qwen2.5-7B-Instruct": {
+      "model_alias": "Qwen2.5-7B-Instruct",
+      "tokenizer_path": "/home/h24/baga0553/models/Qwen2.5-7B-Instruct",
+      "tokenizer_path_origin": "frozen cluster path (MODEL_TOKENIZER_SOURCES)",
+      "result_status": "TOKEN_AUDIT_PASS",
+      "pilot_forbidden": false,
+      "tokenizer_class": "Qwen2TokenizerFast",
+      "tokenizer_name_or_path": "/home/h24/baga0553/models/Qwen2.5-7B-Instruct",
+      "transformers_version": "4.44.2",
+      "tokenizer_version_proxy": {
+        "kind": "local_file_sha256",
+        "file": "tokenizer_config.json",
+        "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583"
+      },
+      "conditions": {
+        "neutral": {"total_token_count": 80, "t_generation_boundary": {"index": 79, "token_id": 198}, "t_final_user_end": {"index": 74, "token_id": 11780}, "positions_coincide": false, "delta_tokens_vs_neutral": 0},
+        "co_prefix_injection": {"total_token_count": 98, "t_generation_boundary": {"index": 97, "token_id": 198}, "t_final_user_end": {"index": 92, "token_id": 11780}, "positions_coincide": false, "delta_tokens_vs_neutral": 18},
+        "co_refusal_suppression": {"total_token_count": 110, "t_generation_boundary": {"index": 109, "token_id": 198}, "t_final_user_end": {"index": 104, "token_id": 11780}, "positions_coincide": false, "delta_tokens_vs_neutral": 30},
+        "co_persona_roleplay": {"total_token_count": 106, "t_generation_boundary": {"index": 105, "token_id": 198}, "t_final_user_end": {"index": 100, "token_id": 11780}, "positions_coincide": false, "delta_tokens_vs_neutral": 26},
+        "mg_encoding_obfuscation": {"total_token_count": 155, "t_generation_boundary": {"index": 154, "token_id": 198}, "t_final_user_end": {"index": 149, "token_id": 418}, "positions_coincide": false, "delta_tokens_vs_neutral": 75, "transform_provenance": {"transform": "encode_base64_utf8", "input_sha256": "7866e0a1b603f25cdbf57b0eb22448e7c77ea4632e24354b4c91b58ef5d757e0", "output_sha256": "4b060af9457f84cdcce8067367704c2d681108c15140c7013ae27679a9a2eecf"}},
+        "mg_payload_splitting": {"total_token_count": 117, "t_generation_boundary": {"index": 116, "token_id": 198}, "t_final_user_end": {"index": 111, "token_id": 13}, "positions_coincide": false, "delta_tokens_vs_neutral": 37, "transform_provenance": {"transform": "split_payload_midpoint", "normalized_sha256": "b0073e6948a245aa5d02269bd102914002818f341e2fad5bf46c2439331b5f66", "fragment_a_sha256": "3e5cf923e67ecc767cd33d8e5e5e6f49ea019f417fce20a651de76f759967838", "fragment_b_sha256": "fe6bdb9e88212276e30cb47da856337b7cb06f97be579dd6551575adfb69ad50"}},
+        "mg_distractors_negated": {"total_token_count": 97, "t_generation_boundary": {"index": 96, "token_id": 198}, "t_final_user_end": {"index": 91, "token_id": 13}, "positions_coincide": false, "delta_tokens_vs_neutral": 17},
+        "context_persona": {"total_token_count": 84, "t_generation_boundary": {"index": 83, "token_id": 198}, "t_final_user_end": {"index": 78, "token_id": 11780}, "positions_coincide": false, "delta_tokens_vs_neutral": 4},
+        "context_authority": {"total_token_count": 83, "t_generation_boundary": {"index": 82, "token_id": 198}, "t_final_user_end": {"index": 77, "token_id": 11780}, "positions_coincide": false, "delta_tokens_vs_neutral": 3},
+        "context_fictional": {"total_token_count": 86, "t_generation_boundary": {"index": 85, "token_id": 198}, "t_final_user_end": {"index": 80, "token_id": 11780}, "positions_coincide": false, "delta_tokens_vs_neutral": 6}
+      }
+    },
+    "Meta-Llama-3.1-8B-Instruct": {
+      "model_alias": "Meta-Llama-3.1-8B-Instruct",
+      "tokenizer_path": "/home/h24/baga0553/models/Llama-3.1-8B-Instruct",
+      "tokenizer_path_origin": "frozen cluster path (MODEL_TOKENIZER_SOURCES)",
+      "result_status": "TOKEN_AUDIT_PASS",
+      "pilot_forbidden": false,
+      "tokenizer_class": "PreTrainedTokenizerFast",
+      "tokenizer_name_or_path": "/home/h24/baga0553/models/Llama-3.1-8B-Instruct",
+      "transformers_version": "4.44.2",
+      "tokenizer_version_proxy": {
+        "kind": "local_file_sha256",
+        "file": "tokenizer_config.json",
+        "sha256": "177c7b61e616fecb84c17ce0591acb92c6c4d60e9ac5ababfb940ff23bbcd424"
+      },
+      "conditions": {
+        "neutral": {"total_token_count": 86, "t_generation_boundary": {"index": 85, "token_id": 271}, "t_final_user_end": {"index": 80, "token_id": 12042}, "positions_coincide": false, "delta_tokens_vs_neutral": 0},
+        "co_prefix_injection": {"total_token_count": 104, "t_generation_boundary": {"index": 103, "token_id": 271}, "t_final_user_end": {"index": 98, "token_id": 12042}, "positions_coincide": false, "delta_tokens_vs_neutral": 18},
+        "co_refusal_suppression": {"total_token_count": 116, "t_generation_boundary": {"index": 115, "token_id": 271}, "t_final_user_end": {"index": 110, "token_id": 12042}, "positions_coincide": false, "delta_tokens_vs_neutral": 30},
+        "co_persona_roleplay": {"total_token_count": 112, "t_generation_boundary": {"index": 111, "token_id": 271}, "t_final_user_end": {"index": 106, "token_id": 12042}, "positions_coincide": false, "delta_tokens_vs_neutral": 26},
+        "mg_encoding_obfuscation": {"total_token_count": 159, "t_generation_boundary": {"index": 158, "token_id": 271}, "t_final_user_end": {"index": 153, "token_id": 419}, "positions_coincide": false, "delta_tokens_vs_neutral": 73, "transform_provenance": {"transform": "encode_base64_utf8", "input_sha256": "7866e0a1b603f25cdbf57b0eb22448e7c77ea4632e24354b4c91b58ef5d757e0", "output_sha256": "4b060af9457f84cdcce8067367704c2d681108c15140c7013ae27679a9a2eecf"}},
+        "mg_payload_splitting": {"total_token_count": 123, "t_generation_boundary": {"index": 122, "token_id": 271}, "t_final_user_end": {"index": 117, "token_id": 13}, "positions_coincide": false, "delta_tokens_vs_neutral": 37, "transform_provenance": {"transform": "split_payload_midpoint", "normalized_sha256": "b0073e6948a245aa5d02269bd102914002818f341e2fad5bf46c2439331b5f66", "fragment_a_sha256": "3e5cf923e67ecc767cd33d8e5e5e6f49ea019f417fce20a651de76f759967838", "fragment_b_sha256": "fe6bdb9e88212276e30cb47da856337b7cb06f97be579dd6551575adfb69ad50"}},
+        "mg_distractors_negated": {"total_token_count": 103, "t_generation_boundary": {"index": 102, "token_id": 271}, "t_final_user_end": {"index": 97, "token_id": 13}, "positions_coincide": false, "delta_tokens_vs_neutral": 17},
+        "context_persona": {"total_token_count": 90, "t_generation_boundary": {"index": 89, "token_id": 271}, "t_final_user_end": {"index": 84, "token_id": 12042}, "positions_coincide": false, "delta_tokens_vs_neutral": 4},
+        "context_authority": {"total_token_count": 89, "t_generation_boundary": {"index": 88, "token_id": 271}, "t_final_user_end": {"index": 83, "token_id": 12042}, "positions_coincide": false, "delta_tokens_vs_neutral": 3},
+        "context_fictional": {"total_token_count": 92, "t_generation_boundary": {"index": 91, "token_id": 271}, "t_final_user_end": {"index": 86, "token_id": 12042}, "positions_coincide": false, "delta_tokens_vs_neutral": 6}
+      }
+    },
+    "gemma-2-9b-it": {
+      "model_alias": "gemma-2-9b-it",
+      "tokenizer_path": "/home/h24/baga0553/models/gemma-2-9b-it",
+      "tokenizer_path_origin": "frozen cluster path (MODEL_TOKENIZER_SOURCES)",
+      "result_status": "TOKEN_AUDIT_PASS",
+      "pilot_forbidden": false,
+      "tokenizer_class": "GemmaTokenizerFast",
+      "tokenizer_name_or_path": "/home/h24/baga0553/models/gemma-2-9b-it",
+      "transformers_version": "4.44.2",
+      "tokenizer_version_proxy": {
+        "kind": "local_file_sha256",
+        "file": "tokenizer_config.json",
+        "sha256": "cb32b7929c62608d46572e813112b3ad8a841fb98fdd6a4da8559e368a951c89"
+      },
+      "conditions": {
+        "neutral": {"total_token_count": 67, "t_generation_boundary": {"index": 66, "token_id": 108}, "t_final_user_end": {"index": 61, "token_id": 17910}, "positions_coincide": false, "delta_tokens_vs_neutral": 0},
+        "co_prefix_injection": {"total_token_count": 85, "t_generation_boundary": {"index": 84, "token_id": 108}, "t_final_user_end": {"index": 79, "token_id": 17910}, "positions_coincide": false, "delta_tokens_vs_neutral": 18},
+        "co_refusal_suppression": {"total_token_count": 97, "t_generation_boundary": {"index": 96, "token_id": 108}, "t_final_user_end": {"index": 91, "token_id": 17910}, "positions_coincide": false, "delta_tokens_vs_neutral": 30},
+        "co_persona_roleplay": {"total_token_count": 93, "t_generation_boundary": {"index": 92, "token_id": 108}, "t_final_user_end": {"index": 87, "token_id": 17910}, "positions_coincide": false, "delta_tokens_vs_neutral": 26},
+        "mg_encoding_obfuscation": {"total_token_count": 128, "t_generation_boundary": {"index": 127, "token_id": 108}, "t_final_user_end": {"index": 122, "token_id": 1310}, "positions_coincide": false, "delta_tokens_vs_neutral": 61, "transform_provenance": {"transform": "encode_base64_utf8", "input_sha256": "7866e0a1b603f25cdbf57b0eb22448e7c77ea4632e24354b4c91b58ef5d757e0", "output_sha256": "4b060af9457f84cdcce8067367704c2d681108c15140c7013ae27679a9a2eecf"}},
+        "mg_payload_splitting": {"total_token_count": 108, "t_generation_boundary": {"index": 107, "token_id": 108}, "t_final_user_end": {"index": 102, "token_id": 235265}, "positions_coincide": false, "delta_tokens_vs_neutral": 41, "transform_provenance": {"transform": "split_payload_midpoint", "normalized_sha256": "b0073e6948a245aa5d02269bd102914002818f341e2fad5bf46c2439331b5f66", "fragment_a_sha256": "3e5cf923e67ecc767cd33d8e5e5e6f49ea019f417fce20a651de76f759967838", "fragment_b_sha256": "fe6bdb9e88212276e30cb47da856337b7cb06f97be579dd6551575adfb69ad50"}},
+        "mg_distractors_negated": {"total_token_count": 85, "t_generation_boundary": {"index": 84, "token_id": 108}, "t_final_user_end": {"index": 79, "token_id": 235265}, "positions_coincide": false, "delta_tokens_vs_neutral": 18},
+        "context_persona": {"total_token_count": 71, "t_generation_boundary": {"index": 70, "token_id": 108}, "t_final_user_end": {"index": 65, "token_id": 17910}, "positions_coincide": false, "delta_tokens_vs_neutral": 4},
+        "context_authority": {"total_token_count": 69, "t_generation_boundary": {"index": 68, "token_id": 108}, "t_final_user_end": {"index": 63, "token_id": 17910}, "positions_coincide": false, "delta_tokens_vs_neutral": 2},
+        "context_fictional": {"total_token_count": 74, "t_generation_boundary": {"index": 73, "token_id": 108}, "t_final_user_end": {"index": 68, "token_id": 17910}, "positions_coincide": false, "delta_tokens_vs_neutral": 7}
+      }
+    }
+  }
+}
