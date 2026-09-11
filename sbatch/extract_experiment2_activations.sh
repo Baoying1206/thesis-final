@@ -30,15 +30,16 @@ MODEL_ALIAS=${MODEL_ALIASES[$MODEL_IDX]}
 PRIMARY_LAYER=${PRIMARY_LAYERS[$MODEL_IDX]}
 IDS_KEY=${IDS_KEY:-direction_ids}   # direction_ids | validation_ids
 
-echo "Model: $MODEL_ALIAS  primary_layer=$PRIMARY_LAYER  ids_key=$IDS_KEY  Start: $(date)"
+echo "Model: $MODEL_ALIAS  expected_primary_layer=$PRIMARY_LAYER  ids_key=$IDS_KEY  Start: $(date)"
 
 cd ~/thesis-final
 mkdir -p sbatch/logs
 source ~/thesis_experiment/Multilingual-Refusal/venv/bin/activate
 
+# extract_experiment2_activations.py takes no --primary-layer flag -- see
+# extract_experiment1_activations.sh's comment for why.
 python3 slurm/extract_experiment2_activations.py \
     --model-alias   "$MODEL_ALIAS" \
-    --primary-layer "$PRIMARY_LAYER" \
     --ids-key       "$IDS_KEY"
 
 echo "Done: $(date)"

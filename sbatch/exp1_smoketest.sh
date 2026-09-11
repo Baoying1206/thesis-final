@@ -21,10 +21,10 @@ echo "=== torch/cuda check ==="
 python3 -c "import torch; print('torch', torch.__version__, 'cuda available:', torch.cuda.is_available())"
 
 echo "=== dry-run (tokenizer only) ==="
-python3 slurm/extract_experiment1_activations.py --model-alias Qwen2.5-7B-Instruct --primary-layer 16 --dry-run
+python3 slurm/extract_experiment1_activations.py --model-alias Qwen2.5-7B-Instruct --dry-run
 
 echo "=== small real GPU extraction test (4 rows only) ==="
-python3 slurm/extract_experiment1_activations.py --model-alias Qwen2.5-7B-Instruct --primary-layer 16 --limit 4
+python3 slurm/extract_experiment1_activations.py --model-alias Qwen2.5-7B-Instruct --limit 4
 
 echo "=== output check ==="
 ls -la slurm/experiment1_output/

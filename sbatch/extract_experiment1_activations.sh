@@ -31,14 +31,17 @@ MODEL_IDX=${MODEL_IDX:-0}
 MODEL_ALIAS=${MODEL_ALIASES[$MODEL_IDX]}
 PRIMARY_LAYER=${PRIMARY_LAYERS[$MODEL_IDX]}
 
-echo "Model: $MODEL_ALIAS  primary_layer=$PRIMARY_LAYER  Start: $(date)"
+echo "Model: $MODEL_ALIAS  expected_primary_layer=$PRIMARY_LAYER  Start: $(date)"
 
 cd ~/thesis-final
 mkdir -p sbatch/logs
 source ~/thesis_experiment/Multilingual-Refusal/venv/bin/activate
 
+# extract_experiment1_activations.py takes no --primary-layer flag -- it
+# derives the layer itself from MODEL_TOKENIZER_SOURCES (same values as
+# PRIMARY_LAYERS above) and asserts it against the model's real config at
+# load time. PRIMARY_LAYER here is echoed above only, for log sanity-checking.
 python3 slurm/extract_experiment1_activations.py \
-    --model-alias   "$MODEL_ALIAS" \
-    --primary-layer "$PRIMARY_LAYER"
+    --model-alias   "$MODEL_ALIAS"
 
 echo "Done: $(date)"
