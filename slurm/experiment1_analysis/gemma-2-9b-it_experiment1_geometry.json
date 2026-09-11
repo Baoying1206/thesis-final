@@ -1,0 +1,1322 @@
+{
+  "result_status": "EXPERIMENT1_GEOMETRY_ANALYSIS",
+  "model_alias": "gemma-2-9b-it",
+  "primary_layer": 25,
+  "taxonomy_version": "wei_canonical_v2",
+  "CO_mechs": [
+    "prefix_injection",
+    "refusal_suppression",
+    "persona_roleplay"
+  ],
+  "MG_mechs": [
+    "encoding_obfuscation",
+    "payload_splitting",
+    "distractors_negated"
+  ],
+  "primary_position": "t_generation_boundary",
+  "sensitivity_position": "t_final_user_end",
+  "by_position": {
+    "t_generation_boundary": {
+      "n_instructions": 300,
+      "n_instruction_clusters": 298,
+      "cosine_matrix": {
+        "prefix_injection": {
+          "prefix_injection": 1.0,
+          "refusal_suppression": 0.417724609375,
+          "persona_roleplay": 0.2283935546875,
+          "encoding_obfuscation": 0.4375,
+          "payload_splitting": 0.422119140625,
+          "distractors_negated": 0.52880859375
+        },
+        "refusal_suppression": {
+          "prefix_injection": 0.417724609375,
+          "refusal_suppression": 1.0,
+          "persona_roleplay": 0.5029296875,
+          "encoding_obfuscation": 0.356201171875,
+          "payload_splitting": 0.341796875,
+          "distractors_negated": 0.46484375
+        },
+        "persona_roleplay": {
+          "prefix_injection": 0.2283935546875,
+          "refusal_suppression": 0.5029296875,
+          "persona_roleplay": 1.0,
+          "encoding_obfuscation": 0.064453125,
+          "payload_splitting": 0.116455078125,
+          "distractors_negated": 0.1983642578125
+        },
+        "encoding_obfuscation": {
+          "prefix_injection": 0.4375,
+          "refusal_suppression": 0.356201171875,
+          "persona_roleplay": 0.064453125,
+          "encoding_obfuscation": 1.0,
+          "payload_splitting": 0.7451171875,
+          "distractors_negated": 0.587890625
+        },
+        "payload_splitting": {
+          "prefix_injection": 0.422119140625,
+          "refusal_suppression": 0.341796875,
+          "persona_roleplay": 0.116455078125,
+          "encoding_obfuscation": 0.7451171875,
+          "payload_splitting": 0.99951171875,
+          "distractors_negated": 0.56591796875
+        },
+        "distractors_negated": {
+          "prefix_injection": 0.52880859375,
+          "refusal_suppression": 0.46484375,
+          "persona_roleplay": 0.1983642578125,
+          "encoding_obfuscation": 0.587890625,
+          "payload_splitting": 0.56591796875,
+          "distractors_negated": 1.0
+        }
+      },
+      "S_CO": 0.3830159505208333,
+      "S_MG": 0.6329752604166666,
+      "S_between": 0.3256157769097222,
+      "Delta_CO": 0.057400173611111105,
+      "Delta_MG": 0.3073594835069444,
+      "T_taxonomy": 0.1823798285590278,
+      "canonical_partition_rank": 1,
+      "n_partitions": 10,
+      "mean_norms": {
+        "prefix_injection": {
+          "mean_norm": 193.5,
+          "std_norm": 29.703125,
+          "min_norm": 106.375,
+          "max_norm": 261.5
+        },
+        "refusal_suppression": {
+          "mean_norm": 233.875,
+          "std_norm": 16.1875,
+          "min_norm": 155.25,
+          "max_norm": 274.0
+        },
+        "persona_roleplay": {
+          "mean_norm": 144.375,
+          "std_norm": 19.421875,
+          "min_norm": 90.5,
+          "max_norm": 224.875
+        },
+        "encoding_obfuscation": {
+          "mean_norm": 274.25,
+          "std_norm": 13.515625,
+          "min_norm": 239.375,
+          "max_norm": 310.5
+        },
+        "payload_splitting": {
+          "mean_norm": 274.0,
+          "std_norm": 17.078125,
+          "min_norm": 220.625,
+          "max_norm": 314.25
+        },
+        "distractors_negated": {
+          "mean_norm": 241.875,
+          "std_norm": 23.046875,
+          "min_norm": 153.0,
+          "max_norm": 293.0
+        }
+      },
+      "reliability": {
+        "prefix_injection": {
+          "split_half_cosine_mean": 0.998166024684906,
+          "split_half_cosine_median": 0.998046875,
+          "split_half_cosine_ci95": [
+            0.99658203125,
+            0.9990234375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "refusal_suppression": {
+          "split_half_cosine_mean": 0.996951162815094,
+          "split_half_cosine_median": 0.99755859375,
+          "split_half_cosine_ci95": [
+            0.99462890625,
+            0.99853515625
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "persona_roleplay": {
+          "split_half_cosine_mean": 0.9952207207679749,
+          "split_half_cosine_median": 0.99560546875,
+          "split_half_cosine_ci95": [
+            0.99072265625,
+            0.99755859375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "encoding_obfuscation": {
+          "split_half_cosine_mean": 0.9984814524650574,
+          "split_half_cosine_median": 0.99853515625,
+          "split_half_cosine_ci95": [
+            0.99755859375,
+            0.99951171875
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "payload_splitting": {
+          "split_half_cosine_mean": 0.9984424114227295,
+          "split_half_cosine_median": 0.99853515625,
+          "split_half_cosine_ci95": [
+            0.9970703125,
+            0.9990234375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "distractors_negated": {
+          "split_half_cosine_mean": 0.9981816411018372,
+          "split_half_cosine_median": 0.99853515625,
+          "split_half_cosine_ci95": [
+            0.9970703125,
+            0.9990234375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        }
+      },
+      "bootstrap": {
+        "S_CO": {
+          "mean": 0.38318201899528503,
+          "median": 0.3831380307674408,
+          "ci95": [
+            0.374673455953598,
+            0.39152324199676514
+          ]
+        },
+        "S_MG": {
+          "mean": 0.6328819394111633,
+          "median": 0.6329752802848816,
+          "ci95": [
+            0.625,
+            0.6402994990348816
+          ]
+        },
+        "S_between": {
+          "mean": 0.32576894760131836,
+          "median": 0.3257649838924408,
+          "ci95": [
+            0.3189831078052521,
+            0.3326765298843384
+          ]
+        },
+        "Delta_CO": {
+          "mean": 0.05741310119628906,
+          "median": 0.0574408620595932,
+          "ci95": [
+            0.05106540396809578,
+            0.06337518244981766
+          ]
+        },
+        "Delta_MG": {
+          "mean": 0.3071129322052002,
+          "median": 0.3072645366191864,
+          "ci95": [
+            0.2989230751991272,
+            0.3147598206996918
+          ]
+        },
+        "T": {
+          "mean": 0.18226303160190582,
+          "median": 0.1823052316904068,
+          "ci95": [
+            0.17788900434970856,
+            0.18664991855621338
+          ]
+        },
+        "P_Delta_CO_gt_0": 1.0,
+        "P_Delta_MG_gt_0": 1.0,
+        "P_canonical_rank_1": 1.0,
+        "n_bootstrap": 2000,
+        "seed": 20260828,
+        "note": "P(...) values are bootstrap resampling proportions, not formal p-values."
+      },
+      "layerwise_sweep_point_estimate_only": [
+        {
+          "layer": 0,
+          "S_CO": NaN,
+          "S_MG": NaN,
+          "S_between": NaN,
+          "Delta_CO": NaN,
+          "Delta_MG": NaN,
+          "T_taxonomy": NaN,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 1,
+          "S_CO": 0.4231770833333333,
+          "S_MG": 0.07657368977864583,
+          "S_between": 0.0858798556857639,
+          "Delta_CO": 0.3372972276475694,
+          "Delta_MG": -0.009306165907118066,
+          "T_taxonomy": 0.16399553087022567,
+          "canonical_partition_rank": 2
+        },
+        {
+          "layer": 2,
+          "S_CO": 0.4983723958333333,
+          "S_MG": 0.25927734375,
+          "S_between": 0.3475070529513889,
+          "Delta_CO": 0.15086534288194442,
+          "Delta_MG": -0.0882297092013889,
+          "T_taxonomy": 0.031317816840277735,
+          "canonical_partition_rank": 3
+        },
+        {
+          "layer": 3,
+          "S_CO": 0.4722493489583333,
+          "S_MG": 0.2801513671875,
+          "S_between": 0.3374701605902778,
+          "Delta_CO": 0.13477918836805552,
+          "Delta_MG": -0.05731879340277779,
+          "T_taxonomy": 0.03873019748263884,
+          "canonical_partition_rank": 2
+        },
+        {
+          "layer": 4,
+          "S_CO": 0.473388671875,
+          "S_MG": 0.3214314778645833,
+          "S_between": 0.3178304036458333,
+          "Delta_CO": 0.15555826822916669,
+          "Delta_MG": 0.00360107421875,
+          "T_taxonomy": 0.07957967122395831,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 5,
+          "S_CO": 0.6097005208333334,
+          "S_MG": 0.391357421875,
+          "S_between": 0.3910590277777778,
+          "Delta_CO": 0.21864149305555558,
+          "Delta_MG": 0.0002983940972222099,
+          "T_taxonomy": 0.10946994357638895,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 6,
+          "S_CO": 0.60107421875,
+          "S_MG": 0.4410807291666667,
+          "S_between": 0.4295247395833333,
+          "Delta_CO": 0.17154947916666669,
+          "Delta_MG": 0.01155598958333337,
+          "T_taxonomy": 0.09155273437500006,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 7,
+          "S_CO": 0.6212565104166666,
+          "S_MG": 0.4171549479166667,
+          "S_between": 0.3858778211805556,
+          "Delta_CO": 0.23537868923611105,
+          "Delta_MG": 0.031277126736111105,
+          "T_taxonomy": 0.13332790798611105,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 8,
+          "S_CO": 0.591796875,
+          "S_MG": 0.4285481770833333,
+          "S_between": 0.3910861545138889,
+          "Delta_CO": 0.2007107204861111,
+          "Delta_MG": 0.03746202256944442,
+          "T_taxonomy": 0.11908637152777773,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 9,
+          "S_CO": 0.4345703125,
+          "S_MG": 0.3608805338541667,
+          "S_between": 0.2499321831597222,
+          "Delta_CO": 0.1846381293402778,
+          "Delta_MG": 0.11094835069444448,
+          "T_taxonomy": 0.14779324001736116,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 10,
+          "S_CO": 0.4908854166666667,
+          "S_MG": 0.439453125,
+          "S_between": 0.3332655164930556,
+          "Delta_CO": 0.1576199001736111,
+          "Delta_MG": 0.10618760850694442,
+          "T_taxonomy": 0.1319037543402778,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 11,
+          "S_CO": 0.4790852864583333,
+          "S_MG": 0.4519856770833333,
+          "S_between": 0.3318277994791667,
+          "Delta_CO": 0.14725748697916663,
+          "Delta_MG": 0.12015787760416663,
+          "T_taxonomy": 0.13370768229166663,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 12,
+          "S_CO": 0.4817708333333333,
+          "S_MG": 0.4183756510416667,
+          "S_between": 0.3255750868055556,
+          "Delta_CO": 0.15619574652777773,
+          "Delta_MG": 0.0928005642361111,
+          "T_taxonomy": 0.12449815538194442,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 13,
+          "S_CO": 0.5142415364583334,
+          "S_MG": 0.4348958333333333,
+          "S_between": 0.3365885416666667,
+          "Delta_CO": 0.17765299479166669,
+          "Delta_MG": 0.09830729166666663,
+          "T_taxonomy": 0.13798014322916669,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 14,
+          "S_CO": 0.487548828125,
+          "S_MG": 0.4386393229166667,
+          "S_between": 0.28143310546875,
+          "Delta_CO": 0.20611572265625,
+          "Delta_MG": 0.15720621744791669,
+          "T_taxonomy": 0.18166097005208337,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 15,
+          "S_CO": 0.4444986979166667,
+          "S_MG": 0.4891764322916667,
+          "S_between": 0.3017510308159722,
+          "Delta_CO": 0.14274766710069448,
+          "Delta_MG": 0.18742540147569448,
+          "T_taxonomy": 0.16508653428819448,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 16,
+          "S_CO": 0.4583333333333333,
+          "S_MG": 0.4814453125,
+          "S_between": 0.3147040473090278,
+          "Delta_CO": 0.14362928602430552,
+          "Delta_MG": 0.1667412651909722,
+          "T_taxonomy": 0.15518527560763884,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 17,
+          "S_CO": 0.4680989583333333,
+          "S_MG": 0.457275390625,
+          "S_between": 0.2976345486111111,
+          "Delta_CO": 0.1704644097222222,
+          "Delta_MG": 0.1596408420138889,
+          "T_taxonomy": 0.16505262586805552,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 18,
+          "S_CO": 0.4136555989583333,
+          "S_MG": 0.4891764322916667,
+          "S_between": 0.2617458767361111,
+          "Delta_CO": 0.1519097222222222,
+          "Delta_MG": 0.22743055555555558,
+          "T_taxonomy": 0.1896701388888889,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 19,
+          "S_CO": 0.3653971354166667,
+          "S_MG": 0.5149739583333334,
+          "S_between": 0.22549947102864584,
+          "Delta_CO": 0.13989766438802084,
+          "Delta_MG": 0.2894744873046875,
+          "T_taxonomy": 0.21468607584635416,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 20,
+          "S_CO": 0.4263102213541667,
+          "S_MG": 0.5675455729166666,
+          "S_between": 0.3053385416666667,
+          "Delta_CO": 0.1209716796875,
+          "Delta_MG": 0.26220703124999994,
+          "T_taxonomy": 0.19158935546874994,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 21,
+          "S_CO": 0.43310546875,
+          "S_MG": 0.5823567708333334,
+          "S_between": 0.3488498263888889,
+          "Delta_CO": 0.0842556423611111,
+          "Delta_MG": 0.23350694444444448,
+          "T_taxonomy": 0.15888129340277785,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 22,
+          "S_CO": 0.4241536458333333,
+          "S_MG": 0.6373697916666666,
+          "S_between": 0.3586561414930556,
+          "Delta_CO": 0.06549750434027773,
+          "Delta_MG": 0.27871365017361105,
+          "T_taxonomy": 0.17210557725694442,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 23,
+          "S_CO": 0.4392903645833333,
+          "S_MG": 0.6512044270833334,
+          "S_between": 0.3804796006944444,
+          "Delta_CO": 0.058810763888888895,
+          "Delta_MG": 0.27072482638888895,
+          "T_taxonomy": 0.16476779513888895,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 24,
+          "S_CO": 0.4337565104166667,
+          "S_MG": 0.62548828125,
+          "S_between": 0.3753933376736111,
+          "Delta_CO": 0.05836317274305558,
+          "Delta_MG": 0.2500949435763889,
+          "T_taxonomy": 0.15422905815972227,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 25,
+          "S_CO": 0.3830159505208333,
+          "S_MG": 0.6329752604166666,
+          "S_between": 0.3256157769097222,
+          "Delta_CO": 0.057400173611111105,
+          "Delta_MG": 0.3073594835069444,
+          "T_taxonomy": 0.1823798285590278,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 26,
+          "S_CO": 0.3546956380208333,
+          "S_MG": 0.6282552083333334,
+          "S_between": 0.3460354275173611,
+          "Delta_CO": 0.00866021050347221,
+          "Delta_MG": 0.28221978081597227,
+          "T_taxonomy": 0.14543999565972227,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 27,
+          "S_CO": 0.3756510416666667,
+          "S_MG": 0.5694173177083334,
+          "S_between": 0.3669704861111111,
+          "Delta_CO": 0.00868055555555558,
+          "Delta_MG": 0.20244683159722227,
+          "T_taxonomy": 0.1055636935763889,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 28,
+          "S_CO": 0.3963216145833333,
+          "S_MG": 0.57763671875,
+          "S_between": 0.3814019097222222,
+          "Delta_CO": 0.014919704861111105,
+          "Delta_MG": 0.1962348090277778,
+          "T_taxonomy": 0.10557725694444442,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 29,
+          "S_CO": 0.3982747395833333,
+          "S_MG": 0.5673014322916666,
+          "S_between": 0.3827853732638889,
+          "Delta_CO": 0.01548936631944442,
+          "Delta_MG": 0.18451605902777773,
+          "T_taxonomy": 0.1000027126736111,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 30,
+          "S_CO": 0.388916015625,
+          "S_MG": 0.552734375,
+          "S_between": 0.3740505642361111,
+          "Delta_CO": 0.014865451388888895,
+          "Delta_MG": 0.1786838107638889,
+          "T_taxonomy": 0.0967746310763889,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 31,
+          "S_CO": 0.3675130208333333,
+          "S_MG": 0.5369466145833334,
+          "S_between": 0.3611518012152778,
+          "Delta_CO": 0.006361219618055525,
+          "Delta_MG": 0.17579481336805558,
+          "T_taxonomy": 0.09107801649305558,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 32,
+          "S_CO": 0.3595377604166667,
+          "S_MG": 0.5137532552083334,
+          "S_between": 0.365234375,
+          "Delta_CO": -0.005696614583333315,
+          "Delta_MG": 0.14851888020833337,
+          "T_taxonomy": 0.0714111328125,
+          "canonical_partition_rank": 3
+        },
+        {
+          "layer": 33,
+          "S_CO": 0.341552734375,
+          "S_MG": 0.4966634114583333,
+          "S_between": 0.3480224609375,
+          "Delta_CO": -0.0064697265625,
+          "Delta_MG": 0.14864095052083331,
+          "T_taxonomy": 0.07108561197916663,
+          "canonical_partition_rank": 3
+        },
+        {
+          "layer": 34,
+          "S_CO": 0.3092854817708333,
+          "S_MG": 0.4791666666666667,
+          "S_between": 0.337158203125,
+          "Delta_CO": -0.027872721354166685,
+          "Delta_MG": 0.14200846354166669,
+          "T_taxonomy": 0.05706787109375,
+          "canonical_partition_rank": 3
+        },
+        {
+          "layer": 35,
+          "S_CO": 0.2944742838541667,
+          "S_MG": 0.4600423177083333,
+          "S_between": 0.3252292209201389,
+          "Delta_CO": -0.03075493706597221,
+          "Delta_MG": 0.13481309678819442,
+          "T_taxonomy": 0.052029079861111105,
+          "canonical_partition_rank": 3
+        },
+        {
+          "layer": 36,
+          "S_CO": 0.2904052734375,
+          "S_MG": 0.470703125,
+          "S_between": 0.3309054904513889,
+          "Delta_CO": -0.040500217013888895,
+          "Delta_MG": 0.1397976345486111,
+          "T_taxonomy": 0.049648708767361105,
+          "canonical_partition_rank": 3
+        },
+        {
+          "layer": 37,
+          "S_CO": 0.2920735677083333,
+          "S_MG": 0.45849609375,
+          "S_between": 0.3342759874131944,
+          "Delta_CO": -0.042202419704861105,
+          "Delta_MG": 0.12422010633680558,
+          "T_taxonomy": 0.04100884331597221,
+          "canonical_partition_rank": 3
+        },
+        {
+          "layer": 38,
+          "S_CO": 0.2755533854166667,
+          "S_MG": 0.45166015625,
+          "S_between": 0.3382500542534722,
+          "Delta_CO": -0.06269666883680552,
+          "Delta_MG": 0.11341010199652779,
+          "T_taxonomy": 0.02535671657986116,
+          "canonical_partition_rank": 3
+        },
+        {
+          "layer": 39,
+          "S_CO": 0.267333984375,
+          "S_MG": 0.4312337239583333,
+          "S_between": 0.3298678927951389,
+          "Delta_CO": -0.0625339084201389,
+          "Delta_MG": 0.10136583116319442,
+          "T_taxonomy": 0.019415961371527735,
+          "canonical_partition_rank": 3
+        },
+        {
+          "layer": 40,
+          "S_CO": 0.2560221354166667,
+          "S_MG": 0.4189453125,
+          "S_between": 0.3281995985243056,
+          "Delta_CO": -0.0721774631076389,
+          "Delta_MG": 0.09074571397569442,
+          "T_taxonomy": 0.00928412543402779,
+          "canonical_partition_rank": 4
+        },
+        {
+          "layer": 41,
+          "S_CO": 0.2581380208333333,
+          "S_MG": 0.4065755208333333,
+          "S_between": 0.34375,
+          "Delta_CO": -0.08561197916666669,
+          "Delta_MG": 0.06282552083333331,
+          "T_taxonomy": -0.011393229166666685,
+          "canonical_partition_rank": 4
+        },
+        {
+          "layer": 42,
+          "S_CO": 0.20967610677083334,
+          "S_MG": 0.351318359375,
+          "S_between": 0.2699110243055556,
+          "Delta_CO": -0.06023491753472224,
+          "Delta_MG": 0.08140733506944442,
+          "T_taxonomy": 0.010586208767361105,
+          "canonical_partition_rank": 4
+        }
+      ],
+      "layerwise_sweep_skipped": false
+    },
+    "t_final_user_end": {
+      "n_instructions": 300,
+      "n_instruction_clusters": 298,
+      "cosine_matrix": {
+        "prefix_injection": {
+          "prefix_injection": 1.0,
+          "refusal_suppression": 0.460205078125,
+          "persona_roleplay": 0.38916015625,
+          "encoding_obfuscation": 0.280517578125,
+          "payload_splitting": 0.298583984375,
+          "distractors_negated": 0.323974609375
+        },
+        "refusal_suppression": {
+          "prefix_injection": 0.460205078125,
+          "refusal_suppression": 0.99951171875,
+          "persona_roleplay": 0.483642578125,
+          "encoding_obfuscation": 0.300048828125,
+          "payload_splitting": 0.153564453125,
+          "distractors_negated": 0.24951171875
+        },
+        "persona_roleplay": {
+          "prefix_injection": 0.38916015625,
+          "refusal_suppression": 0.483642578125,
+          "persona_roleplay": 1.0,
+          "encoding_obfuscation": -0.04022216796875,
+          "payload_splitting": 0.0633544921875,
+          "distractors_negated": -0.0008249282836914062
+        },
+        "encoding_obfuscation": {
+          "prefix_injection": 0.280517578125,
+          "refusal_suppression": 0.300048828125,
+          "persona_roleplay": -0.04022216796875,
+          "encoding_obfuscation": 0.99951171875,
+          "payload_splitting": 0.2342529296875,
+          "distractors_negated": 0.5419921875
+        },
+        "payload_splitting": {
+          "prefix_injection": 0.298583984375,
+          "refusal_suppression": 0.153564453125,
+          "persona_roleplay": 0.0633544921875,
+          "encoding_obfuscation": 0.2342529296875,
+          "payload_splitting": 1.0,
+          "distractors_negated": 0.316650390625
+        },
+        "distractors_negated": {
+          "prefix_injection": 0.323974609375,
+          "refusal_suppression": 0.24951171875,
+          "persona_roleplay": -0.0008249282836914062,
+          "encoding_obfuscation": 0.5419921875,
+          "payload_splitting": 0.316650390625,
+          "distractors_negated": 0.99951171875
+        }
+      },
+      "S_CO": 0.4443359375,
+      "S_MG": 0.3642985026041667,
+      "S_between": 0.18094539642333984,
+      "Delta_CO": 0.26339054107666016,
+      "Delta_MG": 0.18335310618082684,
+      "T_taxonomy": 0.22337182362874353,
+      "canonical_partition_rank": 1,
+      "n_partitions": 10,
+      "mean_norms": {
+        "prefix_injection": {
+          "mean_norm": 50.25,
+          "std_norm": 24.0,
+          "min_norm": 16.515625,
+          "max_norm": 157.625
+        },
+        "refusal_suppression": {
+          "mean_norm": 66.3125,
+          "std_norm": 30.328125,
+          "min_norm": 22.359375,
+          "max_norm": 182.625
+        },
+        "persona_roleplay": {
+          "mean_norm": 60.65625,
+          "std_norm": 25.359375,
+          "min_norm": 20.140625,
+          "max_norm": 203.125
+        },
+        "encoding_obfuscation": {
+          "mean_norm": 345.25,
+          "std_norm": 26.0625,
+          "min_norm": 275.75,
+          "max_norm": 445.5
+        },
+        "payload_splitting": {
+          "mean_norm": 322.25,
+          "std_norm": 27.9375,
+          "min_norm": 250.75,
+          "max_norm": 376.0
+        },
+        "distractors_negated": {
+          "mean_norm": 363.75,
+          "std_norm": 23.15625,
+          "min_norm": 307.25,
+          "max_norm": 450.5
+        }
+      },
+      "reliability": {
+        "prefix_injection": {
+          "split_half_cosine_mean": 0.9770361185073853,
+          "split_half_cosine_median": 0.978515625,
+          "split_half_cosine_ci95": [
+            0.96630859375,
+            0.983166515827179
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "refusal_suppression": {
+          "split_half_cosine_mean": 0.9854482412338257,
+          "split_half_cosine_median": 0.986328125,
+          "split_half_cosine_ci95": [
+            0.9765625,
+            0.990234375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "persona_roleplay": {
+          "split_half_cosine_mean": 0.9758984446525574,
+          "split_half_cosine_median": 0.97705078125,
+          "split_half_cosine_ci95": [
+            0.96484375,
+            0.98193359375
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "encoding_obfuscation": {
+          "split_half_cosine_mean": 0.9924091696739197,
+          "split_half_cosine_median": 0.99267578125,
+          "split_half_cosine_ci95": [
+            0.986071765422821,
+            0.9951171875
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "payload_splitting": {
+          "split_half_cosine_mean": 0.993655264377594,
+          "split_half_cosine_median": 0.994140625,
+          "split_half_cosine_ci95": [
+            0.9892578125,
+            0.99560546875
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        },
+        "distractors_negated": {
+          "split_half_cosine_mean": 0.9955810308456421,
+          "split_half_cosine_median": 0.99560546875,
+          "split_half_cosine_ci95": [
+            0.9921875,
+            0.9970703125
+          ],
+          "n_reps": 500,
+          "seed": 20260828
+        }
+      },
+      "bootstrap": {
+        "S_CO": {
+          "mean": 0.4455007016658783,
+          "median": 0.445556640625,
+          "ci95": [
+            0.43228963017463684,
+            0.458984375
+          ]
+        },
+        "S_MG": {
+          "mean": 0.36574751138687134,
+          "median": 0.3656819760799408,
+          "ci95": [
+            0.352090448141098,
+            0.3798838257789612
+          ]
+        },
+        "S_between": {
+          "mean": 0.1805492788553238,
+          "median": 0.18066661059856415,
+          "ci95": [
+            0.1665342152118683,
+            0.19411925971508026
+          ]
+        },
+        "Delta_CO": {
+          "mean": 0.2649514079093933,
+          "median": 0.26480185985565186,
+          "ci95": [
+            0.25037434697151184,
+            0.28085997700691223
+          ]
+        },
+        "Delta_MG": {
+          "mean": 0.18519821763038635,
+          "median": 0.18515586853027344,
+          "ci95": [
+            0.16497452557086945,
+            0.20669730007648468
+          ]
+        },
+        "T": {
+          "mean": 0.22507481276988983,
+          "median": 0.2249671071767807,
+          "ci95": [
+            0.2104044258594513,
+            0.2407151460647583
+          ]
+        },
+        "P_Delta_CO_gt_0": 1.0,
+        "P_Delta_MG_gt_0": 1.0,
+        "P_canonical_rank_1": 1.0,
+        "n_bootstrap": 2000,
+        "seed": 20260828,
+        "note": "P(...) values are bootstrap resampling proportions, not formal p-values."
+      },
+      "layerwise_sweep_point_estimate_only": [
+        {
+          "layer": 0,
+          "S_CO": NaN,
+          "S_MG": 0.3477274576822917,
+          "S_between": NaN,
+          "Delta_CO": NaN,
+          "Delta_MG": NaN,
+          "T_taxonomy": NaN,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 1,
+          "S_CO": 0.54150390625,
+          "S_MG": 0.3992919921875,
+          "S_between": -0.07438829210069445,
+          "Delta_CO": 0.6158921983506944,
+          "Delta_MG": 0.4736802842881944,
+          "T_taxonomy": 0.5447862413194444,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 2,
+          "S_CO": 0.5089518229166666,
+          "S_MG": 0.3453165690104167,
+          "S_between": 0.07438278198242188,
+          "Delta_CO": 0.43456904093424475,
+          "Delta_MG": 0.2709337870279948,
+          "T_taxonomy": 0.35275141398111975,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 3,
+          "S_CO": 0.486328125,
+          "S_MG": 0.3317972819010417,
+          "S_between": 0.05679490831163195,
+          "Delta_CO": 0.4295332166883681,
+          "Delta_MG": 0.2750023735894097,
+          "T_taxonomy": 0.35226779513888895,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 4,
+          "S_CO": 0.4383951822916667,
+          "S_MG": 0.30908203125,
+          "S_between": 0.04982471466064453,
+          "Delta_CO": 0.38857046763102215,
+          "Delta_MG": 0.25925731658935547,
+          "T_taxonomy": 0.32391389211018884,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 5,
+          "S_CO": 0.4122721354166667,
+          "S_MG": 0.3073323567708333,
+          "S_between": 0.051238165961371526,
+          "Delta_CO": 0.36103396945529515,
+          "Delta_MG": 0.2560941908094618,
+          "T_taxonomy": 0.30856408013237846,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 6,
+          "S_CO": 0.3965657552083333,
+          "S_MG": 0.25286865234375,
+          "S_between": 0.07164255777994792,
+          "Delta_CO": 0.3249231974283854,
+          "Delta_MG": 0.18122609456380206,
+          "T_taxonomy": 0.2530746459960937,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 7,
+          "S_CO": 0.44384765625,
+          "S_MG": 0.18758138020833334,
+          "S_between": 0.07718743218315972,
+          "Delta_CO": 0.3666602240668403,
+          "Delta_MG": 0.11039394802517362,
+          "T_taxonomy": 0.23852708604600698,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 8,
+          "S_CO": 0.4800618489583333,
+          "S_MG": 0.23470052083333334,
+          "S_between": 0.08483335706922743,
+          "Delta_CO": 0.3952284918891059,
+          "Delta_MG": 0.14986716376410592,
+          "T_taxonomy": 0.2725478278266059,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 9,
+          "S_CO": 0.4813639322916667,
+          "S_MG": 0.2806396484375,
+          "S_between": 0.10299258761935765,
+          "Delta_CO": 0.37837134467230904,
+          "Delta_MG": 0.17764706081814235,
+          "T_taxonomy": 0.2780092027452257,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 10,
+          "S_CO": 0.5084635416666666,
+          "S_MG": 0.2611490885416667,
+          "S_between": 0.0677642822265625,
+          "Delta_CO": 0.44069925944010413,
+          "Delta_MG": 0.19338480631510419,
+          "T_taxonomy": 0.31704203287760413,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 11,
+          "S_CO": 0.498046875,
+          "S_MG": 0.2755533854166667,
+          "S_between": 0.060723198784722224,
+          "Delta_CO": 0.4373236762152778,
+          "Delta_MG": 0.21483018663194448,
+          "T_taxonomy": 0.32607693142361116,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 12,
+          "S_CO": 0.4881998697916667,
+          "S_MG": 0.24332682291666666,
+          "S_between": 0.06048583984375,
+          "Delta_CO": 0.4277140299479167,
+          "Delta_MG": 0.18284098307291666,
+          "T_taxonomy": 0.3052775065104167,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 13,
+          "S_CO": 0.5548502604166666,
+          "S_MG": 0.2552490234375,
+          "S_between": 0.08681631088256836,
+          "Delta_CO": 0.46803394953409827,
+          "Delta_MG": 0.16843271255493164,
+          "T_taxonomy": 0.31823333104451496,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 14,
+          "S_CO": 0.5574544270833334,
+          "S_MG": 0.2801513671875,
+          "S_between": 0.0853000217013889,
+          "Delta_CO": 0.4721544053819445,
+          "Delta_MG": 0.1948513454861111,
+          "T_taxonomy": 0.3335028754340278,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 15,
+          "S_CO": 0.6036783854166666,
+          "S_MG": 0.3124186197916667,
+          "S_between": 0.09450276692708333,
+          "Delta_CO": 0.5091756184895833,
+          "Delta_MG": 0.21791585286458337,
+          "T_taxonomy": 0.3635457356770833,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 16,
+          "S_CO": 0.6121419270833334,
+          "S_MG": 0.2467041015625,
+          "S_between": 0.09052954779730903,
+          "Delta_CO": 0.5216123792860243,
+          "Delta_MG": 0.15617455376519096,
+          "T_taxonomy": 0.33889346652560765,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 17,
+          "S_CO": 0.6536458333333334,
+          "S_MG": 0.24825032552083334,
+          "S_between": 0.12322023179796007,
+          "Delta_CO": 0.5304256015353733,
+          "Delta_MG": 0.12503009372287327,
+          "T_taxonomy": 0.3277278476291233,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 18,
+          "S_CO": 0.6160481770833334,
+          "S_MG": 0.218505859375,
+          "S_between": 0.11787245008680555,
+          "Delta_CO": 0.4981757269965278,
+          "Delta_MG": 0.10063340928819445,
+          "T_taxonomy": 0.29940456814236116,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 19,
+          "S_CO": 0.5870768229166666,
+          "S_MG": 0.21040852864583334,
+          "S_between": 0.11165364583333333,
+          "Delta_CO": 0.4754231770833333,
+          "Delta_MG": 0.09875488281250001,
+          "T_taxonomy": 0.2870890299479167,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 20,
+          "S_CO": 0.5416666666666666,
+          "S_MG": 0.25140380859375,
+          "S_between": 0.12774827745225695,
+          "Delta_CO": 0.4139183892144097,
+          "Delta_MG": 0.12365553114149305,
+          "T_taxonomy": 0.26878696017795134,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 21,
+          "S_CO": 0.5379231770833334,
+          "S_MG": 0.2604166666666667,
+          "S_between": 0.1514655219184028,
+          "Delta_CO": 0.3864576551649306,
+          "Delta_MG": 0.1089511447482639,
+          "T_taxonomy": 0.2477043999565972,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 22,
+          "S_CO": 0.4977213541666667,
+          "S_MG": 0.2918294270833333,
+          "S_between": 0.1605648464626736,
+          "Delta_CO": 0.3371565077039931,
+          "Delta_MG": 0.1312645806206597,
+          "T_taxonomy": 0.2342105441623264,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 23,
+          "S_CO": 0.5107421875,
+          "S_MG": 0.3382568359375,
+          "S_between": 0.2043084038628472,
+          "Delta_CO": 0.3064337836371528,
+          "Delta_MG": 0.1339484320746528,
+          "T_taxonomy": 0.2201911078559028,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 24,
+          "S_CO": 0.489990234375,
+          "S_MG": 0.3049723307291667,
+          "S_between": 0.1887334187825521,
+          "Delta_CO": 0.3012568155924479,
+          "Delta_MG": 0.11623891194661459,
+          "T_taxonomy": 0.20874786376953128,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 25,
+          "S_CO": 0.4443359375,
+          "S_MG": 0.3642985026041667,
+          "S_between": 0.18094539642333984,
+          "Delta_CO": 0.26339054107666016,
+          "Delta_MG": 0.18335310618082684,
+          "T_taxonomy": 0.22337182362874353,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 26,
+          "S_CO": 0.43359375,
+          "S_MG": 0.4443359375,
+          "S_between": 0.21716817220052084,
+          "Delta_CO": 0.21642557779947916,
+          "Delta_MG": 0.22716776529947916,
+          "T_taxonomy": 0.22179667154947916,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 27,
+          "S_CO": 0.4306640625,
+          "S_MG": 0.3527018229166667,
+          "S_between": 0.19460042317708334,
+          "Delta_CO": 0.23606363932291666,
+          "Delta_MG": 0.15810139973958334,
+          "T_taxonomy": 0.19708251953125003,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 28,
+          "S_CO": 0.448974609375,
+          "S_MG": 0.4313151041666667,
+          "S_between": 0.22069295247395834,
+          "Delta_CO": 0.22828165690104166,
+          "Delta_MG": 0.21062215169270834,
+          "T_taxonomy": 0.21945190429687503,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 29,
+          "S_CO": 0.437744140625,
+          "S_MG": 0.45556640625,
+          "S_between": 0.22707112630208334,
+          "Delta_CO": 0.21067301432291666,
+          "Delta_MG": 0.22849527994791666,
+          "T_taxonomy": 0.21958414713541666,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 30,
+          "S_CO": 0.4195149739583333,
+          "S_MG": 0.4542643229166667,
+          "S_between": 0.2077568901909722,
+          "Delta_CO": 0.2117580837673611,
+          "Delta_MG": 0.24650743272569448,
+          "T_taxonomy": 0.2291327582465278,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 31,
+          "S_CO": 0.4251302083333333,
+          "S_MG": 0.4453938802083333,
+          "S_between": 0.2109341091579861,
+          "Delta_CO": 0.2141960991753472,
+          "Delta_MG": 0.2344597710503472,
+          "T_taxonomy": 0.2243279351128472,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 32,
+          "S_CO": 0.4034016927083333,
+          "S_MG": 0.4459635416666667,
+          "S_between": 0.1926905314127604,
+          "Delta_CO": 0.2107111612955729,
+          "Delta_MG": 0.25327301025390625,
+          "T_taxonomy": 0.2319920857747396,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 33,
+          "S_CO": 0.4083658854166667,
+          "S_MG": 0.4464518229166667,
+          "S_between": 0.1984803941514757,
+          "Delta_CO": 0.209885491265191,
+          "Delta_MG": 0.247971428765191,
+          "T_taxonomy": 0.228928460015191,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 34,
+          "S_CO": 0.4168294270833333,
+          "S_MG": 0.4480794270833333,
+          "S_between": 0.2057122124565972,
+          "Delta_CO": 0.2111172146267361,
+          "Delta_MG": 0.2423672146267361,
+          "T_taxonomy": 0.2267422146267361,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 35,
+          "S_CO": 0.4038899739583333,
+          "S_MG": 0.4217936197916667,
+          "S_between": 0.18116845024956596,
+          "Delta_CO": 0.22272152370876735,
+          "Delta_MG": 0.24062516954210073,
+          "T_taxonomy": 0.23167334662543404,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 36,
+          "S_CO": 0.3911946614583333,
+          "S_MG": 0.4175618489583333,
+          "S_between": 0.1692716810438368,
+          "Delta_CO": 0.2219229804144965,
+          "Delta_MG": 0.2482901679144965,
+          "T_taxonomy": 0.2351065741644965,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 37,
+          "S_CO": 0.3541666666666667,
+          "S_MG": 0.4388020833333333,
+          "S_between": 0.1663640340169271,
+          "Delta_CO": 0.1878026326497396,
+          "Delta_MG": 0.27243804931640625,
+          "T_taxonomy": 0.2301203409830729,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 38,
+          "S_CO": 0.3099772135416667,
+          "S_MG": 0.4090983072916667,
+          "S_between": 0.1417015923394097,
+          "Delta_CO": 0.16827562120225698,
+          "Delta_MG": 0.267396714952257,
+          "T_taxonomy": 0.21783616807725698,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 39,
+          "S_CO": 0.3165690104166667,
+          "S_MG": 0.4125162760416667,
+          "S_between": 0.16309611002604166,
+          "Delta_CO": 0.15347290039062503,
+          "Delta_MG": 0.24942016601562503,
+          "T_taxonomy": 0.20144653320312503,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 40,
+          "S_CO": 0.22615559895833334,
+          "S_MG": 0.4141438802083333,
+          "S_between": 0.1362186008029514,
+          "Delta_CO": 0.08993699815538195,
+          "Delta_MG": 0.2779252794053819,
+          "T_taxonomy": 0.18393113878038192,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 41,
+          "S_CO": 0.14680989583333334,
+          "S_MG": 0.33837890625,
+          "S_between": 0.1268310546875,
+          "Delta_CO": 0.019978841145833343,
+          "Delta_MG": 0.2115478515625,
+          "T_taxonomy": 0.11576334635416669,
+          "canonical_partition_rank": 1
+        },
+        {
+          "layer": 42,
+          "S_CO": 0.17790730794270834,
+          "S_MG": 0.273193359375,
+          "S_between": 0.11611090766059028,
+          "Delta_CO": 0.061796400282118066,
+          "Delta_MG": 0.1570824517144097,
+          "T_taxonomy": 0.10943942599826391,
+          "canonical_partition_rank": 1
+        }
+      ],
+      "layerwise_sweep_skipped": false
+    }
+  }
+}
