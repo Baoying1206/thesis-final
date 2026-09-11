@@ -1,0 +1,46 @@
+=== torch/cuda check ===
+torch 2.3.0+cu121 cuda available: True
+=== dry-run (tokenizer only) ===
+[Qwen2.5-7B-Instruct] loading tokenizer only: /home/h24/baga0553/models/Qwen2.5-7B-Instruct
+{
+  "result_status": "EXPERIMENT1_DRY_RUN_PASS",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "n_rows": 2400,
+  "n_ok": 2400,
+  "n_failures": 0,
+  "failures": []
+}
+=== small real GPU extraction test (4 rows only) ===
+[Qwen2.5-7B-Instruct] loading tokenizer + model: /home/h24/baga0553/models/Qwen2.5-7B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:06<00:19,  6.36s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:12<00:12,  6.32s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:19<00:06,  6.51s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  6.33s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  6.36s/it]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output/Qwen2.5-7B-Instruct_plain_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output/Qwen2.5-7B-Instruct_placebo_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output/Qwen2.5-7B-Instruct_prefix_injection_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output/Qwen2.5-7B-Instruct_refusal_suppression_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output/Qwen2.5-7B-Instruct_persona_roleplay_activations.pt (0 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output/Qwen2.5-7B-Instruct_encoding_obfuscation_activations.pt (0 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output/Qwen2.5-7B-Instruct_payload_splitting_activations.pt (0 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output/Qwen2.5-7B-Instruct_distractors_negated_activations.pt (0 instructions)
+{
+  "result_status": "EXPERIMENT1_EXTRACTION_DONE",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "n_rows": 4,
+  "n_ok": 4,
+  "n_fail": 0,
+  "manifest_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output/Qwen2.5-7B-Instruct_experiment1_manifest.jsonl",
+  "output_dir": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment1_output"
+}
+=== output check ===
+total 1660
+drwxr-xr-x 2 baga0553 h24   4096 Sep 11 16:56 .
+drwxr-xr-x 3 baga0553 h24   4096 Sep 11 16:56 ..
+-rw-r--r-- 1 baga0553 h24   1104 Sep 11 16:56 Qwen2.5-7B-Instruct_distractors_negated_activations.pt
+-rw-r--r-- 1 baga0553 h24   1108 Sep 11 16:56 Qwen2.5-7B-Instruct_encoding_obfuscation_activations.pt
+-rw-r--r-- 1 baga0553 h24   2758 Sep 11 16:56 Qwen2.5-7B-Instruct_experiment1_manifest.jsonl
+-rw-r--r-- 1 baga0553 h24   1096 Sep 11 16:56 Qwen2.5-7B-Instruct_payload_splitting_activations.pt
+-rw-r--r-- 1 baga0553 h24   1092 Sep 11 16:56 Qwen2.5-7B-Instruct_persona_roleplay_activations.pt
+-rw-r--r-- 1 baga0553 h24 417560 Sep 11 16:56 Qwen2.5-7B-Instruct_placebo_activations.pt
+-rw-r--r-- 1 baga0553 h24 417484 Sep 11 16:56 Qwen2.5-7B-Instruct_plain_activations.pt
+-rw-r--r-- 1 baga0553 h24 417614 Sep 11 16:56 Qwen2.5-7B-Instruct_prefix_injection_activations.pt
+-rw-r--r-- 1 baga0553 h24 417632 Sep 11 16:56 Qwen2.5-7B-Instruct_refusal_suppression_activations.pt
