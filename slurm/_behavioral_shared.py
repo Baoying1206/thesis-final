@@ -79,6 +79,20 @@ def generate_responses(rows, model_path, batch_size, generation_config):
     model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.bfloat16, device_map="auto")
     model.eval()
 
+    # Real end-of-turn token can differ from tokenizer.eos_token_id (e.g.
+    # Gemma-2 chat turns end at <end_of_turn>, not <eos>) -- without this,
+    # generate() never stops there and keeps emitting special tokens up to
+    # max_new_tokens, which skip_special_tokens=True then decodes as "".
+    # Confirmed via a real cluster run: 630/720 Gemma rows had
+    # generated_token_count == max_new_tokens and response == "".
+    eos_ids = model.generation_config.eos_token_id
+    if eos_ids is None:
+        eos_ids = tokenizer.eos_token_id
+    eos_ids = [eos_ids] if isinstance(eos_ids, int) else list(eos_ids)
+    end_of_turn_id = tokenizer.convert_tokens_to_ids("<end_of_turn>")
+    if end_of_turn_id is not None and end_of_turn_id != tokenizer.unk_token_id and end_of_turn_id not in eos_ids:
+        eos_ids.append(end_of_turn_id)
+
     for start in range(0, len(rows), batch_size):
         batch = rows[start:start + batch_size]
         prompts = [
@@ -92,13 +106,14 @@ def generate_responses(rows, model_path, batch_size, generation_config):
                 max_new_tokens=generation_config["max_new_tokens"],
                 do_sample=generation_config["do_sample"],
                 pad_token_id=tokenizer.eos_token_id,
+                eos_token_id=eos_ids,
             )
         for j, gen_ids in enumerate(out):
             new_ids = gen_ids[enc.input_ids.shape[1]:]
             response = tokenizer.decode(new_ids, skip_special_tokens=True)
             batch[j]["response"] = response
             batch[j]["input_token_count"] = int(enc.attention_mask[j].sum().item())
-            batch[j]["generated_token_count"] = int((new_ids != tokenizer.eos_token_id).sum().item())
+            batch[j]["generated_token_count"] = int(sum(1 for t in new_ids.tolist() if t not in eos_ids))
             batch[j]["rendered_prompt_sha256"] = sha256_hex(prompts[j])
         print(f"  generated {min(start + batch_size, len(rows))}/{len(rows)}", file=sys.stderr)
 
