@@ -1,0 +1,156 @@
+Model: Qwen2.5-7B-Instruct  batch_size=8  wg_batch_size=16  Start: Fri 11 Sep 20:56:25 CEST 2026
+Loading model: /home/h24/baga0553/models/Qwen2.5-7B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:06<00:20,  6.74s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:13<00:13,  6.68s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:21<00:07,  7.11s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:27<00:00,  6.83s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:27<00:00,  6.85s/it]
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:567: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.7` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:572: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.8` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:589: UserWarning: `do_sample` is set to `False`. However, `top_k` is set to `20` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_k`.
+  warnings.warn(
+  generated 8/720
+  generated 16/720
+  generated 24/720
+  generated 32/720
+  generated 40/720
+  generated 48/720
+  generated 56/720
+  generated 64/720
+  generated 72/720
+  generated 80/720
+  generated 88/720
+  generated 96/720
+  generated 104/720
+  generated 112/720
+  generated 120/720
+  generated 128/720
+  generated 136/720
+  generated 144/720
+  generated 152/720
+  generated 160/720
+  generated 168/720
+  generated 176/720
+  generated 184/720
+  generated 192/720
+  generated 200/720
+  generated 208/720
+  generated 216/720
+  generated 224/720
+  generated 232/720
+  generated 240/720
+  generated 248/720
+  generated 256/720
+  generated 264/720
+  generated 272/720
+  generated 280/720
+  generated 288/720
+  generated 296/720
+  generated 304/720
+  generated 312/720
+  generated 320/720
+  generated 328/720
+  generated 336/720
+  generated 344/720
+  generated 352/720
+  generated 360/720
+  generated 368/720
+  generated 376/720
+  generated 384/720
+  generated 392/720
+  generated 400/720
+  generated 408/720
+  generated 416/720
+  generated 424/720
+  generated 432/720
+  generated 440/720
+  generated 448/720
+  generated 456/720
+  generated 464/720
+  generated 472/720
+  generated 480/720
+  generated 488/720
+  generated 496/720
+  generated 504/720
+  generated 512/720
+  generated 520/720
+  generated 528/720
+  generated 536/720
+  generated 544/720
+  generated 552/720
+  generated 560/720
+  generated 568/720
+  generated 576/720
+  generated 584/720
+  generated 592/720
+  generated 600/720
+  generated 608/720
+  generated 616/720
+  generated 624/720
+  generated 632/720
+  generated 640/720
+  generated 648/720
+  generated 656/720
+  generated 664/720
+  generated 672/720
+  generated 680/720
+  generated 688/720
+  generated 696/720
+  generated 704/720
+  generated 712/720
+  generated 720/720
+Loading WildGuard...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:16<00:16, 16.83s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 11.30s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 12.13s/it]
+  judged 16/720
+  judged 32/720
+  judged 48/720
+  judged 64/720
+  judged 80/720
+  judged 96/720
+  judged 112/720
+  judged 128/720
+  judged 144/720
+  judged 160/720
+  judged 176/720
+  judged 192/720
+  judged 208/720
+  judged 224/720
+  judged 240/720
+  judged 256/720
+  judged 272/720
+  judged 288/720
+  judged 304/720
+  judged 320/720
+  judged 336/720
+  judged 352/720
+  judged 368/720
+  judged 384/720
+  judged 400/720
+  judged 416/720
+  judged 432/720
+  judged 448/720
+  judged 464/720
+  judged 480/720
+  judged 496/720
+  judged 512/720
+  judged 528/720
+  judged 544/720
+  judged 560/720
+  judged 576/720
+  judged 592/720
+  judged 608/720
+  judged 624/720
+  judged 640/720
+  judged 656/720
+  judged 672/720
+  judged 688/720
+  judged 704/720
+  judged 720/720
+{
+  "result_status": "FORMAL_BEHAVIORAL_DONE",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "n_generation_records": 720,
+  "n_judge_records": 720,
+  "generation_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/formal_behavioral_output/Qwen2.5-7B-Instruct_generation_records.jsonl",
+  "judge_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/formal_behavioral_output/Qwen2.5-7B-Instruct_judge_records.jsonl",
+  "note": "Real Experiment 2 behavioral records (Sec 7) -- report per model, never silently averaged across models (Sec 6.1/7)."
+}
+Done: Fri 11 Sep 21:06:35 CEST 2026

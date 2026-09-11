@@ -1,0 +1,36 @@
+Model: gemma-2-9b-it  batch_size=32  wg_batch_size=64  Start: Fri 11 Sep 21:15:59 CEST 2026
+Loading model: /home/h24/baga0553/models/gemma-2-9b-it
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:08<00:25,  8.56s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:17<00:17,  8.77s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:26<00:08,  8.84s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:33<00:00,  7.99s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:33<00:00,  8.27s/it]
+  generated 32/720
+  generated 64/720
+  generated 96/720
+  generated 128/720
+Traceback (most recent call last):
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/run_formal_behavioral.py", line 187, in <module>
+    main()
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/run_formal_behavioral.py", line 160, in main
+    rows = generate_responses(rows, model_path, args.batch_size, generation_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/_behavioral_shared.py", line 114, in generate_responses
+    out = model.generate(
+          ^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/utils.py", line 2024, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/utils.py", line 2982, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/models/gemma2/modeling_gemma2.py", line 1014, in forward
+    logits = logits.float()
+             ^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 9.46 GiB. GPU 
+Done: Fri 11 Sep 21:17:57 CEST 2026
