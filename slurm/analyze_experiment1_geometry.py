@@ -159,7 +159,7 @@ def layerwise_sweep(plain_acts, placebo_acts, mech_acts, ids, mechanisms, CO, MG
     return rows
 
 
-def run(model_alias, primary_layer, extraction_dir, output_dir):
+def run(model_alias, primary_layer, extraction_dir, output_dir, skip_layerwise_sweep=False):
     taxonomy = load_taxonomy_v2(WEI_CANONICAL_PATH)
     mechanisms = taxonomy["active_mechanisms"]
     CO, MG = taxonomy["CO_mechs"], taxonomy["MG_mechs"]
@@ -179,6 +179,7 @@ def run(model_alias, primary_layer, extraction_dir, output_dir):
 
     results_by_position = {}
     for position in (PRIMARY_TOKEN_POSITION, SECONDARY_TOKEN_POSITION):
+        print(f"[{model_alias}] position={position}: computing calibrated diff vectors...", file=sys.stderr)
         all_diff_vecs = {m: calibrated_diff_vecs(plain_acts, placebo_acts, mech_acts[m], ids, primary_layer, position) for m in mechanisms}
         vecs = {m: aggregate(torch.stack([all_diff_vecs[m][i] for i in ids])) for m in mechanisms}
 
@@ -188,9 +189,22 @@ def run(model_alias, primary_layer, extraction_dir, output_dir):
         all_T = [compute_2group_partition_stats(vecs, a, b)[5] for a, b in partitions]
         ranks = rank_partitions(all_T)
         S_CO, S_MG, S_between, Delta_CO, Delta_MG, T = compute_2group_partition_stats(vecs, CO, MG)
+        print(f"[{model_alias}] position={position}: point estimates done "
+              f"(S_CO={S_CO:.4f} S_MG={S_MG:.4f} canonical_rank={ranks[canonical_idx]}/{len(partitions)})", file=sys.stderr)
 
+        print(f"[{model_alias}] position={position}: split-half reliability ({SPLIT_HALF_REPS} reps x {len(mechanisms)} mechanisms)...", file=sys.stderr)
         reliability = {m: split_half_reliability(all_diff_vecs[m], ids, n_reps=SPLIT_HALF_REPS, seed=SPLIT_HALF_SEED) for m in mechanisms}
         n_layers_total = mech_acts[mechanisms[0]][ids[0]][position].shape[0]
+
+        print(f"[{model_alias}] position={position}: bootstrap ({N_BOOTSTRAP} reps)...", file=sys.stderr)
+        bootstrap = bootstrap_geometry(all_diff_vecs, mechanisms, CO, MG, clusters, partitions, canonical_idx)
+
+        sweep = None
+        if not skip_layerwise_sweep:
+            print(f"[{model_alias}] position={position}: layerwise sweep ({n_layers_total} layers, point-estimate only)...", file=sys.stderr)
+            sweep = layerwise_sweep(plain_acts, placebo_acts, mech_acts, ids, mechanisms, CO, MG, position, n_layers_total)
+        else:
+            print(f"[{model_alias}] position={position}: --skip-layerwise-sweep set, skipping ({n_layers_total} layers)", file=sys.stderr)
 
         results_by_position[position] = {
             "n_instructions": len(ids), "n_instruction_clusters": len(clusters),
@@ -201,9 +215,9 @@ def run(model_alias, primary_layer, extraction_dir, output_dir):
             "n_partitions": len(partitions),
             "mean_norms": mean_norms(all_diff_vecs, mechanisms, ids),
             "reliability": reliability,
-            "bootstrap": bootstrap_geometry(all_diff_vecs, mechanisms, CO, MG, clusters, partitions, canonical_idx),
-            "layerwise_sweep_point_estimate_only": layerwise_sweep(
-                plain_acts, placebo_acts, mech_acts, ids, mechanisms, CO, MG, position, n_layers_total),
+            "bootstrap": bootstrap,
+            "layerwise_sweep_point_estimate_only": sweep,
+            "layerwise_sweep_skipped": skip_layerwise_sweep,
         }
 
     os.makedirs(output_dir, exist_ok=True)
@@ -225,8 +239,12 @@ def main():
     parser.add_argument("--primary-layer", type=int, required=True)
     parser.add_argument("--extraction-dir", default=DEFAULT_EXTRACTION_DIR)
     parser.add_argument("--output-dir", default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--skip-layerwise-sweep", action="store_true",
+                         help="Skip the full-layer point-estimate sweep (Sec 4.2 sensitivity check) -- "
+                              "much faster, gives the core bootstrap/reliability/cosine results only. "
+                              "Re-run without this flag later to get the complete record.")
     args = parser.parse_args()
-    run(args.model_alias, args.primary_layer, args.extraction_dir, args.output_dir)
+    run(args.model_alias, args.primary_layer, args.extraction_dir, args.output_dir, args.skip_layerwise_sweep)
 
 
 if __name__ == "__main__":

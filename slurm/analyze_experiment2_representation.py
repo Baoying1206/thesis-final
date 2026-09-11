@@ -196,7 +196,7 @@ def evaluate_minimum_evidence(reliability, cosine_result, leave_one_out, canonic
     }
 
 
-def run_representation(model_alias, primary_layer, extraction_dir, output_dir):
+def run_representation(model_alias, primary_layer, extraction_dir, output_dir, skip_layerwise_sweep=False):
     with open(SAMPLED_PROMPTS_EN_ONLY_PATH, "r", encoding="utf-8") as f:
         pool = json.load(f)
     instruction_en_by_id = {row["id"]: row["instruction_en"] for row in pool}
@@ -211,6 +211,7 @@ def run_representation(model_alias, primary_layer, extraction_dir, output_dir):
 
     by_position = {}
     for position in (PRIMARY_TOKEN_POSITION, SECONDARY_TOKEN_POSITION):
+        print(f"[{model_alias}] position={position}: computing diff vectors...", file=sys.stderr)
         all_diff_vecs = {m: diff_vecs(neutral_acts, cond_acts[m], ids, primary_layer, position) for m in NON_NEUTRAL_CONDITIONS}
         vecs = {m: aggregate(torch.stack([all_diff_vecs[m][i] for i in ids])) for m in NON_NEUTRAL_CONDITIONS}
 
@@ -234,11 +235,25 @@ def run_representation(model_alias, primary_layer, extraction_dir, output_dir):
         ranks = rank_partitions(all_T)
         canonical_rank = ranks[canonical_idx]
 
+        print(f"[{model_alias}] position={position}: point estimates done "
+              f"(S_CO={S_co:.4f} S_MG={S_mg:.4f} S_Context={S_ctx:.4f} canonical_rank={canonical_rank}/{len(partitions)})",
+              file=sys.stderr)
+
+        print(f"[{model_alias}] position={position}: split-half reliability ({SPLIT_HALF_REPS} reps x {len(NON_NEUTRAL_CONDITIONS)} conditions)...", file=sys.stderr)
         reliability = {m: split_half_reliability(all_diff_vecs[m], ids, n_reps=SPLIT_HALF_REPS, seed=SPLIT_HALF_SEED) for m in NON_NEUTRAL_CONDITIONS}
         leave_one_out = context_leave_one_out(all_diff_vecs, ids)
         minimum_evidence = evaluate_minimum_evidence(reliability, cosine_result, leave_one_out, canonical_rank)
+
+        print(f"[{model_alias}] position={position}: bootstrap ({N_BOOTSTRAP} reps x {len(partitions)} partitions)...", file=sys.stderr)
         bootstrap = bootstrap_representation(all_diff_vecs, clusters, partitions, canonical_idx)
         n_layers_total = cond_acts[NON_NEUTRAL_CONDITIONS[0]][ids[0]][position].shape[0]
+
+        sweep = None
+        if not skip_layerwise_sweep:
+            print(f"[{model_alias}] position={position}: layerwise sweep ({n_layers_total} layers x {len(partitions)} partitions, point-estimate only)...", file=sys.stderr)
+            sweep = layerwise_sweep(neutral_acts, cond_acts, ids, position, n_layers_total, partitions, canonical_idx)
+        else:
+            print(f"[{model_alias}] position={position}: --skip-layerwise-sweep set, skipping ({n_layers_total} layers)", file=sys.stderr)
 
         by_position[position] = {
             "n_instructions": len(ids), "n_instruction_clusters": len(clusters),
@@ -247,8 +262,8 @@ def run_representation(model_alias, primary_layer, extraction_dir, output_dir):
             "mean_norms": mean_norms(all_diff_vecs, NON_NEUTRAL_CONDITIONS, ids),
             "reliability": reliability, "context_leave_one_out": leave_one_out,
             "minimum_evidence": minimum_evidence, "bootstrap": bootstrap,
-            "layerwise_sweep_point_estimate_only": layerwise_sweep(
-                neutral_acts, cond_acts, ids, position, n_layers_total, partitions, canonical_idx),
+            "layerwise_sweep_point_estimate_only": sweep,
+            "layerwise_sweep_skipped": skip_layerwise_sweep,
         }
 
     os.makedirs(output_dir, exist_ok=True)
@@ -355,9 +370,13 @@ def main():
     parser.add_argument("--skip-validation-correlation", action="store_true",
                          help="Only run the direction_ids representation analysis (Sec 6.1); "
                               "skip Sec 6.2 (requires run_formal_behavioral.py's output).")
+    parser.add_argument("--skip-layerwise-sweep", action="store_true",
+                         help="Skip the full-layer point-estimate sweep (280 partitions x n_layers) -- "
+                              "much faster, gives the core bootstrap/reliability/cosine results only. "
+                              "Re-run without this flag later to get the complete record.")
     args = parser.parse_args()
 
-    run_representation(args.model_alias, args.primary_layer, args.extraction_dir, args.output_dir)
+    run_representation(args.model_alias, args.primary_layer, args.extraction_dir, args.output_dir, args.skip_layerwise_sweep)
     if not args.skip_validation_correlation:
         run_validation_correlation(args.model_alias, args.primary_layer, args.extraction_dir, args.behavioral_dir, args.output_dir)
 
