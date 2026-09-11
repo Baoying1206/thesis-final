@@ -198,8 +198,25 @@ only, no model weights) validates all 300 x 8 = 2,400 rows' rendering
 and token-position location per model; confirmed locally: Qwen2.5-7B-Instruct
 2,400/2,400 pass (via HF Hub); Meta-Llama-3.1-8B-Instruct and
 gemma-2-9b-it untested here (gated, no token on this machine) -- same
-constraint as Sec 11.1, resolved there by running on the cluster. The
-GPU extraction itself has not been run anywhere yet.
+constraint as Sec 11.1, resolved there by running on the cluster.
+
+**Round 12: real GPU extraction validated for all 3 models (2026-09-11)**,
+on `slurm-node-gpu-01` (1x NVIDIA L40S, confirmed via `nvidia-smi`,
+`--partition=gpu --account=slurm-students`). `--limit 8` (all 8
+conditions for the first `direction_ids` instruction, including
+`mg_encoding_obfuscation`'s Base64 transform and `mg_payload_splitting`'s
+split -- the two conditions the earlier `--limit 4` run never exercised,
+producing empty `(0 instructions)` `.pt` files for them, a false-negative
+risk of an under-scoped smoke test rather than a script defect) --
+Qwen2.5-7B-Instruct, Meta-Llama-3.1-8B-Instruct, and gemma-2-9b-it all
+`8/8` real forward passes, all `.pt` files populated. One earlier `--limit
+4` run was accidentally executed on a CPU-only node (`slurm-node-cpu-03`,
+no `srun --partition=gpu`) and silently succeeded there too (torch/
+transformers fall back to CPU without erroring) -- a real, now-documented
+risk: this pipeline does not fail loudly if GPU allocation is missing,
+so always confirm `nvidia-smi` shows the GPU before trusting a timing- or
+memory-sensitive run. **Still not run: the full 300 x 8 extraction for
+any model** -- only 8-row smoke tests so far.
 
 ### 4.3 Analysis
 

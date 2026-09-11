@@ -108,9 +108,13 @@ out of `run_pilot_llama.py` into `slurm/_behavioral_shared.py` so the
 pilot and the formal run share identical logic and cannot silently
 diverge.
 
-**No GPU path across any of the 4 drivers has been run anywhere yet**
--- that's the next concrete step, on the cluster
-(`FINAL_STUDY_PROTOCOL.md` Sec 13).
+**Round 12**: `slurm/extract_experiment1_activations.py` validated on
+real GPU (`slurm-node-gpu-01`, L40S) for all 3 models -- `--limit 8`
+(all 8 conditions) `8/8` real forward passes each, `.pt` files populated
+correctly including the two conditions with special placeholder
+transforms. The other 3 drivers (Exp2 extraction, pilot, formal
+behavioral) have not been run against real GPU yet -- that's the next
+concrete step (`FINAL_STUDY_PROTOCOL.md` Sec 4.2/13).
 
 Statistical analysis code also now exists: `src/stats_shared.py`
 (bootstrap, Holm correction, partition enumeration/ranking, split-half
