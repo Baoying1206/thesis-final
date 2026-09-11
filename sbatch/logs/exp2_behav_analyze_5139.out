@@ -1,0 +1,7 @@
+Model: Qwen2.5-7B-Instruct  Start: Fri 11 Sep 19:33:45 CEST 2026
+{
+  "result_status": "EXPERIMENT2_BEHAVIORAL_ANALYSIS_DONE",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "output_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/experiment2_analysis/Qwen2.5-7B-Instruct_experiment2_behavioral.json"
+}
+Done: Fri 11 Sep 19:33:49 CEST 2026

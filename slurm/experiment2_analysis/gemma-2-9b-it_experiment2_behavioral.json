@@ -1,0 +1,396 @@
+{
+  "result_status": "EXPERIMENT2_BEHAVIORAL_ANALYSIS",
+  "model_alias": "gemma-2-9b-it",
+  "n_instructions": 72,
+  "n_instruction_clusters": 72,
+  "primary_metric": "strict_success",
+  "note": "A significant NRR delta is never reported or treated as jailbreak success -- strict_success is the sole primary outcome.",
+  "per_condition": {
+    "co_prefix_injection": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "co_refusal_suppression": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "co_persona_roleplay": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "mg_encoding_obfuscation": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "mg_payload_splitting": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "mg_distractors_negated": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "context_persona": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "context_authority": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "context_fictional": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    }
+  },
+  "per_group": {
+    "CO": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "MG": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    },
+    "Context": {
+      "strict_success": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "NRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      },
+      "HRR": {
+        "point_delta": null,
+        "ci_2_5": null,
+        "ci_97_5": null,
+        "p_two_sided": null,
+        "n_boot_valid": 0,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": null
+      }
+    }
+  }
+}
