@@ -236,6 +236,221 @@ def holm_correction(named_pvalues):
     return {named_pvalues[i][0]: adjusted[i] for i in range(m)}
 
 
+def bootstrap_did_scalar(metric_P, metric_N, metric_S, metric_C, clusters, n_boot=2000, seed=20260828):
+    """Difference-in-differences bootstrap for Study B's behavioral
+    estimand (FINAL_STUDY_PROTOCOL.md Sec 5R.4.5/5R.5, Round 17):
+    I = (P-N) - (S-C), paired by instruction id, resampling
+    instruction-normalized-text clusters (Sec 8's frozen unit).
+    metric_P/N/S/C: {instruction_id: 0/1 float}. Every bootstrap
+    replicate recomputes I from that replicate's own resampled ids
+    (Sec 5R.2's frozen rule) -- there is no fixed component reused
+    across replicates."""
+    rng = random.Random(seed)
+    n_clusters = len(clusters)
+    all_ids = list(metric_N.keys())
+
+    def value_for(metric, ids):
+        vals = [metric[i] for i in ids if metric.get(i) is not None]
+        return sum(vals) / len(vals) if vals else None
+
+    def did(ids):
+        p, n, s, c = value_for(metric_P, ids), value_for(metric_N, ids), value_for(metric_S, ids), value_for(metric_C, ids)
+        if None in (p, n, s, c):
+            return None
+        return (p - n) - (s - c)
+
+    point = did(all_ids)
+    deltas = []
+    for _ in range(n_boot):
+        draws = [clusters[rng.randrange(n_clusters)] for _ in range(n_clusters)]
+        resampled_ids = [i for cluster in draws for i in cluster]
+        d = did(resampled_ids)
+        if d is not None:
+            deltas.append(d)
+
+    if not deltas:
+        return {"point_I": point, "ci_2_5": None, "ci_97_5": None, "p_two_sided": None,
+                "n_boot_valid": 0, "n_boot": n_boot, "resample_unit": "instruction_normalized_text_cluster"}
+
+    deltas_sorted = sorted(deltas)
+    n = len(deltas_sorted)
+    return {
+        "point_I": point,
+        "ci_2_5": deltas_sorted[int(0.025 * n)], "ci_97_5": deltas_sorted[min(int(0.975 * n), n - 1)],
+        "p_two_sided": bootstrap_two_sided_p(deltas),
+        "n_boot_valid": n, "n_boot": n_boot,
+        "resample_unit": "instruction_normalized_text_cluster",
+    }
+
+
+def bootstrap_did_vector(vecs_P, vecs_N, vecs_S, vecs_C, clusters, n_boot=2000, seed=20260828,
+                          extra_cos_targets=None):
+    """Representational difference-in-differences bootstrap (Sec
+    5R.4.5, Round 17): I_vec = (mean(P)-mean(N)) - (mean(S)-mean(C)),
+    paired by instruction id. Reports the point estimate vector, a
+    bootstrap CI on ||I_vec|| (magnitude -- NOT a formal test that the
+    vector differs from a null/permutation baseline; that is a scope
+    limitation, not implemented this round), and, if
+    `extra_cos_targets` is given ({name: unit_vector}), the bootstrap
+    distribution of cos(I_vec_replicate, target) for each target --
+    e.g. Study A's frozen p_CO/p_MG directions (Sec 5R.4.7). Every
+    bootstrap replicate recomputes I_vec AND every cosine from that
+    replicate's own resampled ids (Sec 5R.2's frozen rule) -- the
+    target directions passed in `extra_cos_targets` are themselves
+    fixed external references (Study A is not re-run), so only the
+    LEFT-hand side of each cosine is resampled, which is correct: the
+    frozen CO/MG directions are constants here, not something Study B
+    estimates."""
+    rng = random.Random(seed)
+    n_clusters = len(clusters)
+    all_ids = list(vecs_N.keys())
+    extra_cos_targets = extra_cos_targets or {}
+
+    def mean_vec(vecs, ids):
+        present = [vecs[i] for i in ids if i in vecs]
+        if not present:
+            return None
+        return torch.stack(present).mean(0)
+
+    def compute_I(ids):
+        p, n, s, c = mean_vec(vecs_P, ids), mean_vec(vecs_N, ids), mean_vec(vecs_S, ids), mean_vec(vecs_C, ids)
+        if p is None or n is None or s is None or c is None:
+            return None
+        return (p - n) - (s - c)
+
+    point_I = compute_I(all_ids)
+    norms, cos_dists = [], {name: [] for name in extra_cos_targets}
+    for _ in range(n_boot):
+        draws = [clusters[rng.randrange(n_clusters)] for _ in range(n_clusters)]
+        resampled_ids = [i for cluster in draws for i in cluster]
+        I_rep = compute_I(resampled_ids)
+        if I_rep is None:
+            continue
+        norms.append(I_rep.norm().item())
+        for name, target in extra_cos_targets.items():
+            cos_dists[name].append(cos(I_rep, target))
+
+    result = {
+        "point_I_norm": point_I.norm().item() if point_I is not None else None,
+        "n_boot_valid": len(norms), "n_boot": n_boot,
+        "resample_unit": "instruction_normalized_text_cluster",
+    }
+    if norms:
+        norms_sorted = sorted(norms)
+        n = len(norms_sorted)
+        result["norm_ci_2_5"] = norms_sorted[int(0.025 * n)]
+        result["norm_ci_97_5"] = norms_sorted[min(int(0.975 * n), n - 1)]
+    for name, dists in cos_dists.items():
+        if not dists:
+            continue
+        dists_sorted = sorted(dists)
+        n = len(dists_sorted)
+        result[f"cos_{name}"] = {
+            "point": cos(point_I, extra_cos_targets[name]) if point_I is not None else None,
+            "ci_2_5": dists_sorted[int(0.025 * n)], "ci_97_5": dists_sorted[min(int(0.975 * n), n - 1)],
+        }
+    return result
+
+
+def bootstrap_vector_diff(vecs_a, vecs_b, clusters, n_boot=2000, seed=20260828):
+    """Simple paired vector-difference bootstrap: d = mean(a) - mean(b),
+    reporting ||d||'s point estimate and CI. Used for Study B's `r_f`
+    (Sec 5R.4.4 -- the raw, NOT-DiD-adjusted residual, explicitly kept
+    only as a secondary/confounded quantity alongside the primary
+    `bootstrap_did_vector` estimand). Every replicate recomputes from
+    its own resampled ids, same rule as the rest of this module."""
+    rng = random.Random(seed)
+    n_clusters = len(clusters)
+    all_ids = list(vecs_b.keys())
+
+    def mean_vec(vecs, ids):
+        present = [vecs[i] for i in ids if i in vecs]
+        return torch.stack(present).mean(0) if present else None
+
+    def diff(ids):
+        a, b = mean_vec(vecs_a, ids), mean_vec(vecs_b, ids)
+        return (a - b) if (a is not None and b is not None) else None
+
+    point = diff(all_ids)
+    norms = []
+    for _ in range(n_boot):
+        draws = [clusters[rng.randrange(n_clusters)] for _ in range(n_clusters)]
+        resampled_ids = [i for cluster in draws for i in cluster]
+        d = diff(resampled_ids)
+        if d is not None:
+            norms.append(d.norm().item())
+
+    result = {"point_norm": point.norm().item() if point is not None else None,
+              "n_boot_valid": len(norms), "n_boot": n_boot,
+              "resample_unit": "instruction_normalized_text_cluster"}
+    if norms:
+        norms_sorted = sorted(norms)
+        n = len(norms_sorted)
+        result["norm_ci_2_5"] = norms_sorted[int(0.025 * n)]
+        result["norm_ci_97_5"] = norms_sorted[min(int(0.975 * n), n - 1)]
+    return result
+
+
+def point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=2000, seed=20260828):
+    """Sec 5R.4.6's activation-behavior connection: does the projection
+    z[i] predict strict_success[i]? z_by_id/outcome_by_id:
+    {instruction_id: float / 0-or-1}. Reports the point-biserial
+    correlation (Pearson correlation between z and the binary outcome)
+    with a bootstrap CI, plus the mean-z difference between the
+    success and failure groups (also bootstrapped) -- two of the three
+    checks Sec 5R.4.6 asks for; logistic regression is not implemented
+    here (would need a numerical solver dependency this module
+    otherwise avoids) -- flagged as a scope limitation, not silently
+    dropped."""
+    rng = random.Random(seed)
+    n_clusters = len(clusters)
+
+    def corr_and_group_diff(ids):
+        zs = [z_by_id[i] for i in ids if i in z_by_id and i in outcome_by_id]
+        ys = [outcome_by_id[i] for i in ids if i in z_by_id and i in outcome_by_id]
+        n = len(zs)
+        if n < 2:
+            return None, None
+        mean_z, mean_y = sum(zs) / n, sum(ys) / n
+        cov = sum((zs[k] - mean_z) * (ys[k] - mean_y) for k in range(n)) / n
+        var_z = sum((v - mean_z) ** 2 for v in zs) / n
+        var_y = sum((v - mean_y) ** 2 for v in ys) / n
+        corr = cov / ((var_z * var_y) ** 0.5) if var_z > 0 and var_y > 0 else None
+        succ = [zs[k] for k in range(n) if ys[k] == 1]
+        fail = [zs[k] for k in range(n) if ys[k] == 0]
+        group_diff = (sum(succ) / len(succ) - sum(fail) / len(fail)) if succ and fail else None
+        return corr, group_diff
+
+    all_ids = list(outcome_by_id.keys())
+    point_corr, point_group_diff = corr_and_group_diff(all_ids)
+
+    corrs, group_diffs = [], []
+    for _ in range(n_boot):
+        draws = [clusters[rng.randrange(n_clusters)] for _ in range(n_clusters)]
+        resampled_ids = [i for cluster in draws for i in cluster]
+        c, g = corr_and_group_diff(resampled_ids)
+        if c is not None:
+            corrs.append(c)
+        if g is not None:
+            group_diffs.append(g)
+
+    def ci(vals):
+        if not vals:
+            return None, None
+        s = sorted(vals)
+        n = len(s)
+        return s[int(0.025 * n)], s[min(int(0.975 * n), n - 1)]
+
+    corr_lo, corr_hi = ci(corrs)
+    diff_lo, diff_hi = ci(group_diffs)
+    return {
+        "point_biserial_r": point_corr, "r_ci_2_5": corr_lo, "r_ci_97_5": corr_hi,
+        "point_group_diff": point_group_diff, "group_diff_ci_2_5": diff_lo, "group_diff_ci_97_5": diff_hi,
+        "n_boot_valid_r": len(corrs), "n_boot_valid_group_diff": len(group_diffs), "n_boot": n_boot,
+        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+    }
+
+
 def paired_bootstrap_delta(metric_pos, metric_neutral, clusters, n_boot=2000, seed=20260828):
     """metric_pos/metric_neutral: {instruction_id: 0/1 or float or None}.
     clusters: from load_instruction_clusters(). Resamples clusters with
