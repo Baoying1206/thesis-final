@@ -1,6 +1,7 @@
 {
   "result_status": "STUDY_B_BEHAVIORAL_ANALYSIS",
   "model_alias": "gemma-2-9b-it",
+  "note": "I_f_ASR_primary_DiD.p_holm_adjusted is Holm-corrected across this model's 3 families (Sec 5R.6) -- never compare the raw p_two_sided across families without it.",
   "by_family": {
     "persona": {
       "n_instructions": 72,
@@ -11,7 +12,8 @@
         "p_two_sided": 1.0,
         "n_boot_valid": 2000,
         "n_boot": 2000,
-        "resample_unit": "instruction_normalized_text_cluster"
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": 1.0
       },
       "per_condition_rates": {
         "P": {
@@ -53,7 +55,8 @@
         "p_two_sided": 0.779,
         "n_boot_valid": 2000,
         "n_boot": 2000,
-        "resample_unit": "instruction_normalized_text_cluster"
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": 1.0
       },
       "per_condition_rates": {
         "P": {
@@ -95,7 +98,8 @@
         "p_two_sided": 0.779,
         "n_boot_valid": 2000,
         "n_boot": 2000,
-        "resample_unit": "instruction_normalized_text_cluster"
+        "resample_unit": "instruction_normalized_text_cluster",
+        "p_holm_adjusted": 1.0
       },
       "per_condition_rates": {
         "P": {

@@ -2,7 +2,7 @@
   "result_status": "STUDY_B_ACTIVATION_BEHAVIOR_CONNECTION",
   "model_alias": "Qwen2.5-7B-Instruct",
   "primary_layer": 16,
-  "note": "d_hat[f] estimated from direction_ids ONLY (Sec 5R.7 firewall); z[i] and strict_success both from validation_ids.",
+  "note": "d_hat[f] estimated from direction_ids ONLY (Sec 5R.7 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across this model's 3 families (Sec 5R.6).",
   "by_family": {
     "persona": {
       "n_instructions": 72,
@@ -10,13 +10,16 @@
         "point_biserial_r": -0.09717015479822176,
         "r_ci_2_5": -0.4736828334190996,
         "r_ci_97_5": 0.22625055545160516,
+        "r_p_two_sided": 0.6486486486486487,
         "point_group_diff": -0.5824863978794643,
         "group_diff_ci_2_5": -2.447497381680254,
         "group_diff_ci_97_5": 1.283693125550176,
+        "group_diff_p_two_sided": 0.6486486486486487,
         "n_boot_valid_r": 1739,
         "n_boot_valid_group_diff": 1739,
         "n_boot": 2000,
-        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only"
+        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+        "r_p_holm_adjusted": 1.0
       }
     },
     "authority": {
@@ -25,13 +28,16 @@
         "point_biserial_r": -0.06122865470990756,
         "r_ci_2_5": -0.26573353056960536,
         "r_ci_97_5": 0.19343163009412034,
+        "r_p_two_sided": 0.5865043125317098,
         "point_group_diff": -0.24040670955882337,
         "group_diff_ci_2_5": -1.194817341549296,
         "group_diff_ci_97_5": 1.053257042253521,
+        "group_diff_p_two_sided": 0.5865043125317098,
         "n_boot_valid_r": 1971,
         "n_boot_valid_group_diff": 1971,
         "n_boot": 2000,
-        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only"
+        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+        "r_p_holm_adjusted": 1.0
       }
     },
     "fictional": {
@@ -40,13 +46,16 @@
         "point_biserial_r": 0.08172291305818534,
         "r_ci_2_5": -0.13404914795114917,
         "r_ci_97_5": 0.3005924167742924,
+        "r_p_two_sided": 0.453,
         "point_group_diff": 0.1910224780701748,
         "group_diff_ci_2_5": -0.3188870614035082,
         "group_diff_ci_97_5": 0.683867296918768,
+        "group_diff_p_two_sided": 0.453,
         "n_boot_valid_r": 2000,
         "n_boot_valid_group_diff": 2000,
         "n_boot": 2000,
-        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only"
+        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+        "r_p_holm_adjusted": 1.0
       }
     }
   }
