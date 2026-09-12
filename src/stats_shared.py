@@ -445,7 +445,9 @@ def point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=2000, seed
     diff_lo, diff_hi = ci(group_diffs)
     return {
         "point_biserial_r": point_corr, "r_ci_2_5": corr_lo, "r_ci_97_5": corr_hi,
+        "r_p_two_sided": bootstrap_two_sided_p(corrs) if corrs else None,
         "point_group_diff": point_group_diff, "group_diff_ci_2_5": diff_lo, "group_diff_ci_97_5": diff_hi,
+        "group_diff_p_two_sided": bootstrap_two_sided_p(group_diffs) if group_diffs else None,
         "n_boot_valid_r": len(corrs), "n_boot_valid_group_diff": len(group_diffs), "n_boot": n_boot,
         "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
     }

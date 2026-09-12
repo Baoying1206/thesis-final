@@ -52,7 +52,7 @@ SRC_DIR = os.path.join(REPO_ROOT, "src")
 sys.path.insert(0, SRC_DIR)
 
 from stats_shared import (  # noqa: E402
-    aggregate, cos, load_instruction_clusters,
+    aggregate, cos, load_instruction_clusters, holm_correction,
     bootstrap_did_scalar, bootstrap_did_vector, bootstrap_vector_diff, point_biserial_bootstrap,
 )
 from study_b_loader import FAMILIES, condition_name  # noqa: E402
@@ -250,12 +250,23 @@ def run_behavioral(model_alias, study_b_dir, output_dir):
             "per_condition_rates": per_condition_rates,
         }
 
+    # Sec 5R.6: Holm correction WITHIN this model, across its 3 families'
+    # I_f^ASR p-values -- never pooled across models. Added this round
+    # after real results showed borderline p-values (e.g. p=0.066) that
+    # must not be read as "near-significant" without correction.
+    named_pvalues = [(fam, family_results[fam]["I_f_ASR_primary_DiD"]["p_two_sided"])
+                      for fam in FAMILIES if family_results[fam]["I_f_ASR_primary_DiD"]["p_two_sided"] is not None]
+    adjusted = holm_correction(named_pvalues)
+    for fam, p_holm in adjusted.items():
+        family_results[fam]["I_f_ASR_primary_DiD"]["p_holm_adjusted"] = p_holm
+
     os.makedirs(output_dir, exist_ok=True)
     out_path = os.path.join(output_dir, f"{model_alias}_study_b_behavioral.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump({
             "result_status": "STUDY_B_BEHAVIORAL_ANALYSIS",
             "model_alias": model_alias,
+            "note": "I_f_ASR_primary_DiD.p_holm_adjusted is Holm-corrected across this model's 3 families (Sec 5R.6) -- never compare the raw p_two_sided across families without it.",
             "by_family": family_results,
         }, f, indent=2, ensure_ascii=False)
     print(json.dumps({"result_status": "STUDY_B_BEHAVIORAL_DONE", "model_alias": model_alias, "output_path": out_path}, indent=2))
@@ -308,13 +319,24 @@ def run_activation_behavior_connection(model_alias, primary_layer, study_b_dir, 
         connection = point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=N_BOOTSTRAP, seed=BOOTSTRAP_SEED)
         family_results[family] = {"n_instructions": len(val_ids_common), "z_vs_strict_success": connection}
 
+    # Sec 5R.6: Holm correction WITHIN this model, across its 3 families'
+    # r_p_two_sided (point-biserial correlation p-values) -- same
+    # discipline as run_behavioral()'s I_f^ASR correction, added this
+    # round after real borderline results (e.g. Llama's z-correlations
+    # sitting right at the edge of significance) made this necessary.
+    named_pvalues = [(fam, family_results[fam]["z_vs_strict_success"]["r_p_two_sided"])
+                      for fam in FAMILIES if family_results[fam]["z_vs_strict_success"]["r_p_two_sided"] is not None]
+    adjusted = holm_correction(named_pvalues)
+    for fam, p_holm in adjusted.items():
+        family_results[fam]["z_vs_strict_success"]["r_p_holm_adjusted"] = p_holm
+
     os.makedirs(output_dir, exist_ok=True)
     out_path = os.path.join(output_dir, f"{model_alias}_study_b_activation_behavior_connection.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump({
             "result_status": "STUDY_B_ACTIVATION_BEHAVIOR_CONNECTION",
             "model_alias": model_alias, "primary_layer": primary_layer,
-            "note": "d_hat[f] estimated from direction_ids ONLY (Sec 5R.7 firewall); z[i] and strict_success both from validation_ids.",
+            "note": "d_hat[f] estimated from direction_ids ONLY (Sec 5R.7 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across this model's 3 families (Sec 5R.6).",
             "by_family": family_results,
         }, f, indent=2, ensure_ascii=False)
     print(json.dumps({"result_status": "STUDY_B_ACTIVATION_BEHAVIOR_CONNECTION_DONE", "model_alias": model_alias, "output_path": out_path}, indent=2))
