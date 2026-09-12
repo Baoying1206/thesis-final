@@ -21,6 +21,12 @@
 # clean before submitting the validation_ids array (Sec 5.5/5R.8
 # discipline, unchanged).
 #
+# IDS_KEY=test_ids (Round 19 confirmatory test, Sec 5R.11): FAMILIES is
+# REQUIRED (no default, matches the underlying script's own required
+# --families flag) -- this is a deliberate friction point for reading
+# the previously-sealed test_ids set:
+#   sbatch --export=MODEL_IDX=0,IDS_KEY=test_ids,FAMILIES=fictional sbatch/extract_study_b_activations.sh
+#
 # --time is REJECTED by this cluster's sbatch config (see
 # run_formal_behavioral.sh's comment for the exact error) -- if a job
 # gets SIGTERM'd mid-run (matches the real Gemma incident from
@@ -44,15 +50,26 @@ else
 fi
 BATCH_SIZE=${BATCH_SIZE:-$DEFAULT_BATCH_SIZE}
 
-echo "Model: $MODEL_ALIAS  ids_key=$IDS_KEY  batch_size=$BATCH_SIZE  Start: $(date)"
+if [ "$IDS_KEY" = "test_ids" ] && [ -z "$FAMILIES" ]; then
+    echo "ERROR: IDS_KEY=test_ids requires FAMILIES to be set explicitly (e.g. FAMILIES=fictional) -- no default, by design (Sec 5R.11)." >&2
+    exit 1
+fi
+
+echo "Model: $MODEL_ALIAS  ids_key=$IDS_KEY  batch_size=$BATCH_SIZE  families=${FAMILIES:-all} Start: $(date)"
 
 cd ~/thesis-final
 mkdir -p sbatch/logs
 source ~/thesis_experiment/Multilingual-Refusal/venv/bin/activate
 
+FAMILIES_FLAG=""
+if [ -n "$FAMILIES" ]; then
+    FAMILIES_FLAG="--families $FAMILIES"
+fi
+
 python3 slurm/extract_study_b_activations.py \
     --model-alias "$MODEL_ALIAS" \
     --ids-key     "$IDS_KEY" \
-    --batch-size  "$BATCH_SIZE"
+    --batch-size  "$BATCH_SIZE" \
+    $FAMILIES_FLAG
 
 echo "Done: $(date)"
