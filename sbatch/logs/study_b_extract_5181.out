@@ -1,0 +1,367 @@
+Model: gemma-2-9b-it  ids_key=validation_ids  batch_size=8  Start: Sat 12 Sep 06:37:44 CEST 2026
+[gemma-2-9b-it] loading tokenizer + model: /home/h24/baga0553/models/gemma-2-9b-it
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.25it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.28it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.28it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.41it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.35it/s]
+[gemma-2-9b-it] single-turn conditions (S/C): 432 rows
+  generating real responses for 432 S/C rows (batched)
+    generated 8/432
+    generated 16/432
+    generated 24/432
+    generated 32/432
+    generated 40/432
+    generated 48/432
+    generated 56/432
+    generated 64/432
+    generated 72/432
+    generated 80/432
+    generated 88/432
+    generated 96/432
+    generated 104/432
+    generated 112/432
+    generated 120/432
+    generated 128/432
+    generated 136/432
+    generated 144/432
+    generated 152/432
+    generated 160/432
+    generated 168/432
+    generated 176/432
+    generated 184/432
+    generated 192/432
+    generated 200/432
+    generated 208/432
+    generated 216/432
+    generated 224/432
+    generated 232/432
+    generated 240/432
+    generated 248/432
+    generated 256/432
+    generated 264/432
+    generated 272/432
+    generated 280/432
+    generated 288/432
+    generated 296/432
+    generated 304/432
+    generated 312/432
+    generated 320/432
+    generated 328/432
+    generated 336/432
+    generated 344/432
+    generated 352/432
+    generated 360/432
+    generated 368/432
+    generated 376/432
+    generated 384/432
+    generated 392/432
+    generated 400/432
+    generated 408/432
+    generated 416/432
+    generated 424/432
+    generated 432/432
+[gemma-2-9b-it] trajectory conditions (P/N): 432 rows x 4 stages
+  stage 1: appending user turn + extracting boundary
+  stage 1: generating real responses (432 rows)
+    generated 8/432
+    generated 16/432
+    generated 24/432
+    generated 32/432
+    generated 40/432
+    generated 48/432
+    generated 56/432
+    generated 64/432
+    generated 72/432
+    generated 80/432
+    generated 88/432
+    generated 96/432
+    generated 104/432
+    generated 112/432
+    generated 120/432
+    generated 128/432
+    generated 136/432
+    generated 144/432
+    generated 152/432
+    generated 160/432
+    generated 168/432
+    generated 176/432
+    generated 184/432
+    generated 192/432
+    generated 200/432
+    generated 208/432
+    generated 216/432
+    generated 224/432
+    generated 232/432
+    generated 240/432
+    generated 248/432
+    generated 256/432
+    generated 264/432
+    generated 272/432
+    generated 280/432
+    generated 288/432
+    generated 296/432
+    generated 304/432
+    generated 312/432
+    generated 320/432
+    generated 328/432
+    generated 336/432
+    generated 344/432
+    generated 352/432
+    generated 360/432
+    generated 368/432
+    generated 376/432
+    generated 384/432
+    generated 392/432
+    generated 400/432
+    generated 408/432
+    generated 416/432
+    generated 424/432
+    generated 432/432
+  stage 2: appending user turn + extracting boundary
+  stage 2: generating real responses (432 rows)
+    generated 8/432
+    generated 16/432
+    generated 24/432
+    generated 32/432
+    generated 40/432
+    generated 48/432
+    generated 56/432
+    generated 64/432
+    generated 72/432
+    generated 80/432
+    generated 88/432
+    generated 96/432
+    generated 104/432
+    generated 112/432
+    generated 120/432
+    generated 128/432
+    generated 136/432
+    generated 144/432
+    generated 152/432
+    generated 160/432
+    generated 168/432
+    generated 176/432
+    generated 184/432
+    generated 192/432
+    generated 200/432
+    generated 208/432
+    generated 216/432
+    generated 224/432
+    generated 232/432
+    generated 240/432
+    generated 248/432
+    generated 256/432
+    generated 264/432
+    generated 272/432
+    generated 280/432
+    generated 288/432
+    generated 296/432
+    generated 304/432
+    generated 312/432
+    generated 320/432
+    generated 328/432
+    generated 336/432
+    generated 344/432
+    generated 352/432
+    generated 360/432
+    generated 368/432
+    generated 376/432
+    generated 384/432
+    generated 392/432
+    generated 400/432
+    generated 408/432
+    generated 416/432
+    generated 424/432
+    generated 432/432
+  stage 3: appending user turn + extracting boundary
+  stage 3: generating real responses (432 rows)
+    generated 8/432
+    generated 16/432
+    generated 24/432
+    generated 32/432
+    generated 40/432
+    generated 48/432
+    generated 56/432
+    generated 64/432
+    generated 72/432
+    generated 80/432
+    generated 88/432
+    generated 96/432
+    generated 104/432
+    generated 112/432
+    generated 120/432
+    generated 128/432
+    generated 136/432
+    generated 144/432
+    generated 152/432
+    generated 160/432
+    generated 168/432
+    generated 176/432
+    generated 184/432
+    generated 192/432
+    generated 200/432
+    generated 208/432
+    generated 216/432
+    generated 224/432
+    generated 232/432
+    generated 240/432
+    generated 248/432
+    generated 256/432
+    generated 264/432
+    generated 272/432
+    generated 280/432
+    generated 288/432
+    generated 296/432
+    generated 304/432
+    generated 312/432
+    generated 320/432
+    generated 328/432
+    generated 336/432
+    generated 344/432
+    generated 352/432
+    generated 360/432
+    generated 368/432
+    generated 376/432
+    generated 384/432
+    generated 392/432
+    generated 400/432
+    generated 408/432
+    generated 416/432
+    generated 424/432
+    generated 432/432
+  stage 4: appending user turn + extracting boundary
+  stage 4: generating real responses (432 rows)
+    generated 8/432
+    generated 16/432
+    generated 24/432
+    generated 32/432
+    generated 40/432
+    generated 48/432
+    generated 56/432
+    generated 64/432
+    generated 72/432
+    generated 80/432
+    generated 88/432
+    generated 96/432
+    generated 104/432
+    generated 112/432
+    generated 120/432
+    generated 128/432
+    generated 136/432
+    generated 144/432
+    generated 152/432
+    generated 160/432
+    generated 168/432
+    generated 176/432
+    generated 184/432
+    generated 192/432
+    generated 200/432
+    generated 208/432
+    generated 216/432
+    generated 224/432
+    generated 232/432
+    generated 240/432
+    generated 248/432
+    generated 256/432
+    generated 264/432
+    generated 272/432
+    generated 280/432
+    generated 288/432
+    generated 296/432
+    generated 304/432
+    generated 312/432
+    generated 320/432
+    generated 328/432
+    generated 336/432
+    generated 344/432
+    generated 352/432
+    generated 360/432
+    generated 368/432
+    generated 376/432
+    generated 384/432
+    generated 392/432
+    generated 400/432
+    generated 408/432
+    generated 416/432
+    generated 424/432
+    generated 432/432
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_persona_P_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_persona_N_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_persona_S_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_persona_C_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_authority_P_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_authority_N_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_authority_S_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_authority_C_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_fictional_P_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_fictional_N_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_fictional_S_activations.pt (72 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_fictional_C_activations.pt (72 instructions)
+[gemma-2-9b-it] judging 864 final responses with WildGuard
+Loading WildGuard...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:17<00:17, 17.12s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 11.44s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 12.29s/it]
+  judged 16/864
+  judged 32/864
+  judged 48/864
+  judged 64/864
+  judged 80/864
+  judged 96/864
+  judged 112/864
+  judged 128/864
+  judged 144/864
+  judged 160/864
+  judged 176/864
+  judged 192/864
+  judged 208/864
+  judged 224/864
+  judged 240/864
+  judged 256/864
+  judged 272/864
+  judged 288/864
+  judged 304/864
+  judged 320/864
+  judged 336/864
+  judged 352/864
+  judged 368/864
+  judged 384/864
+  judged 400/864
+  judged 416/864
+  judged 432/864
+  judged 448/864
+  judged 464/864
+  judged 480/864
+  judged 496/864
+  judged 512/864
+  judged 528/864
+  judged 544/864
+  judged 560/864
+  judged 576/864
+  judged 592/864
+  judged 608/864
+  judged 624/864
+  judged 640/864
+  judged 656/864
+  judged 672/864
+  judged 688/864
+  judged 704/864
+  judged 720/864
+  judged 736/864
+  judged 752/864
+  judged 768/864
+  judged 784/864
+  judged 800/864
+  judged 816/864
+  judged 832/864
+  judged 848/864
+  judged 864/864
+{
+  "result_status": "STUDY_B_EXTRACTION_DONE",
+  "model_alias": "gemma-2-9b-it",
+  "ids_key": "validation_ids",
+  "pilot": false,
+  "n_instructions": 72,
+  "n_ok": 2160,
+  "n_fail": 0,
+  "manifest_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_study_b_manifest.jsonl",
+  "responses_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_study_b_responses.jsonl",
+  "judge_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/gemma-2-9b-it_validation_ids_study_b_judge_records.jsonl",
+  "output_dir": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output"
+}
+Done: Sat 12 Sep 07:23:36 CEST 2026

@@ -1,0 +1,153 @@
+Model: gemma-2-9b-it  ids_key=validation_ids  batch_size=16  Start: Sat 12 Sep 06:10:24 CEST 2026
+[gemma-2-9b-it] loading tokenizer + model: /home/h24/baga0553/models/gemma-2-9b-it
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.02s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:01,  1.00it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:00,  1.00it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.11it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.06it/s]
+[gemma-2-9b-it] single-turn conditions (S/C): 432 rows
+  generating real responses for 432 S/C rows (batched)
+    generated 16/432
+    generated 32/432
+    generated 48/432
+    generated 64/432
+    generated 80/432
+    generated 96/432
+    generated 112/432
+    generated 128/432
+    generated 144/432
+    generated 160/432
+    generated 176/432
+    generated 192/432
+    generated 208/432
+    generated 224/432
+    generated 240/432
+    generated 256/432
+    generated 272/432
+    generated 288/432
+    generated 304/432
+    generated 320/432
+    generated 336/432
+    generated 352/432
+    generated 368/432
+    generated 384/432
+    generated 400/432
+    generated 416/432
+    generated 432/432
+[gemma-2-9b-it] trajectory conditions (P/N): 432 rows x 4 stages
+  stage 1: appending user turn + extracting boundary
+  stage 1: generating real responses (432 rows)
+    generated 16/432
+    generated 32/432
+    generated 48/432
+    generated 64/432
+    generated 80/432
+    generated 96/432
+    generated 112/432
+    generated 128/432
+    generated 144/432
+    generated 160/432
+    generated 176/432
+    generated 192/432
+    generated 208/432
+    generated 224/432
+    generated 240/432
+    generated 256/432
+    generated 272/432
+    generated 288/432
+    generated 304/432
+    generated 320/432
+    generated 336/432
+    generated 352/432
+    generated 368/432
+    generated 384/432
+    generated 400/432
+    generated 416/432
+    generated 432/432
+  stage 2: appending user turn + extracting boundary
+  stage 2: generating real responses (432 rows)
+    generated 16/432
+    generated 32/432
+    generated 48/432
+    generated 64/432
+    generated 80/432
+    generated 96/432
+    generated 112/432
+    generated 128/432
+    generated 144/432
+    generated 160/432
+    generated 176/432
+    generated 192/432
+    generated 208/432
+    generated 224/432
+    generated 240/432
+    generated 256/432
+    generated 272/432
+    generated 288/432
+    generated 304/432
+    generated 320/432
+    generated 336/432
+    generated 352/432
+    generated 368/432
+    generated 384/432
+    generated 400/432
+    generated 416/432
+    generated 432/432
+  stage 3: appending user turn + extracting boundary
+  stage 3: generating real responses (432 rows)
+    generated 16/432
+    generated 32/432
+    generated 48/432
+    generated 64/432
+    generated 80/432
+    generated 96/432
+    generated 112/432
+    generated 128/432
+    generated 144/432
+    generated 160/432
+    generated 176/432
+    generated 192/432
+    generated 208/432
+    generated 224/432
+    generated 240/432
+    generated 256/432
+    generated 272/432
+    generated 288/432
+    generated 304/432
+    generated 320/432
+    generated 336/432
+    generated 352/432
+    generated 368/432
+    generated 384/432
+    generated 400/432
+    generated 416/432
+    generated 432/432
+  stage 4: appending user turn + extracting boundary
+  stage 4: generating real responses (432 rows)
+    generated 16/432
+Traceback (most recent call last):
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/extract_study_b_activations.py", line 458, in <module>
+    main()
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/extract_study_b_activations.py", line 454, in main
+    run_extraction(args.model_alias, model_path, primary_layer, args.ids_key, args.output_dir, args.batch_size, args.limit)
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/extract_study_b_activations.py", line 382, in run_extraction
+    run_generation_wave(model, tokenizer, eos_ids, trajectory_rows, batch_size)
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/extract_study_b_activations.py", line 231, in run_generation_wave
+    out = model.generate(
+          ^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/utils.py", line 2024, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/utils.py", line 2982, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/models/gemma2/modeling_gemma2.py", line 1014, in forward
+    logits = logits.float()
+             ^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.25 GiB. GPU 
+Done: Sat 12 Sep 06:33:42 CEST 2026

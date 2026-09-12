@@ -1,0 +1,128 @@
+{
+  "result_status": "STUDY_B_REPRESENTATION_ANALYSIS",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "primary_layer": 16,
+  "note": "5R.4.4's r_f is SECONDARY/confounded (raw context-length effect not controlled); 5R.4.5's I_f_repr is the PRIMARY causal estimand (difference-in-differences).",
+  "by_family": {
+    "persona": {
+      "n_instructions": 300,
+      "M_per_stage": {
+        "1": 29.953125,
+        "2": 26.09375,
+        "3": 19.71875,
+        "4": 10.8515625
+      },
+      "turn_to_turn_cosine_consistency": {
+        "1_to_2": 0.3916015625,
+        "2_to_3": 0.63916015625,
+        "3_to_4": 0.458251953125
+      },
+      "r_f_secondary_confounded": {
+        "point_norm": 29.109375,
+        "n_boot_valid": 2000,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "norm_ci_2_5": 28.859375,
+        "norm_ci_97_5": 29.375
+      },
+      "I_f_repr_primary_DiD": {
+        "point_I_norm": 17.78125,
+        "n_boot_valid": 2000,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "norm_ci_2_5": 17.515625,
+        "norm_ci_97_5": 18.0625,
+        "cos_p_CO": {
+          "point": -0.03729248046875,
+          "ci_2_5": -0.0413818359375,
+          "ci_97_5": -0.032745361328125
+        },
+        "cos_p_MG": {
+          "point": -0.0261383056640625,
+          "ci_2_5": -0.03570556640625,
+          "ci_97_5": -0.0164947509765625
+        }
+      }
+    },
+    "authority": {
+      "n_instructions": 300,
+      "M_per_stage": {
+        "1": 24.125,
+        "2": 17.859375,
+        "3": 14.734375,
+        "4": 8.4921875
+      },
+      "turn_to_turn_cosine_consistency": {
+        "1_to_2": 0.2410888671875,
+        "2_to_3": 0.471923828125,
+        "3_to_4": 0.386474609375
+      },
+      "r_f_secondary_confounded": {
+        "point_norm": 29.65625,
+        "n_boot_valid": 2000,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "norm_ci_2_5": 29.421875,
+        "norm_ci_97_5": 29.90625
+      },
+      "I_f_repr_primary_DiD": {
+        "point_I_norm": 10.84375,
+        "n_boot_valid": 2000,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "norm_ci_2_5": 10.6640625,
+        "norm_ci_97_5": 11.046875,
+        "cos_p_CO": {
+          "point": 0.01139068603515625,
+          "ci_2_5": 0.00653076171875,
+          "ci_97_5": 0.01654052734375
+        },
+        "cos_p_MG": {
+          "point": 0.1529541015625,
+          "ci_2_5": 0.14404296875,
+          "ci_97_5": 0.1619873046875
+        }
+      }
+    },
+    "fictional": {
+      "n_instructions": 300,
+      "M_per_stage": {
+        "1": 25.046875,
+        "2": 21.265625,
+        "3": 16.953125,
+        "4": 11.5078125
+      },
+      "turn_to_turn_cosine_consistency": {
+        "1_to_2": 0.322265625,
+        "2_to_3": 0.6220703125,
+        "3_to_4": 0.5966796875
+      },
+      "r_f_secondary_confounded": {
+        "point_norm": 30.484375,
+        "n_boot_valid": 2000,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "norm_ci_2_5": 30.25,
+        "norm_ci_97_5": 30.71875
+      },
+      "I_f_repr_primary_DiD": {
+        "point_I_norm": 11.9765625,
+        "n_boot_valid": 2000,
+        "n_boot": 2000,
+        "resample_unit": "instruction_normalized_text_cluster",
+        "norm_ci_2_5": 11.8125,
+        "norm_ci_97_5": 12.1796875,
+        "cos_p_CO": {
+          "point": 0.0197601318359375,
+          "ci_2_5": 0.014434814453125,
+          "ci_97_5": 0.02508544921875
+        },
+        "cos_p_MG": {
+          "point": -0.004657745361328125,
+          "ci_2_5": -0.0186614990234375,
+          "ci_97_5": 0.0090484619140625
+        }
+      }
+    }
+  }
+}

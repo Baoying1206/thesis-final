@@ -1,0 +1,75 @@
+=== dry-run, direction_ids (tokenizer only, stage-1 P/N + full S/C rendering) ===
+[Qwen2.5-7B-Instruct] loading tokenizer only: /home/h24/baga0553/models/Qwen2.5-7B-Instruct
+{
+  "result_status": "STUDY_B_DRY_RUN_PASS",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "ids_key": "direction_ids",
+  "note": "validates P/N stage-1 rendering and full S/C rendering only -- stages 2-4 of P/N require real generation, not exercised here",
+  "n_rows": 3600,
+  "n_ok": 3600,
+  "n_failures": 0,
+  "failures": []
+}
+=== small real GPU extraction test, direction_ids (--limit 1 = 1 instruction x 12 conditions) ===
+[Qwen2.5-7B-Instruct] loading tokenizer + model: /home/h24/baga0553/models/Qwen2.5-7B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:06<00:19,  6.38s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:12<00:12,  6.27s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:18<00:06,  6.25s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:24<00:00,  5.95s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:24<00:00,  6.07s/it]
+[Qwen2.5-7B-Instruct] single-turn conditions (S/C): 6 rows
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+[Qwen2.5-7B-Instruct] trajectory conditions (P/N): 6 rows x 4 stages
+  stage 1: appending user turn + extracting boundary
+  stage 1: generating real responses (6 rows)
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:567: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.7` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:572: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.8` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:589: UserWarning: `do_sample` is set to `False`. However, `top_k` is set to `20` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_k`.
+  warnings.warn(
+    generated 6/6
+  stage 2: appending user turn + extracting boundary
+  stage 2: generating real responses (6 rows)
+    generated 6/6
+  stage 3: appending user turn + extracting boundary
+  stage 3: generating real responses (6 rows)
+    generated 6/6
+  stage 4: appending user turn + extracting boundary
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_persona_P_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_persona_N_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_persona_S_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_persona_C_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_authority_P_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_authority_N_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_authority_S_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_authority_C_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_fictional_P_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_fictional_N_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_fictional_S_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_fictional_C_activations.pt (1 instructions)
+{
+  "result_status": "STUDY_B_EXTRACTION_DONE",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "ids_key": "direction_ids",
+  "pilot": false,
+  "n_instructions": 1,
+  "n_ok": 30,
+  "n_fail": 0,
+  "manifest_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output/Qwen2.5-7B-Instruct_direction_ids_study_b_manifest.jsonl",
+  "judge_path": null,
+  "output_dir": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_output"
+}
+=== output check ===
+total 6164
+drwxr-xr-x  2 baga0553 h24   4096 Sep 11 23:24 .
+drwxr-xr-x 10 baga0553 h24   4096 Sep 11 23:24 ..
+-rw-r--r--  1 baga0553 h24 209558 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_authority_C_activations.pt
+-rw-r--r--  1 baga0553 h24 834080 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_authority_N_activations.pt
+-rw-r--r--  1 baga0553 h24 834080 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_authority_P_activations.pt
+-rw-r--r--  1 baga0553 h24 209558 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_authority_S_activations.pt
+-rw-r--r--  1 baga0553 h24 209558 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_fictional_C_activations.pt
+-rw-r--r--  1 baga0553 h24 834080 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_fictional_N_activations.pt
+-rw-r--r--  1 baga0553 h24 834080 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_fictional_P_activations.pt
+-rw-r--r--  1 baga0553 h24 209558 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_fictional_S_activations.pt
+-rw-r--r--  1 baga0553 h24 209484 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_persona_C_activations.pt
+-rw-r--r--  1 baga0553 h24 834064 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_persona_N_activations.pt
+-rw-r--r--  1 baga0553 h24 834064 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_persona_P_activations.pt
+-rw-r--r--  1 baga0553 h24 209484 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_persona_S_activations.pt
+-rw-r--r--  1 baga0553 h24  11414 Sep 11 23:24 Qwen2.5-7B-Instruct_direction_ids_study_b_manifest.jsonl

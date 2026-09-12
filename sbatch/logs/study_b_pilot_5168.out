@@ -1,0 +1,186 @@
+Start: Fri Sep 11 23:51:46 CEST 2026
+[Meta-Llama-3.1-8B-Instruct] loading tokenizer + model: /home/h24/baga0553/models/Llama-3.1-8B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:08<00:25,  8.66s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:17<00:17,  8.59s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:25<00:08,  8.58s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:27<00:00,  5.92s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:27<00:00,  6.91s/it]
+[Meta-Llama-3.1-8B-Instruct] single-turn conditions (S/C): 180 rows
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+  generating real responses for 180 S/C rows (batched)
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:567: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:572: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+    generated 8/180
+    generated 16/180
+    generated 24/180
+    generated 32/180
+    generated 40/180
+    generated 48/180
+    generated 56/180
+    generated 64/180
+    generated 72/180
+    generated 80/180
+    generated 88/180
+    generated 96/180
+    generated 104/180
+    generated 112/180
+    generated 120/180
+    generated 128/180
+    generated 136/180
+    generated 144/180
+    generated 152/180
+    generated 160/180
+    generated 168/180
+    generated 176/180
+    generated 180/180
+[Meta-Llama-3.1-8B-Instruct] trajectory conditions (P/N): 180 rows x 4 stages
+  stage 1: appending user turn + extracting boundary
+  stage 1: generating real responses (180 rows)
+    generated 8/180
+    generated 16/180
+    generated 24/180
+    generated 32/180
+    generated 40/180
+    generated 48/180
+    generated 56/180
+    generated 64/180
+    generated 72/180
+    generated 80/180
+    generated 88/180
+    generated 96/180
+    generated 104/180
+    generated 112/180
+    generated 120/180
+    generated 128/180
+    generated 136/180
+    generated 144/180
+    generated 152/180
+    generated 160/180
+    generated 168/180
+    generated 176/180
+    generated 180/180
+  stage 2: appending user turn + extracting boundary
+  stage 2: generating real responses (180 rows)
+    generated 8/180
+    generated 16/180
+    generated 24/180
+    generated 32/180
+    generated 40/180
+    generated 48/180
+    generated 56/180
+    generated 64/180
+    generated 72/180
+    generated 80/180
+    generated 88/180
+    generated 96/180
+    generated 104/180
+    generated 112/180
+    generated 120/180
+    generated 128/180
+    generated 136/180
+    generated 144/180
+    generated 152/180
+    generated 160/180
+    generated 168/180
+    generated 176/180
+    generated 180/180
+  stage 3: appending user turn + extracting boundary
+  stage 3: generating real responses (180 rows)
+    generated 8/180
+    generated 16/180
+    generated 24/180
+    generated 32/180
+    generated 40/180
+    generated 48/180
+    generated 56/180
+    generated 64/180
+    generated 72/180
+    generated 80/180
+    generated 88/180
+    generated 96/180
+    generated 104/180
+    generated 112/180
+    generated 120/180
+    generated 128/180
+    generated 136/180
+    generated 144/180
+    generated 152/180
+    generated 160/180
+    generated 168/180
+    generated 176/180
+    generated 180/180
+  stage 4: appending user turn + extracting boundary
+  stage 4: generating real responses (180 rows)
+    generated 8/180
+    generated 16/180
+    generated 24/180
+    generated 32/180
+    generated 40/180
+    generated 48/180
+    generated 56/180
+    generated 64/180
+    generated 72/180
+    generated 80/180
+    generated 88/180
+    generated 96/180
+    generated 104/180
+    generated 112/180
+    generated 120/180
+    generated 128/180
+    generated 136/180
+    generated 144/180
+    generated 152/180
+    generated 160/180
+    generated 168/180
+    generated 176/180
+    generated 180/180
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_persona_P_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_persona_N_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_persona_S_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_persona_C_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_authority_P_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_authority_N_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_authority_S_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_authority_C_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_fictional_P_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_fictional_N_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_fictional_S_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_fictional_C_activations.pt (30 instructions)
+[Meta-Llama-3.1-8B-Instruct] judging 360 final responses with WildGuard
+Loading WildGuard...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.98s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.33s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.42s/it]
+  judged 16/360
+  judged 32/360
+  judged 48/360
+  judged 64/360
+  judged 80/360
+  judged 96/360
+  judged 112/360
+  judged 128/360
+  judged 144/360
+  judged 160/360
+  judged 176/360
+  judged 192/360
+  judged 208/360
+  judged 224/360
+  judged 240/360
+  judged 256/360
+  judged 272/360
+  judged 288/360
+  judged 304/360
+  judged 320/360
+  judged 336/360
+  judged 352/360
+  judged 360/360
+{
+  "result_status": "STUDY_B_PILOT_DONE",
+  "model_alias": "Meta-Llama-3.1-8B-Instruct",
+  "ids_key": "direction_ids",
+  "pilot": true,
+  "n_instructions": 30,
+  "n_ok": 900,
+  "n_fail": 0,
+  "manifest_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_study_b_manifest.jsonl",
+  "responses_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_study_b_responses.jsonl",
+  "judge_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_study_b_judge_records.jsonl",
+  "output_dir": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/study_b_pilot_output"
+}
+Done: Sat Sep 12 00:01:56 CEST 2026

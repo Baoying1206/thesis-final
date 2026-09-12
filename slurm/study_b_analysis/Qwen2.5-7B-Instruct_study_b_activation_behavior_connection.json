@@ -1,0 +1,53 @@
+{
+  "result_status": "STUDY_B_ACTIVATION_BEHAVIOR_CONNECTION",
+  "model_alias": "Qwen2.5-7B-Instruct",
+  "primary_layer": 16,
+  "note": "d_hat[f] estimated from direction_ids ONLY (Sec 5R.7 firewall); z[i] and strict_success both from validation_ids.",
+  "by_family": {
+    "persona": {
+      "n_instructions": 72,
+      "z_vs_strict_success": {
+        "point_biserial_r": -0.09717015479822176,
+        "r_ci_2_5": -0.4736828334190996,
+        "r_ci_97_5": 0.22625055545160516,
+        "point_group_diff": -0.5824863978794643,
+        "group_diff_ci_2_5": -2.447497381680254,
+        "group_diff_ci_97_5": 1.283693125550176,
+        "n_boot_valid_r": 1739,
+        "n_boot_valid_group_diff": 1739,
+        "n_boot": 2000,
+        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only"
+      }
+    },
+    "authority": {
+      "n_instructions": 72,
+      "z_vs_strict_success": {
+        "point_biserial_r": -0.06122865470990756,
+        "r_ci_2_5": -0.26573353056960536,
+        "r_ci_97_5": 0.19343163009412034,
+        "point_group_diff": -0.24040670955882337,
+        "group_diff_ci_2_5": -1.194817341549296,
+        "group_diff_ci_97_5": 1.053257042253521,
+        "n_boot_valid_r": 1971,
+        "n_boot_valid_group_diff": 1971,
+        "n_boot": 2000,
+        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only"
+      }
+    },
+    "fictional": {
+      "n_instructions": 72,
+      "z_vs_strict_success": {
+        "point_biserial_r": 0.08172291305818534,
+        "r_ci_2_5": -0.13404914795114917,
+        "r_ci_97_5": 0.3005924167742924,
+        "point_group_diff": 0.1910224780701748,
+        "group_diff_ci_2_5": -0.3188870614035082,
+        "group_diff_ci_97_5": 0.683867296918768,
+        "n_boot_valid_r": 2000,
+        "n_boot_valid_group_diff": 2000,
+        "n_boot": 2000,
+        "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only"
+      }
+    }
+  }
+}
