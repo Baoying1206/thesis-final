@@ -195,12 +195,23 @@ def run_representation(model_alias, primary_layer, study_b_dir, experiment1_dir,
     print(json.dumps({"result_status": "STUDY_B_REPRESENTATION_DONE", "model_alias": model_alias, "output_path": out_path}, indent=2))
 
 
-def run_behavioral(model_alias, study_b_dir, output_dir):
+def run_behavioral(model_alias, study_b_dir, output_dir, ids_key="validation_ids", families=None, output_suffix=None):
     """Sec 5R.5/5R.4.6 -- requires extract_study_b_activations.py's
-    `validation_ids` run (generation + WildGuard judging)."""
-    judge_path = os.path.join(study_b_dir, f"{model_alias}_validation_ids_study_b_judge_records.jsonl")
+    `validation_ids` (discovery stage) or `test_ids` (Round 19
+    confirmatory stage) run (generation + WildGuard judging).
+    `families` restricts which families to analyze (default: all 3);
+    when only 1 family is given, Holm correction across "1 comparison"
+    is a mathematical no-op (holm_correction returns the raw p
+    unchanged) -- this is what makes it safe to reuse this same
+    function for Round 19's single-hypothesis primary confirmatory
+    test (Qwen+fictional on test_ids) without a separate code path:
+    the reported `p_holm_adjusted` for a 1-family call equals the raw
+    `p_one_sided_greater`/`p_two_sided`, exactly as a single
+    pre-registered test requires."""
+    active_families = families or list(FAMILIES)
+    judge_path = os.path.join(study_b_dir, f"{model_alias}_{ids_key}_study_b_judge_records.jsonl")
     if not os.path.exists(judge_path):
-        raise FileNotFoundError(f"missing judge records: {judge_path} -- run extract_study_b_activations.py --ids-key validation_ids first")
+        raise FileNotFoundError(f"missing judge records: {judge_path} -- run extract_study_b_activations.py --ids-key {ids_key} first")
 
     instruction_texts = load_instruction_texts()
     with open(judge_path, "r", encoding="utf-8") as f:
@@ -217,7 +228,7 @@ def run_behavioral(model_alias, study_b_dir, output_dir):
             parse_fail_by_condition[cond][0] += 1
 
     family_results = {}
-    for family in FAMILIES:
+    for family in active_families:
         recs = {form: by_condition_instruction.get(condition_name(family, form), {}) for form in ("P", "N", "S", "C")}
         ids_common = sorted(set(recs["P"]) & set(recs["N"]) & set(recs["S"]) & set(recs["C"]))
         clusters = load_instruction_clusters(ids_common, instruction_texts)
@@ -250,36 +261,47 @@ def run_behavioral(model_alias, study_b_dir, output_dir):
             "per_condition_rates": per_condition_rates,
         }
 
-    # Sec 5R.6: Holm correction WITHIN this model, across its 3 families'
-    # I_f^ASR p-values -- never pooled across models. Added this round
-    # after real results showed borderline p-values (e.g. p=0.066) that
-    # must not be read as "near-significant" without correction.
-    named_pvalues = [(fam, family_results[fam]["I_f_ASR_primary_DiD"]["p_two_sided"])
-                      for fam in FAMILIES if family_results[fam]["I_f_ASR_primary_DiD"]["p_two_sided"] is not None]
-    adjusted = holm_correction(named_pvalues)
-    for fam, p_holm in adjusted.items():
+    # Sec 5R.6: Holm correction WITHIN this model, across `active_families`'
+    # I_f^ASR p-values -- never pooled across models. With len(active_families)==1
+    # (Round 19's confirmatory single-hypothesis case), holm_correction's
+    # output for that one family is mathematically identical to its raw
+    # p -- this is what makes reusing this function for the confirmatory
+    # test safe rather than accidentally applying a multi-test correction
+    # to a single pre-registered test.
+    named_pvalues_two = [(fam, family_results[fam]["I_f_ASR_primary_DiD"]["p_two_sided"])
+                          for fam in active_families if family_results[fam]["I_f_ASR_primary_DiD"]["p_two_sided"] is not None]
+    for fam, p_holm in holm_correction(named_pvalues_two).items():
         family_results[fam]["I_f_ASR_primary_DiD"]["p_holm_adjusted"] = p_holm
 
+    named_pvalues_one = [(fam, family_results[fam]["I_f_ASR_primary_DiD"]["p_one_sided_greater"])
+                          for fam in active_families if family_results[fam]["I_f_ASR_primary_DiD"].get("p_one_sided_greater") is not None]
+    for fam, p_holm in holm_correction(named_pvalues_one).items():
+        family_results[fam]["I_f_ASR_primary_DiD"]["p_one_sided_greater_holm_adjusted"] = p_holm
+
     os.makedirs(output_dir, exist_ok=True)
-    out_path = os.path.join(output_dir, f"{model_alias}_study_b_behavioral.json")
+    suffix = output_suffix or ("study_b_behavioral" if ids_key == "validation_ids" else f"study_b_behavioral_{ids_key}")
+    out_path = os.path.join(output_dir, f"{model_alias}_{suffix}.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump({
             "result_status": "STUDY_B_BEHAVIORAL_ANALYSIS",
-            "model_alias": model_alias,
-            "note": "I_f_ASR_primary_DiD.p_holm_adjusted is Holm-corrected across this model's 3 families (Sec 5R.6) -- never compare the raw p_two_sided across families without it.",
+            "model_alias": model_alias, "ids_key": ids_key, "families_analyzed": active_families,
+            "note": "p_holm_adjusted / p_one_sided_greater_holm_adjusted are Holm-corrected across `families_analyzed` only (Sec 5R.6). With exactly 1 family (Round 19's confirmatory test), this equals the raw p -- by design, not a multi-test correction being silently skipped.",
             "by_family": family_results,
         }, f, indent=2, ensure_ascii=False)
-    print(json.dumps({"result_status": "STUDY_B_BEHAVIORAL_DONE", "model_alias": model_alias, "output_path": out_path}, indent=2))
+    print(json.dumps({"result_status": "STUDY_B_BEHAVIORAL_DONE", "model_alias": model_alias, "ids_key": ids_key, "output_path": out_path}, indent=2))
 
 
-def run_activation_behavior_connection(model_alias, primary_layer, study_b_dir, output_dir):
+def run_activation_behavior_connection(model_alias, primary_layer, study_b_dir, output_dir, ids_key="validation_ids", families=None, output_suffix=None):
     """Sec 5R.4.6: is z[i] = <h[i,f,P,4]-h[i,f,N,4], d_hat[f]> predictive
-    of validation_ids's strict_success? d_hat[f] is I_f^repr's direction,
-    estimated from direction_ids ONLY (Sec 5R.7's firewall) -- read from
-    the already-written representation-analysis JSON's point estimate,
-    recomputed here from the raw direction_ids vectors (never from
-    validation_ids) to keep the vector, not just its norm."""
-    judge_path = os.path.join(study_b_dir, f"{model_alias}_validation_ids_study_b_judge_records.jsonl")
+    of strict_success on `ids_key` (`validation_ids` for the discovery
+    stage, `test_ids` for Round 19's confirmatory stage)? d_hat[f] is
+    I_f^repr's direction, estimated from `direction_ids` ONLY (Sec
+    5R.7's firewall) -- ALWAYS from direction_ids regardless of which
+    `ids_key` z[i] itself is computed on, recomputed here from the raw
+    direction_ids vectors (never re-estimated on new data) to keep the
+    vector, not just its norm."""
+    active_families = families or list(FAMILIES)
+    judge_path = os.path.join(study_b_dir, f"{model_alias}_{ids_key}_study_b_judge_records.jsonl")
     if not os.path.exists(judge_path):
         raise FileNotFoundError(f"missing judge records: {judge_path}")
     with open(judge_path, "r", encoding="utf-8") as f:
@@ -290,8 +312,8 @@ def run_activation_behavior_connection(model_alias, primary_layer, study_b_dir, 
 
     instruction_texts = load_instruction_texts()
     family_results = {}
-    for family in FAMILIES:
-        # d_hat[f]: I_f^repr's direction from direction_ids (Sec 5R.4.5), unit-normalized
+    for family in active_families:
+        # d_hat[f]: I_f^repr's direction from direction_ids (Sec 5R.4.5), unit-normalized -- ALWAYS direction_ids
         dir_acts = {form: load_study_b_activations(study_b_dir, model_alias, "direction_ids", family, form) for form in ("P", "N", "S", "C")}
         dir_ids_common = sorted(set(dir_acts["P"]) & set(dir_acts["N"]) & set(dir_acts["S"]) & set(dir_acts["C"]))
         vp4 = stage_vecs(dir_acts["P"], "stage_4", primary_layer, dir_ids_common)
@@ -303,21 +325,21 @@ def run_activation_behavior_connection(model_alias, primary_layer, study_b_dir, 
         I_repr_point = (mean_p4 - mean_n4) - (mean_s - mean_c)
         d_hat = I_repr_point / I_repr_point.norm()
 
-        # z[i] on validation_ids: <h[i,P,4]-h[i,N,4], d_hat>
-        val_acts_P = load_study_b_activations(study_b_dir, model_alias, "validation_ids", family, "P")
-        val_acts_N = load_study_b_activations(study_b_dir, model_alias, "validation_ids", family, "N")
-        val_ids_common = sorted(set(val_acts_P) & set(val_acts_N) & set(outcome_by_condition_instruction.get(condition_name(family, "P"), {})))
+        # z[i] on `ids_key` (new data): <h[i,P,4]-h[i,N,4], d_hat>
+        new_acts_P = load_study_b_activations(study_b_dir, model_alias, ids_key, family, "P")
+        new_acts_N = load_study_b_activations(study_b_dir, model_alias, ids_key, family, "N")
+        new_ids_common = sorted(set(new_acts_P) & set(new_acts_N) & set(outcome_by_condition_instruction.get(condition_name(family, "P"), {})))
         z_by_id = {}
-        for i in val_ids_common:
-            vp_i = val_acts_P[i]["stage_4"][primary_layer]
-            vn_i = val_acts_N[i]["stage_4"][primary_layer]
+        for i in new_ids_common:
+            vp_i = new_acts_P[i]["stage_4"][primary_layer]
+            vn_i = new_acts_N[i]["stage_4"][primary_layer]
             z_by_id[i] = torch.dot(vp_i - vn_i, d_hat).item()
-        outcome_by_id = {i: outcome_by_condition_instruction[condition_name(family, "P")][i] for i in val_ids_common}
+        outcome_by_id = {i: outcome_by_condition_instruction[condition_name(family, "P")][i] for i in new_ids_common}
 
-        clusters = load_instruction_clusters(val_ids_common, instruction_texts)
-        print(f"[{model_alias}] family={family}: bootstrapping z-vs-strict_success connection...", file=sys.stderr)
+        clusters = load_instruction_clusters(new_ids_common, instruction_texts)
+        print(f"[{model_alias}] family={family}: bootstrapping z-vs-strict_success connection (ids_key={ids_key})...", file=sys.stderr)
         connection = point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=N_BOOTSTRAP, seed=BOOTSTRAP_SEED)
-        family_results[family] = {"n_instructions": len(val_ids_common), "z_vs_strict_success": connection}
+        family_results[family] = {"n_instructions": len(new_ids_common), "z_vs_strict_success": connection}
 
     # Sec 5R.6: Holm correction WITHIN this model, across its 3 families'
     # r_p_two_sided (point-biserial correlation p-values) -- same
@@ -325,18 +347,19 @@ def run_activation_behavior_connection(model_alias, primary_layer, study_b_dir, 
     # round after real borderline results (e.g. Llama's z-correlations
     # sitting right at the edge of significance) made this necessary.
     named_pvalues = [(fam, family_results[fam]["z_vs_strict_success"]["r_p_two_sided"])
-                      for fam in FAMILIES if family_results[fam]["z_vs_strict_success"]["r_p_two_sided"] is not None]
+                      for fam in active_families if family_results[fam]["z_vs_strict_success"]["r_p_two_sided"] is not None]
     adjusted = holm_correction(named_pvalues)
     for fam, p_holm in adjusted.items():
         family_results[fam]["z_vs_strict_success"]["r_p_holm_adjusted"] = p_holm
 
     os.makedirs(output_dir, exist_ok=True)
-    out_path = os.path.join(output_dir, f"{model_alias}_study_b_activation_behavior_connection.json")
+    suffix = output_suffix or ("study_b_activation_behavior_connection" if ids_key == "validation_ids" else f"study_b_activation_behavior_connection_{ids_key}")
+    out_path = os.path.join(output_dir, f"{model_alias}_{suffix}.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump({
             "result_status": "STUDY_B_ACTIVATION_BEHAVIOR_CONNECTION",
-            "model_alias": model_alias, "primary_layer": primary_layer,
-            "note": "d_hat[f] estimated from direction_ids ONLY (Sec 5R.7 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across this model's 3 families (Sec 5R.6).",
+            "model_alias": model_alias, "primary_layer": primary_layer, "ids_key": ids_key, "families_analyzed": active_families,
+            "note": "d_hat[f] estimated from direction_ids ONLY (Sec 5R.7 firewall) regardless of ids_key; z[i] and strict_success both from `ids_key`. r_p_holm_adjusted is Holm-corrected across `families_analyzed` only (Sec 5R.6) -- with 1 family this equals the raw p.",
             "by_family": family_results,
         }, f, indent=2, ensure_ascii=False)
     print(json.dumps({"result_status": "STUDY_B_ACTIVATION_BEHAVIOR_CONNECTION_DONE", "model_alias": model_alias, "output_path": out_path}, indent=2))
@@ -351,15 +374,26 @@ def main():
     parser.add_argument("--output-dir", default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--skip-representation", action="store_true")
     parser.add_argument("--skip-behavioral", action="store_true")
-    parser.add_argument("--skip-connection", action="store_true", help="Skip 5R.4.6's activation-behavior connection (needs both direction_ids and validation_ids extracted).")
+    parser.add_argument("--skip-connection", action="store_true", help="Skip 5R.4.6's activation-behavior connection (needs both direction_ids and validation_ids/test_ids extracted).")
+    parser.add_argument("--behavioral-ids-key", default="validation_ids", choices=["validation_ids", "test_ids"],
+                         help="Which 'new' dataset to analyze behavior/connection on. 'test_ids' is Round 19's confirmatory stage -- REQUIRES --families to be explicit (no default).")
+    parser.add_argument("--families", nargs="+", default=None, choices=list(FAMILIES),
+                         help="Restrict behavioral/connection analysis to specific families. Required (no default) when --behavioral-ids-key test_ids.")
     args = parser.parse_args()
+
+    if args.behavioral_ids_key == "test_ids" and args.families is None:
+        raise SystemExit(
+            "--behavioral-ids-key test_ids requires --families to be explicit "
+            "(e.g. --families fictional for Round 19's primary confirmatory test) "
+            "-- no default, by design."
+        )
 
     if not args.skip_representation:
         run_representation(args.model_alias, args.primary_layer, args.study_b_dir, args.experiment1_dir, args.output_dir)
     if not args.skip_behavioral:
-        run_behavioral(args.model_alias, args.study_b_dir, args.output_dir)
+        run_behavioral(args.model_alias, args.study_b_dir, args.output_dir, ids_key=args.behavioral_ids_key, families=args.families)
     if not args.skip_connection:
-        run_activation_behavior_connection(args.model_alias, args.primary_layer, args.study_b_dir, args.output_dir)
+        run_activation_behavior_connection(args.model_alias, args.primary_layer, args.study_b_dir, args.output_dir, ids_key=args.behavioral_ids_key, families=args.families)
 
 
 if __name__ == "__main__":

@@ -59,8 +59,17 @@ SPLITS_PATH = os.path.join(REPO_ROOT, "data", "splits", "splits.json")
 DEFAULT_OUTPUT_DIR = os.path.join(SCRIPT_DIR, "study_b_output")
 
 PRIMARY_TOKEN_POSITION = "t_generation_boundary"
-ALLOWED_IDS_KEYS = ("direction_ids", "validation_ids")
-EXPECTED_COUNT = {"direction_ids": 300, "validation_ids": 72}
+ALLOWED_IDS_KEYS = ("direction_ids", "validation_ids", "test_ids")
+EXPECTED_COUNT = {"direction_ids": 300, "validation_ids": 72, "test_ids": 200}
+# `test_ids` was sealed (never read) from Round 2 through the discovery
+# stage of Study B (Round 17-18). It is unsealed HERE, deliberately, ONLY
+# for the single pre-registered confirmatory test on Qwen+fictional
+# (Round 19, FINAL_STUDY_PROTOCOL.md) -- explicit user confirmation
+# ("是,解封test_ids,开始confirmatory test") is recorded in Sec 13. This
+# is a one-way action: once read, `test_ids` can never again serve as a
+# genuinely unseen holdout for any future analysis in this thesis. No
+# other script in this repo accepts `test_ids` -- that restriction
+# stays in force everywhere else.
 
 GENERATION_CONFIG = {"max_new_tokens": 200, "do_sample": False}
 WG_BATCH_SIZE = 16
@@ -92,14 +101,19 @@ def load_instructions(ids_key):
     return [{"id": i, "instruction_en": by_id[i]} for i in ids]
 
 
-def build_all_rows(instructions, template_data):
+def build_all_rows(instructions, template_data, families=None):
     """One row per (instruction, family, form) -- 12 conditions x
-    len(instructions). `form` in {P,N} gets 'messages': [] (built up
-    wave by wave); `form` in {S,C} gets its full single-message list
-    immediately (nothing to build up)."""
+    len(instructions), or fewer if `families` restricts to a subset
+    (recommended for `test_ids`: scope to just the pre-registered
+    primary family, e.g. ["fictional"], to minimize how much of the
+    sealed set is exposed for families with no confirmatory hypothesis).
+    `form` in {P,N} gets 'messages': [] (built up wave by wave); `form`
+    in {S,C} gets its full single-message list immediately (nothing to
+    build up)."""
+    families = families or list(FAMILIES)
     trajectory_rows, single_pass_rows = [], []
     for instr in instructions:
-        for family in FAMILIES:
+        for family in families:
             for form in PROGRESSIVE_FORMS:
                 trajectory_rows.append({
                     "instruction_id": instr["id"], "instruction_text": instr["instruction_en"],
@@ -241,7 +255,7 @@ def run_generation_wave(model, tokenizer, eos_ids, rows, batch_size):
         print(f"    generated {min(start + batch_size, len(rows))}/{len(rows)}", file=sys.stderr)
 
 
-def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, output_dir, batch_size, limit=None, pilot_ids=None):
+def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, output_dir, batch_size, limit=None, pilot_ids=None, families=None):
     """`pilot_ids`, when given (a small fixed list of instruction ids),
     overrides the normal `ids_key`-driven instruction loading and forces
     FULL generation + judging at every stage regardless of `ids_key`
@@ -286,17 +300,23 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
     if limit is not None:
         instructions = instructions[:limit]  # --limit N = first N INSTRUCTIONS (each yields 12 condition-rows), not N rows
     template_data = load_template()
-    trajectory_rows, single_pass_rows = build_all_rows(instructions, template_data)
+    active_families = families or list(FAMILIES)
+    trajectory_rows, single_pass_rows = build_all_rows(instructions, template_data, families=active_families)
 
     is_pilot = pilot_ids is not None
     force_full_generation = is_pilot  # pilot always exercises the full generate+judge path, regardless of ids_key
     manifest_ids_key_label = "pilot" if is_pilot else ids_key
+    test_data_read = (ids_key == "test_ids")
+    # validation_ids and test_ids both need the full stage-4 generation
+    # + WildGuard judging path (behavioral outcome required); direction_ids
+    # does not (Sec 5R.8's compute-saving design).
+    needs_full_behavioral = ids_key in ("validation_ids", "test_ids") or force_full_generation
 
     commit = git_commit_hash(REPO_ROOT)
     os.makedirs(output_dir, exist_ok=True)
     manifest_path = os.path.join(output_dir, f"{model_alias}_{manifest_ids_key_label}_study_b_manifest.jsonl")
     responses_path = os.path.join(output_dir, f"{model_alias}_{manifest_ids_key_label}_study_b_responses.jsonl")
-    activations_by_condition = {condition_name(f, form): {} for f in FAMILIES for form in ALL_FORMS}
+    activations_by_condition = {condition_name(f, form): {} for f in active_families for form in ALL_FORMS}
     judge_input_rows = []  # only ever populated for validation_ids or pilot
     n_ok, n_fail = 0, 0
 
@@ -322,7 +342,7 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
             "family": row["family"], "form": row["form"], "stage": stage,
             "model_alias": model_alias, "primary_layer": primary_layer_expected,
             "result_status": ("PILOT_NON_RESULT" if is_pilot else result_status),
-            "ids_key": ids_key, "test_data_read": False,
+            "ids_key": ids_key, "test_data_read": test_data_read,
             "git_commit": commit,
         }
         if is_pilot:
@@ -333,7 +353,7 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
         else:
             record["failure_reason"] = failure_reason
             n_fail += 1
-        if ids_key == "validation_ids":
+        if ids_key in ("validation_ids", "test_ids"):
             record["used_for_direction_estimation"] = False
         manifest_f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
@@ -349,7 +369,7 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
         except Exception as e:
             write_record(row, "single", None, None, None, "EXTRACTION_FAIL", str(e))
 
-    if (ids_key == "validation_ids" or force_full_generation) and single_pass_ok_rows:
+    if needs_full_behavioral and single_pass_ok_rows:
         print(f"  generating real responses for {len(single_pass_ok_rows)} S/C rows (batched)", file=sys.stderr)
         run_generation_wave(model, tokenizer, eos_ids, single_pass_ok_rows, batch_size)
         for row in single_pass_ok_rows:
@@ -376,14 +396,14 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
             except Exception as e:
                 write_record(row, stage_idx, None, None, None, "EXTRACTION_FAIL", str(e))
 
-        need_generation = (stage_idx < 4) or (ids_key == "validation_ids") or force_full_generation
+        need_generation = (stage_idx < 4) or needs_full_behavioral
         if need_generation:
             print(f"  stage {stage_idx}: generating real responses ({len(trajectory_rows)} rows)", file=sys.stderr)
             run_generation_wave(model, tokenizer, eos_ids, trajectory_rows, batch_size)
             for row in trajectory_rows:
                 write_response(row, stage_idx)
                 row["messages"].append({"role": "assistant", "content": row["stage_response"]})
-                if stage_idx == 4 and (ids_key == "validation_ids" or force_full_generation):
+                if stage_idx == 4 and needs_full_behavioral:
                     judge_input_rows.append({
                         "generation_key": sha256_hex(f"{model_alias}|{row['condition']}|{row['instruction_id']}|stage4"),
                         "messages": row["messages"],
@@ -411,7 +431,7 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
     torch.cuda.empty_cache()
 
     judge_path = None
-    if (ids_key == "validation_ids" or force_full_generation) and judge_input_rows:
+    if needs_full_behavioral and judge_input_rows:
         print(f"[{model_alias}] judging {len(judge_input_rows)} final responses with WildGuard", file=sys.stderr)
         judge_extra_tags = {"ids_key": ids_key, "study": "study_b"}
         if is_pilot:
@@ -441,7 +461,16 @@ def main():
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--limit", type=int, default=None, help="Process only the first N instructions (each yields 12 condition-rows) -- smoke test only.")
+    parser.add_argument("--families", nargs="+", default=None, choices=list(FAMILIES),
+                         help="Restrict to specific families (default: all 3). REQUIRED (not defaulted) for --ids-key test_ids -- forces an explicit, deliberate choice of how much of the sealed set gets exposed, e.g. --families fictional for the Round 19 primary confirmatory hypothesis.")
     args = parser.parse_args()
+
+    if args.ids_key == "test_ids" and args.families is None and not args.dry_run:
+        raise SystemExit(
+            "--ids-key test_ids requires --families to be explicitly specified "
+            "(no default) -- this is a deliberate friction point for reading the "
+            "sealed test_ids set. Pass e.g. --families fictional."
+        )
 
     entry = next(m for m in MODEL_TOKENIZER_SOURCES if m[0] == args.model_alias)
     _, env_suffix, default_path, primary_layer = entry
@@ -451,7 +480,7 @@ def main():
         ok = run_dry_run(args.model_alias, model_path, args.ids_key)
         sys.exit(0 if ok else 1)
 
-    run_extraction(args.model_alias, model_path, primary_layer, args.ids_key, args.output_dir, args.batch_size, args.limit)
+    run_extraction(args.model_alias, model_path, primary_layer, args.ids_key, args.output_dir, args.batch_size, args.limit, families=args.families)
 
 
 if __name__ == "__main__":

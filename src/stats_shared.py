@@ -220,6 +220,25 @@ def bootstrap_two_sided_p(replicate_deltas):
     return min(1.0, 2 * min(p_le, p_ge))
 
 
+def bootstrap_one_sided_p(replicate_deltas, direction):
+    """One-sided bootstrap p-value -- ONLY valid when the direction was
+    frozen BEFORE seeing this data, as part of a pre-registered analysis
+    plan (e.g. a single confirmatory hypothesis test on a previously
+    sealed dataset). Never choose `direction` post-hoc based on which
+    side the point estimate favors -- that silently converts this into
+    an anti-conservative, effectively-uncorrected two-sided test.
+    direction='greater': H1 is true delta > 0; p = P(delta <= 0).
+    direction='less': H1 is true delta < 0; p = P(delta >= 0)."""
+    n = len(replicate_deltas)
+    if n == 0:
+        return None
+    if direction == "greater":
+        return sum(1 for d in replicate_deltas if d <= 0) / n
+    if direction == "less":
+        return sum(1 for d in replicate_deltas if d >= 0) / n
+    raise ValueError(f"direction must be 'greater' or 'less', got {direction!r}")
+
+
 def holm_correction(named_pvalues):
     """named_pvalues: list of (name, p) tuples. Returns {name: adjusted_p}."""
     m = len(named_pvalues)
@@ -278,6 +297,8 @@ def bootstrap_did_scalar(metric_P, metric_N, metric_S, metric_C, clusters, n_boo
         "point_I": point,
         "ci_2_5": deltas_sorted[int(0.025 * n)], "ci_97_5": deltas_sorted[min(int(0.975 * n), n - 1)],
         "p_two_sided": bootstrap_two_sided_p(deltas),
+        "p_one_sided_greater": bootstrap_one_sided_p(deltas, "greater"),
+        "p_one_sided_less": bootstrap_one_sided_p(deltas, "less"),
         "n_boot_valid": n, "n_boot": n_boot,
         "resample_unit": "instruction_normalized_text_cluster",
     }
