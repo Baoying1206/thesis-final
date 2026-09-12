@@ -294,12 +294,48 @@ layers, or models.**
 
 ## 5R. Experiment 2 -- Study B: progressive multi-turn delivery, 2x2 difference-in-differences design (Round 17)
 
-**Status: PROTOCOL-ONLY. No GPU run, no `test_ids` read, no commit/push
-this round (standing instruction, unchanged since Round 15). Draft
-template wording exists (`templates/study_b_progressive_multiturn_v1.json`,
-`DRAFT_NOT_HUMAN_REVIEWED`) and is updated alongside this section to add
-the Compressed-neutral (C) condition -- still not frozen, not
-authorized for any run.**
+**STATUS: SUPERSEDED_BY_HISTORY_AUGMENTED_CANONICAL_CO_MG_RQ2 (Round
+20).** This entire section (Sec 5R.0-5R.11) describes Round 16-19's
+persona/authority/fictional Study B design. It is retained below ONLY
+for provenance and reproducibility of the real work already done under
+it (discovery-stage `direction_ids`/`validation_ids` results, and the
+Round 19 confirmatory `test_ids` extraction, all real, all completed --
+see the factual record appended to Sec 5R.11 below). **It does NOT
+participate in RQ2's final inference.** RQ2 is now answered by a
+different design -- history-augmented canonical CO/MG multi-turn
+delivery (the first 3 turns are a frozen, mechanism-free scaffold; the
+final turn carries the unmodified canonical CO/MG mechanism text from
+Sec 4/Experiment 1, so the CO/MG mechanism definitions themselves are
+never altered) -- proposed and adopted this session, Round 20. See Sec
+13 Round 20 for the full replacement rationale. **As of Round 20, no
+code (templates/loader/driver) for the replacement design has been
+written yet** -- this round was a read-only file audit plus this
+documentation update only.
+
+**Original Round 17 status line (historical, kept verbatim, now
+FACTUALLY SUPERSEDED by real events -- do not read the following
+paragraph as describing current reality):**
+
+> Status: PROTOCOL-ONLY. No GPU run, no `test_ids` read, no commit/push
+> this round (standing instruction, unchanged since Round 15). Draft
+> template wording exists (`templates/study_b_progressive_multiturn_v1.json`,
+> `DRAFT_NOT_HUMAN_REVIEWED`) and is updated alongside this section to add
+> the Compressed-neutral (C) condition -- still not frozen, not
+> authorized for any run.
+
+Real events since that line was written (Rounds 18-19, this session):
+GPU was run extensively (discovery-stage extraction, all 3 models, both
+`direction_ids` and `validation_ids`); `test_ids` WAS read (Round 19,
+explicit user confirmation) and its fictional-family activations/
+generations/judgements were extracted for all 3 models (Qwen, Llama,
+Gemma -- see Sec 5R.11's factual record). The template was never
+subsequently frozen/reviewed beyond the Round 19 hash freeze recorded
+in Sec 5R.11.1 (its `DRAFT_NOT_HUMAN_REVIEWED` status in the template
+file itself was never updated to reflect that freeze -- a real,
+outstanding inconsistency between the template file's own metadata and
+this protocol document, noted here rather than silently fixed, since
+this round's instructions prohibit modifying the template file's
+bytes).
 
 ### 5R.0 Why this refinement (Round 17, replacing Round 16's P/S/N version)
 
@@ -712,6 +748,28 @@ pre-registered confirmatory test specified below. This is irreversible
 any future analysis in this thesis. `slurm/extract_study_b_activations.py`
 is the only script in the repository that accepts `test_ids` as
 `--ids-key`; every other driver still rejects it.
+
+**FACTUAL RECORD (Round 20, do not describe `test_ids` as "never
+touched by code" anywhere in this document from this point forward --
+it is no longer accurate)**: `test_ids`'s content has, as a matter of
+fact, already been read and processed. Real, completed, pushed
+extractions exist for the `fictional` family, all 4 conditions
+(`P`/`N`/`S`/`C`), for all 3 models:
+
+- `slurm/study_b_output/Qwen2.5-7B-Instruct_test_ids_study_b_{manifest,responses,judge_records}.jsonl` (2000 manifest records, 0 failures)
+- `slurm/study_b_output/Meta-Llama-3.1-8B-Instruct_test_ids_study_b_{manifest,responses,judge_records}.jsonl`
+- `slurm/study_b_output/gemma-2-9b-it_test_ids_study_b_{manifest,responses,judge_records}.jsonl`
+
+All 3 models' extractions are complete (Qwen's, the primary
+hypothesis, completed and was pushed during this same session, after
+Llama's and Gemma's generalisation-arm extractions). **No
+`analyze_study_b.py` run against this `test_ids` data had been executed
+as of Round 20** -- i.e. the confirmatory test's activations/
+generations/judgements exist on disk, but the primary hypothesis's
+$p_{\text{one\_sided\_greater}}$ has not yet been computed or looked
+at by anyone. This ordering matters for the record: the DATA exists,
+but the STATISTIC that would constitute "seeing the confirmatory
+result" does not yet exist as of this entry.
 
 **Why a discovery-confirmation split, not a single-stage test**: Round
 17-18's `validation_ids` (72) results (Sec 13 Round 17/18) are hereby
@@ -2064,3 +2122,75 @@ remain open, renumbered below. Remaining and new open items:
     by Sec 5R.11.3's four-tier ladder as the FINAL reporting frame for
     RQ2 -- Sec 5R.9 is retained as a historical record of the
     discovery-stage framing, not re-applied to the confirmatory result.
+20. **(Round 20, new)** RQ2's experimental design REPLACED, before
+    Round 19's confirmatory result was ever computed: user proposed a
+    "history-augmented canonical CO/MG" design as a more elegant
+    resolution to the original Round 15 problem (how to give CO/MG a
+    genuine multi-turn form without inventing escalation content that
+    breaks byte-identity to Wei et al.'s single-turn definitions). The
+    first 3 turns are a frozen, mechanism-free progressive scaffold
+    (real assistant generation each turn, history carried forward,
+    same "fixed-policy interactive multi-turn protocol" discipline as
+    Study B); the 4th turn carries the UNMODIFIED canonical CO/MG
+    mechanism text from Sec 4/Experiment 1 -- CO/MG's definitions are
+    never altered, only their delivery structure (single-turn vs.
+    history-augmented) varies. Primary statistics
+    ($E_{CO}=\text{mean}_{m\in CO}(ASR_{m,multi}-ASR_{m,single})$,
+    $E_{MG}$ analogously, $\Gamma=E_{CO}-E_{MG}$) are corrected against
+    a neutral-scaffold baseline ($E_N=ASR_{neutral,multi}-ASR_{neutral,single}$)
+    before being treated as primary -- $E_{CO}-E_N$/$E_{MG}-E_N$ are
+    algebraically the same difference-in-differences structure as
+    Study B's $I_f$, just re-derived independently for this design; the
+    user's own initial draft had proposed the UNCORRECTED $E_{CO}$/
+    $E_{MG}$ as primary and the corrected version as robustness-only,
+    which was flagged as the same substantive issue as an earlier
+    same-session request to abandon Study B's DiD in favour of its
+    raw, confounded predecessor -- resolved by keeping the corrected,
+    neutral-baseline-subtracted version primary, for consistency with
+    the reasoning already established for Study B.
+
+    Sec 5R (Study B, Round 16-19, persona/authority/fictional) is
+    marked `SUPERSEDED_BY_HISTORY_AUGMENTED_CANONICAL_CO_MG_RQ2` at its
+    top -- retained in full for provenance/reproducibility, explicitly
+    NOT used for RQ2's final inference. Its real discovery-stage
+    results (Sec 13 Round 17/18) and its Round 19 confirmatory
+    `test_ids` extraction (now complete for all 3 models -- see the
+    factual record appended to Sec 5R.11) remain on record but do not
+    feed the thesis's RQ2 answer.
+
+    **This round's actual work was a read-only audit, not
+    implementation**: at the user's explicit, itemized request, every
+    file plausibly belonging to old Study B was enumerated (absolute
+    path, tracked/untracked status, size, SHA-256, last commit,
+    cross-reference check in both directions, RQ1/new-design impact,
+    proposed disposition) -- reported in full in-conversation, with NO
+    file deleted, moved, overwritten, modified, `git add`-ed,
+    committed, or pushed during that audit. Findings: no file outside
+    the `study_b`-prefixed set references Study B except this protocol
+    document itself (a documentation reference, not a code dependency);
+    Study B's own code reads (never writes) `slurm/experiment1_output/`
+    (Study A/RQ1's real data) and depends on shared, must-keep modules
+    (`src/stats_shared.py`, `slurm/_behavioral_shared.py`); nothing was
+    `BLOCKED_BY_REFERENCE`; the local mac clone has never had any
+    `study_b`-related `.pt` tensor (gitignored, cluster-only, never
+    pushed -- a real gap in what this audit could directly verify).
+    Recommended disposition for all real (non-cache) Study B artifacts
+    was `MARK_SUPERSEDED`/`ARCHIVE`, never `DELETE_CANDIDATE`, given
+    their value as provenance and as a likely reusable code pattern for
+    the replacement design's own extraction/analysis drivers.
+
+    This same round, on the user's explicit, itemized instruction: (i)
+    this Sec 5R status marker and the Sec 5R.11 factual record above
+    were added; (ii) `README.md` was updated to name the
+    history-augmented canonical CO/MG design as RQ2's current
+    mainline, Study B named as superseded; (iii) no byte of
+    `templates/study_b_progressive_multiturn_v1.json` or of any Study B
+    result/log/analysis file was touched -- only this protocol document
+    and `README.md` were edited; (iv) no archive directory was created
+    and no tracked file was moved -- git history is the archive; (v)
+    no code (template/loader/driver) for the replacement design was
+    written this round; (vi) this session has no direct cluster access
+    (no `squeue`), so no old Qwen job's live status/exact job ID could
+    be independently verified or reported -- if a job is still
+    queued/running, the user must check and decide on cancellation
+    directly, `scancel` was not and will not be run on their behalf.

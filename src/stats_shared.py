@@ -373,16 +373,25 @@ def bootstrap_did_vector(vecs_P, vecs_N, vecs_S, vecs_C, clusters, n_boot=2000, 
     return result
 
 
-def bootstrap_vector_diff(vecs_a, vecs_b, clusters, n_boot=2000, seed=20260828):
+def bootstrap_vector_diff(vecs_a, vecs_b, clusters, n_boot=2000, seed=20260828, extra_cos_targets=None):
     """Simple paired vector-difference bootstrap: d = mean(a) - mean(b),
     reporting ||d||'s point estimate and CI. Used for Study B's `r_f`
     (Sec 5R.4.4 -- the raw, NOT-DiD-adjusted residual, explicitly kept
     only as a secondary/confounded quantity alongside the primary
-    `bootstrap_did_vector` estimand). Every replicate recomputes from
-    its own resampled ids, same rule as the rest of this module."""
+    `bootstrap_did_vector` estimand), and for the history-augmented
+    canonical CO/MG design's per-mechanism representational shift
+    `d_m^history = mean(h[m,multi,stage4]) - mean(h[m,single])` (Sec 13
+    Round 20), where `extra_cos_targets` (e.g. Experiment 1's frozen
+    p_CO/p_MG directions) gives the bootstrap distribution of
+    cos(d_replicate, target) alongside the norm, same pattern as
+    `bootstrap_did_vector`'s `extra_cos_targets`. Every replicate
+    recomputes from its own resampled ids, same rule as the rest of
+    this module; `extra_cos_targets` are fixed external references, not
+    resampled."""
     rng = random.Random(seed)
     n_clusters = len(clusters)
     all_ids = list(vecs_b.keys())
+    extra_cos_targets = extra_cos_targets or {}
 
     def mean_vec(vecs, ids):
         present = [vecs[i] for i in ids if i in vecs]
@@ -393,13 +402,16 @@ def bootstrap_vector_diff(vecs_a, vecs_b, clusters, n_boot=2000, seed=20260828):
         return (a - b) if (a is not None and b is not None) else None
 
     point = diff(all_ids)
-    norms = []
+    norms, cos_dists = [], {name: [] for name in extra_cos_targets}
     for _ in range(n_boot):
         draws = [clusters[rng.randrange(n_clusters)] for _ in range(n_clusters)]
         resampled_ids = [i for cluster in draws for i in cluster]
         d = diff(resampled_ids)
-        if d is not None:
-            norms.append(d.norm().item())
+        if d is None:
+            continue
+        norms.append(d.norm().item())
+        for name, target in extra_cos_targets.items():
+            cos_dists[name].append(cos(d, target))
 
     result = {"point_norm": point.norm().item() if point is not None else None,
               "n_boot_valid": len(norms), "n_boot": n_boot,
@@ -409,6 +421,15 @@ def bootstrap_vector_diff(vecs_a, vecs_b, clusters, n_boot=2000, seed=20260828):
         n = len(norms_sorted)
         result["norm_ci_2_5"] = norms_sorted[int(0.025 * n)]
         result["norm_ci_97_5"] = norms_sorted[min(int(0.975 * n), n - 1)]
+    for name, dists in cos_dists.items():
+        if not dists:
+            continue
+        dists_sorted = sorted(dists)
+        n = len(dists_sorted)
+        result[f"cos_{name}"] = {
+            "point": cos(point, extra_cos_targets[name]) if point is not None else None,
+            "ci_2_5": dists_sorted[int(0.025 * n)], "ci_97_5": dists_sorted[min(int(0.975 * n), n - 1)],
+        }
     return result
 
 
@@ -472,6 +493,94 @@ def point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=2000, seed
         "n_boot_valid_r": len(corrs), "n_boot_valid_group_diff": len(group_diffs), "n_boot": n_boot,
         "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
     }
+
+
+def bootstrap_history_augmented_effects(asr_multi_by_mechanism, asr_single_by_mechanism, clusters,
+                                         co_mechanisms, mg_mechanisms, n_boot=2000, seed=20260828):
+    """RQ2 Round 20 replacement design's primary estimand (history-
+    augmented canonical CO/MG, FINAL_STUDY_PROTOCOL.md Sec 13 Round 20):
+    for each mechanism m (including 'neutral'), delta_m =
+    ASR[m,multi] - ASR[m,single]; E_CO = mean_{m in CO}(delta_m);
+    E_MG = mean_{m in MG}(delta_m); E_N = delta_neutral;
+    Gamma = E_CO - E_MG; corrected_CO = E_CO - E_N;
+    corrected_MG = E_MG - E_N. Algebraically corrected_CO - corrected_MG
+    == Gamma (E_N cancels), so Gamma is reported once, not twice.
+
+    asr_multi_by_mechanism / asr_single_by_mechanism:
+    {mechanism_name: {instruction_id: 0/1}}, both must include every
+    name in co_mechanisms + mg_mechanisms + ['neutral']. clusters: from
+    load_instruction_clusters() (Sec 8's frozen resampling unit).
+
+    Every bootstrap replicate recomputes delta_m, E_CO, E_MG, E_N,
+    Gamma, corrected_CO, corrected_MG entirely from that replicate's own
+    resampled ids -- no fixed component is reused across replicates
+    (the same discipline as bootstrap_did_scalar/bootstrap_did_vector).
+
+    The 3 quantities intended as this design's primary confirmatory
+    hypotheses are corrected_CO, corrected_MG, and Gamma -- Holm-correct
+    those 3 p-values WITHIN each model (never pooled across models),
+    same as every other family in this module. E_CO/E_MG/E_N are
+    reported as descriptive/secondary, not separately Holm-corrected."""
+    rng = random.Random(seed)
+    n_clusters = len(clusters)
+    all_mechanisms = list(co_mechanisms) + list(mg_mechanisms) + ["neutral"]
+
+    def value_for(metric, ids):
+        vals = [metric[i] for i in ids if metric.get(i) is not None]
+        return sum(vals) / len(vals) if vals else None
+
+    def deltas_for_ids(ids):
+        delta_m = {}
+        for m in all_mechanisms:
+            multi_v = value_for(asr_multi_by_mechanism[m], ids)
+            single_v = value_for(asr_single_by_mechanism[m], ids)
+            if multi_v is None or single_v is None:
+                return None
+            delta_m[m] = multi_v - single_v
+        e_co = sum(delta_m[m] for m in co_mechanisms) / len(co_mechanisms)
+        e_mg = sum(delta_m[m] for m in mg_mechanisms) / len(mg_mechanisms)
+        e_n = delta_m["neutral"]
+        return {
+            "E_CO": e_co, "E_MG": e_mg, "E_N": e_n,
+            "Gamma": e_co - e_mg,
+            "corrected_CO": e_co - e_n, "corrected_MG": e_mg - e_n,
+        }
+
+    all_ids = list(asr_single_by_mechanism["neutral"].keys())
+    point = deltas_for_ids(all_ids)
+
+    keys = ("E_CO", "E_MG", "E_N", "Gamma", "corrected_CO", "corrected_MG")
+    replicate_series = {k: [] for k in keys}
+    for _ in range(n_boot):
+        draws = [clusters[rng.randrange(n_clusters)] for _ in range(n_clusters)]
+        resampled_ids = [i for cluster in draws for i in cluster]
+        rep = deltas_for_ids(resampled_ids)
+        if rep is None:
+            continue
+        for k in keys:
+            replicate_series[k].append(rep[k])
+
+    def summarize(k):
+        vals = replicate_series[k]
+        if not vals:
+            return {"point": point[k] if point else None, "ci_2_5": None, "ci_97_5": None,
+                     "p_two_sided": None, "n_boot_valid": 0}
+        vals_sorted = sorted(vals)
+        n = len(vals_sorted)
+        return {
+            "point": point[k],
+            "ci_2_5": vals_sorted[int(0.025 * n)], "ci_97_5": vals_sorted[min(int(0.975 * n), n - 1)],
+            "p_two_sided": bootstrap_two_sided_p(vals),
+            "n_boot_valid": n,
+        }
+
+    result = {k: summarize(k) for k in keys}
+    result["n_boot"] = n_boot
+    result["resample_unit"] = "instruction_normalized_text_cluster"
+    result["co_mechanisms"] = list(co_mechanisms)
+    result["mg_mechanisms"] = list(mg_mechanisms)
+    result["primary_hypotheses"] = ["corrected_CO", "corrected_MG", "Gamma"]
+    return result
 
 
 def paired_bootstrap_delta(metric_pos, metric_neutral, clusters, n_boot=2000, seed=20260828):

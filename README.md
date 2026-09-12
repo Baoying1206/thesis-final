@@ -15,13 +15,35 @@ design):
 - **RQ1**: Does Wei et al.'s competing-objectives (CO) / mismatched-
   generalisation (MG) taxonomy correspond to a consistent internal
   activation geometry across three models?
-- **RQ2**: Does multi-turn contextual reconfiguration show a stable
-  internal representation and behavioral effect that CANNOT be explained
-  by CO or MG alone -- i.e. does it constitute a candidate supplementary
-  category? (Not assumed true; several other outcomes are explicitly
-  anticipated -- see the protocol.)
+- **RQ2 (current mainline, Round 20)**: Does history-augmented canonical
+  CO/MG multi-turn delivery -- the same, unmodified canonical CO/MG
+  mechanism text from RQ1, delivered after a frozen, mechanism-free
+  3-turn scaffold instead of as a single turn -- produce a behavioral
+  and/or representational effect beyond the same mechanism's single-turn
+  delivery, net of a matched neutral-scaffold baseline? CO/MG's
+  mechanism definitions are never altered; only delivery structure
+  varies. **This design has not been implemented in code yet
+  (Round 20: design decided, no template/loader/driver written).**
+  Superseded prior RQ2 designs (Round 1-14's static contextual framing,
+  Round 16-19's persona/authority/fictional "Study B") are retained in
+  `FINAL_STUDY_PROTOCOL.md` and under `slurm/study_b_*`/
+  `templates/study_b_*` for provenance and reproducibility only --
+  neither feeds RQ2's final inference. See
+  `FINAL_STUDY_PROTOCOL.md` Sec 5R (marked
+  `SUPERSEDED_BY_HISTORY_AUGMENTED_CANONICAL_CO_MG_RQ2`) and Sec 13
+  Round 20 for the full history and rationale.
 
 ## Status
+
+**RQ1 (Sec 4/Experiment 1) has real GPU data on all 3 models and a
+complete geometry analysis -- see `FINAL_STUDY_PROTOCOL.md` Sec 13
+Round 12/13.** RQ2's superseded Study B design (Round 16-19) also has
+real, complete discovery-stage data on all 3 models plus a Round 19
+confirmatory `test_ids` extraction (also complete, all 3 models) --
+none of it feeds the current RQ2 answer, which now depends on a design
+that does not yet have any code written for it (see above). The
+paragraph below is historical (Round 4) and now describes neither RQ1
+nor current RQ2's status -- kept verbatim for the record, not rewritten:
 
 **Round 4 (human-reviewed revision): Experiment 2's 10-condition design
 is FROZEN -- template text, the 10-condition set, the unified
