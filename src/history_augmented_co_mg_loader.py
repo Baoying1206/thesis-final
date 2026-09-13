@@ -4,13 +4,18 @@ Round 20; Sec 5R is SUPERSEDED_BY_HISTORY_AUGMENTED_CANONICAL_CO_MG_RQ2).
 
 7 mechanism groups (prefix_injection, refusal_suppression,
 persona_roleplay = CO; encoding_obfuscation, payload_splitting,
-distractors_negated = MG; neutral) x 2 delivery forms (multi/single) =
-14 conditions. "multi" is a 5-turn frozen, mechanism-free scaffold
-(revised up from an initial 3-turn draft to address a statistical-power
-concern raised before any real confirmatory extraction -- a short,
-topic-unrelated scaffold might show near-zero effect on well-aligned
-models regardless of whether a genuine effect exists) followed by the
-canonical mechanism text as the 6th turn.
+distractors_negated = MG; neutral) x 3 delivery forms (single,
+multi_neutral, multi_progressive) = 21 conditions. Each "multi_*" form
+is a 5-turn frozen scaffold followed by the canonical mechanism text as
+the 6th turn; "multi_neutral"'s scaffold is topic-unrelated small talk,
+"multi_progressive"'s scaffold is a generic (non-instruction-specific)
+escalating "security research" framing -- added after a literature
+check found published high-ASR multi-turn jailbreaks rely on CONTENT
+shaping, not structure alone, so a pure structure-only comparison
+(multi_neutral) risked being underpowered by design. Both scaffolds are
+5 turns (revised up from an initial 3-turn neutral-only draft to
+address a statistical-power concern raised before any real confirmatory
+extraction). Both are compared against the SAME "single" baseline.
 
 The canonical mechanism TEXT is read live from
 `templates/imported/templates_wei_canonical.json` (Experiment 1's own
@@ -40,9 +45,20 @@ DEFAULT_CANONICAL_PATH = os.path.join(REPO_ROOT, "templates", "imported", "templ
 CO_MECHANISMS = ("prefix_injection", "refusal_suppression", "persona_roleplay")
 MG_MECHANISMS = ("encoding_obfuscation", "payload_splitting", "distractors_negated")
 ALL_MECHANISM_GROUPS = CO_MECHANISMS + MG_MECHANISMS + ("neutral",)
-FORMS = ("multi", "single")
+SCAFFOLD_KINDS = ("neutral", "progressive")
+MULTI_FORMS = tuple(f"multi_{k}" for k in SCAFFOLD_KINDS)  # ("multi_neutral", "multi_progressive")
+FORMS = ("single",) + MULTI_FORMS
 STAGE_KEYS = ("stage_1_hook", "stage_2_reinforce", "stage_3_followup", "stage_4_extend", "stage_5_bridge")
 FINAL_STAGE_KEY = f"stage_{len(STAGE_KEYS) + 1}"  # e.g. "stage_6" -- the payload turn, one past the scaffold
+
+
+def multi_form_to_scaffold_kind(form):
+    if not form.startswith("multi_"):
+        raise ValueError(f"not a multi form: {form!r}")
+    kind = form[len("multi_"):]
+    if kind not in SCAFFOLD_KINDS:
+        raise ValueError(f"unknown scaffold kind {kind!r} in form {form!r}")
+    return kind
 
 
 def load_template(path=None):
@@ -52,9 +68,13 @@ def load_template(path=None):
     groups_seen = set(data["mechanism_groups"].keys())
     if groups_seen != set(ALL_MECHANISM_GROUPS):
         raise ValueError(f"expected mechanism groups {ALL_MECHANISM_GROUPS}, found {groups_seen} in {path}")
-    for key in STAGE_KEYS:
-        if key not in data["scaffold_stages"]:
-            raise ValueError(f"scaffold_stages missing {key} in {path}")
+    scaffolds_seen = set(data["scaffolds"].keys())
+    if scaffolds_seen != set(SCAFFOLD_KINDS):
+        raise ValueError(f"expected scaffold kinds {SCAFFOLD_KINDS}, found {scaffolds_seen} in {path}")
+    for kind in SCAFFOLD_KINDS:
+        for key in STAGE_KEYS:
+            if key not in data["scaffolds"][kind]:
+                raise ValueError(f"scaffolds.{kind} missing {key} in {path}")
     return data
 
 
@@ -143,8 +163,10 @@ if __name__ == "__main__":
     template_data = load_template()
     canonical_texts = load_canonical_texts()
     print(f"loaded template: status={template_data.get('status')}")
-    print(f"scaffold stages: {list(template_data['scaffold_stages'].keys())}")
+    for kind in SCAFFOLD_KINDS:
+        print(f"scaffold[{kind}] stages: {list(template_data['scaffolds'][kind].keys())}")
     print(f"mechanism groups ({len(ALL_MECHANISM_GROUPS)}): {ALL_MECHANISM_GROUPS}")
+    print(f"forms ({len(FORMS)}): {FORMS}")
 
     example_instruction = "EXAMPLE_INSTRUCTION_TEXT_NOT_REAL_DATA"
     for mechanism in ALL_MECHANISM_GROUPS:

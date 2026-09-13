@@ -583,6 +583,110 @@ def bootstrap_history_augmented_effects(asr_multi_by_mechanism, asr_single_by_me
     return result
 
 
+def bootstrap_history_augmented_effects_multi_scaffold(asr_single, asr_multi_by_kind, clusters,
+                                                        co_mechanisms, mg_mechanisms, n_boot=2000, seed=20260828):
+    """Two-scaffold extension of `bootstrap_history_augmented_effects`
+    (RQ2 Round 20 follow-up: added a second, 'progressive' escalating
+    scaffold alongside the original 'neutral' one, after a literature
+    check found published high-ASR multi-turn jailbreaks rely on
+    content shaping, not structure alone). asr_single: {mechanism:
+    {instruction_id: 0/1}}, the SAME baseline for every scaffold kind.
+    asr_multi_by_kind: {kind: {mechanism: {instruction_id: 0/1}}} for
+    each scaffold kind (e.g. 'neutral', 'progressive').
+
+    For each kind, computes the same 6 quantities as
+    `bootstrap_history_augmented_effects` (E_CO, E_MG, E_N, Gamma,
+    corrected_CO, corrected_MG). When exactly 2 kinds are given, ALSO
+    computes the direct between-kind contrast (kind_b - kind_a) for
+    each of those 6 quantities, e.g. 'corrected_CO' for
+    progressive-vs-neutral answers "does escalating content produce a
+    larger CO effect than neutral small talk, beyond what either shows
+    alone?" -- using the SAME resampled ids per replicate across both
+    kinds (one shared `random.Random(seed)` stream), so the contrast is
+    a valid PAIRED bootstrap, not an independent-samples approximation
+    that would overstate its own uncertainty.
+
+    Every quantity, for every kind, and every contrast, is fully
+    recomputed from that replicate's own resampled ids -- no fixed
+    component is reused across replicates, same discipline as every
+    other function in this module."""
+    rng = random.Random(seed)
+    n_clusters = len(clusters)
+    kinds = list(asr_multi_by_kind.keys())
+    all_mechanisms = list(co_mechanisms) + list(mg_mechanisms) + ["neutral"]
+
+    def value_for(metric, ids):
+        vals = [metric[i] for i in ids if metric.get(i) is not None]
+        return sum(vals) / len(vals) if vals else None
+
+    def deltas_for_ids(kind, ids):
+        delta_m = {}
+        for m in all_mechanisms:
+            multi_v = value_for(asr_multi_by_kind[kind][m], ids)
+            single_v = value_for(asr_single[m], ids)
+            if multi_v is None or single_v is None:
+                return None
+            delta_m[m] = multi_v - single_v
+        e_co = sum(delta_m[m] for m in co_mechanisms) / len(co_mechanisms)
+        e_mg = sum(delta_m[m] for m in mg_mechanisms) / len(mg_mechanisms)
+        e_n = delta_m["neutral"]
+        return {
+            "E_CO": e_co, "E_MG": e_mg, "E_N": e_n,
+            "Gamma": e_co - e_mg,
+            "corrected_CO": e_co - e_n, "corrected_MG": e_mg - e_n,
+        }
+
+    keys = ("E_CO", "E_MG", "E_N", "Gamma", "corrected_CO", "corrected_MG")
+    all_ids = list(asr_single["neutral"].keys())
+    point_by_kind = {kind: deltas_for_ids(kind, all_ids) for kind in kinds}
+    point_contrast = None
+    if len(kinds) == 2:
+        kind_a, kind_b = kinds
+        point_contrast = {k: point_by_kind[kind_b][k] - point_by_kind[kind_a][k] for k in keys}
+
+    replicate_series = {kind: {k: [] for k in keys} for kind in kinds}
+    contrast_series = {k: [] for k in keys} if len(kinds) == 2 else None
+    for _ in range(n_boot):
+        draws = [clusters[rng.randrange(n_clusters)] for _ in range(n_clusters)]
+        resampled_ids = [i for cluster in draws for i in cluster]
+        rep_by_kind = {kind: deltas_for_ids(kind, resampled_ids) for kind in kinds}
+        if any(rep_by_kind[kind] is None for kind in kinds):
+            continue
+        for kind in kinds:
+            for k in keys:
+                replicate_series[kind][k].append(rep_by_kind[kind][k])
+        if len(kinds) == 2:
+            kind_a, kind_b = kinds
+            for k in keys:
+                contrast_series[k].append(rep_by_kind[kind_b][k] - rep_by_kind[kind_a][k])
+
+    def summarize(vals, point):
+        if not vals:
+            return {"point": point, "ci_2_5": None, "ci_97_5": None, "p_two_sided": None, "n_boot_valid": 0}
+        vals_sorted = sorted(vals)
+        n = len(vals_sorted)
+        return {
+            "point": point,
+            "ci_2_5": vals_sorted[int(0.025 * n)], "ci_97_5": vals_sorted[min(int(0.975 * n), n - 1)],
+            "p_two_sided": bootstrap_two_sided_p(vals),
+            "n_boot_valid": n,
+        }
+
+    result = {
+        "by_kind": {kind: {k: summarize(replicate_series[kind][k], point_by_kind[kind][k]) for k in keys} for kind in kinds},
+        "n_boot": n_boot, "resample_unit": "instruction_normalized_text_cluster",
+        "co_mechanisms": list(co_mechanisms), "mg_mechanisms": list(mg_mechanisms),
+        "primary_hypotheses_per_kind": ["corrected_CO", "corrected_MG", "Gamma"],
+    }
+    if contrast_series is not None:
+        kind_a, kind_b = kinds
+        result["contrast"] = {
+            "kind_a": kind_a, "kind_b": kind_b, "definition": f"{kind_b} - {kind_a}",
+            **{k: summarize(contrast_series[k], point_contrast[k]) for k in keys},
+        }
+    return result
+
+
 def paired_bootstrap_delta(metric_pos, metric_neutral, clusters, n_boot=2000, seed=20260828):
     """metric_pos/metric_neutral: {instruction_id: 0/1 or float or None}.
     clusters: from load_instruction_clusters(). Resamples clusters with

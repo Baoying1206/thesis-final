@@ -3,36 +3,42 @@ activation extraction + (for validation_ids/test_ids) real generation
 and judging (FINAL_STUDY_PROTOCOL.md Sec 13 Round 20; Sec 5R is
 SUPERSEDED_BY_HISTORY_AUGMENTED_CANONICAL_CO_MG_RQ2).
 
-14 conditions = 7 mechanism groups (prefix_injection,
+21 conditions = 7 mechanism groups (prefix_injection,
 refusal_suppression, persona_roleplay = CO; encoding_obfuscation,
-payload_splitting, distractors_negated = MG; neutral) x {multi, single}
-(`src/history_augmented_co_mg_loader.py`). "multi" is a genuine 6-stage
-trajectory: 5 frozen, mechanism-free scaffold turns (real assistant
+payload_splitting, distractors_negated = MG; neutral) x 3 forms
+(single, multi_neutral, multi_progressive)
+(`src/history_augmented_co_mg_loader.py`). Each "multi_*" form is a
+genuine 6-stage trajectory: 5 frozen scaffold turns (real assistant
 generation each turn, history carried forward -- the same
 "fixed-policy interactive multi-turn protocol" discipline as the
 superseded Study B design) followed by the UNMODIFIED canonical CO/MG
 mechanism text (or the bare instruction, for neutral) as the 6th turn.
-Scaffold length was revised up from an initial 3-turn draft (before any
-real confirmatory extraction) to address a statistical-power concern:
-a short, topic-unrelated scaffold might show near-zero effect on
-well-aligned models regardless of whether a genuine multi-turn effect
-exists. Stage count is read from `history_augmented_co_mg_loader.STAGE_KEYS`
--- not hardcoded here -- so a future scaffold-length change only needs
-editing the template + that constant.
+multi_neutral's scaffold is topic-unrelated small talk; multi_progressive's
+is a generic (non-instruction-specific) escalating "security research"
+framing -- added after a literature check found published high-ASR
+multi-turn jailbreaks rely on CONTENT shaping, not structure alone, so a
+structure-only comparison risked being underpowered by design. Both
+scaffolds are run as two independent 6-stage trajectories per
+mechanism (they diverge from stage 1, so nothing about the wave loop is
+shared between them). Stage count and scaffold kinds are read from
+`history_augmented_co_mg_loader.STAGE_KEYS`/`SCAFFOLD_KINDS` -- not
+hardcoded here.
 "single" is exactly Experiment 1's own single-turn condition -- one
-turn, no scaffold, byte-identical canonical text.
+turn, no scaffold, byte-identical canonical text -- and is shared as
+the SAME baseline for both multi_neutral and multi_progressive.
 
 Per the same compute-saving design as the superseded Study B script,
 generation requirement differs by `--ids-key`:
-- `direction_ids`: "multi" needs the scaffold stages REALLY generated
-  (to build context for the later stages' boundary extraction) but NOT
-  the final payload stage (no downstream use, no behavioral label
-  wanted for direction estimation). "single" needs only its one forward
-  pass, no generation at all.
-- `validation_ids`/`test_ids`: "multi" needs every stage generated for
-  real (the final stage's response is the judged behavioral outcome).
-  "single" also needs one real generation (its response must exist to
-  be judged). WildGuard judges every condition's FINAL exchange only.
+- `direction_ids`: each "multi_*" form needs its scaffold stages REALLY
+  generated (to build context for the later stages' boundary
+  extraction) but NOT the final payload stage (no downstream use, no
+  behavioral label wanted for direction estimation). "single" needs
+  only its one forward pass, no generation at all.
+- `validation_ids`/`test_ids`: each "multi_*" form needs every stage
+  generated for real (the final stage's response is the judged
+  behavioral outcome). "single" also needs one real generation (its
+  response must exist to be judged). WildGuard judges every
+  condition's FINAL exchange only.
 
 Token position: `t_generation_boundary` only, same as the superseded
 Study B script -- a length, not a substring search.
@@ -53,8 +59,9 @@ SRC_DIR = os.path.join(REPO_ROOT, "src")
 sys.path.insert(0, SRC_DIR)
 
 from history_augmented_co_mg_loader import (  # noqa: E402
-    ALL_MECHANISM_GROUPS, FORMS, STAGE_KEYS,
+    ALL_MECHANISM_GROUPS, FORMS, MULTI_FORMS, STAGE_KEYS,
     load_template, load_canonical_texts, render_payload_text, render_single_messages, condition_name,
+    multi_form_to_scaffold_kind,
 )
 from _behavioral_shared import sha256_hex, git_commit_hash, judge_responses  # noqa: E402
 
@@ -96,25 +103,33 @@ def load_instructions(ids_key):
 
 
 def build_all_rows(instructions, template_data, canonical_texts, mechanisms=None):
-    """One row per (instruction, mechanism, form). `mechanisms` restricts
-    to a subset (analogous to Study B's `--families` scoping, e.g. for a
-    future confirmatory-style run limited to one mechanism)."""
+    """Returns (trajectory_rows_by_form, single_pass_rows).
+    trajectory_rows_by_form: {multi_form: [rows]}, one entry per
+    MULTI_FORMS value (currently multi_neutral, multi_progressive) --
+    each is an independent 6-stage trajectory (they diverge from stage
+    1, sharing nothing but the same final-stage payload-rendering
+    logic). single_pass_rows: one set, shared as the baseline for every
+    multi_form. `mechanisms` restricts to a subset (analogous to Study
+    B's `--families` scoping, e.g. for a future confirmatory-style run
+    limited to one mechanism)."""
     mechanisms = mechanisms or list(ALL_MECHANISM_GROUPS)
-    trajectory_rows, single_pass_rows = [], []
+    trajectory_rows_by_form = {form: [] for form in MULTI_FORMS}
+    single_pass_rows = []
     for instr in instructions:
         for mechanism in mechanisms:
-            trajectory_rows.append({
-                "instruction_id": instr["id"], "instruction_text": instr["instruction_en"],
-                "mechanism": mechanism, "form": "multi", "condition": condition_name(mechanism, "multi"),
-                "messages": [],
-            })
+            for form in MULTI_FORMS:
+                trajectory_rows_by_form[form].append({
+                    "instruction_id": instr["id"], "instruction_text": instr["instruction_en"],
+                    "mechanism": mechanism, "form": form, "condition": condition_name(mechanism, form),
+                    "messages": [],
+                })
             messages, provenance = render_single_messages(template_data, canonical_texts, mechanism, instr["instruction_en"])
             single_pass_rows.append({
                 "instruction_id": instr["id"], "instruction_text": instr["instruction_en"],
                 "mechanism": mechanism, "form": "single", "condition": condition_name(mechanism, "single"),
                 "messages": messages, "transform_provenance": provenance,
             })
-    return trajectory_rows, single_pass_rows
+    return trajectory_rows_by_form, single_pass_rows
 
 
 def locate_generation_boundary(tokenizer, messages):
@@ -137,19 +152,21 @@ def run_dry_run(model_alias, tokenizer_path, ids_key):
     instructions = load_instructions(ids_key)
     template_data = load_template()
     canonical_texts = load_canonical_texts()
-    trajectory_rows, single_pass_rows = build_all_rows(instructions, template_data, canonical_texts)
+    trajectory_rows_by_form, single_pass_rows = build_all_rows(instructions, template_data, canonical_texts)
 
     n_ok, failures = 0, []
-    for row in trajectory_rows:
-        try:
-            stage1_text = template_data["scaffold_stages"]["stage_1_hook"]
-            messages = [{"role": "user", "content": stage1_text}]
-            _, t_gen = locate_generation_boundary(tokenizer, messages)
-            if t_gen < 0:
-                raise ValueError("t_generation_boundary < 0")
-            n_ok += 1
-        except Exception as e:
-            failures.append({"instruction_id": row["instruction_id"], "condition": row["condition"], "reason": str(e)})
+    for form, trajectory_rows in trajectory_rows_by_form.items():
+        scaffold_kind = multi_form_to_scaffold_kind(form)
+        for row in trajectory_rows:
+            try:
+                stage1_text = template_data["scaffolds"][scaffold_kind]["stage_1_hook"]
+                messages = [{"role": "user", "content": stage1_text}]
+                _, t_gen = locate_generation_boundary(tokenizer, messages)
+                if t_gen < 0:
+                    raise ValueError("t_generation_boundary < 0")
+                n_ok += 1
+            except Exception as e:
+                failures.append({"instruction_id": row["instruction_id"], "condition": row["condition"], "reason": str(e)})
     for row in single_pass_rows:
         try:
             _, t_gen = locate_generation_boundary(tokenizer, row["messages"])
@@ -159,11 +176,11 @@ def run_dry_run(model_alias, tokenizer_path, ids_key):
         except Exception as e:
             failures.append({"instruction_id": row["instruction_id"], "condition": row["condition"], "reason": str(e)})
 
-    total = len(trajectory_rows) + len(single_pass_rows)
+    total = sum(len(rows) for rows in trajectory_rows_by_form.values()) + len(single_pass_rows)
     print(json.dumps({
         "result_status": "HISTORY_AUGMENTED_DRY_RUN_PASS" if not failures else "HISTORY_AUGMENTED_DRY_RUN_FAIL",
         "model_alias": model_alias, "ids_key": ids_key,
-        "note": "validates 'multi' stage-1 rendering and full 'single' rendering only -- stages 2-4 of 'multi' require real generation, not exercised here",
+        "note": "validates each multi_* form's stage-1 rendering and full 'single' rendering only -- stages 2-6 of each multi_* form require real generation, not exercised here",
         "n_rows": total, "n_ok": n_ok, "n_failures": len(failures), "failures": failures[:10],
     }, indent=2, ensure_ascii=False))
     return len(failures) == 0
@@ -248,7 +265,7 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
     template_data = load_template()
     canonical_texts = load_canonical_texts()
     active_mechanisms = mechanisms or list(ALL_MECHANISM_GROUPS)
-    trajectory_rows, single_pass_rows = build_all_rows(instructions, template_data, canonical_texts, mechanisms=active_mechanisms)
+    trajectory_rows_by_form, single_pass_rows = build_all_rows(instructions, template_data, canonical_texts, mechanisms=active_mechanisms)
 
     is_pilot = pilot_ids is not None
     force_full_generation = is_pilot
@@ -320,40 +337,42 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
                 "condition": row["condition"], "instruction_id": row["instruction_id"],
             })
 
-    # --- multi: (n_scaffold_stages + 1)-wave real trajectory ---
+    # --- multi_*: independent (n_scaffold_stages + 1)-wave real trajectories, one per scaffold kind ---
     n_scaffold_stages = len(STAGE_KEYS)
     final_stage = n_scaffold_stages + 1
     stage_key_for = dict(enumerate(STAGE_KEYS, start=1))
-    print(f"[{model_alias}] multi-turn conditions: {len(trajectory_rows)} rows x {final_stage} stages", file=sys.stderr)
-    for stage_idx in range(1, final_stage + 1):
-        print(f"  stage {stage_idx}: appending user turn + extracting boundary", file=sys.stderr)
-        for row in trajectory_rows:
-            if stage_idx <= n_scaffold_stages:
-                text = template_data["scaffold_stages"][stage_key_for[stage_idx]]
-            else:
-                text, provenance = render_payload_text(template_data, canonical_texts, row["mechanism"], row["instruction_text"])
-                row["transform_provenance"] = provenance
-            row["messages"].append({"role": "user", "content": text})
-            try:
-                vec, t_gen, tok_id, seq_len = extract_boundary_activation(model, tokenizer, row["messages"])
-                activations_by_condition[row["condition"]].setdefault(row["instruction_id"], {})[f"stage_{stage_idx}"] = vec
-                write_record(row, stage_idx, t_gen, tok_id, seq_len, "EXTRACTION_OK")
-            except Exception as e:
-                write_record(row, stage_idx, None, None, None, "EXTRACTION_FAIL", str(e))
-
-        need_generation = (stage_idx < final_stage) or needs_full_behavioral
-        if need_generation:
-            print(f"  stage {stage_idx}: generating real responses ({len(trajectory_rows)} rows)", file=sys.stderr)
-            run_generation_wave(model, tokenizer, eos_ids, trajectory_rows, batch_size)
+    for form, trajectory_rows in trajectory_rows_by_form.items():
+        scaffold_kind = multi_form_to_scaffold_kind(form)
+        print(f"[{model_alias}] {form} conditions: {len(trajectory_rows)} rows x {final_stage} stages", file=sys.stderr)
+        for stage_idx in range(1, final_stage + 1):
+            print(f"  stage {stage_idx}: appending user turn + extracting boundary", file=sys.stderr)
             for row in trajectory_rows:
-                write_response(row, stage_idx)
-                row["messages"].append({"role": "assistant", "content": row["stage_response"]})
-                if stage_idx == final_stage and needs_full_behavioral:
-                    judge_input_rows.append({
-                        "generation_key": sha256_hex(f"{model_alias}|{row['condition']}|{row['instruction_id']}|final_stage"),
-                        "messages": row["messages"], "response": row["stage_response"],
-                        "condition": row["condition"], "instruction_id": row["instruction_id"],
-                    })
+                if stage_idx <= n_scaffold_stages:
+                    text = template_data["scaffolds"][scaffold_kind][stage_key_for[stage_idx]]
+                else:
+                    text, provenance = render_payload_text(template_data, canonical_texts, row["mechanism"], row["instruction_text"])
+                    row["transform_provenance"] = provenance
+                row["messages"].append({"role": "user", "content": text})
+                try:
+                    vec, t_gen, tok_id, seq_len = extract_boundary_activation(model, tokenizer, row["messages"])
+                    activations_by_condition[row["condition"]].setdefault(row["instruction_id"], {})[f"stage_{stage_idx}"] = vec
+                    write_record(row, stage_idx, t_gen, tok_id, seq_len, "EXTRACTION_OK")
+                except Exception as e:
+                    write_record(row, stage_idx, None, None, None, "EXTRACTION_FAIL", str(e))
+
+            need_generation = (stage_idx < final_stage) or needs_full_behavioral
+            if need_generation:
+                print(f"  stage {stage_idx}: generating real responses ({len(trajectory_rows)} rows)", file=sys.stderr)
+                run_generation_wave(model, tokenizer, eos_ids, trajectory_rows, batch_size)
+                for row in trajectory_rows:
+                    write_response(row, stage_idx)
+                    row["messages"].append({"role": "assistant", "content": row["stage_response"]})
+                    if stage_idx == final_stage and needs_full_behavioral:
+                        judge_input_rows.append({
+                            "generation_key": sha256_hex(f"{model_alias}|{row['condition']}|{row['instruction_id']}|final_stage"),
+                            "messages": row["messages"], "response": row["stage_response"],
+                            "condition": row["condition"], "instruction_id": row["instruction_id"],
+                        })
 
     manifest_f.close()
     responses_f.close()

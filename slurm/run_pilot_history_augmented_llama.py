@@ -1,7 +1,7 @@
 """History-augmented canonical CO/MG pilot (RQ2 Round 20 replacement
 design). Llama-only, mechanical-soundness check ONLY -- same discipline
 as Sec 5.5's original pilot and Study B's `run_pilot_study_b_llama.py`.
-All 14 conditions, on the SAME 30 pre-fixed `direction_ids` both prior
+All 21 conditions, on the SAME 30 pre-fixed `direction_ids` both prior
 pilots used (reused verbatim for cross-study pilot consistency).
 
 Forces the FULL generate+judge path at every stage

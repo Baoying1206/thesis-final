@@ -7,7 +7,7 @@
 # History-augmented canonical CO/MG pilot
 # (slurm/run_pilot_history_augmented_llama.py). Llama-3.1-8B-Instruct
 # ONLY, the same 30 fixed ids as Sec 5.5's original pilot / Study B's
-# pilot, all 14 conditions -- forces the FULL generate+judge path at
+# pilot, all 21 conditions -- forces the FULL generate+judge path at
 # every stage. PILOT_NON_RESULT -- mechanical sanity check only. Its
 # output must NEVER be used to select, revise, or tune the scaffold or
 # any mechanism's wording.

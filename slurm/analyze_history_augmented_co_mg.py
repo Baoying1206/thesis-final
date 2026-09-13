@@ -63,10 +63,13 @@ sys.path.insert(0, SRC_DIR)
 
 from stats_shared import (  # noqa: E402
     cos, load_instruction_clusters, holm_correction,
-    bootstrap_history_augmented_effects, bootstrap_vector_diff,
+    bootstrap_history_augmented_effects_multi_scaffold, bootstrap_vector_diff,
     compute_2group_partition_stats, point_biserial_bootstrap,
 )
-from history_augmented_co_mg_loader import CO_MECHANISMS, MG_MECHANISMS, ALL_MECHANISM_GROUPS, FINAL_STAGE_KEY, condition_name  # noqa: E402
+from history_augmented_co_mg_loader import (  # noqa: E402
+    CO_MECHANISMS, MG_MECHANISMS, ALL_MECHANISM_GROUPS, MULTI_FORMS, FINAL_STAGE_KEY,
+    condition_name, multi_form_to_scaffold_kind,
+)
 
 SAMPLED_PROMPTS_EN_ONLY_PATH = os.path.join(REPO_ROOT, "data", "source", "sampled_prompts_en_only.json")
 DEFAULT_EXTRACTION_DIR = os.path.join(SCRIPT_DIR, "history_augmented_co_mg_output")
@@ -156,36 +159,54 @@ def run_behavioral(model_alias, extraction_dir, output_dir):
         recs = by_condition_instruction.get(condition_name(mechanism, form), {})
         return {i: (1.0 if v.get("strict_success") else 0.0) for i, v in recs.items()}
 
-    asr_multi = {m: strict_success_metric(m, "multi") for m in ALL_MECHANISM_GROUPS}
     asr_single = {m: strict_success_metric(m, "single") for m in ALL_MECHANISM_GROUPS}
+    asr_multi_by_kind = {}
+    for form in MULTI_FORMS:
+        kind = multi_form_to_scaffold_kind(form)
+        asr_multi_by_kind[kind] = {m: strict_success_metric(m, form) for m in ALL_MECHANISM_GROUPS}
 
-    ids_common = sorted(set.intersection(*[set(asr_multi[m]) for m in ALL_MECHANISM_GROUPS],
-                                          *[set(asr_single[m]) for m in ALL_MECHANISM_GROUPS]))
+    ids_common = sorted(set.intersection(
+        *[set(asr_single[m]) for m in ALL_MECHANISM_GROUPS],
+        *[set(asr_multi_by_kind[kind][m]) for kind in asr_multi_by_kind for m in ALL_MECHANISM_GROUPS],
+    ))
     clusters = load_instruction_clusters(ids_common, instruction_texts)
-    print(f"[{model_alias}] behavioral: {len(ids_common)} instructions with all 14 conditions present, {len(clusters)} clusters", file=sys.stderr)
+    print(f"[{model_alias}] behavioral: {len(ids_common)} instructions with all {len(ALL_MECHANISM_GROUPS) * len(MULTI_FORMS + ('single',))} conditions present, {len(clusters)} clusters", file=sys.stderr)
 
-    asr_multi_common = {m: {i: asr_multi[m][i] for i in ids_common} for m in ALL_MECHANISM_GROUPS}
     asr_single_common = {m: {i: asr_single[m][i] for i in ids_common} for m in ALL_MECHANISM_GROUPS}
+    asr_multi_by_kind_common = {
+        kind: {m: {i: asr_multi_by_kind[kind][m][i] for i in ids_common} for m in ALL_MECHANISM_GROUPS}
+        for kind in asr_multi_by_kind
+    }
 
-    print(f"[{model_alias}] bootstrapping E_CO/E_MG/E_N/Gamma/corrected_CO/corrected_MG...", file=sys.stderr)
-    effects = bootstrap_history_augmented_effects(
-        asr_multi_common, asr_single_common, clusters, CO_MECHANISMS, MG_MECHANISMS,
+    print(f"[{model_alias}] bootstrapping E_CO/E_MG/E_N/Gamma/corrected_CO/corrected_MG for each scaffold kind + neutral-vs-progressive contrast...", file=sys.stderr)
+    effects = bootstrap_history_augmented_effects_multi_scaffold(
+        asr_single_common, asr_multi_by_kind_common, clusters, CO_MECHANISMS, MG_MECHANISMS,
         n_boot=N_BOOTSTRAP, seed=BOOTSTRAP_SEED,
     )
 
-    # Sec 13 Round 20: Holm correction WITHIN this model across EXACTLY
-    # the 3 primary hypotheses (corrected_CO, corrected_MG, Gamma) --
-    # this is the final confirmatory result for this design (single-
-    # stage, confirmed with the user: no discovery/confirmation split,
-    # no second pass on test_ids).
-    primary_pvalues = [(k, effects[k]["p_two_sided"]) for k in ("corrected_CO", "corrected_MG", "Gamma")
-                        if effects[k]["p_two_sided"] is not None]
-    for k, p_holm in holm_correction(primary_pvalues).items():
-        effects[k]["p_holm_adjusted"] = p_holm
+    # Sec 13 Round 20 follow-up: Holm correction WITHIN this model across
+    # EXACTLY the primary hypotheses -- 3 per scaffold kind (corrected_CO,
+    # corrected_MG, Gamma), pooled across the 2 kinds = 6 total -- this is
+    # the final confirmatory result for this design (single-stage,
+    # confirmed with the user: no discovery/confirmation split, no
+    # second pass on test_ids). The neutral-vs-progressive CONTRAST is
+    # reported separately, NOT folded into this same Holm family (it
+    # answers a different question -- "does escalation beat neutral
+    # small talk" -- from "does each scaffold beat single-turn").
+    primary_pvalues = []
+    for kind in effects["by_kind"]:
+        for k in ("corrected_CO", "corrected_MG", "Gamma"):
+            p = effects["by_kind"][kind][k]["p_two_sided"]
+            if p is not None:
+                primary_pvalues.append((f"{kind}.{k}", p))
+    adjusted = holm_correction(primary_pvalues)
+    for name, p_holm in adjusted.items():
+        kind, k = name.split(".", 1)
+        effects["by_kind"][kind][k]["p_holm_adjusted"] = p_holm
 
     per_condition_rates = {}
     for m in ALL_MECHANISM_GROUPS:
-        for form in ("multi", "single"):
+        for form in ("single",) + MULTI_FORMS:
             recs = by_condition_instruction.get(condition_name(m, form), {})
             n = len(recs)
             if n == 0:
@@ -205,7 +226,7 @@ def run_behavioral(model_alias, extraction_dir, output_dir):
         json.dump({
             "result_status": "HISTORY_AUGMENTED_BEHAVIORAL_ANALYSIS",
             "model_alias": model_alias, "n_instructions": len(ids_common),
-            "note": "Single-stage design (Sec 13 Round 20) -- this IS the final confirmatory result, not a discovery stage. p_holm_adjusted is Holm-corrected across exactly {corrected_CO, corrected_MG, Gamma} within this model, never pooled across models.",
+            "note": "Single-stage design (Sec 13 Round 20 + follow-up) -- this IS the final confirmatory result, not a discovery stage. p_holm_adjusted is Holm-corrected across exactly {corrected_CO, corrected_MG, Gamma} x {neutral, progressive} = 6 hypotheses within this model, never pooled across models. effects.contrast (progressive-vs-neutral) is a separate, non-Holm-corrected secondary comparison -- a different question from the 6 primary hypotheses.",
             "effects": effects,
             "per_condition_rates": per_condition_rates,
         }, f, indent=2, ensure_ascii=False)
@@ -214,35 +235,40 @@ def run_behavioral(model_alias, extraction_dir, output_dir):
 
 def run_representation(model_alias, primary_layer, extraction_dir, experiment1_dir, output_dir):
     instruction_texts = load_instruction_texts()
-
-    acts_multi = {m: load_activations(extraction_dir, model_alias, "direction_ids", m, "multi") for m in REAL_MECHANISMS}
     acts_single = {m: load_activations(extraction_dir, model_alias, "direction_ids", m, "single") for m in REAL_MECHANISMS}
 
-    d_m_point = {}
-    mechanism_results = {}
-    for m in REAL_MECHANISMS:
-        ids_common = sorted(set(acts_multi[m]) & set(acts_single[m]))
-        clusters = load_instruction_clusters(ids_common, instruction_texts)
-        v_multi = stage_vecs(acts_multi[m], FINAL_STAGE_KEY, primary_layer, ids_common)
-        v_single = stage_vecs(acts_single[m], PRIMARY_TOKEN_POSITION, primary_layer, ids_common)
+    by_kind_results = {}
+    for form in MULTI_FORMS:
+        kind = multi_form_to_scaffold_kind(form)
+        acts_multi = {m: load_activations(extraction_dir, model_alias, "direction_ids", m, form) for m in REAL_MECHANISMS}
 
-        p_CO, p_MG = load_experiment1_frozen_directions(experiment1_dir, model_alias, primary_layer, PRIMARY_TOKEN_POSITION, ids_common)
-        print(f"[{model_alias}] mechanism={m}: bootstrapping d_m^history...", file=sys.stderr)
-        d_m = bootstrap_vector_diff(v_multi, v_single, clusters, n_boot=N_BOOTSTRAP, seed=BOOTSTRAP_SEED,
-                                     extra_cos_targets={"p_CO": p_CO, "p_MG": p_MG})
-        mechanism_results[m] = {"n_instructions": len(ids_common), "d_m_history": d_m}
+        d_m_point = {}
+        mechanism_results = {}
+        for m in REAL_MECHANISMS:
+            ids_common = sorted(set(acts_multi[m]) & set(acts_single[m]))
+            clusters = load_instruction_clusters(ids_common, instruction_texts)
+            v_multi = stage_vecs(acts_multi[m], FINAL_STAGE_KEY, primary_layer, ids_common)
+            v_single = stage_vecs(acts_single[m], PRIMARY_TOKEN_POSITION, primary_layer, ids_common)
 
-        common_diffs = [v_multi[i] - v_single[i] for i in ids_common if i in v_multi and i in v_single]
-        d_m_point[m] = torch.stack(common_diffs).mean(0) if common_diffs else None
+            p_CO, p_MG = load_experiment1_frozen_directions(experiment1_dir, model_alias, primary_layer, PRIMARY_TOKEN_POSITION, ids_common)
+            print(f"[{model_alias}] kind={kind} mechanism={m}: bootstrapping d_m^history...", file=sys.stderr)
+            d_m = bootstrap_vector_diff(v_multi, v_single, clusters, n_boot=N_BOOTSTRAP, seed=BOOTSTRAP_SEED,
+                                         extra_cos_targets={"p_CO": p_CO, "p_MG": p_MG})
+            mechanism_results[m] = {"n_instructions": len(ids_common), "d_m_history": d_m}
 
-    cohesion = None
-    if all(d_m_point[m] is not None for m in REAL_MECHANISMS):
-        S_co, S_mg, S_between, delta_co, delta_mg, T = compute_2group_partition_stats(d_m_point, list(CO_MECHANISMS), list(MG_MECHANISMS))
-        cohesion = {
-            "within_CO_mean_cosine": S_co, "within_MG_mean_cosine": S_mg, "between_CO_MG_mean_cosine": S_between,
-            "CO_minus_between": delta_co, "MG_minus_between": delta_mg, "T_statistic": T,
-            "note": "point estimate only (no bootstrap CI) -- descriptive cohesion check on the canonical CO/MG partition of the 6 d_m^history vectors, same statistic family as Experiment 1 Sec 4.3 but not re-run through its partition-ranking bootstrap this round.",
-        }
+            common_diffs = [v_multi[i] - v_single[i] for i in ids_common if i in v_multi and i in v_single]
+            d_m_point[m] = torch.stack(common_diffs).mean(0) if common_diffs else None
+
+        cohesion = None
+        if all(d_m_point[m] is not None for m in REAL_MECHANISMS):
+            S_co, S_mg, S_between, delta_co, delta_mg, T = compute_2group_partition_stats(d_m_point, list(CO_MECHANISMS), list(MG_MECHANISMS))
+            cohesion = {
+                "within_CO_mean_cosine": S_co, "within_MG_mean_cosine": S_mg, "between_CO_MG_mean_cosine": S_between,
+                "CO_minus_between": delta_co, "MG_minus_between": delta_mg, "T_statistic": T,
+                "note": "point estimate only (no bootstrap CI) -- descriptive cohesion check on the canonical CO/MG partition of the 6 d_m^history vectors, same statistic family as Experiment 1 Sec 4.3 but not re-run through its partition-ranking bootstrap this round.",
+            }
+
+        by_kind_results[kind] = {"by_mechanism": mechanism_results, "co_mg_cohesion": cohesion}
 
     os.makedirs(output_dir, exist_ok=True)
     out_path = os.path.join(output_dir, f"{model_alias}_history_augmented_representation.json")
@@ -250,19 +276,19 @@ def run_representation(model_alias, primary_layer, extraction_dir, experiment1_d
         json.dump({
             "result_status": "HISTORY_AUGMENTED_REPRESENTATION_ANALYSIS",
             "model_alias": model_alias, "primary_layer": primary_layer,
-            "by_mechanism": mechanism_results,
-            "co_mg_cohesion": cohesion,
+            "by_scaffold_kind": by_kind_results,
         }, f, indent=2, ensure_ascii=False)
     print(json.dumps({"result_status": "HISTORY_AUGMENTED_REPRESENTATION_DONE", "model_alias": model_alias, "output_path": out_path}, indent=2))
 
 
 def run_activation_behavior_connection(model_alias, primary_layer, extraction_dir, experiment1_dir, output_dir):
-    """z[i] = <h[i,m,multi,final_stage]-h[i,m,single], d_hat_cat>, where
-    d_hat_cat is Experiment 1's frozen p_CO (if m in CO) or p_MG (if m
-    in MG), unit-normalized -- estimated from `direction_ids` ONLY (Sec
-    6/5R.7's firewall, unchanged), correlated against `validation_ids`
-    strict_success. Holm-corrected across the 6 real mechanisms within
-    this model."""
+    """For each scaffold kind, z[i] = <h[i,m,multi_kind,final_stage]-h[i,m,single], d_hat_cat>,
+    where d_hat_cat is Experiment 1's frozen p_CO (if m in CO) or p_MG
+    (if m in MG), unit-normalized -- estimated from `direction_ids`
+    ONLY (Sec 6/5R.7's firewall, unchanged), correlated against
+    `validation_ids` strict_success. Holm-corrected across the 6 real
+    mechanisms WITHIN each scaffold kind separately (not pooled across
+    kinds -- each kind's 6 mechanisms is its own family)."""
     judge_path = os.path.join(extraction_dir, f"{model_alias}_validation_ids_history_augmented_judge_records.jsonl")
     if not os.path.exists(judge_path):
         raise FileNotFoundError(f"missing judge records: {judge_path}")
@@ -274,39 +300,45 @@ def run_activation_behavior_connection(model_alias, primary_layer, extraction_di
 
     instruction_texts = load_instruction_texts()
 
-    # d_hat direction from direction_ids ONLY (fixed reference, Experiment 1's own directions)
+    # d_hat direction from direction_ids ONLY (fixed reference, Experiment 1's own directions) --
+    # scaffold-independent, so estimated once using the single-form ids (any direction_ids form works here).
     all_dir_ids = set()
     for m in REAL_MECHANISMS:
-        acts_multi_m = load_activations(extraction_dir, model_alias, "direction_ids", m, "multi")
-        all_dir_ids |= set(acts_multi_m.keys())
+        acts_single_m = load_activations(extraction_dir, model_alias, "direction_ids", m, "single")
+        all_dir_ids |= set(acts_single_m.keys())
     p_CO, p_MG = load_experiment1_frozen_directions(experiment1_dir, model_alias, primary_layer, PRIMARY_TOKEN_POSITION, sorted(all_dir_ids))
     d_hat_CO = p_CO / p_CO.norm()
     d_hat_MG = p_MG / p_MG.norm()
 
-    mechanism_results = {}
-    for m in REAL_MECHANISMS:
-        d_hat = d_hat_CO if m in CO_MECHANISMS else d_hat_MG
-        acts_multi = load_activations(extraction_dir, model_alias, "validation_ids", m, "multi")
-        acts_single = load_activations(extraction_dir, model_alias, "validation_ids", m, "single")
-        outcome = outcome_by_condition_instruction.get(condition_name(m, "multi"), {})
-        ids_common = sorted(set(acts_multi) & set(acts_single) & set(outcome))
+    by_kind_results = {}
+    for form in MULTI_FORMS:
+        kind = multi_form_to_scaffold_kind(form)
+        mechanism_results = {}
+        for m in REAL_MECHANISMS:
+            d_hat = d_hat_CO if m in CO_MECHANISMS else d_hat_MG
+            acts_multi = load_activations(extraction_dir, model_alias, "validation_ids", m, form)
+            acts_single = load_activations(extraction_dir, model_alias, "validation_ids", m, "single")
+            outcome = outcome_by_condition_instruction.get(condition_name(m, form), {})
+            ids_common = sorted(set(acts_multi) & set(acts_single) & set(outcome))
 
-        z_by_id = {}
-        for i in ids_common:
-            v_multi_i = acts_multi[i][FINAL_STAGE_KEY][primary_layer]
-            v_single_i = acts_single[i][PRIMARY_TOKEN_POSITION][primary_layer]
-            z_by_id[i] = torch.dot(v_multi_i - v_single_i, d_hat).item()
-        outcome_by_id = {i: outcome[i] for i in ids_common}
+            z_by_id = {}
+            for i in ids_common:
+                v_multi_i = acts_multi[i][FINAL_STAGE_KEY][primary_layer]
+                v_single_i = acts_single[i][PRIMARY_TOKEN_POSITION][primary_layer]
+                z_by_id[i] = torch.dot(v_multi_i - v_single_i, d_hat).item()
+            outcome_by_id = {i: outcome[i] for i in ids_common}
 
-        clusters = load_instruction_clusters(ids_common, instruction_texts)
-        print(f"[{model_alias}] mechanism={m}: bootstrapping z-vs-strict_success connection...", file=sys.stderr)
-        connection = point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=N_BOOTSTRAP, seed=BOOTSTRAP_SEED)
-        mechanism_results[m] = {"n_instructions": len(ids_common), "z_vs_strict_success": connection}
+            clusters = load_instruction_clusters(ids_common, instruction_texts)
+            print(f"[{model_alias}] kind={kind} mechanism={m}: bootstrapping z-vs-strict_success connection...", file=sys.stderr)
+            connection = point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=N_BOOTSTRAP, seed=BOOTSTRAP_SEED)
+            mechanism_results[m] = {"n_instructions": len(ids_common), "z_vs_strict_success": connection}
 
-    named_pvalues = [(m, mechanism_results[m]["z_vs_strict_success"]["r_p_two_sided"])
-                      for m in REAL_MECHANISMS if mechanism_results[m]["z_vs_strict_success"]["r_p_two_sided"] is not None]
-    for m, p_holm in holm_correction(named_pvalues).items():
-        mechanism_results[m]["z_vs_strict_success"]["r_p_holm_adjusted"] = p_holm
+        named_pvalues = [(m, mechanism_results[m]["z_vs_strict_success"]["r_p_two_sided"])
+                          for m in REAL_MECHANISMS if mechanism_results[m]["z_vs_strict_success"]["r_p_two_sided"] is not None]
+        for m, p_holm in holm_correction(named_pvalues).items():
+            mechanism_results[m]["z_vs_strict_success"]["r_p_holm_adjusted"] = p_holm
+
+        by_kind_results[kind] = mechanism_results
 
     os.makedirs(output_dir, exist_ok=True)
     out_path = os.path.join(output_dir, f"{model_alias}_history_augmented_activation_behavior_connection.json")
@@ -314,8 +346,8 @@ def run_activation_behavior_connection(model_alias, primary_layer, extraction_di
         json.dump({
             "result_status": "HISTORY_AUGMENTED_ACTIVATION_BEHAVIOR_CONNECTION",
             "model_alias": model_alias, "primary_layer": primary_layer,
-            "note": "d_hat is Experiment 1's own frozen p_CO/p_MG (direction_ids-estimated only, Sec 6 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across the 6 real mechanisms within this model.",
-            "by_mechanism": mechanism_results,
+            "note": "d_hat is Experiment 1's own frozen p_CO/p_MG (direction_ids-estimated only, Sec 6 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across the 6 real mechanisms WITHIN each scaffold kind separately, never pooled across kinds or models.",
+            "by_scaffold_kind": by_kind_results,
         }, f, indent=2, ensure_ascii=False)
     print(json.dumps({"result_status": "HISTORY_AUGMENTED_ACTIVATION_BEHAVIOR_CONNECTION_DONE", "model_alias": model_alias, "output_path": out_path}, indent=2))
 

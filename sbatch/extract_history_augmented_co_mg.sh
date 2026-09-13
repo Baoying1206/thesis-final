@@ -4,18 +4,20 @@
 #SBATCH --account=slurm-students
 #SBATCH --output=sbatch/logs/history_augmented_co_mg_extract_%j.out
 
-# RQ2 Round 20 replacement design real extraction: 14 conditions (7
-# mechanism groups x multi/single), 6-stage real trajectory for "multi"
-# (5 frozen scaffold turns + 1 canonical-mechanism turn -- scaffold
-# lengthened from an initial 3-turn draft to address a statistical-power
+# RQ2 Round 20 replacement design real extraction: 21 conditions (7
+# mechanism groups x 3 forms: single, multi_neutral, multi_progressive).
+# Each multi_* form is an INDEPENDENT 6-stage real trajectory (5 frozen
+# scaffold turns + 1 canonical-mechanism turn -- scaffold lengthened
+# from an initial 3-turn draft, and a second 'progressive' scaffold
+# added alongside 'neutral', both to address a statistical-power
 # concern raised before any real confirmatory extraction).
-# direction_ids: 300 x 7 mechanisms x 5 expensive generation calls
-# (scaffold stages only -- the final payload stage is not generated, no
-# downstream use for direction estimation) = 10,500/model.
-# validation_ids: 72 x 7 x 6 = 3,024
-# expensive calls/model + judging (this IS the design's single
-# confirmatory dataset -- Sec 13 Round 20 confirmed no
-# discovery/confirmation split for this design).
+# direction_ids: 300 x 7 mechanisms x 2 multi_* forms x 5 expensive
+# generation calls each (scaffold stages only -- the final payload
+# stage is not generated, no downstream use for direction estimation)
+# = 21,000/model. validation_ids: 72 x 7 x 2 x 6 = 6,048 expensive
+# calls/model + judging (this IS the design's single confirmatory
+# dataset -- Sec 13 Round 20 confirmed no discovery/confirmation split
+# for this design).
 #
 # Submit one job per (model, ids_key) with MODEL_IDX=0/1/2 and IDS_KEY:
 #   sbatch --export=MODEL_IDX=0,IDS_KEY=direction_ids  sbatch/extract_history_augmented_co_mg.sh
