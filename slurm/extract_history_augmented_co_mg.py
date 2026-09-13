@@ -6,25 +6,33 @@ SUPERSEDED_BY_HISTORY_AUGMENTED_CANONICAL_CO_MG_RQ2).
 14 conditions = 7 mechanism groups (prefix_injection,
 refusal_suppression, persona_roleplay = CO; encoding_obfuscation,
 payload_splitting, distractors_negated = MG; neutral) x {multi, single}
-(`src/history_augmented_co_mg_loader.py`). "multi" is a genuine 4-stage
-trajectory: 3 frozen, mechanism-free scaffold turns (real assistant
+(`src/history_augmented_co_mg_loader.py`). "multi" is a genuine 6-stage
+trajectory: 5 frozen, mechanism-free scaffold turns (real assistant
 generation each turn, history carried forward -- the same
 "fixed-policy interactive multi-turn protocol" discipline as the
 superseded Study B design) followed by the UNMODIFIED canonical CO/MG
-mechanism text (or the bare instruction, for neutral) as the 4th turn.
+mechanism text (or the bare instruction, for neutral) as the 6th turn.
+Scaffold length was revised up from an initial 3-turn draft (before any
+real confirmatory extraction) to address a statistical-power concern:
+a short, topic-unrelated scaffold might show near-zero effect on
+well-aligned models regardless of whether a genuine multi-turn effect
+exists. Stage count is read from `history_augmented_co_mg_loader.STAGE_KEYS`
+-- not hardcoded here -- so a future scaffold-length change only needs
+editing the template + that constant.
 "single" is exactly Experiment 1's own single-turn condition -- one
 turn, no scaffold, byte-identical canonical text.
 
 Per the same compute-saving design as the superseded Study B script,
 generation requirement differs by `--ids-key`:
-- `direction_ids`: "multi" needs stages 1-3 REALLY generated (to build
-  context for stages 2/3/4's boundary extraction) but NOT stage 4 (no
-  downstream use, no behavioral label wanted for direction estimation).
-  "single" needs only its one forward pass, no generation at all.
-- `validation_ids`/`test_ids`: "multi" needs all 4 stages generated for
-  real (stage 4's response is the judged behavioral outcome). "single"
-  also needs one real generation (its response must exist to be
-  judged). WildGuard judges every condition's FINAL exchange only.
+- `direction_ids`: "multi" needs the scaffold stages REALLY generated
+  (to build context for the later stages' boundary extraction) but NOT
+  the final payload stage (no downstream use, no behavioral label
+  wanted for direction estimation). "single" needs only its one forward
+  pass, no generation at all.
+- `validation_ids`/`test_ids`: "multi" needs every stage generated for
+  real (the final stage's response is the judged behavioral outcome).
+  "single" also needs one real generation (its response must exist to
+  be judged). WildGuard judges every condition's FINAL exchange only.
 
 Token position: `t_generation_boundary` only, same as the superseded
 Study B script -- a length, not a substring search.
@@ -46,7 +54,7 @@ sys.path.insert(0, SRC_DIR)
 
 from history_augmented_co_mg_loader import (  # noqa: E402
     ALL_MECHANISM_GROUPS, FORMS, STAGE_KEYS,
-    load_template, load_canonical_texts, render_stage4_text, render_single_messages, condition_name,
+    load_template, load_canonical_texts, render_payload_text, render_single_messages, condition_name,
 )
 from _behavioral_shared import sha256_hex, git_commit_hash, judge_responses  # noqa: E402
 
@@ -312,16 +320,18 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
                 "condition": row["condition"], "instruction_id": row["instruction_id"],
             })
 
-    # --- multi: 4-wave real trajectory ---
-    print(f"[{model_alias}] multi-turn conditions: {len(trajectory_rows)} rows x 4 stages", file=sys.stderr)
-    stage_key_for = dict(zip((1, 2, 3), STAGE_KEYS))
-    for stage_idx in (1, 2, 3, 4):
+    # --- multi: (n_scaffold_stages + 1)-wave real trajectory ---
+    n_scaffold_stages = len(STAGE_KEYS)
+    final_stage = n_scaffold_stages + 1
+    stage_key_for = dict(enumerate(STAGE_KEYS, start=1))
+    print(f"[{model_alias}] multi-turn conditions: {len(trajectory_rows)} rows x {final_stage} stages", file=sys.stderr)
+    for stage_idx in range(1, final_stage + 1):
         print(f"  stage {stage_idx}: appending user turn + extracting boundary", file=sys.stderr)
         for row in trajectory_rows:
-            if stage_idx <= 3:
+            if stage_idx <= n_scaffold_stages:
                 text = template_data["scaffold_stages"][stage_key_for[stage_idx]]
             else:
-                text, provenance = render_stage4_text(template_data, canonical_texts, row["mechanism"], row["instruction_text"])
+                text, provenance = render_payload_text(template_data, canonical_texts, row["mechanism"], row["instruction_text"])
                 row["transform_provenance"] = provenance
             row["messages"].append({"role": "user", "content": text})
             try:
@@ -331,16 +341,16 @@ def run_extraction(model_alias, model_path, primary_layer_expected, ids_key, out
             except Exception as e:
                 write_record(row, stage_idx, None, None, None, "EXTRACTION_FAIL", str(e))
 
-        need_generation = (stage_idx < 4) or needs_full_behavioral
+        need_generation = (stage_idx < final_stage) or needs_full_behavioral
         if need_generation:
             print(f"  stage {stage_idx}: generating real responses ({len(trajectory_rows)} rows)", file=sys.stderr)
             run_generation_wave(model, tokenizer, eos_ids, trajectory_rows, batch_size)
             for row in trajectory_rows:
                 write_response(row, stage_idx)
                 row["messages"].append({"role": "assistant", "content": row["stage_response"]})
-                if stage_idx == 4 and needs_full_behavioral:
+                if stage_idx == final_stage and needs_full_behavioral:
                     judge_input_rows.append({
-                        "generation_key": sha256_hex(f"{model_alias}|{row['condition']}|{row['instruction_id']}|stage4"),
+                        "generation_key": sha256_hex(f"{model_alias}|{row['condition']}|{row['instruction_id']}|final_stage"),
                         "messages": row["messages"], "response": row["stage_response"],
                         "condition": row["condition"], "instruction_id": row["instruction_id"],
                     })

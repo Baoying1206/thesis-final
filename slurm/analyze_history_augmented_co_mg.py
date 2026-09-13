@@ -21,7 +21,7 @@ Behavioral (PRIMARY, `validation_ids`):
   final confirmatory result for this design; no second stage follows.
 
 Representational (secondary, `direction_ids`):
-- per-mechanism d_m = mean(h[m,multi,stage_4]) - mean(h[m,single]),
+- per-mechanism d_m = mean(h[m,multi,final_stage]) - mean(h[m,single]),
   with bootstrap CI on ||d_m|| and cos(d_m, p_CO)/cos(d_m, p_MG) where
   p_CO/p_MG are Experiment 1's own frozen, placebo-calibrated group
   directions (recomputed from Experiment 1's raw activations, never
@@ -33,7 +33,7 @@ Representational (secondary, `direction_ids`):
 
 Activation-behavior connection (`validation_ids`, using `direction_ids`
 -estimated directions only -- Sec 6's firewall, unchanged):
-- per mechanism m, z[i] = <h[i,m,multi,stage4]-h[i,m,single], d_hat_cat>
+- per mechanism m, z[i] = <h[i,m,multi,final_stage]-h[i,m,single], d_hat_cat>
   where d_hat_cat is p_CO (if m in CO) or p_MG (if m in MG), unit-
   normalized; correlated against `validation_ids` strict_success via
   `point_biserial_bootstrap`. Holm-corrected across the 6 real
@@ -66,7 +66,7 @@ from stats_shared import (  # noqa: E402
     bootstrap_history_augmented_effects, bootstrap_vector_diff,
     compute_2group_partition_stats, point_biserial_bootstrap,
 )
-from history_augmented_co_mg_loader import CO_MECHANISMS, MG_MECHANISMS, ALL_MECHANISM_GROUPS, condition_name  # noqa: E402
+from history_augmented_co_mg_loader import CO_MECHANISMS, MG_MECHANISMS, ALL_MECHANISM_GROUPS, FINAL_STAGE_KEY, condition_name  # noqa: E402
 
 SAMPLED_PROMPTS_EN_ONLY_PATH = os.path.join(REPO_ROOT, "data", "source", "sampled_prompts_en_only.json")
 DEFAULT_EXTRACTION_DIR = os.path.join(SCRIPT_DIR, "history_augmented_co_mg_output")
@@ -223,7 +223,7 @@ def run_representation(model_alias, primary_layer, extraction_dir, experiment1_d
     for m in REAL_MECHANISMS:
         ids_common = sorted(set(acts_multi[m]) & set(acts_single[m]))
         clusters = load_instruction_clusters(ids_common, instruction_texts)
-        v_multi = stage_vecs(acts_multi[m], "stage_4", primary_layer, ids_common)
+        v_multi = stage_vecs(acts_multi[m], FINAL_STAGE_KEY, primary_layer, ids_common)
         v_single = stage_vecs(acts_single[m], PRIMARY_TOKEN_POSITION, primary_layer, ids_common)
 
         p_CO, p_MG = load_experiment1_frozen_directions(experiment1_dir, model_alias, primary_layer, PRIMARY_TOKEN_POSITION, ids_common)
@@ -257,7 +257,7 @@ def run_representation(model_alias, primary_layer, extraction_dir, experiment1_d
 
 
 def run_activation_behavior_connection(model_alias, primary_layer, extraction_dir, experiment1_dir, output_dir):
-    """z[i] = <h[i,m,multi,stage4]-h[i,m,single], d_hat_cat>, where
+    """z[i] = <h[i,m,multi,final_stage]-h[i,m,single], d_hat_cat>, where
     d_hat_cat is Experiment 1's frozen p_CO (if m in CO) or p_MG (if m
     in MG), unit-normalized -- estimated from `direction_ids` ONLY (Sec
     6/5R.7's firewall, unchanged), correlated against `validation_ids`
@@ -293,7 +293,7 @@ def run_activation_behavior_connection(model_alias, primary_layer, extraction_di
 
         z_by_id = {}
         for i in ids_common:
-            v_multi_i = acts_multi[i]["stage_4"][primary_layer]
+            v_multi_i = acts_multi[i][FINAL_STAGE_KEY][primary_layer]
             v_single_i = acts_single[i][PRIMARY_TOKEN_POSITION][primary_layer]
             z_by_id[i] = torch.dot(v_multi_i - v_single_i, d_hat).item()
         outcome_by_id = {i: outcome[i] for i in ids_common}

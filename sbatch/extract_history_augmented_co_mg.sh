@@ -5,11 +5,14 @@
 #SBATCH --output=sbatch/logs/history_augmented_co_mg_extract_%j.out
 
 # RQ2 Round 20 replacement design real extraction: 14 conditions (7
-# mechanism groups x multi/single), 4-stage real trajectory for "multi"
-# (3 frozen scaffold turns + 1 canonical-mechanism turn).
-# direction_ids: 300 x 7 mechanisms x 3 expensive generation calls
-# (stages 1-3 only -- stage 4 not generated, no downstream use for
-# direction estimation) = 6,300/model. validation_ids: 72 x 7 x 4 = 2,016
+# mechanism groups x multi/single), 6-stage real trajectory for "multi"
+# (5 frozen scaffold turns + 1 canonical-mechanism turn -- scaffold
+# lengthened from an initial 3-turn draft to address a statistical-power
+# concern raised before any real confirmatory extraction).
+# direction_ids: 300 x 7 mechanisms x 5 expensive generation calls
+# (scaffold stages only -- the final payload stage is not generated, no
+# downstream use for direction estimation) = 10,500/model.
+# validation_ids: 72 x 7 x 6 = 3,024
 # expensive calls/model + judging (this IS the design's single
 # confirmatory dataset -- Sec 13 Round 20 confirmed no
 # discovery/confirmation split for this design).

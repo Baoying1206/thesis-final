@@ -5,7 +5,12 @@ Round 20; Sec 5R is SUPERSEDED_BY_HISTORY_AUGMENTED_CANONICAL_CO_MG_RQ2).
 7 mechanism groups (prefix_injection, refusal_suppression,
 persona_roleplay = CO; encoding_obfuscation, payload_splitting,
 distractors_negated = MG; neutral) x 2 delivery forms (multi/single) =
-14 conditions.
+14 conditions. "multi" is a 5-turn frozen, mechanism-free scaffold
+(revised up from an initial 3-turn draft to address a statistical-power
+concern raised before any real confirmatory extraction -- a short,
+topic-unrelated scaffold might show near-zero effect on well-aligned
+models regardless of whether a genuine effect exists) followed by the
+canonical mechanism text as the 6th turn.
 
 The canonical mechanism TEXT is read live from
 `templates/imported/templates_wei_canonical.json` (Experiment 1's own
@@ -36,7 +41,8 @@ CO_MECHANISMS = ("prefix_injection", "refusal_suppression", "persona_roleplay")
 MG_MECHANISMS = ("encoding_obfuscation", "payload_splitting", "distractors_negated")
 ALL_MECHANISM_GROUPS = CO_MECHANISMS + MG_MECHANISMS + ("neutral",)
 FORMS = ("multi", "single")
-STAGE_KEYS = ("stage_1_hook", "stage_2_reinforce", "stage_3_bridge")
+STAGE_KEYS = ("stage_1_hook", "stage_2_reinforce", "stage_3_followup", "stage_4_extend", "stage_5_bridge")
+FINAL_STAGE_KEY = f"stage_{len(STAGE_KEYS) + 1}"  # e.g. "stage_6" -- the payload turn, one past the scaffold
 
 
 def load_template(path=None):
@@ -98,7 +104,7 @@ def render_payload(mechanism, placeholder_scheme, canonical_text, instruction_te
     raise ValueError(f"unknown placeholder_scheme {placeholder_scheme!r}")
 
 
-def render_stage4_text(template_data, canonical_texts, mechanism, instruction_text):
+def render_payload_text(template_data, canonical_texts, mechanism, instruction_text):
     """Returns (text, transform_provenance) for the final-turn payload --
     the canonical mechanism text (byte-identical to Experiment 1) for
     the 6 real mechanisms, or the bare instruction for 'neutral'."""
@@ -115,7 +121,7 @@ def render_stage4_text(template_data, canonical_texts, mechanism, instruction_te
 def render_single_messages(template_data, canonical_texts, mechanism, instruction_text):
     """'single' form: exactly Experiment 1's own single-turn condition
     -- one user turn, no scaffold. Returns (messages, transform_provenance)."""
-    text, provenance = render_stage4_text(template_data, canonical_texts, mechanism, instruction_text)
+    text, provenance = render_payload_text(template_data, canonical_texts, mechanism, instruction_text)
     return [{"role": "user", "content": text}], provenance
 
 
@@ -142,5 +148,5 @@ if __name__ == "__main__":
 
     example_instruction = "EXAMPLE_INSTRUCTION_TEXT_NOT_REAL_DATA"
     for mechanism in ALL_MECHANISM_GROUPS:
-        text, prov = render_stage4_text(template_data, canonical_texts, mechanism, example_instruction)
-        print(f"  {mechanism} stage_4/single: {text[:90]}{'...' if len(text) > 90 else ''}  (transform={prov['transform'] if prov else None})")
+        text, prov = render_payload_text(template_data, canonical_texts, mechanism, example_instruction)
+        print(f"  {mechanism} final_stage/single: {text[:90]}{'...' if len(text) > 90 else ''}  (transform={prov['transform'] if prov else None})")

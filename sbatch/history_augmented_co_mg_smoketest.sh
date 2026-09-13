@@ -7,10 +7,12 @@
 # One-off sanity check BEFORE the real extract_history_augmented_co_mg.sh
 # array. RQ2 Round 20 replacement design (history-augmented canonical
 # CO/MG, FINAL_STUDY_PROTOCOL.md Sec 13 Round 20) has NEVER been run
-# against real GPU at all -- new code path (4-stage real trajectory:
-# 3 frozen scaffold turns + 1 canonical-mechanism turn, 14 conditions).
-# --limit 1 covers exactly one instruction's worth of all 14 conditions
-# (7 mechanisms x multi(4 stages)/single(1 turn)). Qwen only,
+# against real GPU at all -- new code path (6-stage real trajectory:
+# 5 frozen scaffold turns + 1 canonical-mechanism turn, 14 conditions;
+# scaffold lengthened from an initial 3-turn draft to address a
+# statistical-power concern raised before any real confirmatory
+# extraction). --limit 1 covers exactly one instruction's worth of all
+# 14 conditions (7 mechanisms x multi(6 stages)/single(1 turn)). Qwen only,
 # direction_ids only (cheaper -- no stage-4 generation needed there).
 #
 # Delete slurm/history_augmented_co_mg_output/ contents afterward if you
