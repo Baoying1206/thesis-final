@@ -234,23 +234,39 @@ def run_behavioral(model_alias, extraction_dir, output_dir):
 
 
 def run_representation(model_alias, primary_layer, extraction_dir, experiment1_dir, output_dir):
+    """Memory note (real cluster incident, Sep 2026): an earlier version of
+    this function (a) preloaded ALL 6 mechanisms' multi-form direction_ids
+    .pt files into one dict simultaneously (each ~300 instructions x 6
+    stored stages, large) and (b) called load_experiment1_frozen_directions
+    -- which itself reloads Experiment 1's plain/placebo/6-mechanism .pt
+    files -- once per (form, mechanism) = 12 times redundantly, since
+    p_CO/p_MG do not depend on this design's scaffold kind at all. Combined,
+    this got the CPU-partition analysis job OOM-killed by the kernel
+    (`Killed`, no Python traceback) on a real run. Fixed by computing
+    p_CO/p_MG exactly once, and loading/freeing one mechanism's activation
+    files at a time instead of all 6 at once."""
     instruction_texts = load_instruction_texts()
-    acts_single = {m: load_activations(extraction_dir, model_alias, "direction_ids", m, "single") for m in REAL_MECHANISMS}
+
+    probe_acts = load_activations(extraction_dir, model_alias, "direction_ids", REAL_MECHANISMS[0], "single")
+    all_direction_ids = sorted(probe_acts.keys())
+    del probe_acts
+    p_CO, p_MG = load_experiment1_frozen_directions(experiment1_dir, model_alias, primary_layer, PRIMARY_TOKEN_POSITION, all_direction_ids)
 
     by_kind_results = {}
     for form in MULTI_FORMS:
         kind = multi_form_to_scaffold_kind(form)
-        acts_multi = {m: load_activations(extraction_dir, model_alias, "direction_ids", m, form) for m in REAL_MECHANISMS}
 
         d_m_point = {}
         mechanism_results = {}
         for m in REAL_MECHANISMS:
-            ids_common = sorted(set(acts_multi[m]) & set(acts_single[m]))
+            acts_multi_m = load_activations(extraction_dir, model_alias, "direction_ids", m, form)
+            acts_single_m = load_activations(extraction_dir, model_alias, "direction_ids", m, "single")
+            ids_common = sorted(set(acts_multi_m) & set(acts_single_m))
             clusters = load_instruction_clusters(ids_common, instruction_texts)
-            v_multi = stage_vecs(acts_multi[m], FINAL_STAGE_KEY, primary_layer, ids_common)
-            v_single = stage_vecs(acts_single[m], PRIMARY_TOKEN_POSITION, primary_layer, ids_common)
+            v_multi = stage_vecs(acts_multi_m, FINAL_STAGE_KEY, primary_layer, ids_common)
+            v_single = stage_vecs(acts_single_m, PRIMARY_TOKEN_POSITION, primary_layer, ids_common)
+            del acts_multi_m, acts_single_m
 
-            p_CO, p_MG = load_experiment1_frozen_directions(experiment1_dir, model_alias, primary_layer, PRIMARY_TOKEN_POSITION, ids_common)
             print(f"[{model_alias}] kind={kind} mechanism={m}: bootstrapping d_m^history...", file=sys.stderr)
             d_m = bootstrap_vector_diff(v_multi, v_single, clusters, n_boot=N_BOOTSTRAP, seed=BOOTSTRAP_SEED,
                                          extra_cos_targets={"p_CO": p_CO, "p_MG": p_MG})
