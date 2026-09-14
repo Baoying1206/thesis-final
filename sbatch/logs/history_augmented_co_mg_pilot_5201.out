@@ -1,0 +1,465 @@
+Start: Sun Sep 13 09:33:52 CEST 2026
+[Meta-Llama-3.1-8B-Instruct] loading tokenizer + model: /home/h24/baga0553/models/Llama-3.1-8B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:08<00:25,  8.36s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:17<00:17,  8.58s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:25<00:08,  8.72s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:28<00:00,  6.15s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:28<00:00,  7.05s/it]
+[Meta-Llama-3.1-8B-Instruct] single-turn conditions: 210 rows
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+  generating real responses for 210 single rows (batched)
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:567: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:572: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+[Meta-Llama-3.1-8B-Instruct] multi_neutral conditions: 210 rows x 6 stages
+  stage 1: appending user turn + extracting boundary
+  stage 1: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 2: appending user turn + extracting boundary
+  stage 2: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 3: appending user turn + extracting boundary
+  stage 3: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 4: appending user turn + extracting boundary
+  stage 4: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 5: appending user turn + extracting boundary
+  stage 5: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 6: appending user turn + extracting boundary
+  stage 6: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+[Meta-Llama-3.1-8B-Instruct] multi_progressive conditions: 210 rows x 6 stages
+  stage 1: appending user turn + extracting boundary
+  stage 1: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 2: appending user turn + extracting boundary
+  stage 2: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 3: appending user turn + extracting boundary
+  stage 3: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 4: appending user turn + extracting boundary
+  stage 4: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 5: appending user turn + extracting boundary
+  stage 5: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  stage 6: appending user turn + extracting boundary
+  stage 6: generating real responses (210 rows)
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+    generated 96/210
+    generated 104/210
+    generated 112/210
+    generated 120/210
+    generated 128/210
+    generated 136/210
+    generated 144/210
+    generated 152/210
+    generated 160/210
+    generated 168/210
+    generated 176/210
+    generated 184/210
+    generated 192/210
+    generated 200/210
+    generated 208/210
+    generated 210/210
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_prefix_injection_single_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_prefix_injection_multi_neutral_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_prefix_injection_multi_progressive_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_refusal_suppression_single_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_refusal_suppression_multi_neutral_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_refusal_suppression_multi_progressive_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_persona_roleplay_single_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_persona_roleplay_multi_neutral_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_persona_roleplay_multi_progressive_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_encoding_obfuscation_single_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_encoding_obfuscation_multi_neutral_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_encoding_obfuscation_multi_progressive_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_payload_splitting_single_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_payload_splitting_multi_neutral_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_payload_splitting_multi_progressive_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_distractors_negated_single_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_distractors_negated_multi_neutral_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_distractors_negated_multi_progressive_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_neutral_single_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_neutral_multi_neutral_activations.pt (30 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_neutral_multi_progressive_activations.pt (30 instructions)
+[Meta-Llama-3.1-8B-Instruct] judging 630 final responses with WildGuard
+Loading WildGuard...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:16<00:16, 16.98s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 11.68s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 12.48s/it]
+  judged 16/630
+  judged 32/630
+  judged 48/630
+  judged 64/630
+  judged 80/630
+  judged 96/630
+  judged 112/630
+  judged 128/630
+  judged 144/630
+  judged 160/630
+  judged 176/630
+  judged 192/630
+  judged 208/630
+  judged 224/630
+  judged 240/630
+  judged 256/630
+  judged 272/630
+  judged 288/630
+  judged 304/630
+  judged 320/630
+  judged 336/630
+  judged 352/630
+  judged 368/630
+  judged 384/630
+  judged 400/630
+  judged 416/630
+  judged 432/630
+  judged 448/630
+  judged 464/630
+  judged 480/630
+  judged 496/630
+  judged 512/630
+  judged 528/630
+  judged 544/630
+  judged 560/630
+  judged 576/630
+  judged 592/630
+  judged 608/630
+  judged 624/630
+  judged 630/630
+{
+  "result_status": "HISTORY_AUGMENTED_PILOT_DONE",
+  "model_alias": "Meta-Llama-3.1-8B-Instruct",
+  "ids_key": "direction_ids",
+  "pilot": true,
+  "n_instructions": 30,
+  "n_ok": 2730,
+  "n_fail": 0,
+  "manifest_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_history_augmented_manifest.jsonl",
+  "responses_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_history_augmented_responses.jsonl",
+  "judge_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output/Meta-Llama-3.1-8B-Instruct_pilot_history_augmented_judge_records.jsonl",
+  "output_dir": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_pilot_output"
+}
+Done: Sun Sep 13 10:13:41 CEST 2026

@@ -1,0 +1,227 @@
+{
+  "result_status": "HISTORY_AUGMENTED_ACTIVATION_BEHAVIOR_CONNECTION",
+  "model_alias": "Meta-Llama-3.1-8B-Instruct",
+  "primary_layer": 19,
+  "note": "d_hat is Experiment 1's own frozen p_CO/p_MG (direction_ids-estimated only, Sec 6 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across the 6 real mechanisms WITHIN each scaffold kind separately, never pooled across kinds or models.",
+  "by_scaffold_kind": {
+    "neutral": {
+      "prefix_injection": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": null,
+          "r_ci_2_5": null,
+          "r_ci_97_5": null,
+          "r_p_two_sided": null,
+          "point_group_diff": null,
+          "group_diff_ci_2_5": null,
+          "group_diff_ci_97_5": null,
+          "group_diff_p_two_sided": null,
+          "n_boot_valid_r": 0,
+          "n_boot_valid_group_diff": 0,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only"
+        }
+      },
+      "refusal_suppression": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": 0.217456998964598,
+          "r_ci_2_5": 0.00030459926794729116,
+          "r_ci_97_5": 0.4209219387427045,
+          "r_p_two_sided": 0.05,
+          "point_group_diff": 0.14664026713063488,
+          "group_diff_ci_2_5": 0.0002158240144475923,
+          "group_diff_ci_97_5": 0.30364238441764535,
+          "group_diff_p_two_sided": 0.05,
+          "n_boot_valid_r": 2000,
+          "n_boot_valid_group_diff": 2000,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 0.1
+        }
+      },
+      "persona_roleplay": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": 0.056188672454958725,
+          "r_ci_2_5": 0.011478954165271659,
+          "r_ci_97_5": 0.12015702553073557,
+          "r_p_two_sided": 0.012738853503184714,
+          "point_group_diff": 0.12549010685511996,
+          "group_diff_ci_2_5": 0.027540180045114437,
+          "group_diff_ci_97_5": 0.228823841481969,
+          "group_diff_p_two_sided": 0.012738853503184714,
+          "n_boot_valid_r": 1727,
+          "n_boot_valid_group_diff": 1727,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 0.038216560509554146
+        }
+      },
+      "encoding_obfuscation": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": -0.08267487228688224,
+          "r_ci_2_5": -0.16557049880421365,
+          "r_ci_97_5": -0.01768118671550839,
+          "r_p_two_sided": 0.002325581395348837,
+          "point_group_diff": -0.07666518688201907,
+          "group_diff_ci_2_5": -0.13709659979376992,
+          "group_diff_ci_97_5": -0.01823317836707744,
+          "group_diff_p_two_sided": 0.002325581395348837,
+          "n_boot_valid_r": 1720,
+          "n_boot_valid_group_diff": 1720,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 0.009302325581395349
+        }
+      },
+      "payload_splitting": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": 0.4588648641895089,
+          "r_ci_2_5": 0.3053546479092992,
+          "r_ci_97_5": 0.5969304487634616,
+          "r_p_two_sided": 0.0,
+          "point_group_diff": 1.1644786047557045,
+          "group_diff_ci_2_5": 0.9410247575330662,
+          "group_diff_ci_97_5": 1.4135333160855876,
+          "group_diff_p_two_sided": 0.0,
+          "n_boot_valid_r": 2000,
+          "n_boot_valid_group_diff": 2000,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 0.0
+        }
+      },
+      "distractors_negated": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": -0.03260334832810768,
+          "r_ci_2_5": -0.1013205586368375,
+          "r_ci_97_5": 0.029910287527324345,
+          "r_p_two_sided": 0.33298538622129437,
+          "point_group_diff": -0.14095193061275757,
+          "group_diff_ci_2_5": -0.4098006538722826,
+          "group_diff_ci_97_5": 0.14639408448163205,
+          "group_diff_p_two_sided": 0.33298538622129437,
+          "n_boot_valid_r": 1916,
+          "n_boot_valid_group_diff": 1916,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 0.33298538622129437
+        }
+      }
+    },
+    "progressive": {
+      "prefix_injection": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": 0.49088231054469683,
+          "r_ci_2_5": 0.4423785424900057,
+          "r_ci_97_5": 0.7501940227862005,
+          "r_p_two_sided": 0.0,
+          "point_group_diff": 2.548009093378631,
+          "group_diff_ci_2_5": 2.420556296764965,
+          "group_diff_ci_97_5": 2.6822924546792475,
+          "group_diff_p_two_sided": 0.0,
+          "n_boot_valid_r": 1275,
+          "n_boot_valid_group_diff": 1275,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 0.0
+        }
+      },
+      "refusal_suppression": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": 0.16514419185167825,
+          "r_ci_2_5": -0.08236535049407834,
+          "r_ci_97_5": 0.4037308680878735,
+          "r_p_two_sided": 0.195,
+          "point_group_diff": 0.13220323835100448,
+          "group_diff_ci_2_5": -0.06235704086283818,
+          "group_diff_ci_97_5": 0.3368873596191406,
+          "group_diff_p_two_sided": 0.195,
+          "n_boot_valid_r": 2000,
+          "n_boot_valid_group_diff": 2000,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 0.78
+        }
+      },
+      "persona_roleplay": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": 0.03846336844315304,
+          "r_ci_2_5": -0.06595644629454094,
+          "r_ci_97_5": 0.15562424275254516,
+          "r_p_two_sided": 0.6079907353792704,
+          "point_group_diff": 0.0835935320172991,
+          "group_diff_ci_2_5": -0.14177435216769366,
+          "group_diff_ci_97_5": 0.3165234157017299,
+          "group_diff_p_two_sided": 0.6079907353792704,
+          "n_boot_valid_r": 1727,
+          "n_boot_valid_group_diff": 1727,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 1.0
+        }
+      },
+      "encoding_obfuscation": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": -0.07884364324862651,
+          "r_ci_2_5": -0.2828858576783179,
+          "r_ci_97_5": 0.1411067406605551,
+          "r_p_two_sided": 0.503,
+          "point_group_diff": -0.02496846516927076,
+          "group_diff_ci_2_5": -0.09058165378157579,
+          "group_diff_ci_97_5": 0.043850149601063815,
+          "group_diff_p_two_sided": 0.503,
+          "n_boot_valid_r": 2000,
+          "n_boot_valid_group_diff": 2000,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 1.0
+        }
+      },
+      "payload_splitting": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": 0.39097061698610275,
+          "r_ci_2_5": 0.24028862279324278,
+          "r_ci_97_5": 0.5282982916494374,
+          "r_p_two_sided": 0.0,
+          "point_group_diff": 1.3130016326904297,
+          "group_diff_ci_2_5": 1.016604712701613,
+          "group_diff_ci_97_5": 1.6137704560250947,
+          "group_diff_p_two_sided": 0.0,
+          "n_boot_valid_r": 2000,
+          "n_boot_valid_group_diff": 2000,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 0.0
+        }
+      },
+      "distractors_negated": {
+        "n_instructions": 72,
+        "z_vs_strict_success": {
+          "point_biserial_r": -0.06412563138203532,
+          "r_ci_2_5": -0.27382403583441395,
+          "r_ci_97_5": 0.07919871182280887,
+          "r_p_two_sided": 0.6135902636916836,
+          "point_group_diff": -0.2711615281946519,
+          "group_diff_ci_2_5": -1.4250623676138865,
+          "group_diff_ci_97_5": 0.3812697590261266,
+          "group_diff_p_two_sided": 0.6135902636916836,
+          "n_boot_valid_r": 1972,
+          "n_boot_valid_group_diff": 1972,
+          "n_boot": 2000,
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": 1.0
+        }
+      }
+    }
+  }
+}

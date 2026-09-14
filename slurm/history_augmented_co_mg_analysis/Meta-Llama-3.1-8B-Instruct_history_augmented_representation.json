@@ -1,0 +1,285 @@
+{
+  "result_status": "HISTORY_AUGMENTED_REPRESENTATION_ANALYSIS",
+  "model_alias": "Meta-Llama-3.1-8B-Instruct",
+  "primary_layer": 19,
+  "by_scaffold_kind": {
+    "neutral": {
+      "by_mechanism": {
+        "prefix_injection": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 3.560546875,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 3.5,
+            "norm_ci_97_5": 3.62890625,
+            "cos_p_CO": {
+              "point": -0.08526611328125,
+              "ci_2_5": -0.09515380859375,
+              "ci_97_5": -0.07464599609375
+            },
+            "cos_p_MG": {
+              "point": -0.215576171875,
+              "ci_2_5": -0.232666015625,
+              "ci_97_5": -0.1976318359375
+            }
+          }
+        },
+        "refusal_suppression": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 3.150390625,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 3.1171875,
+            "norm_ci_97_5": 3.1953125,
+            "cos_p_CO": {
+              "point": -0.001018524169921875,
+              "ci_2_5": -0.01015472412109375,
+              "ci_97_5": 0.008209228515625
+            },
+            "cos_p_MG": {
+              "point": -0.006229400634765625,
+              "ci_2_5": -0.0307769775390625,
+              "ci_97_5": 0.01873779296875
+            }
+          }
+        },
+        "persona_roleplay": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 3.146484375,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 3.1015625,
+            "norm_ci_97_5": 3.205078125,
+            "cos_p_CO": {
+              "point": 0.0016298294067382812,
+              "ci_2_5": -0.00934600830078125,
+              "ci_97_5": 0.01280975341796875
+            },
+            "cos_p_MG": {
+              "point": -0.1539306640625,
+              "ci_2_5": -0.1693115234375,
+              "ci_97_5": -0.138427734375
+            }
+          }
+        },
+        "encoding_obfuscation": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 4.64453125,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 4.62109375,
+            "norm_ci_97_5": 4.66796875,
+            "cos_p_CO": {
+              "point": -0.0298309326171875,
+              "ci_2_5": -0.0311279296875,
+              "ci_97_5": -0.0284271240234375
+            },
+            "cos_p_MG": {
+              "point": -0.10400390625,
+              "ci_2_5": -0.1072998046875,
+              "ci_97_5": -0.10052490234375
+            }
+          }
+        },
+        "payload_splitting": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 4.55859375,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 4.50390625,
+            "norm_ci_97_5": 4.6171875,
+            "cos_p_CO": {
+              "point": -0.03173828125,
+              "ci_2_5": -0.038909912109375,
+              "ci_97_5": -0.0244140625
+            },
+            "cos_p_MG": {
+              "point": -0.2427978515625,
+              "ci_2_5": -0.261962890625,
+              "ci_97_5": -0.2220458984375
+            }
+          }
+        },
+        "distractors_negated": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 3.859375,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 3.80859375,
+            "norm_ci_97_5": 3.927734375,
+            "cos_p_CO": {
+              "point": -0.11871337890625,
+              "ci_2_5": -0.1317138671875,
+              "ci_97_5": -0.105712890625
+            },
+            "cos_p_MG": {
+              "point": -0.125732421875,
+              "ci_2_5": -0.15185546875,
+              "ci_97_5": -0.0992431640625
+            }
+          }
+        }
+      },
+      "co_mg_cohesion": {
+        "within_CO_mean_cosine": 0.6246744791666666,
+        "within_MG_mean_cosine": 0.5069173177083334,
+        "between_CO_MG_mean_cosine": 0.4695909288194444,
+        "CO_minus_between": 0.1550835503472222,
+        "MG_minus_between": 0.03732638888888895,
+        "T_statistic": 0.09620496961805558,
+        "note": "point estimate only (no bootstrap CI) -- descriptive cohesion check on the canonical CO/MG partition of the 6 d_m^history vectors, same statistic family as Experiment 1 Sec 4.3 but not re-run through its partition-ranking bootstrap this round."
+      }
+    },
+    "progressive": {
+      "by_mechanism": {
+        "prefix_injection": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 3.767578125,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 3.69921875,
+            "norm_ci_97_5": 3.85546875,
+            "cos_p_CO": {
+              "point": -0.1922607421875,
+              "ci_2_5": -0.2078857421875,
+              "ci_97_5": -0.1746826171875
+            },
+            "cos_p_MG": {
+              "point": -0.201904296875,
+              "ci_2_5": -0.2310791015625,
+              "ci_97_5": -0.17431640625
+            }
+          }
+        },
+        "refusal_suppression": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 3.830078125,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 3.763671875,
+            "norm_ci_97_5": 3.912109375,
+            "cos_p_CO": {
+              "point": -0.0009717941284179688,
+              "ci_2_5": -0.0135040283203125,
+              "ci_97_5": 0.01114654541015625
+            },
+            "cos_p_MG": {
+              "point": 0.07952880859375,
+              "ci_2_5": 0.04412841796875,
+              "ci_97_5": 0.11279296875
+            }
+          }
+        },
+        "persona_roleplay": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 3.30078125,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 3.26953125,
+            "norm_ci_97_5": 3.341796875,
+            "cos_p_CO": {
+              "point": 0.0206146240234375,
+              "ci_2_5": 0.00685882568359375,
+              "ci_97_5": 0.034271240234375
+            },
+            "cos_p_MG": {
+              "point": -0.10235595703125,
+              "ci_2_5": -0.12152099609375,
+              "ci_97_5": -0.082763671875
+            }
+          }
+        },
+        "encoding_obfuscation": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 5.37109375,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 5.34765625,
+            "norm_ci_97_5": 5.39453125,
+            "cos_p_CO": {
+              "point": -0.0528564453125,
+              "ci_2_5": -0.053985595703125,
+              "ci_97_5": -0.051605224609375
+            },
+            "cos_p_MG": {
+              "point": -0.1600341796875,
+              "ci_2_5": -0.16259765625,
+              "ci_97_5": -0.1571044921875
+            }
+          }
+        },
+        "payload_splitting": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 5.28515625,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 5.23046875,
+            "norm_ci_97_5": 5.34765625,
+            "cos_p_CO": {
+              "point": -0.052734375,
+              "ci_2_5": -0.06011962890625,
+              "ci_97_5": -0.045623779296875
+            },
+            "cos_p_MG": {
+              "point": -0.29248046875,
+              "ci_2_5": -0.314208984375,
+              "ci_97_5": -0.271240234375
+            }
+          }
+        },
+        "distractors_negated": {
+          "n_instructions": 300,
+          "d_m_history": {
+            "point_norm": 4.33984375,
+            "n_boot_valid": 2000,
+            "n_boot": 2000,
+            "resample_unit": "instruction_normalized_text_cluster",
+            "norm_ci_2_5": 4.28515625,
+            "norm_ci_97_5": 4.41015625,
+            "cos_p_CO": {
+              "point": -0.08966064453125,
+              "ci_2_5": -0.10223388671875,
+              "ci_97_5": -0.07684326171875
+            },
+            "cos_p_MG": {
+              "point": -0.054443359375,
+              "ci_2_5": -0.07855224609375,
+              "ci_97_5": -0.028533935546875
+            }
+          }
+        }
+      },
+      "co_mg_cohesion": {
+        "within_CO_mean_cosine": 0.599609375,
+        "within_MG_mean_cosine": 0.4825032552083333,
+        "between_CO_MG_mean_cosine": 0.4613986545138889,
+        "CO_minus_between": 0.1382107204861111,
+        "MG_minus_between": 0.02110460069444442,
+        "T_statistic": 0.07965766059027773,
+        "note": "point estimate only (no bootstrap CI) -- descriptive cohesion check on the canonical CO/MG partition of the 6 d_m^history vectors, same statistic family as Experiment 1 Sec 4.3 but not re-run through its partition-ranking bootstrap this round."
+      }
+    }
+  }
+}

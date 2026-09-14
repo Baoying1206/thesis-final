@@ -1,0 +1,22 @@
+Start: Sun Sep 13 08:56:03 CEST 2026
+[Meta-Llama-3.1-8B-Instruct] loading tokenizer + model: /home/h24/baga0553/models/Llama-3.1-8B-Instruct
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:08<00:26,  8.90s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:17<00:17,  8.71s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:26<00:08,  8.64s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:28<00:00,  6.03s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:28<00:00,  7.01s/it]
+[Meta-Llama-3.1-8B-Instruct] single-turn conditions: 210 rows
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+  generating real responses for 210 single rows (batched)
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:567: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.6` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/configuration_utils.py:572: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `0.9` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+    generated 8/210
+    generated 16/210
+    generated 24/210
+    generated 32/210
+    generated 40/210
+    generated 48/210
+    generated 56/210
+    generated 64/210
+    generated 72/210
+    generated 80/210
+    generated 88/210
+[2026-09-13T08:57:41.519] error: *** JOB 5199 ON slurm-node-gpu-02 CANCELLED AT 2026-09-13T08:57:41 DUE to SIGNAL Terminated ***

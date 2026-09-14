@@ -1,0 +1,71 @@
+[gemma-2-9b-it] loading tokenizer + model: /home/h24/baga0553/models/gemma-2-9b-it
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:07<00:23,  7.69s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:16<00:16,  8.10s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:25<00:08,  8.72s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:32<00:00,  7.98s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:32<00:00,  8.09s/it]
+[gemma-2-9b-it] single-turn conditions: 7 rows
+[gemma-2-9b-it] multi_neutral conditions: 7 rows x 6 stages
+  stage 1: appending user turn + extracting boundary
+  stage 1: generating real responses (7 rows)
+    generated 7/7
+  stage 2: appending user turn + extracting boundary
+  stage 2: generating real responses (7 rows)
+    generated 7/7
+  stage 3: appending user turn + extracting boundary
+  stage 3: generating real responses (7 rows)
+    generated 7/7
+  stage 4: appending user turn + extracting boundary
+  stage 4: generating real responses (7 rows)
+    generated 7/7
+  stage 5: appending user turn + extracting boundary
+  stage 5: generating real responses (7 rows)
+    generated 7/7
+  stage 6: appending user turn + extracting boundary
+[gemma-2-9b-it] multi_progressive conditions: 7 rows x 6 stages
+  stage 1: appending user turn + extracting boundary
+  stage 1: generating real responses (7 rows)
+    generated 7/7
+  stage 2: appending user turn + extracting boundary
+  stage 2: generating real responses (7 rows)
+    generated 7/7
+  stage 3: appending user turn + extracting boundary
+  stage 3: generating real responses (7 rows)
+    generated 7/7
+  stage 4: appending user turn + extracting boundary
+  stage 4: generating real responses (7 rows)
+    generated 7/7
+  stage 5: appending user turn + extracting boundary
+  stage 5: generating real responses (7 rows)
+    generated 7/7
+  stage 6: appending user turn + extracting boundary
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_prefix_injection_single_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_prefix_injection_multi_neutral_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_prefix_injection_multi_progressive_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_refusal_suppression_single_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_refusal_suppression_multi_neutral_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_refusal_suppression_multi_progressive_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_persona_roleplay_single_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_persona_roleplay_multi_neutral_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_persona_roleplay_multi_progressive_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_encoding_obfuscation_single_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_encoding_obfuscation_multi_neutral_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_encoding_obfuscation_multi_progressive_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_payload_splitting_single_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_payload_splitting_multi_neutral_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_payload_splitting_multi_progressive_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_distractors_negated_single_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_distractors_negated_multi_neutral_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_distractors_negated_multi_progressive_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_neutral_single_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_neutral_multi_neutral_activations.pt (1 instructions)
+  saved /a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_neutral_multi_progressive_activations.pt (1 instructions)
+{
+  "result_status": "HISTORY_AUGMENTED_EXTRACTION_DONE",
+  "model_alias": "gemma-2-9b-it",
+  "ids_key": "direction_ids",
+  "pilot": false,
+  "n_instructions": 1,
+  "n_ok": 91,
+  "n_fail": 0,
+  "manifest_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_history_augmented_manifest.jsonl",
+  "responses_path": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output/gemma-2-9b-it_direction_ids_history_augmented_responses.jsonl",
+  "judge_path": null,
+  "output_dir": "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/history_augmented_co_mg_output"
+}

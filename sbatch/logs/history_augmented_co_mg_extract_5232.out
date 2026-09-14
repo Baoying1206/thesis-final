@@ -1,0 +1,437 @@
+Model: gemma-2-9b-it  ids_key=validation_ids  batch_size=8  Start: Mon 14 Sep 14:36:27 CEST 2026
+[gemma-2-9b-it] loading tokenizer + model: /home/h24/baga0553/models/gemma-2-9b-it
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:09<00:27,  9.09s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:18<00:18,  9.46s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:28<00:09,  9.44s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:35<00:00,  8.43s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:35<00:00,  8.77s/it]
+[gemma-2-9b-it] single-turn conditions: 504 rows
+  generating real responses for 504 single rows (batched)
+    generated 8/504
+    generated 16/504
+    generated 24/504
+    generated 32/504
+    generated 40/504
+    generated 48/504
+    generated 56/504
+    generated 64/504
+    generated 72/504
+    generated 80/504
+    generated 88/504
+    generated 96/504
+    generated 104/504
+    generated 112/504
+    generated 120/504
+    generated 128/504
+    generated 136/504
+    generated 144/504
+    generated 152/504
+    generated 160/504
+    generated 168/504
+    generated 176/504
+    generated 184/504
+    generated 192/504
+    generated 200/504
+    generated 208/504
+    generated 216/504
+    generated 224/504
+    generated 232/504
+    generated 240/504
+    generated 248/504
+    generated 256/504
+    generated 264/504
+    generated 272/504
+    generated 280/504
+    generated 288/504
+    generated 296/504
+    generated 304/504
+    generated 312/504
+    generated 320/504
+    generated 328/504
+    generated 336/504
+    generated 344/504
+    generated 352/504
+    generated 360/504
+    generated 368/504
+    generated 376/504
+    generated 384/504
+    generated 392/504
+    generated 400/504
+    generated 408/504
+    generated 416/504
+    generated 424/504
+    generated 432/504
+    generated 440/504
+    generated 448/504
+    generated 456/504
+    generated 464/504
+    generated 472/504
+    generated 480/504
+    generated 488/504
+    generated 496/504
+    generated 504/504
+[gemma-2-9b-it] multi_neutral conditions: 504 rows x 6 stages
+  stage 1: appending user turn + extracting boundary
+  stage 1: generating real responses (504 rows)
+    generated 8/504
+    generated 16/504
+    generated 24/504
+    generated 32/504
+    generated 40/504
+    generated 48/504
+    generated 56/504
+    generated 64/504
+    generated 72/504
+    generated 80/504
+    generated 88/504
+    generated 96/504
+    generated 104/504
+    generated 112/504
+    generated 120/504
+    generated 128/504
+    generated 136/504
+    generated 144/504
+    generated 152/504
+    generated 160/504
+    generated 168/504
+    generated 176/504
+    generated 184/504
+    generated 192/504
+    generated 200/504
+    generated 208/504
+    generated 216/504
+    generated 224/504
+    generated 232/504
+    generated 240/504
+    generated 248/504
+    generated 256/504
+    generated 264/504
+    generated 272/504
+    generated 280/504
+    generated 288/504
+    generated 296/504
+    generated 304/504
+    generated 312/504
+    generated 320/504
+    generated 328/504
+    generated 336/504
+    generated 344/504
+    generated 352/504
+    generated 360/504
+    generated 368/504
+    generated 376/504
+    generated 384/504
+    generated 392/504
+    generated 400/504
+    generated 408/504
+    generated 416/504
+    generated 424/504
+    generated 432/504
+    generated 440/504
+    generated 448/504
+    generated 456/504
+    generated 464/504
+    generated 472/504
+    generated 480/504
+    generated 488/504
+    generated 496/504
+    generated 504/504
+  stage 2: appending user turn + extracting boundary
+  stage 2: generating real responses (504 rows)
+    generated 8/504
+    generated 16/504
+    generated 24/504
+    generated 32/504
+    generated 40/504
+    generated 48/504
+    generated 56/504
+    generated 64/504
+    generated 72/504
+    generated 80/504
+    generated 88/504
+    generated 96/504
+    generated 104/504
+    generated 112/504
+    generated 120/504
+    generated 128/504
+    generated 136/504
+    generated 144/504
+    generated 152/504
+    generated 160/504
+    generated 168/504
+    generated 176/504
+    generated 184/504
+    generated 192/504
+    generated 200/504
+    generated 208/504
+    generated 216/504
+    generated 224/504
+    generated 232/504
+    generated 240/504
+    generated 248/504
+    generated 256/504
+    generated 264/504
+    generated 272/504
+    generated 280/504
+    generated 288/504
+    generated 296/504
+    generated 304/504
+    generated 312/504
+    generated 320/504
+    generated 328/504
+    generated 336/504
+    generated 344/504
+    generated 352/504
+    generated 360/504
+    generated 368/504
+    generated 376/504
+    generated 384/504
+    generated 392/504
+    generated 400/504
+    generated 408/504
+    generated 416/504
+    generated 424/504
+    generated 432/504
+    generated 440/504
+    generated 448/504
+    generated 456/504
+    generated 464/504
+    generated 472/504
+    generated 480/504
+    generated 488/504
+    generated 496/504
+    generated 504/504
+  stage 3: appending user turn + extracting boundary
+  stage 3: generating real responses (504 rows)
+    generated 8/504
+    generated 16/504
+    generated 24/504
+    generated 32/504
+    generated 40/504
+    generated 48/504
+    generated 56/504
+    generated 64/504
+    generated 72/504
+    generated 80/504
+    generated 88/504
+    generated 96/504
+    generated 104/504
+    generated 112/504
+    generated 120/504
+    generated 128/504
+    generated 136/504
+    generated 144/504
+    generated 152/504
+    generated 160/504
+    generated 168/504
+    generated 176/504
+    generated 184/504
+    generated 192/504
+    generated 200/504
+    generated 208/504
+    generated 216/504
+    generated 224/504
+    generated 232/504
+    generated 240/504
+    generated 248/504
+    generated 256/504
+    generated 264/504
+    generated 272/504
+    generated 280/504
+    generated 288/504
+    generated 296/504
+    generated 304/504
+    generated 312/504
+    generated 320/504
+    generated 328/504
+    generated 336/504
+    generated 344/504
+    generated 352/504
+    generated 360/504
+    generated 368/504
+    generated 376/504
+    generated 384/504
+    generated 392/504
+    generated 400/504
+    generated 408/504
+    generated 416/504
+    generated 424/504
+    generated 432/504
+    generated 440/504
+    generated 448/504
+    generated 456/504
+    generated 464/504
+    generated 472/504
+    generated 480/504
+    generated 488/504
+    generated 496/504
+    generated 504/504
+  stage 4: appending user turn + extracting boundary
+  stage 4: generating real responses (504 rows)
+    generated 8/504
+    generated 16/504
+    generated 24/504
+    generated 32/504
+    generated 40/504
+    generated 48/504
+    generated 56/504
+    generated 64/504
+    generated 72/504
+    generated 80/504
+    generated 88/504
+    generated 96/504
+    generated 104/504
+    generated 112/504
+    generated 120/504
+    generated 128/504
+    generated 136/504
+    generated 144/504
+    generated 152/504
+    generated 160/504
+    generated 168/504
+    generated 176/504
+    generated 184/504
+    generated 192/504
+    generated 200/504
+    generated 208/504
+    generated 216/504
+    generated 224/504
+    generated 232/504
+    generated 240/504
+    generated 248/504
+    generated 256/504
+    generated 264/504
+    generated 272/504
+    generated 280/504
+    generated 288/504
+    generated 296/504
+    generated 304/504
+    generated 312/504
+    generated 320/504
+    generated 328/504
+    generated 336/504
+    generated 344/504
+    generated 352/504
+    generated 360/504
+    generated 368/504
+    generated 376/504
+    generated 384/504
+    generated 392/504
+    generated 400/504
+    generated 408/504
+    generated 416/504
+    generated 424/504
+    generated 432/504
+    generated 440/504
+    generated 448/504
+    generated 456/504
+    generated 464/504
+    generated 472/504
+    generated 480/504
+    generated 488/504
+    generated 496/504
+    generated 504/504
+  stage 5: appending user turn + extracting boundary
+  stage 5: generating real responses (504 rows)
+    generated 8/504
+    generated 16/504
+    generated 24/504
+    generated 32/504
+    generated 40/504
+    generated 48/504
+    generated 56/504
+    generated 64/504
+    generated 72/504
+    generated 80/504
+    generated 88/504
+    generated 96/504
+    generated 104/504
+    generated 112/504
+    generated 120/504
+    generated 128/504
+    generated 136/504
+    generated 144/504
+    generated 152/504
+    generated 160/504
+    generated 168/504
+    generated 176/504
+    generated 184/504
+    generated 192/504
+    generated 200/504
+    generated 208/504
+    generated 216/504
+    generated 224/504
+    generated 232/504
+    generated 240/504
+    generated 248/504
+    generated 256/504
+    generated 264/504
+    generated 272/504
+    generated 280/504
+    generated 288/504
+    generated 296/504
+    generated 304/504
+    generated 312/504
+    generated 320/504
+    generated 328/504
+    generated 336/504
+    generated 344/504
+    generated 352/504
+    generated 360/504
+    generated 368/504
+    generated 376/504
+    generated 384/504
+    generated 392/504
+    generated 400/504
+    generated 408/504
+    generated 416/504
+    generated 424/504
+    generated 432/504
+    generated 440/504
+    generated 448/504
+    generated 456/504
+    generated 464/504
+    generated 472/504
+    generated 480/504
+    generated 488/504
+    generated 496/504
+    generated 504/504
+  stage 6: appending user turn + extracting boundary
+  stage 6: generating real responses (504 rows)
+    generated 8/504
+    generated 16/504
+    generated 24/504
+    generated 32/504
+    generated 40/504
+    generated 48/504
+    generated 56/504
+    generated 64/504
+    generated 72/504
+    generated 80/504
+    generated 88/504
+Traceback (most recent call last):
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/extract_history_augmented_co_mg.py", line 442, in <module>
+    main()
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/extract_history_augmented_co_mg.py", line 438, in main
+    run_extraction(args.model_alias, model_path, primary_layer, args.ids_key, args.output_dir, args.batch_size, args.limit, mechanisms=args.mechanisms)
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/extract_history_augmented_co_mg.py", line 366, in run_extraction
+    run_generation_wave(model, tokenizer, eos_ids, trajectory_rows, batch_size)
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis-final/slurm/extract_history_augmented_co_mg.py", line 218, in run_generation_wave
+    out = model.generate(**enc, max_new_tokens=GENERATION_CONFIG["max_new_tokens"],
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/utils.py", line 2024, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/generation/utils.py", line 2982, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/a/slurm-login-internal-home/h24/baga0553/thesis_experiment/Multilingual-Refusal/venv/lib/python3.11/site-packages/transformers/models/gemma2/modeling_gemma2.py", line 1014, in forward
+    logits = logits.float()
+             ^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 8.63 GiB. GPU 
+Done: Mon 14 Sep 15:35:10 CEST 2026
