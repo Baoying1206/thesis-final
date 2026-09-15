@@ -366,7 +366,6 @@ def run_activation_behavior_connection(model_alias, primary_layer, extraction_di
             # correlation. Do NOT report any r as a reliable finding until
             # its z distribution here has been eyeballed for exactly this.
             z_vals = list(z_by_id.values())
-            y_vals = list(outcome_by_id.values())
             z_sorted = sorted(z_vals)
             n_z = len(z_sorted)
             z_mean = sum(z_vals) / n_z
@@ -376,15 +375,27 @@ def run_activation_behavior_connection(model_alias, primary_layer, extraction_di
                 "z_min": z_sorted[0], "z_max": z_sorted[-1],
                 "z_median": z_sorted[n_z // 2],
                 "z_p05": z_sorted[int(0.05 * n_z)], "z_p95": z_sorted[min(int(0.95 * n_z), n_z - 1)],
-                "y_n_success": sum(1 for v in y_vals if v == 1), "y_n_fail": sum(1 for v in y_vals if v == 0), "y_n_total": len(y_vals),
-                "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15.",
+                "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function).",
             }
             mechanism_results[m] = {"n_instructions": len(ids_common), "z_vs_strict_success": connection, "z_diagnostics": diagnostics}
 
+        # Sep 2026 real-data incident: point_biserial_bootstrap's `reliable`
+        # flag is False when class balance is too extreme (min(success,fail)
+        # < 5) -- confirmed on real data that these degenerate to an
+        # outlier-detection artifact, not a genuine correlation, regardless
+        # of |r|. Excluded entirely from the Holm family, not just flagged --
+        # including a known-degenerate p-value in a multiple-comparison
+        # correction wastes correction budget without adding any real
+        # information.
         named_pvalues = [(m, mechanism_results[m]["z_vs_strict_success"]["r_p_two_sided"])
-                          for m in REAL_MECHANISMS if mechanism_results[m]["z_vs_strict_success"]["r_p_two_sided"] is not None]
+                          for m in REAL_MECHANISMS
+                          if mechanism_results[m]["z_vs_strict_success"]["r_p_two_sided"] is not None
+                          and mechanism_results[m]["z_vs_strict_success"]["reliable"]]
         for m, p_holm in holm_correction(named_pvalues).items():
             mechanism_results[m]["z_vs_strict_success"]["r_p_holm_adjusted"] = p_holm
+        for m in REAL_MECHANISMS:
+            if not mechanism_results[m]["z_vs_strict_success"]["reliable"]:
+                mechanism_results[m]["z_vs_strict_success"]["r_p_holm_adjusted"] = None
 
         by_kind_results[kind] = mechanism_results
 
@@ -394,7 +405,7 @@ def run_activation_behavior_connection(model_alias, primary_layer, extraction_di
         json.dump({
             "result_status": "HISTORY_AUGMENTED_ACTIVATION_BEHAVIOR_CONNECTION",
             "model_alias": model_alias, "primary_layer": primary_layer,
-            "note": "d_hat is Experiment 1's own frozen p_CO/p_MG (direction_ids-estimated only, Sec 6 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across the 6 real mechanisms WITHIN each scaffold kind separately, never pooled across kinds or models.",
+            "note": "d_hat is Experiment 1's own frozen p_CO/p_MG (direction_ids-estimated only, Sec 6 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across only the mechanisms with z_vs_strict_success.reliable==true WITHIN each scaffold kind, never pooled across kinds or models -- mechanisms with reliable==false (min(y_n_success,y_n_fail)<5, real-data incident Sep 2026: extreme class imbalance degenerates the bootstrap into an outlier-detection artifact regardless of |r|) are excluded from the Holm family entirely and have r_p_holm_adjusted=null; do not report their r or p as a finding.",
             "by_scaffold_kind": by_kind_results,
         }, f, indent=2, ensure_ascii=False)
     print(json.dumps({"result_status": "HISTORY_AUGMENTED_ACTIVATION_BEHAVIOR_CONNECTION_DONE", "model_alias": model_alias, "output_path": out_path}, indent=2))

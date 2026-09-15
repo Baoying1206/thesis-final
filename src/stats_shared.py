@@ -433,7 +433,7 @@ def bootstrap_vector_diff(vecs_a, vecs_b, clusters, n_boot=2000, seed=20260828, 
     return result
 
 
-def point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=2000, seed=20260828):
+def point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=2000, seed=20260828, min_group_n=5):
     """Sec 5R.4.6's activation-behavior connection: does the projection
     z[i] predict strict_success[i]? z_by_id/outcome_by_id:
     {instruction_id: float / 0-or-1}. Reports the point-biserial
@@ -443,7 +443,25 @@ def point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=2000, seed
     checks Sec 5R.4.6 asks for; logistic regression is not implemented
     here (would need a numerical solver dependency this module
     otherwise avoids) -- flagged as a scope limitation, not silently
-    dropped."""
+    dropped.
+
+    `reliable` flag (real-data incident, Sep 2026): with extreme class
+    imbalance in `outcome_by_id` (e.g. 1-2 successes out of 72), cluster
+    bootstrap-with-replacement degenerates -- most replicates either
+    drop the rare class entirely (var_y=0, skipped) or retain it only as
+    1-3 duplicated copies of the SAME original point. The resulting
+    "correlation" distribution across replicates collapses toward
+    testing whether that one rare-class point's z-value is an outlier
+    relative to the resampled bulk, not a genuine bootstrap sampling
+    distribution of a correlation across n independent observations --
+    it can produce deceptively narrow CIs and small-but-"significant"
+    p-values regardless of the point estimate's magnitude (confirmed on
+    real Qwen/Llama/Gemma data: every case with min(n_success, n_fail) <
+    5 showed this pattern, including some with large |r|; every case
+    with min(n_success, n_fail) >= 5 did not). `reliable` is False when
+    min(n_success, n_fail) < min_group_n -- callers should exclude
+    unreliable results from any Holm family and from any reported
+    finding, not just footnote them."""
     rng = random.Random(seed)
     n_clusters = len(clusters)
 
@@ -485,11 +503,15 @@ def point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=2000, seed
 
     corr_lo, corr_hi = ci(corrs)
     diff_lo, diff_hi = ci(group_diffs)
+    y_n_success = sum(1 for v in outcome_by_id.values() if v == 1)
+    y_n_fail = sum(1 for v in outcome_by_id.values() if v == 0)
+    reliable = min(y_n_success, y_n_fail) >= min_group_n
     return {
         "point_biserial_r": point_corr, "r_ci_2_5": corr_lo, "r_ci_97_5": corr_hi,
         "r_p_two_sided": bootstrap_two_sided_p(corrs) if corrs else None,
         "point_group_diff": point_group_diff, "group_diff_ci_2_5": diff_lo, "group_diff_ci_97_5": diff_hi,
         "group_diff_p_two_sided": bootstrap_two_sided_p(group_diffs) if group_diffs else None,
+        "y_n_success": y_n_success, "y_n_fail": y_n_fail, "min_group_n": min_group_n, "reliable": reliable,
         "n_boot_valid_r": len(corrs), "n_boot_valid_group_diff": len(group_diffs), "n_boot": n_boot,
         "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
     }
