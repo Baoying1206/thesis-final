@@ -15,6 +15,16 @@ Produces:
       cross-model-consistent finding (within_CO > within_MG in all 3
       models x 2 scaffold kinds), contrasted against the behavioral
       panel's model-specific heterogeneity.
+  fig6_raw_asr_per_condition.pdf/png -- raw strict_success_rate for all
+      21 conditions, one panel per model (7 mechanisms x 3 forms), no
+      bootstrap summarizing -- the un-aggregated numbers behind fig4,
+      useful for an appendix or for readers who want the raw rates.
+  fig7_z_behavior_forest.pdf/png -- point-biserial r (activation shift
+      vs strict_success) with 95% bootstrap CI, one panel per model, all
+      6 mechanisms x 2 scaffold kinds -- filled markers = Holm-significant
+      within that (model, scaffold kind) cell. Shows the z-vs-behavior
+      connection is narrow (mostly null/small, inconsistent signs) except
+      one robust, replicated exception (Llama x payload_splitting).
 
 CPU-only, no model, no GPU. Run locally after pulling the real
 analysis JSON files (git pull, then this script).
@@ -38,12 +48,25 @@ MODEL_SHORT = {"Qwen2.5-7B-Instruct": "Qwen2.5-7B", "Meta-Llama-3.1-8B-Instruct"
 SCAFFOLD_KINDS = ["neutral", "progressive"]
 SCAFFOLD_LABEL = {"neutral": "neutral scaffold", "progressive": "progressive scaffold"}
 
+CO_MECHANISMS = ["prefix_injection", "refusal_suppression", "persona_roleplay"]
+MG_MECHANISMS = ["encoding_obfuscation", "payload_splitting", "distractors_negated"]
+ALL_MECHANISM_GROUPS = CO_MECHANISMS + MG_MECHANISMS + ["neutral"]
+FORMS = ["single", "multi_neutral", "multi_progressive"]
+FORM_LABEL = {"single": "single", "multi_neutral": "multi (neutral)", "multi_progressive": "multi (progressive)"}
+MECH_SHORT = {
+    "prefix_injection": "prefix\ninjection", "refusal_suppression": "refusal\nsuppression", "persona_roleplay": "persona\nroleplay",
+    "encoding_obfuscation": "encoding\nobfuscation", "payload_splitting": "payload\nsplitting", "distractors_negated": "distractors\nnegated",
+    "neutral": "neutral",
+}
+
 CO_COLOR = "#4C72B0"
 MG_COLOR = "#DD8452"
+NEUTRAL_MECH_COLOR = "#8C8C8C"
 GAMMA_COLOR = "#55A868"
 WITHIN_CO_COLOR = "#4C72B0"
 WITHIN_MG_COLOR = "#DD8452"
 BETWEEN_COLOR = "#8C8C8C"
+FORM_SHADES = ["#C9CDD3", "#7C93B5", "#2D4159"]  # single -> multi_neutral -> multi_progressive
 
 plt.rcParams.update({
     "font.size": 11,
@@ -139,6 +162,91 @@ def fig5_representation_cohesion(representation, out_dir):
     save(fig, out_dir, "fig5_representation_cohesion")
 
 
+def fig6_raw_asr_per_condition(behavioral, out_dir):
+    fig, axes = plt.subplots(1, len(MODELS), figsize=(15, 4.6), sharey=True)
+    x = np.arange(len(ALL_MECHANISM_GROUPS))
+    width = 0.26
+
+    for ax, m in zip(axes, MODELS):
+        rates = behavioral[m]["per_condition_rates"]
+        for offset, form in enumerate(FORMS):
+            values = []
+            for mech in ALL_MECHANISM_GROUPS:
+                cond = f"{mech}_{form}"
+                entry = rates.get(cond)
+                values.append(entry["strict_success_rate"] if entry else 0.0)
+            xpos = x + (offset - 1) * width
+            ax.bar(xpos, values, width, label=FORM_LABEL[form], color=FORM_SHADES[offset],
+                   edgecolor="black", linewidth=0.5)
+
+        ax.axvline(2.5, color="black", linewidth=0.8, linestyle=":")
+        ax.axvline(5.5, color="black", linewidth=0.8, linestyle=":")
+        ax.set_xticks(x)
+        labels = ax.set_xticklabels([MECH_SHORT[mech] for mech in ALL_MECHANISM_GROUPS], fontsize=7.5)
+        for lbl, mech in zip(labels, ALL_MECHANISM_GROUPS):
+            lbl.set_color(CO_COLOR if mech in CO_MECHANISMS else (MG_COLOR if mech in MG_MECHANISMS else NEUTRAL_MECH_COLOR))
+        ax.set_title(MODEL_SHORT[m], fontsize=12)
+        ax.set_ylim(0, 0.75)
+
+    axes[0].set_ylabel("strict_success_rate (raw)")
+    axes[-1].legend(frameon=False, fontsize=9, loc="upper right")
+    fig.suptitle("Raw per-condition ASR, all 21 conditions (7 mechanisms x 3 forms)\n"
+                  "(no bootstrap summarizing; blue labels = CO, orange = MG, gray = neutral; dotted lines separate CO | MG | neutral)", y=1.08)
+    save(fig, out_dir, "fig6_raw_asr_per_condition")
+
+
+def fig7_z_behavior_forest(connection, out_dir):
+    fig, axes = plt.subplots(1, len(MODELS), figsize=(13, 6), sharex=True)
+    row_labels = []
+    for mech in ALL_MECHANISM_GROUPS[:-1]:  # REAL_MECHANISMS only (connection analysis excludes 'neutral')
+        for kind in SCAFFOLD_KINDS:
+            row_labels.append((mech, kind))
+    y = np.arange(len(row_labels))[::-1]
+
+    UNRELIABLE_COLOR = "#C7C9CD"
+    for ax, m in zip(axes, MODELS):
+        for yi, (mech, kind) in zip(y, row_labels):
+            entry = connection[m]["by_scaffold_kind"][kind].get(mech)
+            z = entry["z_vs_strict_success"] if entry else None
+            r = z.get("point_biserial_r") if z else None
+            color = CO_COLOR if mech in CO_MECHANISMS else MG_COLOR
+            if r is None:
+                ax.plot(0, yi, marker="x", color="#B0B3B8", markersize=6)
+                continue
+            # reliable=False (real-data incident, Sep 2026): extreme
+            # class imbalance (min(success,fail)<5) degenerates the
+            # bootstrap into an outlier-detection artifact regardless of
+            # |r| -- plotted muted gray, never colored/filled, even if
+            # the raw r looked large, so this never reads as a finding.
+            reliable = z.get("reliable", True)
+            lo, hi = z.get("r_ci_2_5"), z.get("r_ci_97_5")
+            p_holm = z.get("r_p_holm_adjusted")
+            is_sig = reliable and p_holm is not None and p_holm < 0.05
+            plot_color = color if reliable else UNRELIABLE_COLOR
+            if lo is not None and hi is not None:
+                ax.plot([lo, hi], [yi, yi], color=plot_color, linewidth=1.3, alpha=0.8, zorder=1)
+            ax.plot(r, yi, marker="o", markersize=6.5 if is_sig else 5,
+                     markerfacecolor=plot_color if is_sig else "white", markeredgecolor=plot_color, markeredgewidth=1.4, zorder=2)
+
+        ax.axvline(0, color="black", linewidth=0.8)
+        ax.set_title(MODEL_SHORT[m], fontsize=12)
+        ax.set_xlim(-0.6, 0.6)
+        ax.set_xlabel(r"point-biserial $r$ ($z$ vs. strict_success)")
+
+    ytick_labels = [f"{MECH_SHORT[mech].replace(chr(10), ' ')} ({'N' if kind == 'neutral' else 'P'})" for mech, kind in row_labels]
+    axes[0].set_yticks(y)
+    axes[0].set_yticklabels(ytick_labels, fontsize=8.5)
+    for lbl, (mech, _) in zip(axes[0].get_yticklabels(), row_labels):
+        lbl.set_color(CO_COLOR if mech in CO_MECHANISMS else MG_COLOR)
+    for ax in axes[1:]:
+        ax.tick_params(labelleft=False)
+
+    fig.suptitle("Activation shift vs. behavioral success: point-biserial $r$, 95% bootstrap CI\n"
+                  "(filled = Holm-significant; gray = unreliable, class imbalance <5 per group -- never a finding regardless of |r|; "
+                  "N/P = neutral/progressive; x = undefined, zero-variance outcome)", y=1.05)
+    save(fig, out_dir, "fig7_z_behavior_forest")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--analysis-dir", default=DEFAULT_ANALYSIS_DIR)
@@ -148,11 +256,14 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
     behavioral = load_all(args.analysis_dir, "behavioral")
     representation = load_all(args.analysis_dir, "representation")
+    connection = load_all(args.analysis_dir, "activation_behavior_connection")
 
     fig4_behavioral_corrected_effects(behavioral, args.output_dir)
     fig5_representation_cohesion(representation, args.output_dir)
+    fig6_raw_asr_per_condition(behavioral, args.output_dir)
+    fig7_z_behavior_forest(connection, args.output_dir)
 
-    print(f"Saved 2 figures (.pdf + .png) to {args.output_dir}")
+    print(f"Saved 4 figures (.pdf + .png) to {args.output_dir}")
 
 
 if __name__ == "__main__":
