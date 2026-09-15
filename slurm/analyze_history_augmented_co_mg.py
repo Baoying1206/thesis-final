@@ -347,7 +347,39 @@ def run_activation_behavior_connection(model_alias, primary_layer, extraction_di
             clusters = load_instruction_clusters(ids_common, instruction_texts)
             print(f"[{model_alias}] kind={kind} mechanism={m}: bootstrapping z-vs-strict_success connection...", file=sys.stderr)
             connection = point_biserial_bootstrap(z_by_id, outcome_by_id, clusters, n_boot=N_BOOTSTRAP, seed=BOOTSTRAP_SEED)
-            mechanism_results[m] = {"n_instructions": len(ids_common), "z_vs_strict_success": connection}
+
+            # Diagnostics (Sec 13 follow-up, real-data review Sep 2026): a
+            # handful of small-|r| point-biserial correlations came back
+            # Holm-significant despite n=72 -- unexpected under standard
+            # correlation-test theory (SE(r) ~ 1/sqrt(n-3) ~ 0.12 there).
+            # A synthetic check of point_biserial_bootstrap itself did NOT
+            # reproduce this (wide CIs, p>>0.05 for small injected r), so
+            # this is not a generic bug in the bootstrap function -- but it
+            # was never checked against the REAL z distribution, because
+            # the raw activation .pt tensors only exist on the cluster.
+            # These summary stats (not the full z vector) are cheap enough
+            # to persist here so this can be diagnosed without re-pulling
+            # multi-GB tensor files: e.g. a few extreme z outliers that
+            # happen to align with y could dominate resampling-with-
+            # replacement and produce a spuriously one-sided bootstrap
+            # distribution even though the bulk of the data has near-zero
+            # correlation. Do NOT report any r as a reliable finding until
+            # its z distribution here has been eyeballed for exactly this.
+            z_vals = list(z_by_id.values())
+            y_vals = list(outcome_by_id.values())
+            z_sorted = sorted(z_vals)
+            n_z = len(z_sorted)
+            z_mean = sum(z_vals) / n_z
+            z_std = (sum((v - z_mean) ** 2 for v in z_vals) / n_z) ** 0.5
+            diagnostics = {
+                "z_mean": z_mean, "z_std": z_std,
+                "z_min": z_sorted[0], "z_max": z_sorted[-1],
+                "z_median": z_sorted[n_z // 2],
+                "z_p05": z_sorted[int(0.05 * n_z)], "z_p95": z_sorted[min(int(0.95 * n_z), n_z - 1)],
+                "y_n_success": sum(1 for v in y_vals if v == 1), "y_n_fail": sum(1 for v in y_vals if v == 0), "y_n_total": len(y_vals),
+                "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15.",
+            }
+            mechanism_results[m] = {"n_instructions": len(ids_common), "z_vs_strict_success": connection, "z_diagnostics": diagnostics}
 
         named_pvalues = [(m, mechanism_results[m]["z_vs_strict_success"]["r_p_two_sided"])
                           for m in REAL_MECHANISMS if mechanism_results[m]["z_vs_strict_success"]["r_p_two_sided"] is not None]
