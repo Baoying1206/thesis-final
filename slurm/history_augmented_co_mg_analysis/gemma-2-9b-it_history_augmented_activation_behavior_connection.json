@@ -2,7 +2,7 @@
   "result_status": "HISTORY_AUGMENTED_ACTIVATION_BEHAVIOR_CONNECTION",
   "model_alias": "gemma-2-9b-it",
   "primary_layer": 25,
-  "note": "d_hat is Experiment 1's own frozen p_CO/p_MG (direction_ids-estimated only, Sec 6 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across the 6 real mechanisms WITHIN each scaffold kind separately, never pooled across kinds or models.",
+  "note": "d_hat is Experiment 1's own frozen p_CO/p_MG (direction_ids-estimated only, Sec 6 firewall); z[i] and strict_success both from validation_ids. r_p_holm_adjusted is Holm-corrected across only the mechanisms with z_vs_strict_success.reliable==true WITHIN each scaffold kind, never pooled across kinds or models -- mechanisms with reliable==false (min(y_n_success,y_n_fail)<5, real-data incident Sep 2026: extreme class imbalance degenerates the bootstrap into an outlier-detection artifact regardless of |r|) are excluded from the Holm family entirely and have r_p_holm_adjusted=null; do not report their r or p as a finding.",
   "by_scaffold_kind": {
     "neutral": {
       "prefix_injection": {
@@ -16,10 +16,15 @@
           "group_diff_ci_2_5": null,
           "group_diff_ci_97_5": null,
           "group_diff_p_two_sided": null,
+          "y_n_success": 0,
+          "y_n_fail": 72,
+          "min_group_n": 5,
+          "reliable": false,
           "n_boot_valid_r": 0,
           "n_boot_valid_group_diff": 0,
           "n_boot": 2000,
-          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only"
+          "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
+          "r_p_holm_adjusted": null
         },
         "z_diagnostics": {
           "z_mean": 0.5495931837293837,
@@ -29,10 +34,7 @@
           "z_median": 1.8935546875,
           "z_p05": -13.9765625,
           "z_p95": 15.609375,
-          "y_n_success": 0,
-          "y_n_fail": 72,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "refusal_suppression": {
@@ -46,11 +48,15 @@
           "group_diff_ci_2_5": -3.681135506465518,
           "group_diff_ci_97_5": 0.2839948537630388,
           "group_diff_p_two_sided": 0.095,
+          "y_n_success": 15,
+          "y_n_fail": 57,
+          "min_group_n": 5,
+          "reliable": true,
           "n_boot_valid_r": 2000,
           "n_boot_valid_group_diff": 2000,
           "n_boot": 2000,
           "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
-          "r_p_holm_adjusted": 0.28500000000000003
+          "r_p_holm_adjusted": 0.19
         },
         "z_diagnostics": {
           "z_mean": 10.718980577256945,
@@ -60,10 +66,7 @@
           "z_median": 10.96875,
           "z_p05": 2.541015625,
           "z_p95": 19.046875,
-          "y_n_success": 15,
-          "y_n_fail": 57,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "persona_roleplay": {
@@ -77,11 +80,15 @@
           "group_diff_ci_2_5": -3.234542410714285,
           "group_diff_ci_97_5": -0.43681291852678594,
           "group_diff_p_two_sided": 0.008012820512820512,
+          "y_n_success": 1,
+          "y_n_fail": 71,
+          "min_group_n": 5,
+          "reliable": false,
           "n_boot_valid_r": 1248,
           "n_boot_valid_group_diff": 1248,
           "n_boot": 2000,
           "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
-          "r_p_holm_adjusted": 0.03205128205128205
+          "r_p_holm_adjusted": null
         },
         "z_diagnostics": {
           "z_mean": 6.845543755425347,
@@ -91,10 +98,7 @@
           "z_median": 6.90234375,
           "z_p05": -3.345703125,
           "z_p95": 17.5625,
-          "y_n_success": 1,
-          "y_n_fail": 71,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "encoding_obfuscation": {
@@ -108,11 +112,15 @@
           "group_diff_ci_2_5": -3.5918807983398438,
           "group_diff_ci_97_5": 3.8956557765151514,
           "group_diff_p_two_sided": 0.9444166249374061,
+          "y_n_success": 6,
+          "y_n_fail": 66,
+          "min_group_n": 5,
+          "reliable": true,
           "n_boot_valid_r": 1997,
           "n_boot_valid_group_diff": 1997,
           "n_boot": 2000,
           "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
-          "r_p_holm_adjusted": 1.0
+          "r_p_holm_adjusted": 0.9444166249374061
         },
         "z_diagnostics": {
           "z_mean": -4.668857150607639,
@@ -122,10 +130,7 @@
           "z_median": -4.703125,
           "z_p05": -10.1953125,
           "z_p95": -0.3564453125,
-          "y_n_success": 6,
-          "y_n_fail": 66,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "payload_splitting": {
@@ -139,11 +144,15 @@
           "group_diff_ci_2_5": -3.403972516741071,
           "group_diff_ci_97_5": 3.199686399647888,
           "group_diff_p_two_sided": 0.9565714285714285,
+          "y_n_success": 2,
+          "y_n_fail": 70,
+          "min_group_n": 5,
+          "reliable": false,
           "n_boot_valid_r": 1750,
           "n_boot_valid_group_diff": 1750,
           "n_boot": 2000,
           "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
-          "r_p_holm_adjusted": 1.0
+          "r_p_holm_adjusted": null
         },
         "z_diagnostics": {
           "z_mean": -11.160179985894096,
@@ -153,10 +162,7 @@
           "z_median": -9.8828125,
           "z_p05": -21.21875,
           "z_p95": -1.734375,
-          "y_n_success": 2,
-          "y_n_fail": 70,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "distractors_negated": {
@@ -170,11 +176,15 @@
           "group_diff_ci_2_5": 3.425898162411972,
           "group_diff_ci_97_5": 7.514538402288732,
           "group_diff_p_two_sided": 0.0,
+          "y_n_success": 1,
+          "y_n_fail": 71,
+          "min_group_n": 5,
+          "reliable": false,
           "n_boot_valid_r": 1261,
           "n_boot_valid_group_diff": 1261,
           "n_boot": 2000,
           "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
-          "r_p_holm_adjusted": 0.0
+          "r_p_holm_adjusted": null
         },
         "z_diagnostics": {
           "z_mean": 4.774912516276042,
@@ -184,10 +194,7 @@
           "z_median": 6.0078125,
           "z_p05": -10.8984375,
           "z_p95": 17.46875,
-          "y_n_success": 1,
-          "y_n_fail": 71,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       }
     },
@@ -203,11 +210,15 @@
           "group_diff_ci_2_5": 1.9192856297348486,
           "group_diff_ci_97_5": 33.84507882254464,
           "group_diff_p_two_sided": 0.0061162079510703364,
+          "y_n_success": 4,
+          "y_n_fail": 68,
+          "min_group_n": 5,
+          "reliable": false,
           "n_boot_valid_r": 1962,
           "n_boot_valid_group_diff": 1962,
           "n_boot": 2000,
           "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
-          "r_p_holm_adjusted": 0.012232415902140673
+          "r_p_holm_adjusted": null
         },
         "z_diagnostics": {
           "z_mean": -2.032284206814236,
@@ -217,10 +228,7 @@
           "z_median": -3.130859375,
           "z_p05": -16.890625,
           "z_p95": 23.9375,
-          "y_n_success": 4,
-          "y_n_fail": 68,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "refusal_suppression": {
@@ -234,6 +242,10 @@
           "group_diff_ci_2_5": -8.015475186434658,
           "group_diff_ci_97_5": -2.916975459346065,
           "group_diff_p_two_sided": 0.0,
+          "y_n_success": 24,
+          "y_n_fail": 48,
+          "min_group_n": 5,
+          "reliable": true,
           "n_boot_valid_r": 2000,
           "n_boot_valid_group_diff": 2000,
           "n_boot": 2000,
@@ -248,10 +260,7 @@
           "z_median": 8.4375,
           "z_p05": -0.703125,
           "z_p95": 23.765625,
-          "y_n_success": 24,
-          "y_n_fail": 48,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "persona_roleplay": {
@@ -265,11 +274,15 @@
           "group_diff_ci_2_5": -13.7126953125,
           "group_diff_ci_97_5": -9.35479822293134,
           "group_diff_p_two_sided": 0.0,
+          "y_n_success": 1,
+          "y_n_fail": 71,
+          "min_group_n": 5,
+          "reliable": false,
           "n_boot_valid_r": 1248,
           "n_boot_valid_group_diff": 1248,
           "n_boot": 2000,
           "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
-          "r_p_holm_adjusted": 0.0
+          "r_p_holm_adjusted": null
         },
         "z_diagnostics": {
           "z_mean": 18.603403727213543,
@@ -279,10 +292,7 @@
           "z_median": 19.5625,
           "z_p05": 1.53125,
           "z_p95": 33.5625,
-          "y_n_success": 1,
-          "y_n_fail": 71,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "encoding_obfuscation": {
@@ -296,6 +306,10 @@
           "group_diff_ci_2_5": 0.010949337121211045,
           "group_diff_ci_97_5": 3.8699448529411757,
           "group_diff_p_two_sided": 0.05,
+          "y_n_success": 7,
+          "y_n_fail": 65,
+          "min_group_n": 5,
+          "reliable": true,
           "n_boot_valid_r": 2000,
           "n_boot_valid_group_diff": 2000,
           "n_boot": 2000,
@@ -310,10 +324,7 @@
           "z_median": -12.1328125,
           "z_p05": -18.9375,
           "z_p95": -7.94140625,
-          "y_n_success": 7,
-          "y_n_fail": 65,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "payload_splitting": {
@@ -327,11 +338,15 @@
           "group_diff_ci_2_5": 1.8154296875,
           "group_diff_ci_97_5": 13.908314732142856,
           "group_diff_p_two_sided": 0.003156233561283535,
+          "y_n_success": 3,
+          "y_n_fail": 69,
+          "min_group_n": 5,
+          "reliable": false,
           "n_boot_valid_r": 1901,
           "n_boot_valid_group_diff": 1901,
           "n_boot": 2000,
           "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
-          "r_p_holm_adjusted": 0.009468700683850605
+          "r_p_holm_adjusted": null
         },
         "z_diagnostics": {
           "z_mean": -17.023573133680557,
@@ -341,10 +356,7 @@
           "z_median": -15.453125,
           "z_p05": -33.21875,
           "z_p95": -4.26953125,
-          "y_n_success": 3,
-          "y_n_fail": 69,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       },
       "distractors_negated": {
@@ -358,11 +370,15 @@
           "group_diff_ci_2_5": 9.700524847848074,
           "group_diff_ci_97_5": 16.509982686647227,
           "group_diff_p_two_sided": 0.0,
+          "y_n_success": 2,
+          "y_n_fail": 70,
+          "min_group_n": 5,
+          "reliable": false,
           "n_boot_valid_r": 1736,
           "n_boot_valid_group_diff": 1736,
           "n_boot": 2000,
           "note": "logistic regression not implemented (scope limitation) -- point-biserial correlation and success/failure group z-mean difference only",
-          "r_p_holm_adjusted": 0.0
+          "r_p_holm_adjusted": null
         },
         "z_diagnostics": {
           "z_mean": -4.0103930897182885,
@@ -372,10 +388,7 @@
           "z_median": -1.2275390625,
           "z_p05": -21.9375,
           "z_p95": 12.671875,
-          "y_n_success": 2,
-          "y_n_fail": 70,
-          "y_n_total": 72,
-          "note": "z summary stats + y class balance, saved to allow checking whether a small-|r| significant result is driven by a few extreme z outliers rather than a real bulk relationship -- inspect before trusting any r with |point_biserial_r| < ~0.15."
+          "note": "z summary stats only -- y class balance is now in z_vs_strict_success.{y_n_success,y_n_fail,reliable} (point_biserial_bootstrap computes this itself; see stats_shared.py's real-data incident note on this function)."
         }
       }
     }
