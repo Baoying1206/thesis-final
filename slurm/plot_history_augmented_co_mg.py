@@ -16,7 +16,8 @@ Produces:
       models x 2 scaffold kinds), contrasted against the behavioral
       panel's model-specific heterogeneity.
   fig6_raw_asr_per_condition.pdf/png -- raw strict_success_rate for all
-      21 conditions, one panel per model (7 mechanisms x 3 forms), no
+      21 conditions, one panel per model (6 mechanisms and the neutral
+      reference x 3 delivery forms), no
       bootstrap summarizing -- the un-aggregated numbers behind fig4,
       useful for an appendix or for readers who want the raw rates.
   fig7_z_behavior_forest.pdf/png -- point-biserial r (activation shift
@@ -44,7 +45,7 @@ DEFAULT_ANALYSIS_DIR = os.path.join(SCRIPT_DIR, "history_augmented_co_mg_analysi
 DEFAULT_OUTPUT_DIR = os.path.join(DEFAULT_ANALYSIS_DIR, "figures")
 
 MODELS = ["Qwen2.5-7B-Instruct", "Meta-Llama-3.1-8B-Instruct", "gemma-2-9b-it"]
-MODEL_SHORT = {"Qwen2.5-7B-Instruct": "Qwen2.5-7B", "Meta-Llama-3.1-8B-Instruct": "Llama-3.1-8B", "gemma-2-9b-it": "Gemma-2-9B"}
+MODEL_SHORT = {"Qwen2.5-7B-Instruct": "Qwen2.5-7B", "Meta-Llama-3.1-8B-Instruct": "Llama-3.1-8B", "gemma-2-9b-it": "Gemma-2-9B-it"}
 SCAFFOLD_KINDS = ["neutral", "progressive"]
 SCAFFOLD_LABEL = {"neutral": "neutral scaffold", "progressive": "progressive scaffold"}
 
@@ -131,7 +132,7 @@ def fig4_behavioral_corrected_effects(behavioral, out_dir):
     axes[0].set_ylabel("ASR delta (multi $-$ single), corrected against neutral baseline")
     axes[1].legend(frameon=False, loc="upper left")
     fig.suptitle("History-augmented canonical CO/MG: primary confirmatory effects\n"
-                  "(95% bootstrap CI, n=2000; * = Holm-significant within model, p<0.05)", y=1.06)
+                  "(95% CI, B=2000 bootstrap repetitions; * = Holm-significant within model, p<0.05)", y=1.06)
     save(fig, out_dir, "fig4_behavioral_corrected_effects")
 
 
@@ -155,9 +156,9 @@ def fig5_representation_cohesion(representation, out_dir):
         ax.set_title(SCAFFOLD_LABEL[kind])
         ax.set_ylim(0, 1)
 
-    axes[0].set_ylabel(r"mean cosine similarity among $d_m^{history}$ vectors")
+    axes[0].set_ylabel(r"mean cosine similarity among $\hat{d}^{\,\mathrm{history}}(m,k)$ vectors")
     axes[1].legend(frameon=False, loc="upper right")
-    fig.suptitle("History-augmented $d_m$ cohesion: within-CO vs. within-MG vs. between\n"
+    fig.suptitle(r"History-augmented $\hat{d}^{\,\mathrm{history}}(m,k)$ cohesion: within-CO vs. within-MG vs. between" "\n"
                   "(point estimate only; consistent across all 3 models x 2 scaffold kinds)", y=1.06)
     save(fig, out_dir, "fig5_representation_cohesion")
 
@@ -190,7 +191,8 @@ def fig6_raw_asr_per_condition(behavioral, out_dir):
 
     axes[0].set_ylabel("strict_success_rate (raw)")
     axes[-1].legend(frameon=False, fontsize=9, loc="upper right")
-    fig.suptitle("Raw per-condition ASR, all 21 conditions (7 mechanisms x 3 forms)\n"
+    fig.suptitle("Raw per-condition ASR, all 21 conditions\n"
+                  "(6 mechanisms and the neutral reference x 3 delivery forms)\n"
                   "(no bootstrap summarizing; blue labels = CO, orange = MG, gray = neutral; dotted lines separate CO | MG | neutral)", y=1.08)
     save(fig, out_dir, "fig6_raw_asr_per_condition")
 

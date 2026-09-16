@@ -5,7 +5,7 @@
 only plots already-computed numbers, it does not compute anything new
 or re-derive statistics.
 
-Produces, at the frozen primary position (t_generation_boundary) unless
+Produces, at the frozen primary position (the generation boundary) unless
 --position is overridden:
   fig1_delta_co_mg_bootstrap.pdf/png  -- Delta_CO/Delta_MG per model,
       95% bootstrap CI error bars (the core within-vs-between-group
@@ -36,8 +36,9 @@ DEFAULT_ANALYSIS_DIR = os.path.join(SCRIPT_DIR, "experiment1_analysis")
 DEFAULT_OUTPUT_DIR = os.path.join(DEFAULT_ANALYSIS_DIR, "figures")
 
 MODELS = ["Qwen2.5-7B-Instruct", "Meta-Llama-3.1-8B-Instruct", "gemma-2-9b-it"]
-MODEL_SHORT = {"Qwen2.5-7B-Instruct": "Qwen2.5-7B", "Meta-Llama-3.1-8B-Instruct": "Llama-3.1-8B", "gemma-2-9b-it": "Gemma-2-9B"}
+MODEL_SHORT = {"Qwen2.5-7B-Instruct": "Qwen2.5-7B", "Meta-Llama-3.1-8B-Instruct": "Llama-3.1-8B", "gemma-2-9b-it": "Gemma-2-9B-it"}
 PRIMARY_LAYERS = {"Qwen2.5-7B-Instruct": 16, "Meta-Llama-3.1-8B-Instruct": 19, "gemma-2-9b-it": 25}
+POSITION_LABEL = {"t_generation_boundary": "generation boundary", "t_final_user_end": "final user turn end"}
 
 CO_COLOR = "#4C72B0"
 MG_COLOR = "#DD8452"
@@ -93,7 +94,7 @@ def fig1_delta_bootstrap(data, position, out_dir):
     ax.set_xticks(x)
     ax.set_xticklabels([MODEL_SHORT[m] for m in MODELS])
     ax.set_ylabel(r"$\Delta$ (within-group $-$ between-group cosine)")
-    ax.set_title(f"CO/MG within-vs-between-group cohesion\n(position: {position}, 95% bootstrap CI, n=2000)")
+    ax.set_title(f"CO/MG within-vs-between-group cohesion\n(position: {POSITION_LABEL.get(position, position)}, 95% CI, B=2000 bootstrap repetitions)")
     ax.legend(frameon=False)
     save(fig, out_dir, "fig1_delta_co_mg_bootstrap")
 
@@ -121,7 +122,7 @@ def fig2_cosine_heatmap(data, position, out_dir):
                 ax.text(j, i, f"{value:.2f}", ha="center", va="center", fontsize=6.5, color=text_color)
         ax.set_title(MODEL_SHORT[m], fontsize=11)
     fig.colorbar(im, ax=axes, shrink=0.7, label="cosine similarity")
-    fig.suptitle(f"Pairwise cosine similarity among calibrated mechanism directions\n(position: {position}; top-left 3x3 block = CO, bottom-right 3x3 block = MG)", y=1.08)
+    fig.suptitle(f"Pairwise cosine similarity among calibrated mechanism directions\n(position: {POSITION_LABEL.get(position, position)}; top-left 3x3 block = CO, bottom-right 3x3 block = MG)", y=1.08)
     fig.savefig(os.path.join(out_dir, "fig2_cosine_heatmap.pdf"), bbox_inches="tight")
     fig.savefig(os.path.join(out_dir, "fig2_cosine_heatmap.png"), bbox_inches="tight")
     plt.close(fig)
@@ -145,7 +146,7 @@ def fig3_layerwise_sweep(data, position, out_dir):
     ax.axhline(0, color="black", linewidth=0.8)
     ax.set_xlabel("relative depth (layer / n_layers)")
     ax.set_ylabel(r"$T$ = mean within-group cosine $-$ between-group cosine")
-    ax.set_title(f"Canonical CO/MG partition's T statistic across layers\n(position: {position}; dashed lines = each model's frozen primary layer)", pad=14)
+    ax.set_title(f"Canonical CO/MG partition's T statistic across layers\n(position: {POSITION_LABEL.get(position, position)}; dashed lines = each model's frozen primary layer)", pad=14)
     ax.legend(frameon=False)
     save(fig, out_dir, "fig3_layerwise_T_sweep")
 
