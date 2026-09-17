@@ -11,8 +11,10 @@ reports only t=6, to avoid overclaiming turn-by-turn drift before it
 had actually been checked against real data). `extract_history_augmented_co_mg.py`
 saves EVERY stage's activation for the multi_* forms, not just the
 final one (`activations_by_condition[condition][instruction_id]["stage_1"]`
-through `"stage_6"`), so the 5 scaffold-turn vectors (stage_1_hook ..
-stage_5_bridge) already exist in the direction_ids .pt files -- no
+through `"stage_6"`, plain numeric -- distinct from STAGE_KEYS'
+descriptive template-lookup names like "stage_1_hook", which only index
+into the scaffold TEXT template, a separate namespace), so the 5
+scaffold-turn vectors already exist in the direction_ids .pt files -- no
 re-extraction needed -- but no analysis script had read them until
 this one.
 
@@ -82,7 +84,22 @@ from analyze_history_augmented_co_mg import (  # noqa: E402
     load_instruction_texts, load_activations, stage_vecs, load_experiment1_frozen_directions,
 )
 
-ALL_STAGE_KEYS = list(STAGE_KEYS) + [FINAL_STAGE_KEY]  # 6 stages: 5 scaffold turns + the payload turn
+# extract_history_augmented_co_mg.py saves multi-turn activations under
+# plain numeric keys "stage_1".."stage_6" (f"stage_{stage_idx}" for
+# stage_idx in range(1, final_stage+1)) -- NOT under STAGE_KEYS' template
+# lookup names ("stage_1_hook" etc, which only index into the scaffold
+# TEXT template, a separate namespace). Only the last one coincidentally
+# matches FINAL_STAGE_KEY's own f"stage_{n+1}" construction. Real-data
+# incident (Sep 2026): an earlier version of this script used STAGE_KEYS
+# directly here, silently returning empty vectors (stage_vecs falls back
+# to PRIMARY_TOKEN_POSITION, which multi-form entries never have either)
+# for every stage except the final one -- caught by inspecting real
+# output (n_boot_valid=0, point_norm=null for stage_1_hook), not by the
+# synthetic fixture, which had made the identical wrong assumption.
+N_SCAFFOLD_STAGES = len(STAGE_KEYS)
+FINAL_STAGE_IDX = N_SCAFFOLD_STAGES + 1
+ALL_STAGE_KEYS = [f"stage_{i}" for i in range(1, FINAL_STAGE_IDX + 1)]  # ["stage_1", ..., "stage_6"]
+assert ALL_STAGE_KEYS[-1] == FINAL_STAGE_KEY  # sanity check against the loader's own construction
 
 
 def run_trajectory(model_alias, primary_layer, extraction_dir, experiment1_dir, output_dir, n_boot):
@@ -149,7 +166,7 @@ def run_trajectory(model_alias, primary_layer, extraction_dir, experiment1_dir, 
             "result_status": "HISTORY_AUGMENTED_TRAJECTORY_ANALYSIS",
             "model_alias": model_alias, "primary_layer": primary_layer,
             "stage_order": ALL_STAGE_KEYS,
-            "note": "Exploratory/diagnostic, not a confirmatory hypothesis test -- checks whether the within-CO > within-MG cohesion pattern (reported at the final stage only in the main analysis) is already present during the mechanism-free scaffold turns (stage_1_hook..stage_5_bridge) or only emerges once the mechanism-specific payload text appears (the last entry in stage_order, == FINAL_STAGE_KEY, same numbers as analyze_history_augmented_co_mg.py's run_representation).",
+            "note": "Exploratory/diagnostic, not a confirmatory hypothesis test -- checks whether the within-CO > within-MG cohesion pattern (reported at the final stage only in the main analysis) is already present during the mechanism-free scaffold turns (stage_order[0:5]) or only emerges once the mechanism-specific payload text appears (stage_order[-1], == FINAL_STAGE_KEY, same numbers as analyze_history_augmented_co_mg.py's run_representation).",
             "by_scaffold_kind": by_kind_results,
         }, f, indent=2, ensure_ascii=False)
     print(json.dumps({"result_status": "HISTORY_AUGMENTED_TRAJECTORY_DONE", "model_alias": model_alias, "output_path": out_path}, indent=2))
